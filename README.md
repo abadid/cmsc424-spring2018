@@ -1,2 +1,4 @@
 # cmsc424-fall2016
-Repository for CMSC 424, Fall 2016, University of Maryland
+Class repository for CMSC 424, Fall 2016, University of Maryland. 
+
+This repository is used primarily to publish the assignments. 
