@@ -4,7 +4,7 @@ Over the course of the semester, you will work with a variety of software packag
 
 * Install the different software packages on your own machine (most of these packages should have tutorials to install them on different OSs). If you have a Linux box or a Mac, this should be possible; it may be more difficult with Windows. In any case, although we will try our best, we would likely not be able to help you with any problems.
 * (**Preferred Option**) Use Vagrant with Virtual Box (as discussed below). If you have a reasonably modern machine (within last 3-4 years), VirtualBox should generally work fine, but with older laptops, the performance may not be as good. See below for more details on this.
-* Use a VM in the CS Departments Horvitz Cluster. Last year, only one person chose to use this, so we will likely do this on demand, if anyone is really interested. You can also similarly use a VM in Amazon or Microsoft Azure clusters -- both of them provide free VMs for beginning users. The problem with this approach is that you only have `ssh` access into that machine, so you can't run a web browser, etc., without some work.
+* Use a VM in the CS Department's Horvitz Cluster. Last year, only one person chose to use this, so we will likely do this on demand, if anyone is really interested. You can also similarly use a VM in Amazon or Microsoft Azure clusters -- both of them provide free VMs for beginning users. The problem with this approach is that you only have `ssh` access into that machine, so you can't run a web browser, etc., without some work.
 
 ---
 
@@ -118,11 +118,11 @@ Now you can start using the database.
 	   \i smallRelationsInsertFile.sql
 	   ``` 
 
-   - For this to work, the two .sql file must be in the same directory as the one where you started psql. The first command creates the tables, and the
+   - For this to work, the two .sql files must be in the same directory as the one where you started psql. The first command creates the tables, and the
    second one inserts tuples in it. 
 	
-    - Create a different database ```university_large``` for the larger dataset provided (`largeRelationsInsertFile.sql`). Since the table names
-   are identical, we need a separate database. This would be needed for the reading homework.
+   - Create a different database ```university_large``` for the larger dataset provided (`largeRelationsInsertFile.sql`). Since the table names
+   are identical, we need a separate database. You would need this for the reading homework.
 
 ---
 
@@ -134,7 +134,7 @@ IPython is an enhanced command shell for Python, that offers enhanced introspect
 
 **IPython Notebook** started as a web browser-based interface to IPython, and proved especially popular with Data Scientists. A few years ago, the Notebook functionality was forked off as a separate project, called [Jupyter](http://jupyter.org/). Jupyter provides support for many other languages in addition to Python. 
 
-* Start the VM using `vagrant up`. Python and IPython are already loaded (note that the VM has an older version of IPython -- which shouldn't matter for what we are doing). 
+* Start the VM using `vagrant up`. Python, IPython, and Jupyter are already loaded.
 
 * To use Python, you can just do `python` (or `ipython`), and it will start up the shell.
 
@@ -146,9 +146,7 @@ This will start a server on the VM, listening on port 8888. We will access it fr
 
 * You should see the Notebooks in the `project0/` directory. Click to open the "IPython Getting Started" Notebook, and follow the instruction therein.
 
-* You can also open the second Notebook (on "Instabase: Basics of SQL"), but you will not be able to run anything in that Notebook since it must be run within Instabase environment (see below).
-
-* Instead, the third Notebook ("Basics of SQL") does the same things as the Instabase Notebook, but connects to your local PostgreSQL instance instead. However, in order to use that, you must set up a password in `psql` using `\password` (set the password to be `vagrant`)
+* The second Notebook ("Basics of SQL") covers basics of SQL, by connecting to your local PostgreSQL instance. The Notebook also serves as an alternative mechanism to run queries. However, in order to use that, you must set up a password in `psql` using `\password` (set the password to be `vagrant`).
 
 
 ---
