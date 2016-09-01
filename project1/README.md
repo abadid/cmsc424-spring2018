@@ -51,15 +51,15 @@ You are also provided with a Python file `SQLTesting.py` for testing your answer
 
 - We recommend that you use `psql` to design your queries, and then paste the queries to the `queries.py` file, and confirm it works.
 
-- SQLTesting takes quite a few options: use `python SQLTesting -h` to see the options.
+- SQLTesting takes quite a few options: use `python SQLTesting.py -h` to see the options.
 
-- To get started with SQLTesting, do: `python SQLTesting -v -i` -- that will run each of the queries and show you your answer and correct answer.
+- To get started with SQLTesting, do: `python SQLTesting.py -v -i` -- that will run each of the queries and show you your answer and correct answer.
 
 - If you want to test your answer to Question 1, use: `python SQLTesting.py -q 1`. The program compares the result of running your query against the provided answer (in the `answers.py` file).
 
 - The `-v` flag will print out more information, including the correct and submitted answers etc.
 
-- If you want to test your answers to all questions (this is what we will do), use: `python SQLTesting.py`
+- If you want to test your answers to all questions (this is what we will do), use: `python SQLTesting.py` and look at the final total score.
 
 - `-i` flag to SQLTesting will run all the queries, one at a time (waiting for you to press Enter after each query).
 
