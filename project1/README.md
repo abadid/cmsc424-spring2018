@@ -5,12 +5,12 @@
 The following assumes you have gone through PostgreSQL instructions and have ran some queries on the `university` database. 
 It also assumed you have cloned the git repository, and have done a `git pull` to download the directory `project1`. The files are:
 
-        1. README.md: This file
-        1. populate-small.sql: The SQL script for creating the data.
-        1. queries.py: The file where to enter your answer; this is the file to be submitted
-        1. answers.py: The answers to the queries on the small dataset.
-        1. SQLTesting.py: File to be used for testing your submission -- see below
-        1. Vagrantfile: A Vagrantfile that creates the 'flights' database and populates it using `populate-small.sql` file.
+1. README.md: This file
+1. populate-small.sql: The SQL script for creating the data.
+1. queries.py: The file where to enter your answer; this is the file to be submitted
+1. answers.py: The answers to the queries on the small dataset.
+1. SQLTesting.py: File to be used for testing your submission -- see below
+1. Vagrantfile: A Vagrantfile that creates the 'flights' database and populates it using `populate-small.sql` file.
 
 **Note:** The testing will be done on a different, larger dataset. 
 
