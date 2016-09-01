@@ -4,12 +4,13 @@
 
 The following assumes you have gone through PostgreSQL instructions and have ran some queries on the `university` database. 
 It also assumed you have cloned the git repository, and have done a `git pull` to download the directory `project1`. The files are:
+
         1. README.md: This file
-        2. populate-small.sql: The SQL script for creating the data.
-        3. queries.py: The file where to enter your answer; this is the file to be submitted
-        4. answers.py: The answers to the queries on the small dataset.
-        5. SQLTesting.py: File to be used for testing your submission -- see below
-        6. Vagrantfile: A Vagrantfile that creates the 'flights' database and populates it using `populate-small.sql` file.
+        1. populate-small.sql: The SQL script for creating the data.
+        1. queries.py: The file where to enter your answer; this is the file to be submitted
+        1. answers.py: The answers to the queries on the small dataset.
+        1. SQLTesting.py: File to be used for testing your submission -- see below
+        1. Vagrantfile: A Vagrantfile that creates the 'flights' database and populates it using `populate-small.sql` file.
 
 **Note:** The testing will be done on a different, larger dataset. 
 
@@ -20,11 +21,12 @@ Start the VM with `vagrant up` in the `project1/` directory. The database should
 
 ### Schema 
 The dataset contains synthetic air flight data. Specifically it contains the following tables:
+
 1. airports: airportid, city, name, total2011, total2012
-2. customers: customerid, name, birthdate, frequentflieron
-3. airlines: airlineid, name, hub
-4. flights: flightid, source, dest, airlineid, local_departing_time, local_arrival_time
-5. flewon: flightid, customerid, flightdate
+1. customers: customerid, name, birthdate, frequentflieron
+1. airlines: airlineid, name, hub
+1. flights: flightid, source, dest, airlineid, local_departing_time, local_arrival_time
+1. flewon: flightid, customerid, flightdate
 
 See the provided SQL file for the table definitions.
 
