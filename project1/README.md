@@ -6,7 +6,7 @@ The following assumes you have gone through PostgreSQL instructions and have ran
 It also assumed you have cloned the git repository, and have done a `git pull` to download the directory `project1`. The files are:
 
 1. README.md: This file
-1. populate-small.sql: The SQL script for creating the data.
+1. small.sql: The SQL script for creating the data.
 1. queries.py: The file where to enter your answer; this is the file to be submitted
 1. answers.py: The answers to the queries on the small dataset.
 1. SQLTesting.py: File to be used for testing your submission -- see below
@@ -17,7 +17,7 @@ It also assumed you have cloned the git repository, and have done a `git pull` t
 ### Getting started
 Start the VM with `vagrant up` in the `project1/` directory. The database should already be set up, but if not: 
 - Create a new database called `flights` and switch to it (see the PostgreSQL setup instructions).
-- Run `\i populate-small.sql` to create and populate the tables. 
+- Run `\i small.sql` to create and populate the tables. 
 
 ### Schema 
 The dataset contains synthetic air flight data. Specifically it contains the following tables:
