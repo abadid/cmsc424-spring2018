@@ -10,6 +10,7 @@ order by city;
 """
 
 ### 1. Write a query to find the names of the customers whose names are at least 15 characters long, and the second letter in the  name is "l".
+### Order by name.
 queries[1] = """
 select 0;
 """
@@ -52,6 +53,8 @@ select 0;
 
 ### 7. Write a query to generate a list of customers who don't list Southwest as their frequent flier airline, but
 ### actually flew the most (by number of flights) on that airline.
+### Output columns: customerid, customer_name
+### Order by: customerid
 queries[7] = """
 select 0;
 """
@@ -67,6 +70,8 @@ select 0;
 ### 9. Write a query to find the names of the customer(s) who visited the most cities in the 10 day
 ### duration. A customer is considered to have visited a city if he/she took a flight that either
 ### departed from the city or landed in the city. 
+### Output columns: name
+### Order by: name
 queries[9] = """
 select 0;
 """
@@ -76,7 +81,7 @@ select 0;
 ### by the total number of flights that depart that airport. So the airport with the maximum number
 ### of flights departing gets rank 1, and so on. If two airports tie, then they should 
 ### both get the same rank, and the next rank should be skipped.
-
+### Order the output in the increasing order by rank.
 queries[10] = """
 select 0;
 """
