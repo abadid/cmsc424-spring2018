@@ -1,0 +1,6 @@
+# Compiled Python
+*.pyc
+
+# Jupyter caches
+.ipynb_checkpoints/
+
