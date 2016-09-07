@@ -39,13 +39,14 @@ select 0;
 ### 5. For all flights from OAK to ATL, list the flight id, airline name, and the 
 ### duration in hours and minutes. So the output will have 4 fields: flightid, airline name,
 ### hours, minutes. Order by flightid.
+### Don't worry about timezones -- assume all times are reported using the same timezone.
 queries[5] = """
 select 0;
 """
 
 ### 6. Write a query to find all the empty flights (if any); recall that all the flights listed
-### in the flights table are daily, and that flewon contains information for a period of 10
-### days from Jan 1 to Jan 10, 2010. For each such flight, list the flightid and the date.
+### in the flights table are daily, and that flewon contains information for a period of 9
+### days from August 1 to August 9, 2016. For each such flight, list the flightid and the date.
 ### Order by flight id in the increasing order, and then by date in the increasing order.
 queries[6] = """
 select 0;
