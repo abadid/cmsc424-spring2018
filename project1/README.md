@@ -39,7 +39,7 @@ The dataset was generated synthetically: the airport ids and the cities were cho
 
 In many cases (especially for complex queries or queries involving 
 `max` or `min`), you will find it easier to create temporary tables
-using the ``with'' construct. This also allows you to break down the full 
+using the `with` construct. This also allows you to break down the full
 query and makes it easier to debug.
 
 You don't have to use the "hints" if you don't want to; there might 
