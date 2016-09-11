@@ -3,7 +3,7 @@
 Over the course of the semester, you will work with a variety of software packages, including PostgreSQL, Apache Spark, Python Django, and others. Installing those packages and getting started can often be a hassle, because of software dependencies. You have three choices.
 
 * Install the different software packages on your own machine (most of these packages should have tutorials to install them on different OSs). If you have a Linux box or a Mac, this should be possible; it may be more difficult with Windows. In any case, although we will try our best, we would likely not be able to help you with any problems.
-* (**Preffered Option**) Use Vagrant with Virtual Box (as discussed below). If you have a reasonably modern machine (within last 3-4 years), VirtualBox should generally work fine, but with older laptops, the performance may not be as good. See below for more details on this.
+* (**Preferred Option**) Use Vagrant with Virtual Box (as discussed below). If you have a reasonably modern machine (within last 3-4 years), VirtualBox should generally work fine, but with older laptops, the performance may not be as good. See below for more details on this.
 * Use a VM in the CS Department's Horvitz Cluster. Last year, only one person chose to use this, so we will likely do this on demand, if anyone is really interested. You can also similarly use a VM in Amazon or Microsoft Azure clusters -- both of them provide free VMs for beginning users. The problem with this approach is that you only have `ssh` access into that machine, so you can't run a web browser, etc., without some work.
 
 ---
