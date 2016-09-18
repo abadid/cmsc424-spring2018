@@ -1,0 +1,13 @@
+Assignment No.: {{ assignment.assignment_no }}
+
+<form action="/grading/student/{{ student.id }}/submitassignment/{{ assignment.id }}/" method="post">
+{% csrf_token %}
+<ul>
+{% for q in assignment.question_set.all %}
+<li> Question {{ q.question_no }}: {{ q.question_text }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+<label>True <input type="radio" name="answer{{ q.question_no }}"  value="true" checked="checked"/> </label> 
+<label>False <input type="radio" name="answer{{ q.question_no }}"  value="false" /> </label>
+{% endfor %}
+</ul>
+<input type="submit" value="Submit Assignment" />
+</form>

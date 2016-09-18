@@ -1,0 +1,21 @@
+<h3> Active Assignments for {{ course_title }} </h3>
+{% if active_assignment_list %}
+<ul>
+    {% for a in active_assignment_list %}
+    <li> <a href="/grading/instructor/{{ instructor_id }}/course/{{ course_id }}/assignment/{{ a.id }}">Assignment {{ a.assignment_no }}, Due Date: {{ a.due_date }} </a>
+    {% endfor %}
+</ul>
+{% else %}
+No active assignments.  
+{% endif %}
+
+<h3> Past Assignments for {{ course_title }} </h3>
+{% if past_assignment_list %}
+<ul>
+    {% for a in past_assignment_list %}
+    <li> <a href="/grading/instructor/{{ instructor_id }}/course/{{ course_id }}/assignment/{{ a.id }}">Assignment {{ a.assignment_no }}, Due Date: {{ a.due_date }} </a>
+    {% endfor %}
+</ul>
+{% else %}
+No past assignments.  
+{% endif %}
