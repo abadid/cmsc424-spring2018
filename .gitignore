@@ -4,3 +4,6 @@
 # Jupyter caches
 .ipynb_checkpoints/
 
+# Swap files
+*.swp
+
