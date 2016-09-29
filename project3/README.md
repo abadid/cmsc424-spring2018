@@ -8,7 +8,7 @@ As before we have created a VagrantFile for you. The main differences here are t
 
 ### Assignment Questions
 
-**Question 1 (.5 pt)**: Consider the following query which finds the number of flights taken by users whose name starts with 'William'. Before doing this, make sure to create a new database with the provided `populate-flights-skewed.sql` file, and use that database for all the questions in this assignment. The `VagrantFile` we have provided already does this.
+**Question 1 (.5 pt)**: Consider the following query which finds the number of flights taken by users whose name starts with 'William'. Before doing this, make sure to create a new database with the provided `large-skewed.sql` file, and use that database for all the questions in this assignment. The `VagrantFile` we have provided already does this.
 
 ```
 select c.customerid, c.name, count(*)
