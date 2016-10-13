@@ -8,9 +8,9 @@ def executePrint(s):
 	print cur.fetchall()
 
 print "Compiling..."
-subprocess.call(["javac", "-classpath", ".:./json-simple-1.1.1.jar", "JSONProcessing.java"])
+subprocess.call(["javac", "-classpath", ".:./json-simple-1.1.1.jar:./postgresql-9.0-801.jdbc3.jar", "JSONProcessing.java"])
 print "Executing against example.json..."
-subprocess.call(["java", "-classpath", ".:./json-simple-1.1.1.jar", "JSONProcessing"], stdin=open("example.json"))
+subprocess.call(["java", "-classpath", ".:./json-simple-1.1.1.jar:./postgresql-9.0-801.jdbc3.jar", "JSONProcessing"], stdin=open("example.json"))
 
 conn = psycopg2.connect("dbname=flightsskewed user=vagrant")
 cur = conn.cursor()
