@@ -20,5 +20,5 @@ print "==== Testing first json update"
 executePrint("select * from customers where customerid = 'cust1000'")
 
 print "==== Testing second json update"
-executePrint("select * from flewon where flightid = 'DL119'")
+executePrint("select * from flewon where flightid = 'DL108'")
 executePrint("select * from customers where customerid = 'cust1001'")
