@@ -7,3 +7,5 @@
 # Swap files
 *.swp
 
+# Java class files
+*.class
