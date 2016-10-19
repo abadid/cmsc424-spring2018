@@ -49,7 +49,7 @@ def createDatabase1(name):
 
 	# With the given settings, the following B+-Tree is identical to the one shown in
 	# Figure 11.9 in the textbook
-	db.newIndex(keysize = 20, relname = "instructor", attribute = "name")
+	db.newIndex(keysize = 10, relname = "instructor", attribute = "name")
 	#db.newIndex(keysize = 20, relname = "instructor", attribute = "dept_name")
 
 	return db

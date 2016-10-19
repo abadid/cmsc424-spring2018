@@ -29,7 +29,7 @@ class BTreeBlock(Block):
 			return "Block No. {}, Type: BTree, Parent: None: ".format(self.blockNumber) + ", ".join([str(l) for l in self.keysAndPointers])
 
 	def html_str(self):
-		return "{}: ".format(self.blockNumber) + ", ".join([str(self.keysAndPointers[l])[:6] for l in range(1, len(self.keysAndPointers), 2)])
+		return "{}: ".format(self.blockNumber) + ", ".join([str(self.keysAndPointers[l])[:5] for l in range(1, len(self.keysAndPointers), 2)])
 
 	def hasSpace(self):
 		return len(self.keysAndPointers) < self.maxlen
@@ -162,7 +162,7 @@ class BTreeBlock(Block):
 	def findSiblingWithSameParent(self, parentBlock):
 		print parentBlock
 		for index in range(0, len(parentBlock.keysAndPointers), 2):
-			print "** {} - {} - {}".format(index, parentBlock.keysAndPointers[index].blockNumber, self.blockNumber)
+			#print "** {} - {} - {}".format(index, parentBlock.keysAndPointers[index].blockNumber, self.blockNumber)
 			if parentBlock.keysAndPointers[index].blockNumber == self.blockNumber:
 				if index != 0:
 					return (parentBlock.keysAndPointers[index-2].getBlock(), parentBlock.keysAndPointers[index-1], self)
@@ -344,7 +344,7 @@ class BTreeIndex:
 
 
 
-WIDTH_PER_KEY = 50
+WIDTH_PER_KEY = 30
 WIDTH_PER_POINTER = 10
 
 class BTreeDisplayRectangle:
@@ -352,7 +352,7 @@ class BTreeDisplayRectangle:
 		self.btreenode = btreenode
 		self.corner_x = corner_x
 		self.corner_y = corner_y
-		self.height = 30
+		self.height = 25
 		self.num_ptrs_keys = len(self.btreenode.keysAndPointers)
 		self.width = self.num_ptrs_keys/2 * WIDTH_PER_KEY + (self.num_ptrs_keys/2 + 1) * WIDTH_PER_POINTER
 
@@ -375,7 +375,7 @@ class BTreeDisplayRectangle:
 			h += '<line x1="{}" y1="{}" x2="{}" y2="{}" stroke="black" stroke-width="1"/>'.format(x_position, 0, x_position, self.height)
 		for i in range(1, self.num_ptrs_keys, 2):
 			x_position = i/2 * (WIDTH_PER_POINTER + WIDTH_PER_KEY) + WIDTH_PER_POINTER + 2
-			h += '<text x="{}" y="{}" dy=".35em">{}</text>'.format(x_position, self.height/2, str(self.btreenode.keysAndPointers[i])[:6])
+			h += '<text x="{}" y="{}" font-size="10" dy=".35em">{}</text>'.format(x_position, self.height/2, str(self.btreenode.keysAndPointers[i])[:5])
 		h += '</g>'
 		return h
 
@@ -397,7 +397,7 @@ class DisplayBTree:
 					x_offset += rects[node.blockNumber].width + 20
 
 
-		h = '<svg class="chart" width="1820" height="520">\n'
+		h = '<svg class="chart" width="1820" height="250">\n'
 		h += '<marker id="triangle" viewBox="0 0 10 10" refX="0" refY="5" markerUnits="strokeWidth" markerWidth="5" markerHeight="8" orient="auto"> <path d="M 0 0 L 10 5 L 0 10 z" /> </marker>'
 		for k in rects:
 			h += rects[k].html() + '\n'
