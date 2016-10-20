@@ -41,6 +41,7 @@ def createDatabase1(name):
 	dept_schema = ["dept_name", "building", "budget"]
 	department = db.newRelation("department", dept_schema)
 	department.insertTuple(Tuple(dept_schema, ('Biology', 'Watson', '90000')));
+	department.insertTuple(Tuple(dept_schema, ('Ca is after bio but before comp sci', 'Watson', '90000')));
 	department.insertTuple(Tuple(dept_schema, ('Comp. Sci.', 'Taylor', '100000')));
 	department.insertTuple(Tuple(dept_schema, ('Elec. Eng.', 'Taylor', '85000')));
 	department.insertTuple(Tuple(dept_schema, ('Finance', 'Painter', '120000')));

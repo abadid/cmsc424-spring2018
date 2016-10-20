@@ -277,15 +277,14 @@ class SortMergeJoin(Operator):
 					else:
 						break
 
-				while ptr_r < len(right_input):
+				while ptr_r < len(right_input) and right_input[ptr_r].getAttribute(self.right_attribute) <= l_attr:
 					if right_input[ptr_r].getAttribute(self.right_attribute) == l_attr:
 						for l in set_L:
 							output = list(l.t)
 							output.extend(list(right_input[ptr_r].t))
 							yield Tuple(None, output)
-						ptr_r += 1
-					else:
-						break
+					ptr_r += 1
+
 		elif self.jointype == self.FULL_OUTER_JOIN:
 			raise ValueError("Functionality to be implemented")
 		else:
