@@ -23,6 +23,8 @@ def testQueries():
 	R_Schema = ["A", "B"]
 	S_Schema = ["B", "C", "D"]
 
+	random.seed(0)
+
 	Cvalues = [1, 1, 1, 1, 2, 2, 2, 3, 3, 4, 0]
 	Dvalues = [5, 5, 5, 5, 3, 2, 2, 1, 1, 1, 0]
 	random.shuffle(Cvalues)
@@ -60,5 +62,7 @@ def testQueries():
 		print "--- Executing Query {}".format(i)
 		for t in queries[i].get_next():
 			print  str(t)
+
+	
 
 testQueries()
