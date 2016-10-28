@@ -67,8 +67,9 @@ def createTestIndexDatabase():
 
 (db, R, index) = createTestIndexDatabase()
 index.printTree()
+checkValidityTree(index)
 
 ##### NOTE: Below is only one test case -- you need to try different situations to make sure your code works for other situations
-deleteFromTree(R, index, '15')
-deleteFromTree(R, index, '1')
-checkValidityTree(index)
+#deleteFromTree(R, index, '15')
+#deleteFromTree(R, index, '1')
+#checkValidityTree(index)
