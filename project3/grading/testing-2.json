@@ -1,0 +1,1 @@
+{ "flightinfo": { "flightid": "SW109", "flightdate": "2015-10-25", "customers": [ {"customer_id": "cust652"}, {"customer_id": "cust653"}, {"customer_id": "cust1003", "name": "XYZ", "birthdate": "1991-12-06", "frequentflieron": "AA"} ] } }
