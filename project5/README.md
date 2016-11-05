@@ -100,8 +100,6 @@ The file also contains some examples of operations on these RDDs.
 Your tasks are to fill out the 8 functions that are defined in the `functions.py` file (starting with `task`). The amount of code that you 
 write would typically be small (several would be one-liners), with the exception of the last one. 
 
-**results.txt** shows the results of running assignment.py on our code using: `$SPARKHOME/bin/spark-submit assignment.py`
-
 - **Task 1 (4pt)**: This takes as input the playRDD and for each line, finds the first word in the line, and also counts the number of words. It should then filter the RDD by only selecting the lines where the count of words in the line is > 10. The output will be an RDD where the key is the first word in the line, and the value is a 2-tuple, the first being the line and the second being the number of words (which must be >10). Simplest way to do it is probably a `map` followed by a `filter`.
 
 - **Task 2 (4pt)**: Write just the flatmap function (`task2_flatmap`) that takes in a parsed JSON document (from `prize.json`) and returns the surnames of the Nobel Laureates. In other words, the following command should create an RDD with all the surnames. We will use `json.loads` to parse the JSONs (this is already done). Make sure to look at what it returns so you know how to access the information inside the parsed JSONs (these are basically nested dictionaries).
@@ -131,19 +129,19 @@ is the list of all URLs fetched from that host on the second day. Use `filter` t
 A *matching* in a graph is a subset of the edges such that no two edges share a vertex (i.e., every vertex is part of at most 1 edge in the matching). A *maximal* matching
 is such that, we cannot add any more edges to it (in other words, there is no remaining edge in the graph both of whose endpoints are unmatched). Here is a simple greedy
 algorithm for finding a maximal matching using map-reduce; note that this is not a particularly good algorithm for solving this problem, but it is easy to parallelize.
-
 We maintain the current state of the program in a PairRDD called currentMatching, where we note all the user-product relationships
 that have already been chosen. Initially this RDD is set to be empty (for making it easy to debug, we have added one entry to it).
-
 The following is then executed repeatadly till currentMatching does not change.
+* For each user who is currently unmatched (i.e., does not have an entry in currentMatching), find the group of products connected to it that are also unmatched.
+* For each such user, among the group of unmatched products it is connected to, pick the `min` (it is better to pick this randomly but then the output is not deterministic and will make testing/debugging difficult)
+* It is possible that two different users have picked the same product. 
+* In another step, repeat the same process from the products' perspective, i.e., for each product that has been picked as potential match for multiple user nodes, pick the minimum user node (again doing this randomly is better).
+* Now we are left with a set of user-product relationships that we can add to currentMatching and iterate
 
-	- For each user who is currently unmatched (i.e., does not have an entry in currentMatching), find the group of products connected to it that are also unmatched.
-	- For each such user, among the group of unmatched products it is connected to, pick the `min` (it is better to pick this randomly but then the output is not deterministic and will make testing/debugging difficult)
-	- It is possible that two different users have picked the same product. 
-	- In another step, repeat the same process from the products' perspective, i.e., for each product that has been picked as potential match for multiple user nodes, pick the minimum user node (again doing this randomly is better).
-	- Now we are left with a set of user-product relationships that we can add to currentMatching and iterate
-
+### Sample results.txt File
 You can use spark-submit to run the `assignment.py` file, but it would be easier to develop with pyspark (by copying the commands over). We will also shortly post iPython instructions.
+
+**results.txt** shows the results of running assignment.py on our code using: `$SPARKHOME/bin/spark-submit assignment.py`
 
 ### Submission
 
