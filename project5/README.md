@@ -15,7 +15,7 @@ Spark can be used with the Hadoop ecosystem, including the HDFS file system and 
 
 ### Installing Spark
 
-As before, we have provide a VagrantFile in the `project5` directory. Since the Spark distribution is large, we ask you to download that directly from the Spark website.
+As before, we have provided a VagrantFile in the `project5` directory. Since the Spark distribution is large, we ask you to download that directly from the Spark website.
 
 1. Download the Spark package at http://spark.apache.org/downloads.html. We will use **Version 2.0.1, Pre-built for Hadoop 2.7 or later**.
 2. Move the downloaded file to the `project5/` directory (so it is available in '/vagrant' on the virtual machine), and uncompress it using: 
@@ -37,7 +37,6 @@ To use Spark within the Jupyter Notebook (and to play with the Notebook we have 
 	```
 	PYSPARK_DRIVER_PYTHON="jupyter" PYSPARK_DRIVER_PYTHON_OPTS="notebook --no-browser --ip=0.0.0.0 --port=8881" $SPARKHOME/bin/pyspark
 	```
-
 ### PySpark Shell
 
 You can also use the PySpark Shell directly.
@@ -90,4 +89,64 @@ You should also try out the Scala and Java interfaces.
 
 ## Assignment Details
 
-To be released...
+We have provided a Python file: `assignment.py`, that initializes the folllowing RDDs:
+* An RDD consisting of lines from a Shakespeare play (`play.txt`)
+* An RDD consisting of lines from a log file (`NASA_logs_sample.txt`)
+* An RDD consisting of 2-tuples indicating user-product ratings from Amazon Dataset (`amazon-ratings.txt`)
+* An RDD consisting of JSON documents pertaining to all the Noble Laureates over last few years (`prize.json`)
+
+The file also contains some examples of operations on these RDDs. 
+
+Your tasks are to fill out the 8 functions that are defined in the `functions.py` file (starting with `task`). The amount of code that you 
+write would typically be small (several would be one-liners), with the exception of the last one. 
+
+**results.txt** shows the results of running assignment.py on our code using: `$SPARKHOME/bin/spark-submit assignment.py`
+
+* **Task 1 (4pt) **: This takes as input the playRDD and for each line, finds the first word in the line, and also counts the number of words. It should then filter the RDD by only selecting the lines where the count of words in the line is > 10. The output will be an RDD where the key is the first word in the line, and the value is a 2-tuple, the first being the line and the second being the number of words (which must be >10). Simplest way to do it is probably a `map` followed by a `filter`.
+
+* **Task 2 (4pt) **: Write just the flatmap function (`task2_flatmap`) that takes in a parsed JSON document (from `prize.json`) and returns the surnames of the Nobel Laureates. In other words, the following command should create an RDD with all the surnames. We will use `json.loads` to parse the JSONs (this is already done). Make sure to look at what it returns so you know how to access the information inside the parsed JSONs (these are basically nested dictionaries).
+```
+     	task2_result = nobelRDD.map(json.loads).flatMap(task2_flatmap)
+```
+
+* **Task 3 (4pt) **: Write a sequence of transformations starting from prizeRDD that returns an PairRDD where the key is the `category` (`physics` etc), and the value is a list of all Nobel Laureates for that category (just their surnames). Make sure the final values are `list`s, and not some other class objects (if you do a `take(5)`, it should print out the lists).
+
+* **Task 4 (4pt) **: This function operates on the `logsRDD`. It takes as input a list of *dates* and returns an RDD with "hosts" that were present in the log on all of 
+those dates. The dates would be provided as strings, in the same format that they appear in the logs (e.g., '01/Jul/1995' and '02/Jul/1995').
+The format of the log entries should be self-explanatory, but here are more details if you need: [NASA Logs](http://ita.ee.lbl.gov/html/contrib/NASA-HTTP.html)
+Try to minimize the number of RDDs you end up creating.
+
+* **Task 5 (4pt) **: Complete a function to calculate the degree distribution of user nodes in the Amazon graph (i.e., `amazonBipartiteRDD`). In other words, calculate 
+the degree of 
+each user node (i.e., number of products each user has rated), and then use a reduceByKey (or aggregateByKey) to find the number of nodes with a given degree. The output 
+should be a PairRDD where the key is the degree, and the value is the number of nodes in the graph with that degree.
+
+* **Task 6 (4pt) **: On the `logsRDD`, for two given days (provided as input analogous to Task 4 above), use a 'cogroup' to create the following RDD: the key of 
+the RDD will be a host, and the value will be a 2-tuple, where the first element is a list of all URLs fetched from that host on the first day, and the second element
+is the list of all URLs fetched from that host on the second day. Use `filter` to first create two RDDs from the input `logsRDD`.
+
+* **Task 7 (8pt) **: [Bigrams](http://en.wikipedia.org/wiki/Bigram) are sequences of two consecutive words. For example, the previous sentence contains the following bigrams: "Bigrams are", "are simply", "simply sequences", "sequences of", etc. Your task is to write a bigram counting application for counting the bigrams in the `motivation`s of the Nobel Prizes (i.e., the reason they were given the Nobel Prize). The return value should be a PairRDD where the key is a bigram, and the value is its count, i.e., in how many different `motivations` did it appear. Don't assume 'motivation' is always present.
+
+* **Task 8 (8pt) **: [Maximal Matching] `task8` should implement one iteration of a greedy algorithm for finding a maximal matching in a bipartite graph. 
+A *matching* in a graph is a subset of the edges such that no two edges share a vertex (i.e., every vertex is part of at most 1 edge in the matching). A *maximal* matching
+is such that, we cannot add any more edges to it (in other words, there is no remaining edge in the graph both of whose endpoints are unmatched). Here is a simple greedy
+algorithm for finding a maximal matching using map-reduce; note that this is not a particularly good algorithm for solving this problem, but it is easy to parallelize.
+
+We maintain the current state of the program in a PairRDD called currentMatching, where we note all the user-product relationships
+that have already been chosen. Initially this RDD is set to be empty (for making it easy to debug, we have added one entry to it).
+
+The following is then executed repeatadly till currentMatching does not change.
+	- For each user who is currently unmatched (i.e., does not have an entry in currentMatching), find the group of products connected to it that are also unmatched.
+	- For each such user, among the group of unmatched products it is connected to, pick the `min` (it is better to pick this randomly but then the output is not deterministic and will make testing/debugging difficult)
+	- It is possible that two different users have picked the same product. 
+	- In another step, repeat the same process from the products' perspective, i.e., for each product that has been picked as potential match for multiple user nodes, pick the minimum user node (again doing this randomly is better).
+	- Now we are left with a set of user-product relationships that we can add to currentMatching and iterate
+
+You can use spark-submit to run the `assignment.py` file, but it would be easier to develop with pyspark (by copying the commands over). We will also shortly post iPython instructions.
+
+### Submission
+
+Submit the `functions.py` file.
+
+
+https://docs.python.org/2/library/json.html
