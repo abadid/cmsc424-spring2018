@@ -134,7 +134,7 @@ that have already been chosen. Initially this RDD is set to be empty (for making
 The following is then executed repeatadly till currentMatching does not change.
   * For each user who is currently unmatched (i.e., does not have an entry in currentMatching), find the group of products connected to it that are also unmatched.
   * For each such user, among the group of unmatched products it is connected to, pick the `min` (it is better to pick this randomly but then the output is not deterministic and will make testing/debugging difficult)
-  * It is possible that two different users have picked the same product. 
+  * It is possible that we have picked the same product two different unmatched users, which would violate the matching constraint.
   * In another step, repeat the same process from the products' perspective, i.e., for each product that has been picked as potential match for multiple user nodes, pick the minimum user node (again doing this randomly is better).
   * Now we are left with a set of user-product relationships that we can add to currentMatching and iterate
 
