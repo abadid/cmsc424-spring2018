@@ -33,7 +33,7 @@ You can do `git pull` (from within the `cmsc424-spring2018` directory) to fetch 
 - In order to use this option, you have to first install Vagrant and VirtualBox on your machine (called `Host` henceforth). See the instructions on the two websites above to do that.
 - Vagrant makes things **super-easy**. We will provide you with appropriate setup files -- all you need to do is `vagrant up` to start the virtual machine.
 - More specifically: in the git sub-directory `project0`, run `vagrant up`. This will start the virtual machine in the background. 
-- By default, vagrant only provides **ssh** access into the virtual machine (called `Guest VM` henceforth), using `vagrant ssh`. This will work as if you are doing `ssh` into a remote machine.
+- By default, vagrant only provides **ssh** access into the virtual machine (called `Guest VM` henceforth), using `vagrant ssh`. Just type `vagrant ssh` and you will have access to the virtual machine with everything installed that you need for this assignment.
 - The Guest VM will have access to the files in the current directory in the host machine (i.e., the files in the `project0` directory and its subdirectories). These are mounted in the guest VM at `/vagrant`. It would be best if you only make edits to that directory -- since those edits will survive a `vagrant destroy`. In fact, you can continue using your favorite text editor (in the host machine) to edit files, and only use the VM for running specific programs (like `postgres`, `psql`, or `ipython notebook` below).
 - If the Guest VM has a program (e.g., a Web Server) running and listening on a specific port (e.g., 80), you can access those ports from the host machine by adding them to the `VagrantFile`. The provided VagrantFile has two such mappings: for port 8888, used by iPython (mapped to port 8888 on the host machine), and for port 80, used by a Web server (mapped to port 8080 on the host machine).
 - If you just exist `ssh`, then the VM continues running in the background.
@@ -50,7 +50,7 @@ You can do `git pull` (from within the `cmsc424-spring2018` directory) to fetch 
 PostgreSQL is a full-fledged and powerful relational database system, and will be used for several assignments. 
 
 PostgreSQL is already installed on your virtual machine. To get started, start the virtual machine using `vagrant up`. 
-The current version of PostgreSQL is 9.6.1. However, the version installed on the VMs is 9.3.20, the one available through `apt-get` right now. You will find the detailed documentation at: https://www.postgresql.org/docs/9.3/static/index.html. 
+The current version of PostgreSQL is 10.1. However, the version installed on the VMs is 9.3.20, the one available through `apt-get` right now. You will find the detailed documentation at: https://www.postgresql.org/docs/9.3/static/index.html. 
 
 Following steps will get you started with creating a database and populating it with the `University` dataset provided on the book website: http://www.db-book.com
 
