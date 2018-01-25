@@ -2,7 +2,7 @@
 
 Over the course of the semester, you will work with a variety of software packages, including PostgreSQL, Apache Spark, Python Django, and others. Installing those packages and getting started can often be a hassle, because of software dependencies. You have three choices.
 
-* Install the different software packages on your own machine (most of these packages should have tutorials to install them on different OSs). If you have a Linux box or a Mac, this should be possible; it may be more difficult with Windows. In any case, although we will try our best, we would likely not be able to help you with any problems.
+* Install the different software packages on your own machine (most of these packages should have tutorials to install them on different OSs). If you have a Linux box or a Mac, this should be possible; it will be more difficult with Windows. In any case, although TAs would try their best, they would likely not be able to help you with any problems.
 * (**Preferred Option**) Use Vagrant with Virtual Box (as discussed below). If you have a reasonably modern machine (within last 3-4 years), VirtualBox should generally work fine, but with older laptops, the performance may not be as good. See below for more details on this.
 * Use a VM in the CS Department's Horvitz Cluster. Last year, only one person chose to use this, so we will likely do this on demand, if anyone is really interested. You can also similarly use a VM in Amazon or Microsoft Azure clusters -- both of them provide free VMs for beginning users. The problem with this approach is that you only have `ssh` access into that machine, so you can't run a web browser, etc., without some work.
 
@@ -13,35 +13,16 @@ Over the course of the semester, you will work with a variety of software packag
 Git is one of the most widely used version control management systems today, and invaluable when working in a team. GitHub is a web-based hosting service built around git --
 it supports hosting git repositories, user management, etc. There are other similar services, e.g., bitbucket.
 
-We will use GitHub to distribute the assignments, and other class materials. Our use of git/github for the class will be minimal; however, we encourage you to use it for
-collaboration for your class project, or for other classes. 
+We will use GitHub to distribute the assignments, and other class materials. Our use of git/github for the class will be minimal.
 
 #### Just Cloning the Class Repository
-You don't need a GitHub account for just cloning the class repository. Just do:
+You don't need a GitHub account for just cloning the class repository. Just install git (on Windows, http://gitforwindows.org/ is helpful) and then run:
 
-`git clone https://github.com/umddb/cmsc424-fall2016.git`
+`git clone https://github.com/cmsc424-spring2018.git`
 
-You can do `git pull` (from within the `cmsc424-fall2016` directory) to fetch the newly added material. 
+You can do `git pull` (from within the `cmsc424-spring2018` directory) to fetch the newly added material. 
 
 *NOTE*: If you are having trouble installing `git`, you can just download the files instead (as a zipfile), although updating may become tedious. 
-
-#### Setting up a GitHub Account 
-Repositories hosted on github for free accounts are public; however, you can easily sign up for an educational account which allows you to host 5 private repositories. More
-details: https://education.github.com/
-
-- Create an account on Github: https://github.com
-- Generate and associate an SSH key with your account
-    - Instructions to generate SSH Keys: https://help.github.com/articles/generating-ssh-keys#platform-linux
-        - Make sure to remember the passphrase
-    - Go to Profile: https://github.com/settings/profile, and SSH Keys (or directly: https://github.com/settings/ssh)
-    - Add SSH Key
-- Clone the class repository:
-    - In Terminal: `git clone git@github.com:umddb/cmsc424-fall2016.git`
-    - The master branch should be checked out in a new directory 
-- Familiarize yourself with the basic git commands
-    - At a minimum, you would need to know: `clone`, `add`, `commit`, `push`, `pull`, `status`
-    - But you should also be familiar with how to use **branches**
-- You can't push to the main class repository, but feel free to do *pull requests* on the main class repository if you spot any errors or if you think something could be improved.
 
 ---
 
@@ -150,21 +131,5 @@ This will start a server on the VM, listening on port 8888. We will access it fr
 
 
 ---
-
-### Instabase (Optional)
-
-Instabase is a Cloud platform for hosting data, applications, and interactive computations. Its platform makes it very easy to do interactive and collaborative analytics in the cloud. The company has graciously agreed to provide us with computing resources to host some of the instructional materials. Use of Instabase is complementary and optional -- it is being provided primarily to make it simpler for you to follow and work with instructional Notebooks that we provide. The platform itself is very powerful and has been used at some other universities for assignment submission, etc.
-
-We will primarily use the hosted Jupyter (originally iPython) Notebook functionality provided by Instabase. Here is such a Notebook that covers basics of SQL. 
-
-[Instabase Notebook: Basics of SQL](https://www.instabase.com/amolvdeshpande/CMSC424/fs/Instabase%20Drive/notebooks/CMSC424%20-%20Introduction%20to%20SQL.ipynb)
-
-In order to edit the Notebook, you will need an account at Instabase. You can get an account here: https://www.instabase.com/account/register?use_token=true (token is instabase-amol-deshpande). 
-
-After you get the sign in, you can open the notebook by clicking "Open With" on the right hand top corner, and choosing Jupyter. This will start something like a Virtual Machine and open the Notebook in it. You might want to copy the Notebook to your own directory first.
-
-**NOTE 1**: Instabase is a startup and the software is being very actively developed; be prepared for some rough edges.
-
-**NOTE 2**: Please be careful not to run computationally intense stuff on their platform.
 
 
