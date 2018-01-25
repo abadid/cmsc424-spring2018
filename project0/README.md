@@ -18,7 +18,7 @@ We will use GitHub to distribute the assignments, and other class materials. Our
 #### Just Cloning the Class Repository
 You don't need a GitHub account for just cloning the class repository. Just install git (on Windows, http://gitforwindows.org/ is helpful) and then run:
 
-`git clone https://github.com/cmsc424-spring2018.git`
+`git clone https://github.com/abadid/cmsc424-spring2018.git`
 
 You can do `git pull` (from within the `cmsc424-spring2018` directory) to fetch the newly added material. 
 
@@ -52,7 +52,7 @@ PostgreSQL is a full-fledged and powerful relational database system, and will b
 PostgreSQL is already installed on your virtual machine. To get started, start the virtual machine using `vagrant up`. 
 
 The current version of PostgreSQL is 9.5.4. You will find the detailed documentation at:
-http://www.postgresql.org/docs/9.5/interactive/index.html. However, the version installed on the VMs is 9.3.14, the one available through `apt-get` right now.
+http://www.postgresql.org/docs/9.5/interactive/index.html. However, the version installed on the VMs is 9.3.20, the one available through `apt-get` right now.
 
 Following steps will get you started with creating a database and populating it with the `University` dataset provided on the book website: http://www.db-book.com
 
@@ -94,7 +94,11 @@ Now you can start using the database.
 
    - All commands like this can be found at:  http://www.postgresql.org/docs/current/static/app-psql.html. `\?` will also list them out.
 
-   - To populate the database using the provided university dataset, use the following: `\i DDL.sql`, followed by 
+   - To populate the database using the provided university dataset, use the following: 
+     ```
+     \i DDL.sql 
+     ```
+     followed by 
 	   ```
 	   \i smallRelationsInsertFile.sql
 	   ``` 
