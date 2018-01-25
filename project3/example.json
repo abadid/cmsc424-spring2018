@@ -1,2 +1,0 @@
-{ "newcustomer": { "customerid": "cust1000", "name": "XYZ", "birthdate": "1991-12-06", "frequentflieron": "Southwest Airlines" } }
-{ "flightinfo": { "flightid": "DL108", "flightdate": "2015-09-25", "customers": [ {"customer_id": "cust94"}, {"customer_id": "cust102"}, {"customer_id": "cust1001", "name": "XYZ", "birthdate": "1991-12-06", "frequentflieron": "DL"} ] } }
