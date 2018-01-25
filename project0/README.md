@@ -1,6 +1,6 @@
 # Project 0: Computing Environment
 
-Over the course of the semester, you will work with a variety of software packages, including PostgreSQL, Apache Spark, Python Django, and others. Installing those packages and getting started can often be a hassle, because of software dependencies. You have three choices.
+Over the course of the semester, you will work with a variety of software packages, including PostgreSQL, Apache Spark, and others. Installing those packages and getting started can often be a hassle, because of software dependencies. You have three choices.
 
 * Install the different software packages on your own machine (most of these packages should have tutorials to install them on different OSs). If you have a Linux box or a Mac, this should be possible; it will be more difficult with Windows. In any case, although TAs would try their best, they would likely not be able to help you with any problems.
 * (**Preferred Option**) Use Vagrant with Virtual Box (as discussed below). If you have a reasonably modern machine (within last 3-4 years), VirtualBox should generally work fine, but with older laptops, the performance may not be as good. See below for more details on this.
@@ -50,9 +50,7 @@ You can do `git pull` (from within the `cmsc424-spring2018` directory) to fetch 
 PostgreSQL is a full-fledged and powerful relational database system, and will be used for several assignments. 
 
 PostgreSQL is already installed on your virtual machine. To get started, start the virtual machine using `vagrant up`. 
-
-The current version of PostgreSQL is 9.5.4. You will find the detailed documentation at:
-http://www.postgresql.org/docs/9.5/interactive/index.html. However, the version installed on the VMs is 9.3.20, the one available through `apt-get` right now.
+The current version of PostgreSQL is 9.6.1. However, the version installed on the VMs is 9.3.20, the one available through `apt-get` right now. You will find the detailed documentation at: https://www.postgresql.org/docs/9.3/static/index.html. 
 
 Following steps will get you started with creating a database and populating it with the `University` dataset provided on the book website: http://www.db-book.com
 
