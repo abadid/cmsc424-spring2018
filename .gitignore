@@ -9,3 +9,6 @@
 
 # Java class files
 *.class
+
+# Vagrant hidden folder
+.vagrant/
