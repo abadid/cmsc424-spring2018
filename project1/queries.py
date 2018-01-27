@@ -9,7 +9,7 @@ from airports
 order by city;
 """
 
-### 1. Write a query to find the names of the customers who were born after 1990-01-01, and the the family name starts with 'G'
+### 1. Write a query to find the names of the customers who were born after 1990-01-01, and the family name starts with 'G'
 ### Hint: See postgresql date operators and string functions
 ### Order: by name
 ### Output columns: name 
@@ -18,8 +18,8 @@ select 0;
 """
 
 
-### 2. Write a query to find any customers who flew on the dates within one week before their birthday.
-### Hint: See postgresql date functions
+### 2. Write a query to find unique customers who flew on the dates within one week before their birthday.
+### Hint: See postgresql date functions and distinct operator
 ### Order: by name 
 ### Output columns: all columns from customers
 queries[2] = """
