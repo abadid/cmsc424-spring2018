@@ -61,7 +61,7 @@ queries[6] = """
 select 0;
 """
 
-### 7. Write a query to find the customer who flew the least on their frequent flier airline.
+### 7. Write a query to find the customers who used their frequent flier airline the least by looking at his/her own flew on records.
 ### Output: (customerid, customer_name) 
 ### Order: by customerid
 ### Note: a customer may have never flown on their frequent flier airlines.
