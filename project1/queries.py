@@ -34,7 +34,7 @@ queries[3] = """
 select airports.city, flights.airlineid, COUNT(*) as inbound_flights from flights join airports on airports.airportid = flights.dest group by flights.airlineid, airports.city order by airports.city, inbound_flights desc, flights.airlineid;
 """
 
-### 4. Find the name of the customer who flew the most with his/her frequent flier airlines
+### 4. Find the name of the customer who flew the most times with his/her frequent flier airline. For example, if customer X flew Delta (which is listed as X's frequent flier airline in the customers table) 100 times, and no other customer flew their frequent flyer airline more than 99 times, the only thing returned for this query is X's name.
 ### Hint: use `with clause` and nested queries 
 ### Output: only the name of the customer. If multiple answers, return them all.
 ### Order: order by name.
@@ -61,7 +61,7 @@ queries[6] = """
 with tmp as (select flightid, flightdate, round(cast(COUNT(*)/cast(120 as float) as numeric) ,2) as PLF from flewon where flightdate = '20160801' group by flightid, flightdate), extras as (select flightid from flights except select flightid from tmp), final as (select flightid, 0.00 as plf from extras union select flightid, plf from tmp where plf <= .01) select * from final order by plf desc, flightid;
 """
 
-### 7. Write a query to find the customer who flew the least on their frequent flier airline.
+### 7. Write a query to find the customers who used their frequent flier airline the least when compared to all the airlines that this customer as flown on. For example, if customer X has Delta as X's frequent flyer airline in the customer table, but flew on Delta only 1 time, but every other airline at least 1 time, then X's id and name would be returned as part of this query.
 ### Output: (customerid, customer_name) 
 ### Order: by customerid
 ### Note: a customer may have never flown on their frequent flier airlines.
@@ -92,7 +92,8 @@ with customer_flights as (select flewon.customerid, flights.dest, flights.source
 ### 10. Write a query that outputs the top 20 ranking of the most busy flights. We rank the flights by their average on-board customers, so the flight with the most average number of customers gets rank 1, and so on. 
 ### Output: (flightid, flight_rank)
 ### Order: by the rank 
-### Note: If two flights tie, then they should both get the same rank, and the next rank should be skipped. For example, if the top two flights have the same average number of customers, then there should be no rank 2, e.g., 1, 1, 3 ...   
+### Note: a) If two flights tie, then they should both get the same rank, and the next rank should be skipped. For example, if the top two flights have the same average number of customers, then there should be no rank 2, e.g., 1, 1, 3 ...   
+###       b) There may be empty flights.
 queries[10] = """
 with tmp as (select flightid, flightdate, count(*) from flewon group by flightid, flightdate) , tmp2 as (select SUM(count) as passengers, flightid from tmp group by flightid) select flightid, rank() over (order by passengers desc) as rank from tmp2 limit 20;
 """
