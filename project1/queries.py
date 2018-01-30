@@ -34,7 +34,7 @@ queries[3] = """
 select 0;
 """
 
-### 4. Find the name of the customer who flew the most with his/her frequent flier airlines
+### 4. Find the name of the customer who flew the most times with his/her frequent flier airline. For example, if customer X flew Delta (which is listed as X's frequent flier airline in the customers table) 100 times, and no other customer flew their frequent flyer airline more than 99 times, the only thing returned for this query is X's name.
 ### Hint: use `with clause` and nested queries 
 ### Output: only the name of the customer. If multiple answers, return them all.
 ### Order: order by name.
@@ -61,7 +61,7 @@ queries[6] = """
 select 0;
 """
 
-### 7. Write a query to find the customers who used their frequent flier airline the least by looking at his/her own flew on records.
+### 7. Write a query to find the customers who used their frequent flier airline the least when compared to all the airlines that this customer as flown on. For example, if customer X has Delta as X's frequent flyer airline in the customer table, but flew on Delta only 1 time, but every other airline at least 1 time, then X's id and name would be returned as part of this query.
 ### Output: (customerid, customer_name) 
 ### Order: by customerid
 ### Note: a customer may have never flown on their frequent flier airlines.
