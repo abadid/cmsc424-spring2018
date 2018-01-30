@@ -23,8 +23,7 @@ select name from customers where birthdate > '19900101' and name like '% G%' ord
 ### Order: by name 
 ### Output columns: all columns from customers
 queries[2] = """
-NOT DONE
-select customers.name, customers.birthdate, flewon.flightdate from customers join flewon on customers.customerid = flewon.customerid;
+with adjusted as (select customers.name, customers.birthdate + interval '1 year' * (2016 - date_part('year', customers.birthdate)) as birthday, flewon.flightdate from customers join flewon on customers.customerid = flewon.customerid) select distinct customers.customerid, customers.name,  customers.birthdate, customers.frequentflieron from adjusted join customers on adjusted.name = customers.name where (date_part('day', adjusted.birthday - adjusted.flightdate) <= 7 and adjusted.birthday > adjusted.flightdate);
 """
 
 ### 3. Write a query to find number of inbound flights by each airlines to any airport 
@@ -67,7 +66,7 @@ with tmp as (select flightid, flightdate, round(cast(COUNT(*)/cast(120 as float)
 ### Order: by customerid
 ### Note: a customer may have never flown on their frequent flier airlines.
 queries[7] = """
-with counts as (with tmp as (select customers.customerid, customers.name, customers.frequentflieron, flewon.flightid, flewon.flightdate from customers join flewon on customers.customerid = flewon.customerid where customers.frequentflieron = substring(flewon.flightid, 1, 2) order by name) select customerid, name, COUNT(*) from tmp group by customerid,name order by count desc), extras as (select customerid, name from customers except select customerid, name from counts), final as (select * from counts UNION select customerid, name, 0 as count from extras) select customerid, name from final where count = (select min(count) from final) order by customerid;
+with extras as (select customerid, customers.name, frequentflieron, airlineid, 0 as count from airlines cross join customers), counts as (select customers.customerid, name, frequentflieron, substring(flightid, 1, 2) as airlineid, count(*) from customers join flewon on customers.customerid = flewon.customerid group by name, airlineid, frequentflieron, customers.customerid), combined as (select * from counts union select * from extras where not exists (select * from counts where counts.customerid = extras.customerid and counts.airlineid = extras.airlineid)), mins as (select customerid, name, airlineid, frequentflieron, count, min(count) over (partition by name) as min_count from combined) select customerid, name from mins where count = min_count and airlineid = frequentflieron order by customerid;
 """
 
 ### 8. Write a query to find the flights which are empty on three consecutive days, but not empty on the other days, return the flight, and the start and end dates of those three days.  
@@ -75,7 +74,10 @@ with counts as (with tmp as (select customers.customerid, customers.name, custom
 ### Output: flightid, start_date, end_date 
 ### Order: by start_date, then flightid 
 queries[8] = """
-select 0;
+with flight_dates as (select distinct flights.flightid, flightdate from flights join flewon on flewon.flightid = flights.flightid),
+three_gaps as (select a.flightid, a.flightdate + 1 as start_date from flight_dates a where not exists (select * from flight_dates b where b.flightdate = a.flightdate + interval '1 day' and b.flightid = a.flightid) and
+not exists (select * from flight_dates b where b.flightdate = a.flightdate + interval '1 day' * 2 and b.flightid = a.flightid) and
+not exists (select * from flight_dates b where b.flightdate = a.flightdate + interval '1 day' * 3 and b.flightid = a.flightid)), gaps as (select a.flightid, a.flightdate + interval '1 day' as gap from flight_dates a where not exists (select * from flight_dates b where b.flightdate = a.flightdate + interval '1 day' and b.flightid = a.flightid)), counts as (select flightid, count(*) as c from flight_dates group by flightid order by flightid) select *, start_date + 2 as end_date from three_gaps where exists (select * from counts where counts.flightid = three_gaps.flightid and c = 6) and start_date <= '20160806' order by start_date, flightid;
 """
 
 ### 9. Write a query to find the city name(s) which have the strongest connection with OAK. We define it as the total number of customers who took a flight that departures the city to OAK, or arrives the city from OAK.  
@@ -93,4 +95,10 @@ with customer_flights as (select flewon.customerid, flights.dest, flights.source
 ### Note: If two flights tie, then they should both get the same rank, and the next rank should be skipped. For example, if the top two flights have the same average number of customers, then there should be no rank 2, e.g., 1, 1, 3 ...   
 queries[10] = """
 with tmp as (select flightid, flightdate, count(*) from flewon group by flightid, flightdate) , tmp2 as (select SUM(count) as passengers, flightid from tmp group by flightid) select flightid, rank() over (order by passengers desc) as rank from tmp2 limit 20;
+"""
+"""
+with tmp as (select flightid, count(*) from flewon group by flightid) select flightid, rank() over (order by count desc) as rank from tmp limit 20;
+"""
+"""
+with tmp as (select flightid, count(*) from flewon group by flightid) , tmp2 as (select SUM(count) as passengers, flightid from tmp group by flightid) select flightid, rank() over (order by passengers desc) as rank from tmp2 limit 20;
 """
