@@ -91,7 +91,7 @@ select 0;
 ### Order: by the rank, then by flightid 
 ### Note: a) If two flights tie, then they should both get the same rank, and the next rank should be skipped. For example, if the top two flights have the same average number of customers, then there should be no rank 2, e.g., 1, 1, 3 ...   
 ###       b) There may be empty flights.
-###       c) There may be tied ranked 20 flights, if so, all ranked 20 flights need to be returned
+###       c) There may be tied flights at rank 20, if so, all flights ranked 20 need to be returned
 queries[10] = """
 select 0;
 """
