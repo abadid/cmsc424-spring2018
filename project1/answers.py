@@ -23,5 +23,5 @@ correctanswers[8] = [('SW112 ',datetime.date(2016,8,3),datetime.date(2016,8,5))]
 
 correctanswers[9] = [('Dallas-Fort Worth   ',)]
 
-correctanswers[10] = [('UA101 ',1L),('SW102 ',2L),('SW103 ',3L),('SW104 ',4L),('SW107 ',5L),('UA105 ',6L),('SW106 ',7L),('SW118 ',8L),('AA113 ',9L),('AA109 ',10L),('SW108 ',10L),('SW123 ',10L),('AA114 ',13L),('SW110 ',13L),('AA131 ',15L),('SW116 ',16L),('DL119 ',16L),('UA117 ',16L),('SW126 ',19L),('SW111 ',20L)]
+correctanswers[10] = [('UA101 ',1L),('SW102 ',2L),('SW103 ',3L),('SW104 ',4L),('SW107 ',5L),('UA105 ',6L),('SW106 ',7L),('SW118 ',8L),('AA113 ',9L),('AA109 ',10L),('SW108 ',10L),('SW123 ',10L),('AA114 ',13L),('SW110 ',13L),('AA131 ',15L),('DL119 ',16L),('SW116 ',16L),('UA117 ',16L),('SW126 ',19L),('SW111 ',20L)]
 
