@@ -95,11 +95,5 @@ with customer_flights as (select flewon.customerid, flights.dest, flights.source
 ### Note: a) If two flights tie, then they should both get the same rank, and the next rank should be skipped. For example, if the top two flights have the same average number of customers, then there should be no rank 2, e.g., 1, 1, 3 ...   
 ###       b) There may be empty flights.
 queries[10] = """
-with tmp as (select flightid, flightdate, count(*) from flewon group by flightid, flightdate) , tmp2 as (select SUM(count) as passengers, flightid from tmp group by flightid) select flightid, rank() over (order by passengers desc) as rank from tmp2 limit 20;
-"""
-"""
-with tmp as (select flightid, count(*) from flewon group by flightid) select flightid, rank() over (order by count desc) as rank from tmp limit 20;
-"""
-"""
-with tmp as (select flightid, count(*) from flewon group by flightid) , tmp2 as (select SUM(count) as passengers, flightid from tmp group by flightid) select flightid, rank() over (order by passengers desc) as rank from tmp2 limit 20;
+with tmp as (select flightid, flightdate, count(*) from flewon group by flightid, flightdate) , tmp2 as (select SUM(count) as passengers, flightid from tmp group by flightid) select flightid, rank() over (order by passengers desc) as rank from tmp2 order by rank, flightid limit 20;
 """
