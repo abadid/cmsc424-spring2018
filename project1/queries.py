@@ -1,6 +1,6 @@
 queries = ["" for i in range(0, 11)]
 
-### 0. List all airport codes and their cities. Order by the city name in the increasing order. 
+### 0. List all airport codes and their cities. Order by the city name in increasing order. 
 ### Output column order: airportid, city
 
 queries[0] = """
@@ -26,7 +26,7 @@ queries[2] = """
 select 0;
 """
 
-### 3. Write a query to find number of inbound flights by each airlines to any airport 
+### 3. Write a query to find number of inbound flights by each airline to any airport 
 ### Output: (airport_city, airline_id, inbound_flights) 
 ### Order: first by airport_city increasingly, then inbound_flights decreasingly, then airline_id increasingly.
 ### Note: You must generate the airport city names instead of airport codes.
@@ -49,10 +49,10 @@ queries[5] = """
 select 0;
 """
 
-### 6. Assuming each flight have 120 seats, from flewon, find all flights with passenger load factor (PLF) less than or equal to 1% on Aug 1st 2016. Note, PLF is defined as number of customers on-board divided by total number of available seats.  
+### 6. Assuming each flight has 120 seats, from flewon, find all flights with passenger load factor (PLF) less than or equal to 1% on Aug 1st 2016. Note, PLF is defined as number of customers on-board divided by total number of available seats.  
 ### Output: (flightid, PLF). 
 ### Order: first by PLF descreasing order, then flightid 
-### Note: a) Each flight flew daily during Aug1 and Aug9, 2016. 
+### Note: a) Each flight flew daily between Aug1 and Aug9, 2016. 
 ###          There may be empty flights which are not in the flewon table (i.e. PLF=0). 
 ###          Please include those.
 ###       b) PLF should be rounded to 2 decimal places, e.g., 10% should be 0.10.
@@ -61,7 +61,7 @@ queries[6] = """
 select 0;
 """
 
-### 7. Write a query to find the customers who used their frequent flier airline the least when compared to all the airlines that this customer as flown on. For example, if customer X has Delta as X's frequent flyer airline in the customer table, but flew on Delta only 1 time, but every other airline at least 1 time, then X's id and name would be returned as part of this query.
+### 7. Write a query to find the customers who used their frequent flier airline the least when compared to all the airlines that this customer as flown on. For example, if customer X has Delta as X's frequent flyer airline in the customer table, but flew on Delta only 1 time, and every other airline at least 1 time, then X's id and name would be returned as part of this query.
 ### Output: (customerid, customer_name) 
 ### Order: by customerid
 ### Note: a customer may have never flown on their frequent flier airlines.
@@ -69,7 +69,7 @@ queries[7] = """
 select 0;
 """
 
-### 8. Write a query to find the flights which are empty on three consecutive days, but not empty on the other days, return the flight, and the start and end dates of those three days.  
+### 8. Write a query to find the flights which are empty on three consecutive days, but not empty on the other days. Return the flight, and the start and end dates of those three days.  
 ### Hint: postgres window functions may be useful
 ### Output: flightid, start_date, end_date 
 ### Order: by start_date, then flightid 
@@ -77,7 +77,7 @@ queries[8] = """
 select 0;
 """
 
-### 9. Write a query to find the city name(s) which have the strongest connection with OAK. We define it as the total number of customers who took a flight that departures the city to OAK, or arrives the city from OAK.  
+### 9. Write a query to find the city name(s) which have the strongest connection with OAK. We define "strongest connection" as the city with the total number of customers who took a flight that departs from that city to fly to OAK, or arrives at the city from OAK.  
 ### Output columns: city name
 ### Order by: city name
 ### Note: a) You can assume there is only one airport in a city.
@@ -86,7 +86,7 @@ queries[9] = """
 select 0;
 """
 
-### 10. Write a query that outputs the top 20 ranking of the most busy flights. We rank the flights by their average on-board customers, so the flight with the most average number of customers gets rank 1, and so on. 
+### 10. Write a query that outputs the ranking of the top 20 busiest flights. We rank the flights by their average number of on-board customers, so the flight with the highest average number of customers gets rank 1, and so on. 
 ### Output: (flightid, flight_rank)
 ### Order: by the rank, then by flightid 
 ### Note: a) If two flights tie, then they should both get the same rank, and the next rank should be skipped. For example, if the top two flights have the same average number of customers, then there should be no rank 2, e.g., 1, 1, 3 ...   
