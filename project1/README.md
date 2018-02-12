@@ -63,12 +63,12 @@ You are also provided with a Python file `SQLTesting.py` for testing your answer
 
 - `-i` flag to SQLTesting will run all the queries, one at a time (waiting for you to press Enter after each query).
 
-- **Note that**: We will basically run this same program on your submitted `queries.py` file, but with the larger dataset; your score on the assignment will 
-be score output by the program. The program tries to do partial credits (as you can see in the code). It is very unlikely that your score on the larger, hidden 
-dataset will be higher than your score on the provided dataset.  
+- **Note that**: We will basically run this same program on your submitted `queries.py` file, but with a larger dataset; your score on the assignment will 
+be the score output by the program. The program tries to give partial credit (as you can see in the code). In general, it is unlikely that your score on the larger, hidden 
+dataset will be higher than your score on the dataset that we provided you.  
 
 ### Submission Instructions
-Submit the `queries.py` file using ELMS.
+Submit the `queries.py` file using the Assignments link on ELMS.
       
 ### Assignment Questions
 See `queries.py` file.

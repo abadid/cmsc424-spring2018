@@ -1,6 +1,6 @@
 queries = ["" for i in range(0, 11)]
 
-### 0. List all airport codes and their cities. Order by the city name in the increasing order. 
+### 0. List all airport codes and their cities. Order by the city name in increasing order. 
 ### Output column order: airportid, city
 
 queries[0] = """
@@ -26,7 +26,7 @@ queries[2] = """
 with adjusted as (select customers.name, customers.birthdate + interval '1 year' * (2016 - date_part('year', customers.birthdate)) as birthday, flewon.flightdate from customers join flewon on customers.customerid = flewon.customerid) select distinct customers.customerid, customers.name,  customers.birthdate, customers.frequentflieron from adjusted join customers on adjusted.name = customers.name where (date_part('day', adjusted.birthday - adjusted.flightdate) <= 7 and adjusted.birthday > adjusted.flightdate);
 """
 
-### 3. Write a query to find number of inbound flights by each airlines to any airport 
+### 3. Write a query to find number of inbound flights by each airline to any airport 
 ### Output: (airport_city, airline_id, inbound_flights) 
 ### Order: first by airport_city increasingly, then inbound_flights decreasingly, then airline_id increasingly.
 ### Note: You must generate the airport city names instead of airport codes.
@@ -49,10 +49,10 @@ queries[5] = """
 with jfk as (select source, dest, flightid, local_arrival_time from flights where source = 'JFK'), final as (select jfk.flightid, flights.flightid, jfk.dest, flights.local_departing_time -jfk.local_arrival_time as layover from jfk join flights on jfk.dest = flights.source where flights.dest = 'LAX') select * from final where layover >= '1:00:00';
 """
 
-### 6. Assuming each flight have 120 seats, from flewon, find all flights with passenger load factor (PLF) less than or equal to 1% on Aug 1st 2016. Note, PLF is defined as number of customers on-board divided by total number of available seats.  
+### 6. Assuming each flight has 120 seats, from flewon, find all flights with passenger load factor (PLF) less than or equal to 1% on Aug 1st 2016. Note, PLF is defined as number of customers on-board divided by total number of available seats.  
 ### Output: (flightid, PLF). 
 ### Order: first by PLF descreasing order, then flightid 
-### Note: a) Each flight flew daily during Aug1 and Aug9, 2016. 
+### Note: a) Each flight flew daily between Aug1 and Aug9, 2016. 
 ###          There may be empty flights which are not in the flewon table (i.e. PLF=0). 
 ###          Please include those.
 ###       b) PLF should be rounded to 2 decimal places, e.g., 10% should be 0.10.
@@ -61,7 +61,7 @@ queries[6] = """
 with tmp as (select flightid, flightdate, round(cast(COUNT(*)/cast(120 as float) as numeric) ,2) as PLF from flewon where flightdate = '20160801' group by flightid, flightdate), extras as (select flightid from flights except select flightid from tmp), final as (select flightid, 0.00 as plf from extras union select flightid, plf from tmp where plf <= .01) select * from final order by plf desc, flightid;
 """
 
-### 7. Write a query to find the customers who used their frequent flier airline the least when compared to all the airlines that this customer as flown on. For example, if customer X has Delta as X's frequent flyer airline in the customer table, but flew on Delta only 1 time, but every other airline at least 1 time, then X's id and name would be returned as part of this query.
+### 7. Write a query to find the customers who used their frequent flier airline the least when compared to all the airlines that this customer as flown on. For example, if customer X has Delta as X's frequent flyer airline in the customer table, but flew on Delta only 1 time, and every other airline at least 1 time, then X's id and name would be returned as part of this query.
 ### Output: (customerid, customer_name) 
 ### Order: by customerid
 ### Note: a customer may have never flown on their frequent flier airlines.
@@ -69,7 +69,7 @@ queries[7] = """
 with extras as (select customerid, customers.name, frequentflieron, airlineid, 0 as count from airlines cross join customers), counts as (select customers.customerid, name, frequentflieron, substring(flightid, 1, 2) as airlineid, count(*) from customers join flewon on customers.customerid = flewon.customerid group by name, airlineid, frequentflieron, customers.customerid), combined as (select * from counts union select * from extras where not exists (select * from counts where counts.customerid = extras.customerid and counts.airlineid = extras.airlineid)), mins as (select customerid, name, airlineid, frequentflieron, count, min(count) over (partition by name) as min_count from combined) select customerid, name from mins where count = min_count and airlineid = frequentflieron order by customerid;
 """
 
-### 8. Write a query to find the flights which are empty on three consecutive days, but not empty on the other days, return the flight, and the start and end dates of those three days.  
+### 8. Write a query to find the flights which are empty on three consecutive days, but not empty on the other days. Return the flight, and the start and end dates of those three days.  
 ### Hint: postgres window functions may be useful
 ### Output: flightid, start_date, end_date 
 ### Order: by start_date, then flightid 
@@ -80,7 +80,7 @@ not exists (select * from flight_dates b where b.flightdate = a.flightdate + int
 not exists (select * from flight_dates b where b.flightdate = a.flightdate + interval '1 day' * 3 and b.flightid = a.flightid)), gaps as (select a.flightid, a.flightdate + interval '1 day' as gap from flight_dates a where not exists (select * from flight_dates b where b.flightdate = a.flightdate + interval '1 day' and b.flightid = a.flightid)), counts as (select flightid, count(*) as c from flight_dates group by flightid order by flightid) select *, start_date + 2 as end_date from three_gaps where exists (select * from counts where counts.flightid = three_gaps.flightid and c = 6) and start_date <= '20160806' order by start_date, flightid;
 """
 
-### 9. Write a query to find the city name(s) which have the strongest connection with OAK. We define it as the total number of customers who took a flight that departures the city to OAK, or arrives the city from OAK.  
+### 9. Write a query to find the city name(s) which have the strongest connection with OAK. We define "strongest connection" as the city with the total number of customers who took a flight that departs from that city to fly to OAK, or arrives at the city from OAK.  
 ### Output columns: city name
 ### Order by: city name
 ### Note: a) You can assume there is only one airport in a city.
@@ -89,7 +89,7 @@ queries[9] = """
  with sources as (select source as airport from flights join flewon on flights.flightid = flewon.flightid where dest = 'OAK'), dests as (select dest as airport from flights join flewon on flights.flightid = flewon.flightid where source = 'OAK'), counts as (select airport, count(*) from (select * from dests union all select * from sources) t group by airport) select city from counts join airports on counts.airport = airports.airportid where counts.count = (select max(count) from counts);
 """
 
-### 10. Write a query that outputs the top 20 ranking of the most busy flights. We rank the flights by their average on-board customers, so the flight with the most average number of customers gets rank 1, and so on. 
+### 10. Write a query that outputs the ranking of the top 20 busiest flights. We rank the flights by their average number of on-board customers, so the flight with the highest average number of customers gets rank 1, and so on. 
 ### Output: (flightid, flight_rank)
 ### Order: by the rank, then by flightid 
 ### Note: a) If two flights tie, then they should both get the same rank, and the next rank should be skipped. For example, if the top two flights have the same average number of customers, then there should be no rank 2, e.g., 1, 1, 3 ...   
