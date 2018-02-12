@@ -86,7 +86,7 @@ not exists (select * from flight_dates b where b.flightdate = a.flightdate + int
 ### Note: a) You can assume there is only one airport in a city.
 ###       b) If there are ties, return all tied cities 
 queries[9] = """
-with customer_flights as (select flewon.customerid, flights.dest, flights.source, flewon.flightdate from flights join flewon on flewon.flightid = flights.flightid), dests as (select dest, COUNT(*) from customer_flights where source = 'OAK' group by dest), sources as (select source, COUNT(*) as c2 from customer_flights where dest = 'OAK' group by source), combined as (select * from dests join sources on sources.source = dests.dest), final as (select dest, count + c2 as count from combined) select airports.city from final join airports on airports.airportid = final.dest where count = (select max(count) from final) order by airports.city;
+ with sources as (select source as airport from flights join flewon on flights.flightid = flewon.flightid where dest = 'OAK'), dests as (select dest as airport from flights join flewon on flights.flightid = flewon.flightid where source = 'OAK'), counts as (select airport, count(*) from (select * from dests union all select * from sources) t group by airport) select city from counts join airports on counts.airport = airports.airportid where counts.count = (select max(count) from counts);
 """
 
 ### 10. Write a query that outputs the top 20 ranking of the most busy flights. We rank the flights by their average on-board customers, so the flight with the most average number of customers gets rank 1, and so on. 
@@ -96,5 +96,5 @@ with customer_flights as (select flewon.customerid, flights.dest, flights.source
 ###       b) There may be empty flights.
 ###       c) There may be tied flights at rank 20, if so, all flights ranked 20 need to be returned
 queries[10] = """
-with tmp as (select flightid, flightdate, count(*) from flewon group by flightid, flightdate) , tmp2 as (select SUM(count) as passengers, flightid from tmp group by flightid) select flightid, rank() over (order by passengers desc) as rank from tmp2 order by rank, flightid limit 20;
+with tmp as (select flightid, flightdate, count(*) from flewon group by flightid, flightdate) , tmp2 as (select SUM(count) as passengers, flightid from tmp group by flightid) select flightid, rank from (select flightid, rank() over (order by passengers desc) as rank from tmp2) t where rank <= 20 order by rank, flightid;
 """
