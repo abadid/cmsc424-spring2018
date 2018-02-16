@@ -2,7 +2,7 @@
 
 **1. [Outer Join]** Write a query that uses an outer join to list all the flights that flew empty on August 5, 2016. 
 
-**2. [Outer Join]** We will write a query using outer joins to find all the customers who satisfy the following conditions <br />
+**2. [Outer Join]** We will write a query using outer joins to find all the customers who satisfy all the following conditions <br />
   a. are born in or after 1996, and <br />
   b. have taken a flight at least once, and <br />
   c. have never taken a flight in or out of ‘ORD’.
