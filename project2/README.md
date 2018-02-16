@@ -38,4 +38,4 @@ having count(*)=1
 order by cid;
 ```
 
-Does the query give the desired output always? Explain. If not, modify the above query to produce the desired output. 
+Does the query always produce the correct output? Explain. If not, modify the above query to produce the correct output. 
