@@ -87,7 +87,7 @@ We provide an example to demonstrate the transformation rule below:
 
 Fortunately, the existence of SQL functions makes it easier to write these transformations.
 
-**Part II**: Write a stored procedure to generate ```finaltab2```.
+**Part II**: Write a SQL function to generate ```finaltab2```.
 
 In the following links, you’ll find some useful SQL function examples to get started: <br />
 1.https://www.postgresql.org/docs/8.0/static/plpgsql.html <br />
