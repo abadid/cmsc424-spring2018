@@ -57,7 +57,7 @@ Does the query always produce the correct output? Explain. If not, modify the ab
 
 **3.[PL/pgSQL Functions]** PL/pgSQL is a procedural language for the PostgreSQL database system that can be used to create functions and trigger procedures. In this assignment we will use PL/pgSQL to perform complex computations that are otherwise not straigtforward using SQL queries.
 
-To begin with this, you must create a new database `stpc` and load the data using `\i table4storedproc.sql`. You are provided with an initial table `inittab` and you are required to generate new table `finaltab`, where the count attribute in ```finaltab``` is transformed according to the following transformation rule:
+To begin with this, you must create a new database `stpc`, and switch to it and load the data using `\i table4storedproc.sql`. You are provided with an initial table `inittab` and you are required to generate new table `finaltab`, where the count attribute in ```finaltab``` is transformed according to the following transformation rule:
 
 ```
 finaltab.count(i) = inittab.count(i) + inittab.count(i-1), where i indicates the row-id
@@ -136,7 +136,7 @@ where total_ticket_sales = (select min(total_ticket_sales) from airlinesales);
 
 Note that we do not report the `airlineid` even if it has the minimum `total_ticket_sales` provided it had minimum `total_ticket_sales` for the previous transaction as well. It is not immediately obvious if this `reportmin` table can be kept updated using a view. Therefore we want you to implement this logic within the trigger function.
 
-You should be able to load the `flightsales` database by `\i trigger-database.sql`. We have already created the `airlinesales` and the `reportmin` tables for you. The trigger code should be submitted in `trigger.sql` file. Running `psql -f trigger.sql flightsales` should generate the trigger without errors.
+Create the `flightsales` database, switch to it and load the data using `\i trigger-database.sql`. We have already created the `airlinesales` and the `reportmin` tables and initialized them for you. The trigger code should be submitted in `trigger.sql` file. Running `psql -f trigger.sql flightsales` should generate the trigger without errors.
 
 In the following link, you’ll find some useful trigger examples to get started:
 https://www.postgresql.org/docs/9.2/static/plpgsql-trigger.html
