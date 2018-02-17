@@ -1,5 +1,20 @@
 ## Project 2: Advanced SQL Assignment, CMSC424, Spring 2018
 
+*The assignment is to be done by yourself.*
+
+Please do a `git pull` to download the directory `project2`. The files are:
+
+1. README.md: This file
+1. small.sql: SQL script for populating `flights` database.
+1. table4storedproc.sql: SQL script for populating `stpc` database.
+1. trigger-database.sql: SQL script for setting up the `flightsales` database.
+1. Vagrantfile: Vagrantfile that creates the `flights` database and populates it using `small.sql` file.
+
+### Getting started
+Start the VM with `vagrant up` in the `project2/` directory. The database should already be set up, but if not: 
+- Create a new database called `flights` and switch to it (see the PostgreSQL setup instructions).
+- Run `\i small.sql` to create and populate the tables. 
+
 **1. [Outer Join]** Write a query that uses an outer join to list all the flights that flew empty on August 5, 2016. 
 
 **2. [Outer Join]** We will write a query using outer joins to find all the customers who satisfy all the following conditions <br />
