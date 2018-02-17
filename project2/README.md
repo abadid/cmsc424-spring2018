@@ -43,7 +43,7 @@ Does the query always produce the correct output? Explain. If not, modify the ab
 **3.[SQL Functions]** To begin with this, you must create a new database `stpc` and load the data using `\i table4storedproc.sql`. You are provided with an initial table `inittab` and you are required to generate new table `finaltab`, where the count attribute in ```finaltab``` is transformed according to the following transformation rule:
 
 ```
-finaltab_count(i) = inittab_count(i) + inittab_count(i-1), where i indicates the row-id
+finaltab.count(i) = inittab.count(i) + inittab.count(i-1), where i indicates the row-id
 ```
 The rule above implies that the value of the attribute count of the current row is the sum of the current row and the previous row. For the first row, we just make a copy of it. An example is provided below:
 
@@ -70,9 +70,9 @@ The rule above implies that the value of the attribute count of the current row 
 As the complexity of the transformation rule increases, writing them out as SQL queries turns out to be less obvious. Here is a more involved transformation rule:
 
 ```
-finaltab2_amount(i) = inittab_count(i) + F(i), where,
-F(i) = sum of the values of count attribute in inittab from row (i-1) to row (i-inittab_id(i)),
-if i - inittab_id(i) < 1, then we sum the values upto row 1
+finaltab2.count(i) = inittab.count(i) + F(i), where,
+F(i) = sum of the values of count attribute in inittab from row (i-1) to row (i-inittab.id(i)),
+if i - inittab.id(i) < 1, then we sum the values upto row 1
 ```
 We provide an example to demonstrate the transformation rule below:
 
