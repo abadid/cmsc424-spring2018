@@ -116,9 +116,9 @@ from airlinesales
 where total_ticket_sales = (select min(total_ticket_sales) from airlinesales);
 ```
 
-Note that we do not report the `airlineid` even if it has the minimum `total_ticket_sales` provided it had minimum `total_ticket_sales` for the previous transaction as well. 
+Note that we do not report the `airlineid` even if it has the minimum `total_ticket_sales` provided it had minimum `total_ticket_sales` for the previous transaction as well. It is not immediately obvious if this `reportmin` table can be kept updated using a view. Therefore we want you to implement this logic within the trigger function.
 
-You should be able to load the `flightsales` database by `\i trigger-database.sql`. We have already created the `airlinesales` and the `reportmin` tables for you. The trigger code should be submitted in `trigger.sql` file. Running `psql -f trigger.sql flightsales` should generate the trigger without errors. 
+You should be able to load the `flightsales` database by `\i trigger-database.sql`. We have already created the `airlinesales` and the `reportmin` tables for you. The trigger code should be submitted in `trigger.sql` file. Running `psql -f trigger.sql flightsales` should generate the trigger without errors.
 
 In the following link, you’ll find some useful trigger examples to get started:
 https://www.postgresql.org/docs/9.2/static/plpgsql-trigger.html
