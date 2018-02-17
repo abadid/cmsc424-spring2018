@@ -94,7 +94,7 @@ In the following links, you’ll find some useful SQL function examples to get s
 2. https://www.postgresql.org/docs/9.1/static/xfunc-sql.html#XFUNC-SQL-FUNCTIONS-RETURNING-TABLE
 
 
-**3.[Trigger]** For this problem, we’ll be using a new hypothetical database `flightsales`, that has all the tables in the `flights` database except that `flewon` table is replaced with `ticketsales` table. The table `ticketsales (ticketid, flightid, customerid, salesdate)` in the `flightsales` database records the ticket sales transaction. To keep things simple, every customer always makes a single ticket purchase in a given flight at a time. We want the ability to keep track of the total number of ticket sales per airline company in the table `airlinesales (airlineid, total_ticket_sales)`.  We use the following command to create this table:
+**4.[Trigger]** For this problem, we’ll be using a new hypothetical database `flightsales`, that has all the tables in the `flights` database except that `flewon` table is replaced with `ticketsales` table. The table `ticketsales (ticketid, flightid, customerid, salesdate)` in the `flightsales` database records the ticket sales transaction. To keep things simple, every customer always makes a single ticket purchase in a given flight at a time. We want the ability to keep track of the total number of ticket sales per airline company in the table `airlinesales (airlineid, total_ticket_sales)`.  We use the following command to create this table:
 
 ```
 create table airlinesales as
