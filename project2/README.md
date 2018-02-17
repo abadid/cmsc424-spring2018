@@ -40,7 +40,9 @@ order by cid;
 
 Does the query always produce the correct output? Explain. If not, modify the above query to produce the correct output. 
 
-**3.[SQL Functions]** To begin with this, you must create a new database `stpc` and load the data using `\i table4storedproc.sql`. You are provided with an initial table `inittab` and you are required to generate new table `finaltab`, where the count attribute in ```finaltab``` is transformed according to the following transformation rule:
+**3.[PL/pgSQL Functions]** PL/pgSQL is a procedural language for the PostgreSQL database system that can be used to create functions and trigger procedures. In this assignment we will use PL/pgSQL to perform complex computations that are otherwise not straigtforward using SQL queries.
+
+To begin with this, you must create a new database `stpc` and load the data using `\i table4storedproc.sql`. You are provided with an initial table `inittab` and you are required to generate new table `finaltab`, where the count attribute in ```finaltab``` is transformed according to the following transformation rule:
 
 ```
 finaltab.count(i) = inittab.count(i) + inittab.count(i-1), where i indicates the row-id
@@ -65,7 +67,7 @@ The rule above implies that the value of the attribute count of the current row 
 
 `finaltab`
 
-**Part I**: (i) Write a SQL query to generate `finaltab`, (ii) Write a SQL function using the procedural language in Postgres to generate `finaltab`. 
+**Part I**: (i) Write a SQL query to generate `finaltab`, (ii) Write a PL/pgSQL function using the procedural language in Postgres to generate `finaltab`. 
 
 As the complexity of the transformation rule increases, writing them out as SQL queries turns out to be less obvious. Here is a more involved transformation rule:
 
@@ -85,9 +87,11 @@ We provide an example to demonstrate the transformation rule below:
 
 `finaltab2`
 
-Fortunately, the existence of SQL functions makes it easier to write these transformations.
+Fortunately, the existence of PL/pgSQL procedural language makes it easier to write these transformations.
 
-**Part II**: Write a SQL function to generate `finaltab2`.
+**Part II**: Write a PL/pgSQL function to generate `finaltab2`.
+
+
 
 In the following links, you’ll find some useful SQL function examples to get started: <br />
 1. https://www.postgresql.org/docs/8.0/static/plpgsql.html <br />
