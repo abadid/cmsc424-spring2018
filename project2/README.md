@@ -90,5 +90,5 @@ Fortunately, the existence of SQL functions makes it easier to write these trans
 **Part II**: Write a SQL function to generate ```finaltab2```.
 
 In the following links, you’ll find some useful SQL function examples to get started: <br />
-1.https://www.postgresql.org/docs/8.0/static/plpgsql.html <br />
-2.https://www.postgresql.org/docs/9.1/static/xfunc-sql.html#XFUNC-SQL-FUNCTIONS-RETURNING-TABLE
+1. https://www.postgresql.org/docs/8.0/static/plpgsql.html <br />
+2. https://www.postgresql.org/docs/9.1/static/xfunc-sql.html#XFUNC-SQL-FUNCTIONS-RETURNING-TABLE
