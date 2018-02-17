@@ -40,7 +40,7 @@ order by cid;
 
 Does the query always produce the correct output? Explain. If not, modify the above query to produce the correct output. 
 
-**3.[SQL Functions]** To begin with this, you must create a new database ```stpc``` and load the data using ```\i table4storedproc.sql```. You are provided with an initial table `inittab` and you are required to generate new table `finaltab`, where the count attribute in ```finaltab``` is transformed according to the following transformation rule:
+**3.[SQL Functions]** To begin with this, you must create a new database `stpc` and load the data using `\i table4storedproc.sql`. You are provided with an initial table `inittab` and you are required to generate new table `finaltab`, where the count attribute in ```finaltab``` is transformed according to the following transformation rule:
 
 ```
 finaltab_count(i) = inittab_count(i) + inittab_count(i-1), where i indicates the row-id
@@ -65,7 +65,7 @@ The rule above implies that the value of the attribute count of the current row 
 
 `finaltab`
 
-**Part I**: (i) Write a SQL query to generate ```finaltab```, (ii) Write a SQL function using the procedural language in Postgres to generate ```finaltab```. 
+**Part I**: (i) Write a SQL query to generate `finaltab`, (ii) Write a SQL function using the procedural language in Postgres to generate `finaltab`. 
 
 As the complexity of the transformation rule increases, writing them out as SQL queries turns out to be less obvious. Here is a more involved transformation rule:
 
@@ -87,8 +87,39 @@ We provide an example to demonstrate the transformation rule below:
 
 Fortunately, the existence of SQL functions makes it easier to write these transformations.
 
-**Part II**: Write a SQL function to generate ```finaltab2```.
+**Part II**: Write a SQL function to generate `finaltab2`.
 
 In the following links, you’ll find some useful SQL function examples to get started: <br />
 1. https://www.postgresql.org/docs/8.0/static/plpgsql.html <br />
 2. https://www.postgresql.org/docs/9.1/static/xfunc-sql.html#XFUNC-SQL-FUNCTIONS-RETURNING-TABLE
+
+
+**3.[Trigger]** For this problem, we’ll be using a new hypothetical database `flightsales`, that has all the tables in the `flights` database except that `flewon` table is replaced with `ticketsales` table. The table `ticketsales (ticketid, flightid, customerid, salesdate)` in the `flightsales` database records the ticket sales transaction. To keep things simple, every customer always makes a single ticket purchase in a given flight at a time. We want the ability to keep track of the total number of ticket sales per airline company in the table `airlinesales (airlineid, total_ticket_sales)`.  We use the following command to create this table:
+
+```
+create table airlinesales as
+select substring(flightid from 1 for 2) as airlineid, count(*) as total_ticket_sales
+from ticketsales
+group by airlineid;
+```
+This table won’t be kept up-to-date by the database as this is a derived table and not a view. Write a trigger to keep this new table updated when a new ticket (row) is purchased (inserted) into or cancelled (deleted) from the `ticketsales` table. Remember that `airlineid` corresponding to the new `ticketsales` update may not exist in the `airlinesales` table at that time and it should be added to the table with a count of 1, in that case. Similarly, if a deletion of a row in `ticketsales` results in an airline having `total_ticket_sales` to 0, then the corresponding tuple for that airline in `airlinesales` should be deleted.
+
+In addition to this, we also want to report those airlines that had minimum ticket sales (for every ticket purchased or cancelled) and the `salesdate` of the transaction. We will use the following command to create and populate `reportmin (airlineid, salesdate)` table corresponding to the current state of `airlinesales` table:
+
+```
+create table reportmin as
+select airlineid, 
+(select temp.salesdate 
+from (select salesdate, row_number() over() as rid from ticketsales order by rid desc) as temp 
+where temp.rid = 1) as salesdate
+from airlinesales
+where total_ticket_sales = (select min(total_ticket_sales) from airlinesales);
+```
+
+Note that we do not report the `airlineid` even if it has the minimum `total_ticket_sales` provided it had minimum `total_ticket_sales` for the previous transaction as well. 
+
+You should be able to load the `flightsales` database by `\i trigger-database.sql`. We have already created the `airlinesales` and the `reportmin` tables for you. The trigger code should be submitted in `trigger.sql` file. Running `psql -f trigger.sql flightsales` should generate the trigger without errors. 
+
+In the following link, you’ll find some useful trigger examples to get started:
+https://www.postgresql.org/docs/9.2/static/plpgsql-trigger.html
+
