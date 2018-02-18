@@ -15,6 +15,9 @@ Start the VM with `vagrant up` in the `project2/` directory. The database should
 - Create a new database called `flights` and switch to it (see the PostgreSQL setup instructions).
 - Run `\i small.sql` to create and populate the tables. 
 
+<br />
+
+
 **1. [Outer Join]** Write a query that uses an outer join to list all the flights that flew empty on August 5, 2016. 
 
 **2. [Outer Join]** We will write a query using outer joins to find all the customers who satisfy all the following conditions <br />
