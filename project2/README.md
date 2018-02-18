@@ -150,4 +150,4 @@ https://www.postgresql.org/docs/9.2/static/plpgsql-trigger.html
 
 ### Submission Instructions
 
-We have provided a answers.txt file -- fill in your answers to the first 3 questions into that txt file.
+We have provided a `answers.txt` file -- fill in your answers to the first 3 questions into that txt file. Submit the answer for question 4 in `trigger.sql` file.
