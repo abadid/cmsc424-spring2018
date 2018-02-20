@@ -96,7 +96,7 @@ The rule above implies that the value of the attribute count of the current row 
 
 `finaltab`
 
-**Part I**: (i) Write a SQL query to generate `finaltab`, (ii) Write a PL/pgSQL function using the procedural language in Postgres to generate `finaltab`. 
+**Part I**: (i) Write a SQL query to generate `finaltab`, (ii) Write a PL/pgSQL function `function1()` using the procedural language in Postgres to generate `finaltab`. For this part, you are required to create the `finaltab` table and insert the required tuples into it. We will test it by invoking `SELECT function1();`
 
 As the complexity of the transformation rule increases, writing them out as SQL queries turns out to be less obvious. Here is a more involved transformation rule:
 
@@ -118,7 +118,7 @@ We provide an example to demonstrate the transformation rule below:
 
 Fortunately, the existence of PL/pgSQL procedural language makes it easier to write these transformations.
 
-**Part II**: Write a PL/pgSQL function to generate `finaltab2`.
+**Part II**: Write a PL/pgSQL function `function2()` to generate `finaltab2`. You are required to create the `finaltab2` table and insert the required tuples into it. We will test it by invoking `SELECT function2();`
 
 In the following links, you’ll find some useful PL/pgSQL function examples and related know-how's to get started: <br />
 1. https://www.postgresql.org/docs/9.2/static/plpgsql.html <br />
