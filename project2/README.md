@@ -138,7 +138,7 @@ Fortunately, the existence of PL/pgSQL procedural language makes it easier to wr
 
 In the following links, you’ll find some useful PL/pgSQL function examples and related know-how's to get started: <br />
 1. https://www.postgresql.org/docs/9.2/static/plpgsql.html <br />
-2. https://www.postgresql.org/docs/9.2/static/xfunc-sql.html#XFUNC-SQL-FUNCTIONS-RETURNING-TABLE
+2. http://www.postgresqltutorial.com/plpgsql-function-returns-a-table/ <br />
 3. https://stackoverflow.com/questions/30786295/postgres-unassigned-record-is-there-a-way-to-test-for-null
 
 
