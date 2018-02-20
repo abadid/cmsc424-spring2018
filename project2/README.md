@@ -15,6 +15,10 @@ Start the VM with `vagrant up` in the `project2/` directory. The database should
 - Create a new database called `flights` and switch to it (see the PostgreSQL setup instructions).
 - Run `\i small.sql` to create and populate the tables. 
 
+### Submission Instructions
+
+We have provided a `answers.txt` file -- fill in your answers to the first 3 questions into that txt file. Submit the answer for question 4 in `trigger.sql` file.
+
 <br />
 
 
@@ -96,10 +100,10 @@ The rule above implies that the value of the attribute count of the current row 
 
 As the complexity of the transformation rule increases, writing them out as SQL queries turns out to be less obvious. Here is a more involved transformation rule:
 
+
 ```
-finaltab2.count(i) = inittab.count(i) + F(i), where,
-F(i) = sum of the values of count attribute in inittab from row (i-1) to row (i-inittab.transid(i)),
-if i - inittab.transid(i) < 1, then we sum the values upto row 1
+finaltab2.count(i) = sum of the values of count attribute in inittab from row i to row (i-inittab.transid(i)), 
+if (i-inittab.transid(i)) < 1, then we sum the values up to row 1
 ```
 We provide an example to demonstrate the transformation rule below:
 
@@ -150,7 +154,3 @@ Create the `flightsales` database, switch to it and load the data using `\i trig
 
 In the following link, you’ll find some useful trigger examples to get started:
 https://www.postgresql.org/docs/9.2/static/plpgsql-trigger.html
-
-### Submission Instructions
-
-We have provided a `answers.txt` file -- fill in your answers to the first 3 questions into that txt file. Submit the answer for question 4 in `trigger.sql` file.
