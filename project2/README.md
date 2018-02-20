@@ -13,7 +13,7 @@ Please do a `git pull` to download the directory `project2`. The files are:
 1. table4storedproc.sql: SQL script for populating `stpc` database.
 1. trigger-database.sql: SQL script for setting up the `flightsales` database.
 1. trigger-test.py: Python script for testing the trigger.
-1. Vagrantfile: Vagrantfile that creates the `flights` database and populates it using `small.sql` file.
+1. Vagrantfile: Vagrantfile that creates the required databases and populates some of them.
 
 ### Getting started
 Start the VM with `vagrant up` in the `project2/` directory. The databases `flights` and `stpc` should already be set up. The `flightsales` database is already created for you, but you need to populate it explicitly. 
@@ -193,7 +193,7 @@ Note that the `salesdate` entry in the `reportmin` table always corresponds to t
 
 `reportmin`
 
-Create the `flightsales` database, switch to it and load the data using `\i trigger-database.sql`. We have already created the `airlinesales` and the `reportmin` tables and initialized them for you. The trigger code should be submitted in `trigger.sql` file. Running `psql -f trigger.sql flightsales` should generate the trigger without errors.
+Switch to the `flightsales` database, and load the data using `\i trigger-database.sql`. We have already created the `airlinesales` and the `reportmin` tables and initialized them for you. The trigger code should be submitted in `trigger.sql` file. Running `psql -f trigger.sql flightsales` should generate the trigger without errors.
 
 You may also use `trigger-test.py`, in which case you do not need to execute `\i trigger-database.sql` and `psql -f trigger.sql flightsales` (they are included in the script). A few transactions to the `ticketsales` table are also provided. You are free to add more transactions for purposes of testing your trigger code. Remember to create the `flightsales` database before running the test script. If you are going to run it multiple times, you need to `dropdb flightsales` before every run (no easy way to clear all the functions and triggers otherwise).
 
