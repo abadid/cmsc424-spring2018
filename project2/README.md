@@ -21,11 +21,11 @@ Start the VM with `vagrant up` in the `project2/` directory. The databases `flig
 ### Testing and submitting using SQLTesting.py
 - Your answers (i.e., SQL queries) should be added to the `queries.py` file similar to Project 1. You are also provided with a Python file `SQLTesting.py` for testing your answers.
 
-- We recommend that you use psql to design your queries, and then paste the queries to the `queries.py` file, and confirm it works.
+- We recommend that you use `psql` to design your queries, and then paste the queries to the `queries.py` file, and confirm it works.
 
-- SQLTesting takes quite a few options: use python SQLTesting.py -h to see the options.
+- SQLTesting takes quite a few options: use `python SQLTesting.py -h` to see the options.
 
-- If you want to test your answer to Question 1, use: `python SQLTesting.py -dbname flights -q 1`. The program compares the result of running your query against the provided answer (in the answers.py file).
+- If you want to test your answer to Question 1, use: `python SQLTesting.py -dbname flights -q 1`. The program compares the result of running your query against the provided answer (in the `answers.py` file).
 
 - Similarly for Question 3, use: `python SQLTesting.py -dbname stpc -q 3`
 
