@@ -15,9 +15,7 @@ Please do a `git pull` to download the directory `project2`. The files are:
 1. Vagrantfile: Vagrantfile that creates the `flights` database and populates it using `small.sql` file.
 
 ### Getting started
-Start the VM with `vagrant up` in the `project2/` directory. The database should already be set up, but if not: 
-- Create a new database called `flights` and switch to it (see the PostgreSQL setup instructions).
-- Run `\i small.sql` to create and populate the tables. 
+Start the VM with `vagrant up` in the `project2/` directory. The databases `flights` and `stpc` should already be set up. The `flightsales` database is already created for you, but you need to populate it explicitly. 
 
 ### Submission Instructions
 - Submit your answers to Q1 and Q3, (Part I, SQL query) in `queries.py`
@@ -69,10 +67,10 @@ Does the query always produce the correct output? Explain. If not, modify the ab
 
 **Q3 (15pt)**.[PL/pgSQL Functions] PL/pgSQL is a procedural language for the PostgreSQL database system that can be used to create functions and trigger procedures. In this assignment we will use PL/pgSQL to perform complex computations that are otherwise not straigtforward using SQL queries.
 
-To begin with this, you must create a new database `stpc`, and switch to it and load the data using `\i table4storedproc.sql`. You are provided with an initial table `inittab` and you are required to generate new table `finaltab`, where the count attribute in ```finaltab``` is transformed according to the following transformation rule:
+To begin with this, you must switch to `stpc` and load the data using `\i table4storedproc.sql`. You are provided with an initial table `inittab` and you are required to generate new table `finaltab`, where the count attribute in ```finaltab``` is transformed according to the following transformation rule:
 
 ```
-finaltab.count(i) = inittab.count(i) + inittab.count(i-1), where i indicates the row-id
+finaltab.tcount(i) = inittab.tcount(i) + inittab.tcount(i-1), where i indicates the row-id
 ```
 You can generate the row-id (named as `rid`) of each row in `inittab` using the following query:
 
@@ -83,7 +81,7 @@ from inittab;
 
 The rule above implies that the value of the attribute count of the current row is the sum of the current row and the previous row. For the first row, we just make a copy of it. An example is provided below:
 
-| transid | count |  
+| transid | tcount |  
 |:---:|:---:| 
 | 12 | 10 | 
 | 23 | 20 | 
@@ -92,7 +90,7 @@ The rule above implies that the value of the attribute count of the current row 
 
 `inittab`
 
-| transid | count |  
+| transid | tcount |  
 |:---:|:---:| 
 | 12 | 10 | 
 | 23 | 30 | 
@@ -107,12 +105,12 @@ As the complexity of the transformation rule increases, writing them out as SQL 
 
 
 ```
-finaltab2.count(i) = sum of the values of count attribute in inittab from row i to row (i-inittab.transid(i)), 
+finaltab2.tcount(i) = sum of the values of tcount attribute in inittab from row i to row (i-inittab.transid(i)), 
 if (i-inittab.transid(i)) < 1, then we sum the values up to row 1
 ```
 We provide an example to demonstrate the transformation rule below:
 
-| transid | count |  
+| transid | tcount |  
 |:---:|:---:| 
 | 12 | 10 | 
 | 23 | 30 | 
