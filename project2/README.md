@@ -167,7 +167,7 @@ We will explain the `reportmin` table logic using an example. The initial state 
 
 `reportmin`
 
-Note that the `salesdate` entry in the `reportmin` table always corresponds to the `salesdate` entry of latest row of the `ticketsales` table. Consider the next transaction in the `ticketsales` table as: `cust2` cancels his ticket in `UA101` on `2016-08-11`. This would bring down the count of `UA` in the `airlinesales` to 1. Therefore `UA` and `SW` are ailineids with minimum `total_ticket_sales` for this transaction. We will only report `UA` and `2016-08-11`, in the `reportmin` table since `SW` was already reported in the previous transaction. The resulting `reportmin` table is as follows:
+Note that the `salesdate` entry in the `reportmin` table always corresponds to the `salesdate` entry of latest transaction (last row) of the `ticketsales` table. Consider the next transaction in the `ticketsales` table as: `cust2` cancels his ticket in `UA101` on `2016-08-11`. This would bring down the count of `UA` in the `airlinesales` to 1. Therefore this transaction results in `UA` and `SW` as the airlineids with minimum `total_ticket_sales`. However, we will only report `UA` and `2016-08-11`, in the `reportmin` table since `SW` was already reported in the previous transaction. The resulting `reportmin` table is as follows:
 
 | airlineid | salesdate |
 |:---:|:---:| 
@@ -177,6 +177,8 @@ Note that the `salesdate` entry in the `reportmin` table always corresponds to t
 `reportmin`
 
 Create the `flightsales` database, switch to it and load the data using `\i trigger-database.sql`. We have already created the `airlinesales` and the `reportmin` tables and initialized them for you. The trigger code should be submitted in `trigger.sql` file. Running `psql -f trigger.sql flightsales` should generate the trigger without errors.
+
+You may also use `trigger-test.py`, in which case you do not need to execute `\i trigger-database.sql` and `psql -f trigger.sql flightsales` (they are included in the script). A few transactions to the `ticketsales` table are also provided. You are free to add more transactions for purposes of testing your trigger code. Remember to create the `flightsales` database before running the test script. If you are going to run it multiple times, you need to `dropdb flightsales` before every run (no easy way to clear all the functions and triggers otherwise).
 
 In the following link, you’ll find some useful trigger examples to get started:
 https://www.postgresql.org/docs/9.2/static/plpgsql-trigger.html
