@@ -168,7 +168,7 @@ We will explain the `reportmin` table logic using an example. The initial state 
 
 `reportmin`
 
-Note that the `salesdate` entry in the `reportmin` table always corresponds to the `salesdate` entry of latest transaction (last row) of the `ticketsales` table. Consider the next transaction in the `ticketsales` table as: `cust2` cancels his ticket in `UA101` purchased on `2016-08-08` [We would just delete this entry from `ticketsales`]. This would bring down the count of `UA` in the `airlinesales` to 1. Therefore this transaction results in `UA` and `SW` as the airlineids with minimum `total_ticket_sales`. However, we will only report `UA` and `2016-08-11`, in the `reportmin` table since `SW` was already reported in the previous transaction. The resulting `reportmin` table is as follows:
+Note that the `salesdate` entry in the `reportmin` table always corresponds to the `salesdate` entry of latest transaction (last row) of the `ticketsales` table. Consider the next transaction in the `ticketsales` table as: `cust2` cancels his ticket in `UA101` purchased on `2016-08-08` [We would just delete this entry from `ticketsales`]. This would bring down the count of `UA` in the `airlinesales` to 1. Therefore this transaction results in `UA` and `SW` as the airlineids with minimum `total_ticket_sales`. However, we will only report `UA` and `2016-08-08`, in the `reportmin` table since `SW` was already reported in the previous transaction. The resulting `reportmin` table is as follows:
 
 | airlineid | salesdate |
 |:---:|:---:| 
