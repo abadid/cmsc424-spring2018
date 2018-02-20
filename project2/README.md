@@ -22,7 +22,7 @@ We have provided a `answers.txt` file -- fill in your answers to the first 3 que
 <br />
 
 
-**1. [Outer Join]** Write a query that uses an outer join to list all the flights that flew empty on August 5, 2016. 
+**1. [Outer Join]** Write a query that uses an outer join to list all the flights that flew empty on August 5, 2016. [Output Column: `flightid`]
 
 **2. [Outer Join]** We will write a query using outer joins to find all the customers who satisfy all the following conditions <br />
   a. are born in or after 1996, and <br />
