@@ -21,46 +21,19 @@ print "Initial State"
 executePrint("select * from airlinesales")
 executePrint("select * from reportmin")
 
+print "Deleting a ticketsales entry for UA"
+cur.execute("delete from ticketsales where customerid = 'cust2' and flightid = 'UA101'")
+conn.commit()
+
+print "After deletion"
+executePrint("select * from airlinesales")
+executePrint("select * from reportmin")
+
 print "Inserting a ticketsales entry for SW"
 cur.execute("insert into ticketsales values ('T6', 'SW102', 'cust2', to_date('2016-08-09', 'YYYY-MM-DD'))");
 conn.commit()
 
 print "After insertion"
-executePrint("select * from airlinesales")
-executePrint("select * from reportmin")
-
-
-print "Inserting a ticketsales entry for AA"
-cur.execute("insert into ticketsales values ('T7', 'AA101', 'cust1', to_date('2016-08-09', 'YYYY-MM-DD'))");
-conn.commit()
-
-print "After insertion"
-executePrint("select * from airlinesales")
-executePrint("select * from reportmin")
-
-print "Inserting a ticketsales entry for UA"
-cur.execute("insert into ticketsales values ('T8', 'UA101', 'cust1', to_date('2016-08-10', 'YYYY-MM-DD'))");
-conn.commit()
-
-print "After insertion"
-executePrint("select * from airlinesales")
-executePrint("select * from reportmin")
-
-
-print "Deleting a ticketsales entry for SW"
-cur.execute("delete from ticketsales where customerid = 'cust1' and flightid = 'SW102'")
-conn.commit()
-
-print "After deletion"
-executePrint("select * from airlinesales")
-executePrint("select * from reportmin")
-
-
-print "Deleting a ticketsales entry for SW"
-cur.execute("delete from ticketsales where customerid = 'cust2' and flightid = 'SW102'")
-conn.commit()
-
-print "After deletion"
 executePrint("select * from airlinesales")
 executePrint("select * from reportmin")
 
