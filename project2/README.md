@@ -26,9 +26,9 @@ We have provided a `answers.txt` file -- fill in your answers to the first 3 que
 **Q1 (5pt)**. [Outer Join] Write a query that uses an outer join to list all the flights that flew empty on August 5, 2016. [Output Column: `flightid`]
 
 **Q2 (5pt)**. [Outer Join] We will write a query using outer joins to find all the customers who satisfy all the following conditions <br />
-  a. are born in or after 1996, and <br />
-  b. have taken a flight at least once, and <br />
-  c. have never taken a flight in or out of ‘ORD’.
+  1. are born in or after 1996, and <br />
+  1. have taken a flight at least once, and <br />
+  1. have never taken a flight in or out of ‘ORD’.
 
 Note that your query should **only use** the following views which are defined as:
 
