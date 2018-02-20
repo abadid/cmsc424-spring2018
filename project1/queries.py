@@ -14,7 +14,26 @@ order by city;
 ### Order: by name
 ### Output columns: name 
 queries[1] = """
-select 0;
+with temp1 as
+(
+select distinct flightid as fid
+from flewon
+where flightdate = '2016-08-05'
+),
+temp2 as (
+select flightid as fid
+from flights
+),temp as
+(
+select t1.fid as afid , t2.fid as bfid
+from temp1 t1 right outer join temp2 t2
+on t1.fid=t2.fid
+where t1.fid is NULL
+order by t2.fid,t1.fid
+)
+select bfid
+from temp
+order by bfid;
 """
 
 
@@ -83,7 +102,24 @@ select 0;
 ### Note: a) You can assume there is only one airport in a city.
 ###       b) If there are ties, return all tied cities 
 queries[9] = """
-select 0;
+with from_oak as (
+    select dest as airportid, count(*) as strength, 0 as direction 
+    from flights natural join flewon 
+    where source = 'OAK' 
+    group by dest
+), to_oak as (
+    select source as airportid, count(*) as strength, 1 as direction 
+    from flights natural join flewon 
+    where dest = 'OAK' 
+    group by source
+), oak_connections as (
+    select airportid, sum(strength) as strength 
+    from (select * from from_oak union select * from to_oak) oak_edges 
+    group by airportid
+) 
+select city from oak_connections natural join airports
+where strength = (select max(strength) from oak_connections)
+order by city;
 """
 
 ### 10. Write a query that outputs the ranking of the top 20 busiest flights. We rank the flights by their average number of on-board customers, so the flight with the highest average number of customers gets rank 1, and so on. 
@@ -93,5 +129,4 @@ select 0;
 ###       b) There may be empty flights.
 ###       c) There may be tied flights at rank 20, if so, all flights ranked 20 need to be returned
 queries[10] = """
-select 0;
-"""
+select 0;"""
