@@ -73,5 +73,6 @@ Vagrant.configure("2") do |config|
      sudo -u vagrant psql flights -f /vagrant/small.sql
      sudo -u vagrant createdb stpc
      sudo -u vagrant psql stpc -f /vagrant/table4storedproc.sql
+     sudo -u vagrant createdb flightsales
   SHELL
 end
