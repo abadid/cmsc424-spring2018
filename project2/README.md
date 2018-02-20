@@ -26,9 +26,9 @@ We have provided a `answers.txt` file -- fill in your answers to the first 3 que
 **Q1 (5pt)**. [Outer Join] Write a query that uses an outer join to list all the flights that flew empty on August 5, 2016. [Output Column: `flightid`]
 
 **Q2 (5pt)**. [Outer Join] We will write a query using outer joins to find all the customers who satisfy all the following conditions <br />
-  a. are born in or after 1996, and <br />
-  b. have taken a flight at least once, and <br />
-  c. have never taken a flight in or out of ‘ORD’.
+  1. are born in or after 1996, and <br />
+  1. have taken a flight at least once, and <br />
+  1. have never taken a flight in or out of ‘ORD’.
 
 Note that your query should **only use** the following views which are defined as:
 
@@ -168,12 +168,12 @@ We will explain the `reportmin` table logic using an example. The initial state 
 
 `reportmin`
 
-Note that the `salesdate` entry in the `reportmin` table always corresponds to the `salesdate` entry of latest transaction (last row) of the `ticketsales` table. Consider the next transaction in the `ticketsales` table as: `cust2` cancels his ticket in `UA101` on `2016-08-11`. This would bring down the count of `UA` in the `airlinesales` to 1. Therefore this transaction results in `UA` and `SW` as the airlineids with minimum `total_ticket_sales`. However, we will only report `UA` and `2016-08-11`, in the `reportmin` table since `SW` was already reported in the previous transaction. The resulting `reportmin` table is as follows:
+Note that the `salesdate` entry in the `reportmin` table always corresponds to the `salesdate` entry of latest transaction (last row) of the `ticketsales` table. Consider the next transaction in the `ticketsales` table as: `cust2` cancels his ticket in `UA101` purchased on `2016-08-08` [We would just delete this entry from `ticketsales`]. This would bring down the count of `UA` in the `airlinesales` to 1. Therefore this transaction results in `UA` and `SW` as the airlineids with minimum `total_ticket_sales`. However, we will only report `UA` and `2016-08-08`, in the `reportmin` table since `SW` was already reported in the previous transaction. The resulting `reportmin` table is as follows:
 
 | airlineid | salesdate |
 |:---:|:---:| 
 | SW | 2016-08-09 |
-| UA | 2016-08-11 |
+| UA | 2016-08-08 |
 
 `reportmin`
 
