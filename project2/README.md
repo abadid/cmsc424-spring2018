@@ -6,6 +6,9 @@ Please do a `git pull` to download the directory `project2`. The files are:
 
 1. README.md: This file
 1. small.sql: SQL script for populating `flights` database.
+1. queries.py: The file where to enter your answer for Q1 and Q3, Part I; this file has to be submitted
+1. answers.py: The answers to queries Q1 and Q3.
+1. SQLTesting.py: File to be used for testing your SQL submission -- see below 
 1. table4storedproc.sql: SQL script for populating `stpc` database.
 1. trigger-database.sql: SQL script for setting up the `flightsales` database.
 1. trigger-test.py: Python script for testing the trigger.
@@ -17,8 +20,9 @@ Start the VM with `vagrant up` in the `project2/` directory. The database should
 - Run `\i small.sql` to create and populate the tables. 
 
 ### Submission Instructions
-
-We have provided a `answers.txt` file -- fill in your answers to the first 3 questions into that txt file. Submit the answer for question 4 in `trigger.sql` file.
+- Submit your answers to Q1 and Q3, (Part I, SQL query) in `queries.py`
+- Submit your answers to Q2, Q3 (Part I, PL/pgSQL Function) and Q3 (Part II) in `answers.txt`
+- Submit your answer to Q4 in `trigger.sql`
 
 <br />
 
