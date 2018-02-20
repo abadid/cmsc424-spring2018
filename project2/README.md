@@ -22,9 +22,9 @@ We have provided a `answers.txt` file -- fill in your answers to the first 3 que
 <br />
 
 
-**1. [Outer Join]** Write a query that uses an outer join to list all the flights that flew empty on August 5, 2016. [Output Column: `flightid`]
+**1 (5pt)**. [Outer Join] Write a query that uses an outer join to list all the flights that flew empty on August 5, 2016. [Output Column: `flightid`]
 
-**2. [Outer Join]** We will write a query using outer joins to find all the customers who satisfy all the following conditions <br />
+**2 (5pt)**. [Outer Join] We will write a query using outer joins to find all the customers who satisfy all the following conditions <br />
   a. are born in or after 1996, and <br />
   b. have taken a flight at least once, and <br />
   c. have never taken a flight in or out of ‘ORD’.
@@ -62,7 +62,7 @@ order by cid;
 
 Does the query always produce the correct output? Explain. If not, modify the above query to produce the correct output. 
 
-**3.[PL/pgSQL Functions]** PL/pgSQL is a procedural language for the PostgreSQL database system that can be used to create functions and trigger procedures. In this assignment we will use PL/pgSQL to perform complex computations that are otherwise not straigtforward using SQL queries.
+**3 (15pt)**.[PL/pgSQL Functions] PL/pgSQL is a procedural language for the PostgreSQL database system that can be used to create functions and trigger procedures. In this assignment we will use PL/pgSQL to perform complex computations that are otherwise not straigtforward using SQL queries.
 
 To begin with this, you must create a new database `stpc`, and switch to it and load the data using `\i table4storedproc.sql`. You are provided with an initial table `inittab` and you are required to generate new table `finaltab`, where the count attribute in ```finaltab``` is transformed according to the following transformation rule:
 
@@ -126,7 +126,7 @@ In the following links, you’ll find some useful PL/pgSQL function examples and
 3. https://stackoverflow.com/questions/30786295/postgres-unassigned-record-is-there-a-way-to-test-for-null
 
 
-**4.[Trigger]** For this problem, we’ll be using a new hypothetical database `flightsales`, that has all the tables in the `flights` database except that `flewon` table is replaced with `ticketsales` table. The table `ticketsales (ticketid, flightid, customerid, salesdate)` in the `flightsales` database records the ticket sales transaction. To keep things simple, every customer always makes a single ticket purchase in a given flight at a time. We want the ability to keep track of the total number of ticket sales per airline company in the table `airlinesales (airlineid, total_ticket_sales)`.  We use the following command to create this table:
+**4 (15pt)**.[Trigger] For this problem, we’ll be using a new hypothetical database `flightsales`, that has all the tables in the `flights` database except that `flewon` table is replaced with `ticketsales` table. The table `ticketsales (ticketid, flightid, customerid, salesdate)` in the `flightsales` database records the ticket sales transaction. To keep things simple, every customer always makes a single ticket purchase in a given flight at a time. We want the ability to keep track of the total number of ticket sales per airline company in the table `airlinesales (airlineid, total_ticket_sales)`.  We use the following command to create this table:
 
 ```
 create table airlinesales as
