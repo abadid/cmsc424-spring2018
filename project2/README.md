@@ -151,47 +151,97 @@ select substring(flightid from 1 for 2) as airlineid, count(*) as total_ticket_s
 from ticketsales
 group by airlineid;
 ```
-This table won’t be kept up-to-date by the database as this is a derived table and not a view. Write a trigger to keep this new table updated when a new ticket (row) is purchased (inserted) into or cancelled (deleted) from the `ticketsales` table. Remember that `airlineid` corresponding to the new `ticketsales` update may not exist in the `airlinesales` table at that time and it should be added to the table with a count of 1, in that case. Similarly, if a deletion of a row in `ticketsales` results in an airline having `total_ticket_sales` to 0, then the corresponding tuple for that airline in `airlinesales` should be deleted.
+This table won’t be kept up-to-date by the database as this is a derived table and not a view. Write a trigger to keep this new table updated when a new ticket (row) is purchased (inserted) into or cancelled (deleted) from the `ticketsales` table. Remember that `airlineid` corresponding to the new `ticketsales` update may not exist in the `airlinesales` table at that time and it should be added to the table with a count of 1, in that case. When a row is deleted from `ticketsales`, we will decrement the count of `total_ticket_sales` corresponding to the deleted `airlineid` by 1.
 
-In addition to this, we also want to report those airlines that had minimum ticket sales (for every ticket purchased or cancelled) and the `salesdate` of the transaction. We will use the following command to create and initialize `reportmin (airlineid, salesdate)` table corresponding to the current state of `airlinesales` table:
+In addition to this, for every insertion or deletion of a tuple into/from `ticketsales` (henceforth referred to as `ticketsales` transaction), we want to report those airlines that had minimum ticket sales along with the `salesdate` of the inserted/deleted tuple in `ticketsales`. We will use the `reportmin (airlineid, salesdate)` table for this purpose. In this context, we will refer to an airlineid as minimum airlineid if it has the minimum `total_ticket_sales`. Note that for a `ticketsales` transaction, we do not report the minimum `airlineid` if that `airlineid` was already a minimum `airlineid` in the previous `ticketsales` transaction. Every `(airlineid, salesdate)` tuple that we want to report is appended to the `reportmin` table. We will explain the `reportmin` table logic with an example below:
 
-```
-create table reportmin as
-select airlineid, 
-(select temp.salesdate 
-from (select salesdate, row_number() over() as rid from ticketsales order by rid desc) as temp 
-where temp.rid = 1) as salesdate
-from airlinesales
-where total_ticket_sales = (select min(total_ticket_sales) from airlinesales);
-```
-
-Note that we do not report the `airlineid` even if it has the minimum `total_ticket_sales` provided it had minimum `total_ticket_sales` for the previous transaction as well. It is not immediately obvious if this `reportmin` table can be kept updated using a view. Therefore we want you to implement this logic within the trigger function.
-
-We will explain the `reportmin` table logic using an example. The initial state of the `airlinesales` and the `reportmin` table after executing `trigger-database.sql` is as follows: 
+Consider the transactions in the `ticketsales` table. When the first tuple `(T1, AA101, cust0, 2016-08-09)` was inserted into the `ticketsales` table, we report the state of the `airlinesales` and `reportmin` tables:
 
 | airlineid | total_ticket_sales |
 | :---: | :---: |
-| SW | 1 |
-| UA | 2 |
+| AA | 1 |
+
+`airlinesales`
+
+| airlineid | salesdate |
+|:---:|:---:| 
+| AA | 2016-08-09 |
+
+`reportmin`
+
+Next, for insertion of `(T2, AA101, cust0, 2016-08-10)`, the corresponding state of the `airlinesales` and `reportmin` tables are:
+
+| airlineid | total_ticket_sales |
+| :---: | :---: |
 | AA | 2 |
 
 `airlinesales`
 
-
 | airlineid | salesdate |
 |:---:|:---:| 
-| SW | 2016-08-09 |
+| AA | 2016-08-09 |
 
 `reportmin`
 
-Note that the `salesdate` entry in the `reportmin` table always corresponds to the `salesdate` entry of latest transaction (last row) of the `ticketsales` table. Consider the next transaction in the `ticketsales` table as: `cust2` cancels his ticket in `UA101` purchased on `2016-08-08` [We would just delete this entry from `ticketsales`]. This would bring down the count of `UA` in the `airlinesales` to 1. Therefore this transaction results in `UA` and `SW` as the airlineids with minimum `total_ticket_sales`. However, we will only report `UA` and `2016-08-08`, in the `reportmin` table since `SW` was already reported in the previous transaction. The resulting `reportmin` table is as follows:
+Note here that we do not append `(AA, 2016-08-10)` into reportmin because `AA` was already the minimum `airlineid` in the previous transaction.
+
+Next, for `(T3, UA101, cust2, 2016-08-08)`, we have:
+
+| airlineid | total_ticket_sales |
+| :---: | :---: |
+| AA | 2 |
+| UA | 1 |
+
+`airlinesales`
 
 | airlineid | salesdate |
 |:---:|:---:| 
-| SW | 2016-08-09 |
+| AA | 2016-08-09 |
 | UA | 2016-08-08 |
 
 `reportmin`
+
+Next, for `(T4, SW102, cust1, 2016-08-08)`, we have:
+
+| airlineid | total_ticket_sales |
+| :---: | :---: |
+| AA | 2 |
+| UA | 1 |
+| SW | 1 |
+
+`airlinesales`
+
+| airlineid | salesdate |
+|:---:|:---:| 
+| AA | 2016-08-09 |
+| UA | 2016-08-08 |
+| SW | 2016-08-08 |
+
+`reportmin`
+
+Note here that although we have both `UA` and `SW` as the minimum `airlineid`s we only append `SW` into the `reportmin` table.
+
+Finally, for `(T5, UA101, cust1, 2016-08-09)`, we have:
+
+| airlineid | total_ticket_sales |
+| :---: | :---: |
+| AA | 2 |
+| UA | 2 |
+| SW | 1 |
+
+`airlinesales`
+
+| airlineid | salesdate |
+|:---:|:---:| 
+| AA | 2016-08-09 |
+| UA | 2016-08-08 |
+| SW | 2016-08-08 |
+
+`reportmin`
+
+Here again, we have `SW` as the minimum `airlineid` but we do not append it to the `reportmin` table because `SW` was already the minimum `airlineid` for the previous transaction.
+
+It is not immediately obvious if this `reportmin` table can be kept updated using a view. Therefore we want you to implement this logic within the trigger function.
 
 Switch to the `flightsales` database, and load the data using `\i trigger-database.sql`. We have already created the `airlinesales` and the `reportmin` tables and initialized them for you. The trigger code should be submitted in `trigger.sql` file. Running `psql -f trigger.sql flightsales` should generate the trigger without errors.
 
