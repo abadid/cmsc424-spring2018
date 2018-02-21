@@ -5,7 +5,3 @@ queries[1] = """
 select 0;
 """
 
-### 3 part I
-queries[3] = """
-select 0;
-"""
