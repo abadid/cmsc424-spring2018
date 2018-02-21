@@ -75,7 +75,7 @@ having count(*)=1
 order by cid;
 ```
 
-Does the query always produce the correct output? Explain. If not, modify the above query to produce the correct output. If you modify the query, you can only change the having clause. Right now it says: having count(*)= 1. You can change it to say: having count(*) = 1 AND exists (<write your expression here>). You cannot change any other part of the query.
+Does the query always produce the correct output? Explain. If not, modify the above query to produce the correct output. If you modify the query, you can only change the having clause. Right now it says: `having count(*)= 1`. You can change it to say: `having count(*) = 1 AND exists (<write your expression here>)`. You cannot change any other part of the query.
 
 **Q3 (15pt)**.[PL/pgSQL Functions] PL/pgSQL is a procedural language for the PostgreSQL database system that can be used to create functions and trigger procedures. In this assignment we will use PL/pgSQL to perform complex computations that are otherwise not straigtforward using SQL queries.
 
