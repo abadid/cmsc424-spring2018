@@ -219,7 +219,7 @@ Next, for `(T4, SW102, cust1, 2016-08-08)`, we have:
 
 `reportmin`
 
-Note here that although we have both `UA` and `SW` as the minimum `airlineid`s we only append `SW` into the `reportmin` table.
+Note here that although we have both `UA` and `SW` as the minimum `airlineid`'s we only append `SW` into the `reportmin` table, because we already had `UA` as the minimum `airlineid` for the previous transaction.
 
 Finally, for `(T5, UA101, cust1, 2016-08-09)`, we have:
 
