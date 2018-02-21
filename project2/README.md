@@ -128,7 +128,7 @@ For example, this transformation rule, when applied to the ```inittab``` from ab
 
 **Part II**: Write a PL/pgSQL function `function2()` to generate `finaltab2`. Just like part I, you are required to create the `finaltab2` table within the function and insert the required tuples into it. Your function should not return anything. We will test it by invoking `SELECT function2();` Again, you can assume that the definition of the "ith row" in the table for the calculation mentioned above is the same as the ith row that is encountered in a ```FOR LOOP``` in PL/pgSQL that iterates through (```SELECT * FROM inittab```)
 
-In the following links contains some useful documentation on PL/pgSQL: <br />
+The following links contains some useful documentation on PL/pgSQL: <br />
 1. https://www.postgresql.org/docs/9.2/static/plpgsql.html
 1. https://www.postgresql.org/docs/9.2/static/plpgsql-control-structures.html 
 1. https://stackoverflow.com/questions/30786295/postgres-unassigned-record-is-there-a-way-to-test-for-null
