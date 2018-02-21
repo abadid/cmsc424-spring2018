@@ -48,7 +48,7 @@ select substring(flightid from 1 for 2) as airlineid, count(*) as total_ticket_s
 from ticketsales
 group by airlineid;
 
-create table reportmin as (airlineid char(2), salesdate date);
+create table reportmin (airlineid char(2), salesdate date);
 
 insert into reportmin values
 ('AA', to_date('2016-08-09', 'YYYY-MM-DD')),
