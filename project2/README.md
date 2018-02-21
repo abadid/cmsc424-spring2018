@@ -134,7 +134,7 @@ In the following links contains some useful documentation on PL/pgSQL: <br />
 1. https://stackoverflow.com/questions/30786295/postgres-unassigned-record-is-there-a-way-to-test-for-null
 
 
-**Q4 (14pt)**.[Trigger] For this problem, we’ll be using a new hypothetical database `flightsales`, that has all the tables in the `flights` database except that `flewon` table is replaced with `ticketsales` table. The table `ticketsales (ticketid, flightid, customerid, salesdate)` in the `flightsales` database records the ticket sales transaction. To keep things simple, every customer always makes a single ticket purchase in a given flight at a time. We want the ability to keep track of the total number of ticket sales per airline company in the table `airlinesales (airlineid, total_ticket_sales)`.  We use the following command to create this table:
+**Q4 (14pt)**.[Trigger] For this problem, we’ll be using a new hypothetical database `flightsales`, that has all the tables in the `flights` database except that the `flewon` table is replaced with the `ticketsales` table. The table `ticketsales (ticketid, flightid, customerid, salesdate)` in the `flightsales` database records the ticket sales transactions. To keep things simple, we will assume that every customer always makes a single ticket purchase for a given flight at a time. We want the ability to keep track of the total number of ticket sales per airline company in the table `airlinesales (airlineid, total_ticket_sales)`.  We use the following command to create this table:
 
 ```
 create table airlinesales as
@@ -142,9 +142,9 @@ select substring(flightid from 1 for 2) as airlineid, count(*) as total_ticket_s
 from ticketsales
 group by airlineid;
 ```
-This table won’t be kept up-to-date by the database as this is a derived table and not a view. Write a trigger to keep this new table updated when a new ticket (row) is purchased (inserted) into or cancelled (deleted) from the `ticketsales` table. Remember that `airlineid` corresponding to the new `ticketsales` update may not exist in the `airlinesales` table at that time and it should be added to the table with a count of 1, in that case. When a row is deleted from `ticketsales`, we will decrement the count of `total_ticket_sales` corresponding to the deleted `airlineid` by 1.
+This table won’t be kept up-to-date by the database as this is a derived table and not a view. Write a trigger to keep this new table updated when a new ticket (row) is purchased (inserted) into or cancelled (deleted) from the `ticketsales` table. Remember that `airlineid` corresponding to the new `ticketsales` update may not exist in the `airlinesales` table at that time and it should be added to the table with a count of 1, in that case. When a row is deleted from `ticketsales`, we will decrement the count of `total_ticket_sales` corresponding to the deleted `airlineid` by 1. Note that this means that there may be a row in `airlinesales` with a `total_ticket_sales` of 0 if all the records for an airline in `ticketsales` are subsequently deleted. (Note that if we just created a view using the above SQL (instead of creating a seperate table), there would never be records in `airlinesales` with a `total_ticket_sales` of 0.)
 
-In addition to this, for every insertion or deletion of a tuple into/from `ticketsales` (henceforth referred to as `ticketsales` transaction), we want to report those airlines that had minimum ticket sales along with the `salesdate` of the last inserted/deleted tuple in `ticketsales`. We will use the `reportmin (airlineid, salesdate)` table for this purpose. In this context, we will refer to an airlineid as minimum airlineid if it has the minimum `total_ticket_sales`. Note that for a `ticketsales` transaction, we do not report the minimum `airlineid` if that `airlineid` was already a minimum `airlineid` in the previous `ticketsales` transaction. Every `(airlineid, salesdate)` tuple that we want to report is appended to the `reportmin` table. We will explain the `reportmin` table logic with an example below:
+In addition to this, for every insertion or deletion of a tuple into/from `ticketsales` (henceforth referred to as a `ticketsales` transaction), we want to check if, as a result of this transaction, a new airline (or set of airlines) is (are) now included in the set of airlines in `airlinesales` with the minimum `total_ticket_sales`. If so, we will report those new airlines with minimum `total_ticket_sales` by inserting each of those airlines into the `reportmin (airlineid, salesdate)` table along with the salesdate of the `ticketsales` transaction (the record that was inserted or deleted) that caused them to become the new minimum. The example below shows how the `reportmin` table is updated:
 
 Consider the transactions in the `ticketsales` table. When the first tuple `(T1, AA101, cust0, 2016-08-09)` was inserted into the `ticketsales` table, we have the state of the `airlinesales` and `reportmin` tables as:
 
@@ -160,7 +160,7 @@ Consider the transactions in the `ticketsales` table. When the first tuple `(T1,
 
 `reportmin`
 
-Next, for insertion of `(T2, AA101, cust0, 2016-08-10)`, the corresponding state of the `airlinesales` and `reportmin` tables are:
+Next, after the insertion of `(T2, AA101, cust0, 2016-08-10)` into `ticketsales`, the corresponding state of the `airlinesales` and `reportmin` tables will be:
 
 | airlineid | total_ticket_sales |
 | :---: | :---: |
@@ -174,9 +174,9 @@ Next, for insertion of `(T2, AA101, cust0, 2016-08-10)`, the corresponding state
 
 `reportmin`
 
-Note here that we do not append `(AA, 2016-08-10)` into reportmin because `AA` was already the minimum `airlineid` in the previous transaction.
+Note that `(AA, 2016-08-10)` did not get inserted into `reportmin` because `AA` was already the minimum `airlineid` in `airlinesales`.
 
-Next, for `(T3, UA101, cust2, 2016-08-08)`, we have:
+Next, after `(T3, UA101, cust2, 2016-08-08)` is inserted into `ticketsales`, we have:
 
 | airlineid | total_ticket_sales |
 | :---: | :---: |
@@ -192,7 +192,7 @@ Next, for `(T3, UA101, cust2, 2016-08-08)`, we have:
 
 `reportmin`
 
-Next, for `(T4, SW102, cust1, 2016-08-08)`, we have:
+Next, after `(T4, SW102, cust1, 2016-08-08)` is inserted into `ticketsales`, we have:
 
 | airlineid | total_ticket_sales |
 | :---: | :---: |
@@ -210,9 +210,9 @@ Next, for `(T4, SW102, cust1, 2016-08-08)`, we have:
 
 `reportmin`
 
-Note here that although we have both `UA` and `SW` as the minimum `airlineid`'s we only append `SW` into the `reportmin` table, because we already had `UA` as the minimum `airlineid` for the previous transaction.
+Note here that although both `UA` and `SW` are the `airlineid`'s with minimal sales in the `airlinesales` table, only the record corresponding to `SW` was inserted into the `reportmin` table, because `UA` was already the minimum `airlineid` prior to this transaction.
 
-Finally, for `(T5, UA101, cust1, 2016-08-09)`, we have:
+Finally, after inserting `(T5, UA101, cust1, 2016-08-09)` into `ticketsales`, we have:
 
 | airlineid | total_ticket_sales |
 | :---: | :---: |
@@ -230,9 +230,9 @@ Finally, for `(T5, UA101, cust1, 2016-08-09)`, we have:
 
 `reportmin`
 
-Here again, we have `SW` as the minimum `airlineid` but we do not append it to the `reportmin` table because `SW` was already the minimum `airlineid` for the previous transaction.
+Here again, `SW` is listed as the `airlineid` with minimal sales in `airlinesales`, but it did not get inserted into the `reportmin` table because `SW` was already the minimum `airlineid` prior to this transaction.
 
-Now, we will delete the following tuple: `(T2, AA101, cust0, 2016-08-10)` and we have:
+Now, if we delete the following tuple from `ticketsales`: `(T2, AA101, cust0, 2016-08-10)` we would have:
 
 | airlineid | total_ticket_sales |
 | :---: | :---: |
@@ -251,13 +251,11 @@ Now, we will delete the following tuple: `(T2, AA101, cust0, 2016-08-10)` and we
 
 `reportmin`
 
-Here, we have both `AA` and `SW` as the minimum airline but we only append `AA` to `reportmin` with the `salesdate` corresponding to the deleted tuple, since `SW` was already the minimum `airlineid` for the previous transaction.
-
-It is not immediately obvious if this `reportmin` table can be kept updated using a view. Therefore we want you to implement this logic within the trigger function.
+Here, both `AA` and `SW` are the airlines with minimum sales after this transactions, but only `AA` gets inserted into `reportmin` since `SW` was already the minimum `airlineid` prior to this transaction. Note that the `salesdate` used for this insert into `reportmin` corresponds to the sales date of the deleted record from `ticketsales`.
 
 Switch to the `flightsales` database, and load the data using `\i trigger-database.sql`. We have already created the `airlinesales` and the `reportmin` tables and initialized them for you. The trigger code should be submitted in `trigger.sql` file. Running `psql -f trigger.sql flightsales` should generate the trigger without errors.
 
 You may also use `trigger-test.py`, in which case you do not need to execute `\i trigger-database.sql` and `psql -f trigger.sql flightsales` (they are included in the script). You can run the test script as `python trigger-test.py trigger.sql`. A few transactions to the `ticketsales` table are also provided. You are free to add more transactions for purposes of testing your trigger code. Remember to create the `flightsales` database before running the test script. If you are going to run it multiple times, you need to `dropdb flightsales` before every run (no easy way to clear all the functions and triggers otherwise).
 
-In the following link, you’ll find some useful trigger examples to get started:
+In the following link, you’ll find some useful trigger examples. You can also use the example from class on Feb 21 to get started:
 https://www.postgresql.org/docs/9.2/static/plpgsql-trigger.html
