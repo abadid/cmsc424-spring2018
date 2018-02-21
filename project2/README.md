@@ -39,7 +39,7 @@ Start the VM with `vagrant up` in the `project2/` directory. The databases `flig
 
 **Q1 (5pt)**. [Outer Join] Write a query that uses an outer join to list all the flights that flew empty on August 5, 2016. [Output Column: `flightid`]
 
-**Q2 (5pt)**. [Outer Join] We will write a query using outer joins to find all the customers who satisfy all the following conditions <br />
+**Q2 (8pt)**. [Outer Join] We will write a query using outer joins to find all the customers who satisfy all the following conditions <br />
   1. are born in or after 1996, and <br />
   1. have taken a flight at least once, and <br />
   1. have never taken a flight in or out of ‘ORD’.
@@ -75,7 +75,7 @@ having count(*)=1
 order by cid;
 ```
 
-Does the query always produce the correct output? Explain. If not, modify the above query to produce the correct output. 
+Does the query always produce the correct output? Explain. If not, modify the above query to produce the correct output. If you modify the query, you can only change the having clause. Right now it says: having count(*)= 1. You can change it to say: having count(*) = 1 AND exists (<write your expression here>). You cannot change any other part of the query.
 
 **Q3 (15pt)**.[PL/pgSQL Functions] PL/pgSQL is a procedural language for the PostgreSQL database system that can be used to create functions and trigger procedures. In this assignment we will use PL/pgSQL to perform complex computations that are otherwise not straigtforward using SQL queries.
 
