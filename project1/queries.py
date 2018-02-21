@@ -14,7 +14,30 @@ order by city;
 ### Order: by name
 ### Output columns: name 
 queries[1] = """
+<<<<<<< HEAD
 select name from customers where birthdate > '19900101' and name like '% G%' order by name;
+=======
+with temp1 as
+(
+select distinct flightid as fid
+from flewon
+where flightdate = '2016-08-05'
+),
+temp2 as (
+select flightid as fid
+from flights
+),temp as
+(
+select t1.fid as afid , t2.fid as bfid
+from temp1 t1 right outer join temp2 t2
+on t1.fid=t2.fid
+where t1.fid is NULL
+order by t2.fid,t1.fid
+)
+select bfid
+from temp
+order by bfid;
+>>>>>>> 6dfd2e3cd50f3eaf08b38a838c6a63e26df42a6c
 """
 
 
@@ -86,7 +109,28 @@ not exists (select * from flight_dates b where b.flightdate = a.flightdate + int
 ### Note: a) You can assume there is only one airport in a city.
 ###       b) If there are ties, return all tied cities 
 queries[9] = """
+<<<<<<< HEAD
  with sources as (select source as airport from flights join flewon on flights.flightid = flewon.flightid where dest = 'OAK'), dests as (select dest as airport from flights join flewon on flights.flightid = flewon.flightid where source = 'OAK'), counts as (select airport, count(*) from (select * from dests union all select * from sources) t group by airport) select city from counts join airports on counts.airport = airports.airportid where counts.count = (select max(count) from counts);
+=======
+with from_oak as (
+    select dest as airportid, count(*) as strength, 0 as direction 
+    from flights natural join flewon 
+    where source = 'OAK' 
+    group by dest
+), to_oak as (
+    select source as airportid, count(*) as strength, 1 as direction 
+    from flights natural join flewon 
+    where dest = 'OAK' 
+    group by source
+), oak_connections as (
+    select airportid, sum(strength) as strength 
+    from (select * from from_oak union select * from to_oak) oak_edges 
+    group by airportid
+) 
+select city from oak_connections natural join airports
+where strength = (select max(strength) from oak_connections)
+order by city;
+>>>>>>> 6dfd2e3cd50f3eaf08b38a838c6a63e26df42a6c
 """
 
 ### 10. Write a query that outputs the ranking of the top 20 busiest flights. We rank the flights by their average number of on-board customers, so the flight with the highest average number of customers gets rank 1, and so on. 
@@ -96,5 +140,9 @@ queries[9] = """
 ###       b) There may be empty flights.
 ###       c) There may be tied flights at rank 20, if so, all flights ranked 20 need to be returned
 queries[10] = """
+<<<<<<< HEAD
 with tmp as (select flightid, flightdate, count(*) from flewon group by flightid, flightdate) , tmp2 as (select SUM(count) as passengers, flightid from tmp group by flightid) select flightid, rank from (select flightid, rank() over (order by passengers desc) as rank from tmp2) t where rank <= 20 order by rank, flightid;
 """
+=======
+select 0;"""
+>>>>>>> 6dfd2e3cd50f3eaf08b38a838c6a63e26df42a6c

@@ -1,0 +1,30 @@
+2. Answer to Q2
+
+Explanation
+-----------
+
+
+
+
+SQL Query, if needed
+--------------------
+
+
+
+
+3. Answer to Q3, Part I
+
+PL/pgSQL Function
+-----------------
+
+
+
+
+3. Answer to Q3, Part II
+
+PL/pgSQL Function
+-----------------
+
+
+
+
