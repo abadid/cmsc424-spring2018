@@ -82,10 +82,10 @@ Does the query always produce the correct output? Explain. If not, modify the ab
 To begin with this, you must switch to `stpc` and load the data using `\i table4storedproc.sql`. You are provided with an initial table `inittab` and you are required to generate new table `finaltab`, where the count attribute in ```finaltab``` is transformed according to the following transformation rule:
 
 ```
-finaltab.tcount(i) = inittab.tcount(i) + inittab.tcount(i-1), where i indicates the row-id
+finaltab.tcount(i) = inittab.tcount(i) + inittab.tcount(i-1), where i is the ith row in the table
 ```
 
-The rule above implies that the value of the attribute count of the current row is the sum of the current row and the previous row. For the first row, we just make a copy of it. An example is provided below:
+The rule above implies that the value of tcount of the ith row in ```finaltab``` is the sum of the ith row and the one before it in ```inittab```. For the first row, we just make a copy of it. An example is provided below:
 
 | transid | tcount |  
 |:---:|:---:| 
@@ -105,7 +105,9 @@ The rule above implies that the value of the attribute count of the current row 
 
 `finaltab`
 
-**Part I**: (i) Write a PL/pgSQL function `function1()` using the procedural language in Postgres to generate `finaltab`. For this part, you are required to create the `finaltab` table within the function and insert the required tuples into it. Your function should not return anything. We will test it by invoking `SELECT function1();`
+**Part I**: (i) Write a PL/pgSQL function `function1()` using the procedural language in Postgres to generate `finaltab`. You may want to start with the PL/pgSQL example from class on Feb 21 in order to get started. As far as the definition of the "ith row" in the table for the calculation mentioned above, you can assume that this is the same as the ith row that is encountered in a ```FOR LOOP``` in PL/pgSQL that iterates through (```SELECT * FROM inittab```). For this part, you are required to create the `finaltab` table within the function and insert the required tuples into it. Your function should not return anything. We will test it by invoking `SELECT function1();`
+
+
 
 Here is a more involved transformation rule:
 
@@ -113,7 +115,7 @@ Here is a more involved transformation rule:
 finaltab2.tcount(i) = sum of the values of tcount attribute in inittab from row i to row (i-inittab.transid(i)), 
 if (i-inittab.transid(i)) < 1, then we sum the values up to row 1
 ```
-We provide an example to demonstrate the transformation rule below:
+For example, this transformation rule, when applied to the ```inittab``` from above, would produce the result:
 
 | transid | tcount |  
 |:---:|:---:| 
@@ -124,11 +126,9 @@ We provide an example to demonstrate the transformation rule below:
 
 `finaltab2`
 
-Fortunately, the existence of PL/pgSQL procedural language makes it easier to write these transformations. 
+**Part II**: Write a PL/pgSQL function `function2()` to generate `finaltab2`. Just like part I, you are required to create the `finaltab2` table within the function and insert the required tuples into it. Your function should not return anything. We will test it by invoking `SELECT function2();` Again, you can assume that the definition of the "ith row" in the table for the calculation mentioned above is the same as the ith row that is encountered in a ```FOR LOOP``` in PL/pgSQL that iterates through (```SELECT * FROM inittab```)
 
-**Part II**: Write a PL/pgSQL function `function2()` to generate `finaltab2`. You are required to create the `finaltab2` table within the function and insert the required tuples into it. Your function should not return anything. We will test it by invoking `SELECT function2();` Note that loops (in PL/pgSQL) iterate over the tuples of a table in the same order as that returned by a `SELECT *` over the table.  
-
-In the following links, you’ll find some useful PL/pgSQL function examples and related know-how's to get started: <br />
+In the following links contains some useful documentation on PL/pgSQL: <br />
 1. https://www.postgresql.org/docs/9.2/static/plpgsql.html
 1. https://www.postgresql.org/docs/9.2/static/plpgsql-control-structures.html 
 1. https://stackoverflow.com/questions/30786295/postgres-unassigned-record-is-there-a-way-to-test-for-null
