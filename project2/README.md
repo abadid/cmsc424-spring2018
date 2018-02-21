@@ -7,7 +7,7 @@ Please do a `git pull` to download the directory `project2`. The files are:
 1. README.md: This file
 1. small.sql: SQL script for populating `flights` database.
 1. queries.py: The file where to enter your answer for Q1; this file has to be submitted
-1. answers.py: The answers to query Q1.
+1. answers.py: The answers to query Q1 and Q3.
 1. answers.txt: The answers to queries Q2 and Q3.
 1. SQLTesting.py: File to be used for testing your SQL submission -- see below 
 1. table4storedproc.sql: SQL script for populating `stpc` database.
