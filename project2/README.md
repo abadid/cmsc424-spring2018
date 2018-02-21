@@ -245,7 +245,7 @@ It is not immediately obvious if this `reportmin` table can be kept updated usin
 
 Switch to the `flightsales` database, and load the data using `\i trigger-database.sql`. We have already created the `airlinesales` and the `reportmin` tables and initialized them for you. The trigger code should be submitted in `trigger.sql` file. Running `psql -f trigger.sql flightsales` should generate the trigger without errors.
 
-You may also use `trigger-test.py`, in which case you do not need to execute `\i trigger-database.sql` and `psql -f trigger.sql flightsales` (they are included in the script). A few transactions to the `ticketsales` table are also provided. You are free to add more transactions for purposes of testing your trigger code. Remember to create the `flightsales` database before running the test script. If you are going to run it multiple times, you need to `dropdb flightsales` before every run (no easy way to clear all the functions and triggers otherwise).
+You may also use `trigger-test.py`, in which case you do not need to execute `\i trigger-database.sql` and `psql -f trigger.sql flightsales` (they are included in the script). You can run the test script as `python trigger-test.py trigger.sql`. A few transactions to the `ticketsales` table are also provided. You are free to add more transactions for purposes of testing your trigger code. Remember to create the `flightsales` database before running the test script. If you are going to run it multiple times, you need to `dropdb flightsales` before every run (no easy way to clear all the functions and triggers otherwise).
 
 In the following link, you’ll find some useful trigger examples to get started:
 https://www.postgresql.org/docs/9.2/static/plpgsql-trigger.html
