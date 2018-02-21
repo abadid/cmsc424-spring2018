@@ -232,6 +232,27 @@ Finally, for `(T5, UA101, cust1, 2016-08-09)`, we have:
 
 Here again, we have `SW` as the minimum `airlineid` but we do not append it to the `reportmin` table because `SW` was already the minimum `airlineid` for the previous transaction.
 
+Now, we will delete the following tuple: `(T2, AA101, cust0, 2016-08-10)` and we have:
+
+| airlineid | total_ticket_sales |
+| :---: | :---: |
+| AA | 1 |
+| UA | 2 |
+| SW | 1 |
+
+`airlinesales`
+
+| airlineid | salesdate |
+|:---:|:---:| 
+| AA | 2016-08-09 |
+| UA | 2016-08-08 |
+| SW | 2016-08-08 |
+| AA | 2016-08-10 |
+
+`reportmin`
+
+Here, we have both `AA` and `SW` as the minimum airline but we only append `AA` to `reportmin` with the `salesdate` corresponding to the deleted tuple, since `SW` was already the minimum `airlineid` for the previous transaction.
+
 It is not immediately obvious if this `reportmin` table can be kept updated using a view. Therefore we want you to implement this logic within the trigger function.
 
 Switch to the `flightsales` database, and load the data using `\i trigger-database.sql`. We have already created the `airlinesales` and the `reportmin` tables and initialized them for you. The trigger code should be submitted in `trigger.sql` file. Running `psql -f trigger.sql flightsales` should generate the trigger without errors.
