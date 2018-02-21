@@ -6,9 +6,9 @@ Please do a `git pull` to download the directory `project2`. The files are:
 
 1. README.md: This file
 1. small.sql: SQL script for populating `flights` database.
-1. queries.py: The file where to enter your answer for Q1 and Q3, Part I; this file has to be submitted
-1. answers.py: The answers to queries Q1 and Q3 (Part I, SQL).
-1. answers.txt: The answers to queries Q2 and Q3 (Part I and Part II, PL/pgSQL Functions).
+1. queries.py: The file where to enter your answer for Q1; this file has to be submitted
+1. answers.py: The answers to query Q1.
+1. answers.txt: The answers to queries Q2 and Q3.
 1. SQLTesting.py: File to be used for testing your SQL submission -- see below 
 1. table4storedproc.sql: SQL script for populating `stpc` database.
 1. trigger-database.sql: SQL script for setting up the `flightsales` database.
@@ -27,13 +27,11 @@ Start the VM with `vagrant up` in the `project2/` directory. The databases `flig
 
 - If you want to test your answer to Question 1, use: `python SQLTesting.py -dbname flights -q 1`. The program compares the result of running your query against the provided answer (in the `answers.py` file).
 
-- Similarly for Question 3, use: `python SQLTesting.py -dbname stpc -q 3`
-
 - The -v flag will print out more information, including the correct and submitted answers etc.
 
 ### Submission Instructions
-- Submit your answers to Q1 and Q3, (Part I, SQL query) in `queries.py`
-- Submit your answers to Q2, Q3 (Part I, PL/pgSQL Function) and Q3 (Part II) in `answers.txt`
+- Submit your answers to Q1 in `queries.py`
+- Submit your answers to Q2, Q3 in `answers.txt`
 - Submit your answer to Q4 in `trigger.sql`
 
 <br />
@@ -86,12 +84,6 @@ To begin with this, you must switch to `stpc` and load the data using `\i table4
 ```
 finaltab.tcount(i) = inittab.tcount(i) + inittab.tcount(i-1), where i indicates the row-id
 ```
-You can generate the row-id (named as `rid`) of each row in `inittab` using the following query:
-
-```
-select row_number() over() as rid, *
-from inittab;
-```
 
 The rule above implies that the value of the attribute count of the current row is the sum of the current row and the previous row. For the first row, we just make a copy of it. An example is provided below:
 
@@ -113,10 +105,9 @@ The rule above implies that the value of the attribute count of the current row 
 
 `finaltab`
 
-**Part I**: (i) Write a SQL query to generate `finaltab`, (ii) Write a PL/pgSQL function `function1()` using the procedural language in Postgres to generate `finaltab`. For this part, you are required to create the `finaltab` table and insert the required tuples into it. We will test it by invoking `SELECT function1();`
+**Part I**: (i) Write a PL/pgSQL function `function1()` using the procedural language in Postgres to generate `finaltab`. For this part, you are required to create the `finaltab` table within the function and insert the required tuples into it. Your function should not return anything. We will test it by invoking `SELECT function1();`
 
-As the complexity of the transformation rule increases, writing them out as SQL queries turns out to be less obvious. Here is a more involved transformation rule:
-
+Here is a more involved transformation rule:
 
 ```
 finaltab2.tcount(i) = sum of the values of tcount attribute in inittab from row i to row (i-inittab.transid(i)), 
@@ -133,14 +124,14 @@ We provide an example to demonstrate the transformation rule below:
 
 `finaltab2`
 
-Fortunately, the existence of PL/pgSQL procedural language makes it easier to write these transformations.
+Fortunately, the existence of PL/pgSQL procedural language makes it easier to write these transformations. 
 
-**Part II**: Write a PL/pgSQL function `function2()` to generate `finaltab2`. You are required to create the `finaltab2` table and insert the required tuples into it. We will test it by invoking `SELECT function2();`
+**Part II**: Write a PL/pgSQL function `function2()` to generate `finaltab2`. You are required to create the `finaltab2` table within the function and insert the required tuples into it. Your function should not return anything. We will test it by invoking `SELECT function2();` Note that loops (in PL/pgSQL) iterate over the tuples of a table in the same order as that returned by a `SELECT *` over the table.  
 
 In the following links, you’ll find some useful PL/pgSQL function examples and related know-how's to get started: <br />
-1. https://www.postgresql.org/docs/9.2/static/plpgsql.html <br />
-2. http://www.postgresqltutorial.com/plpgsql-function-returns-a-table/ <br />
-3. https://stackoverflow.com/questions/30786295/postgres-unassigned-record-is-there-a-way-to-test-for-null
+1. https://www.postgresql.org/docs/9.2/static/plpgsql.html
+1. https://www.postgresql.org/docs/9.2/static/plpgsql-control-structures.html 
+1. https://stackoverflow.com/questions/30786295/postgres-unassigned-record-is-there-a-way-to-test-for-null
 
 
 **Q4 (15pt)**.[Trigger] For this problem, we’ll be using a new hypothetical database `flightsales`, that has all the tables in the `flights` database except that `flewon` table is replaced with `ticketsales` table. The table `ticketsales (ticketid, flightid, customerid, salesdate)` in the `flightsales` database records the ticket sales transaction. To keep things simple, every customer always makes a single ticket purchase in a given flight at a time. We want the ability to keep track of the total number of ticket sales per airline company in the table `airlinesales (airlineid, total_ticket_sales)`.  We use the following command to create this table:
