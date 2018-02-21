@@ -155,7 +155,7 @@ This table won’t be kept up-to-date by the database as this is a derived table
 
 In addition to this, for every insertion or deletion of a tuple into/from `ticketsales` (henceforth referred to as `ticketsales` transaction), we want to report those airlines that had minimum ticket sales along with the `salesdate` of the last inserted/deleted tuple in `ticketsales`. We will use the `reportmin (airlineid, salesdate)` table for this purpose. In this context, we will refer to an airlineid as minimum airlineid if it has the minimum `total_ticket_sales`. Note that for a `ticketsales` transaction, we do not report the minimum `airlineid` if that `airlineid` was already a minimum `airlineid` in the previous `ticketsales` transaction. Every `(airlineid, salesdate)` tuple that we want to report is appended to the `reportmin` table. We will explain the `reportmin` table logic with an example below:
 
-Consider the transactions in the `ticketsales` table. When the first tuple `(T1, AA101, cust0, 2016-08-09)` was inserted into the `ticketsales` table, we report the state of the `airlinesales` and `reportmin` tables:
+Consider the transactions in the `ticketsales` table. When the first tuple `(T1, AA101, cust0, 2016-08-09)` was inserted into the `ticketsales` table, we have the state of the `airlinesales` and `reportmin` tables as:
 
 | airlineid | total_ticket_sales |
 | :---: | :---: |
