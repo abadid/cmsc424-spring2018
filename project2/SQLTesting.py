@@ -12,7 +12,7 @@ from answers import *
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-v', '--verbose', help="Print out the query results and more details", required=False, action="store_true")
-parser.add_argument('-db', '--dbname', help="Provide the database against the query", required=True)
+parser.add_argument('-dbname', '--dbname', help="Provide the database against the query", required=True)
 parser.add_argument('-q', '--query', type = int, help="Only run and check the given query number", required=False)
 args = parser.parse_args()
 
@@ -92,7 +92,7 @@ for i in range(0, 11):
 			cur.execute(queries[i])
 			ans = cur.fetchall()
 
-			if i == 3:
+			if i == 1:
 				ans = sorted(ans, key=itemgetter(0))
 				correctanswers[i] = sorted(correctanswers[i], key=itemgetter(0))
 
