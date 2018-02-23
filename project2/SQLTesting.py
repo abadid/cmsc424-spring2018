@@ -56,7 +56,7 @@ def compareAnswers(ans, correct):
 			for (t1x, t2x) in zip(t1, t2):
 				c[match(t1x, t2x)] += 1
 		if c[False] == 0:
-			return ("Score = 4: Exact or Near-exact Match", 4)
+			return ("Score = 5: Exact or Near-exact Match", 5)
 
 	# Let's try to do an approximate match
 	flattened_ans = Counter([str(x).strip() for y in ans for x in y])
