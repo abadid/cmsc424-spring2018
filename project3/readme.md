@@ -1,4 +1,4 @@
-]# **Project 2: Matchapp (JDBC Manipulation)**
+# **Project 3: Matchapp (JDBC Manipulation)**
 
 ## **Introduction**
 
