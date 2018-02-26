@@ -1,3 +1,4 @@
+drop table if exists inittab;
 create table inittab (transid int, tcount int);
 
 insert into inittab values(1,59);
