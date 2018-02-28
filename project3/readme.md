@@ -2,17 +2,17 @@
 
 ## **Introduction**
 
-This project should give you all the skills needed to create your own fully functional web page that interfaces with a your own database using JDBC. We will be creating an application that matches uses with other users with similar interests and backgrounds. We will be using Java and Tomcat to make this happen in conjunction with a variation of HTML (JSP) to create webpages. You will be a "Full-stack developer" in this project since you will be dealing with the front-end, the back-end, and the database system components of the application!
+This project should help you gain the skills involved in creating a fully functional web application that interfaces with a database database system using JDBC. We will be creating an application that matches users with other users with similar interests and backgrounds. We will be using Java and Tomcat to make this happen in conjunction with a variation of HTML (JSP) to create webpages. You will be a "Full-stack developer" in this project since you will be dealing with all three tiers of a 3-tier architecture: the front-end (presentation tier), the back-end (logic tier), and the database system components of the application!
 
 ## **Relevant Project Files**
 
-To begin this project you will have to pull code from our git repo, ?. Below, we give an overview of the important files that you should know about; all of the other files that are included in the code that you pull are just there to make sure that the application works properly:
+To begin this project you will have to pull the project 3 folder from our git repo. Below, we give an overview of the important files that you should know about; all of the other files that are included in the code that you pull are just there to make sure that the application works properly:
 
 * **build.sh**: you should run "./build.sh" in order for your project files to build. This will compile all the necessary files for the application. Make sure you run build as the root user **(sudo)** to have it copy the war file to the tomcat directory properly.
 
 * **src/**
 
-    * ***.jsp**: These are the Java Server Pages. JSP allows Java code to be interleaved with static web markup content (HTML in our case), with the resulting page being compiled and executed on the server to deliver a complete HTML page. Basically Java is being used to dynamically create HTML pages. A good overview/tutorial on JSP can be found at: [https://www.tutorialspoint.com/jsp/jsp_overview.htm](https://www.tutorialspoint.com/jsp/jsp_overview.htm) (however, you can skip the parts of the tutorial on how to set up the enviornment, since we’ve already done that for you). For this project, the only jsp page that you will have to modify in this is **add.jsp**, however, it is a good idea to check out the other jsp files that we are providing you if you want to get a sense of how each page of the app is generated. **(Front-end Component)**
+    * ***.jsp**: These are the Java Server Pages. JSP allows Java code to be interleaved with static web markup content (HTML in our case), with the resulting page being compiled and executed on the server to deliver a complete HTML page. Basically Java is being used to dynamically create HTML pages. A good overview/tutorial on JSP can be found at: [https://www.tutorialspoint.com/jsp/jsp_overview.htm](https://www.tutorialspoint.com/jsp/jsp_overview.htm) (however, you can skip the parts of the tutorial on how to set up the enviornment, since we’ve already done that for you). For this project, you will have to modify in this is **add.jsp**. Before doing that, it is a good idea to check out the other jsp files that we are providing you, so that you can get a sense of how each page of the app is generated. **(Front-end Component)**
 
     * **com/match/**
 
