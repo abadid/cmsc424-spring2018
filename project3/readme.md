@@ -82,7 +82,7 @@ Start the VM with **"vagrant up"**. You will use the database “matchapp” whi
 
 You will also have to include one more attribute into the person table with any type of your choice. Once you create your tables, you can run /i person.sql in matchapp in psql to populate the person database with people. You will also have to create a user with name **"matchmaker"** and password **“kingofthenorth”** and you must grant all permissions to that user to access your database and tables as it will be the one doing the database manipulation. You should find the commands to do this (check the textbook and past projects in this class and online resources).
 
-## **Part 1: Person.java (Back-end + DB)**
+## **Part 1: ER diagram**
 Assume that the ER diagram that was used to generate this schema contained a recursive relationship set. Please answer the following questions:
 
 How many entity sets were included in the ER diagram for this appliciation? (You can count weak entity sets as entity sets for the purpose of this question.)
@@ -95,10 +95,10 @@ True or False: There are no one-to-one, many-to-one, or one-to-many mapping card
 
 Please answer the questions in a text file called part1.txt with one line per answer. For example, the part1.txt file would contain:
 
-5
-relationship set
-5
-false
+5\\
+relationship set\\
+5\\
+false\\
 
 if you thought the answers to the four questions are 5, relationship set, 5, and false respectively. Please note that the grader will not be case sensitive, but it will be spelling sensitive --- so please be careful to spell your answers to the second and fourth questions correctly.
 
@@ -188,7 +188,7 @@ javac -classpath WEB-INF/lib/*:WEB-INF/classes -d WEB-INF/classes com/match/web/
 Also, we want to add a link to the new page in the header bar of the site. In header.tag under WEB-INF/tags, add 
 ```<li><a href="your url for the jsp page">Whatever you want the link to say</a></li> ``` so that you can navigate to the page from the header.
 
-## **Part 6 (Optional): Deploying to AWS**
+## **Part 7 (Optional): Deploying to AWS**
 
 More likely than not, you will have to work with a database in the cloud at some point in the future. Here we give you the opportunity to deploy your MatchMaker application to the cloud and get to work with cloud databases a little bit. Follow these steps to do this:
 
