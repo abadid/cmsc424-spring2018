@@ -104,13 +104,13 @@ if you thought the answers to the four questions are 5, relationship set, 5, and
 
 ## **Part 2: Person.java (Back-end + DB)**
 
-You will need to complete the following functions in Person.java model file that interface with the person table in the matchapp database. We have completed a few of these methods including the Constructors as well as functions that interface with your database remotely and locally:
+You will need to complete the following functions in the Person.java model file that interfaces with the person table in the matchapp database. We have already completed a few of these methods, including the constructors as well as functions that interface with your database remotely and locally. You have to complete:
 
 * **getPeople():** Get a list of all the people in the database.
 
-* **getPerson(id):** Get a specific person via id.
+* **getPerson(id):** Get a specific person given a value for the id attribute.
 
-* **addPerson(*all person parameters*):** Add a person using all the parameters.
+* **addPerson(*all person attributes*):** Add a person with the specified values for all attributes of that person.
 
 * **getMatchedPeople(id):** Get the top 5 matches for a specific person via id.
 
@@ -126,7 +126,7 @@ You will have to complete most of this file. Here are some general things you wi
 
 You will be **required** to write these functions:
 
-* **getMatchesFor(id):** Get the matches from the match table via the id
+* **getMatchesFor(id):** Get the matches from the match table that include the person with specified value for the id attribute
 
 * **At least these fields and getter methods:**
 
@@ -138,23 +138,25 @@ You will be **required** to write these functions:
 
 ## **Part 4: Web Servlets (AddPerson.java) (Back-end + Front-end)**
 
-Now that you have successfully finished the majority of the Back-end Components you will now have to hook up the the Back-end with the Front-end Components. This process will be done via the Java files in the **web** directory. We will only be editing the AddPerson.java file and this process is trivial. All you have to do is make sure you alter the file to accept a new field that you added to the person table and then add it to the addPerson method call at the end of the file. See the comments in the file for the specific things to do.
+Now that you have successfully finished the majority of the back-end (logic tier) components, you will now have to hook up the back-end with the front-end components. This process will be done via the Java files in the **web** directory. We will only be editing the AddPerson.java file and this process is trivial (most of what you need is already there). All you have to do is make sure you alter the file to accept a new field that you added to the person table (see part 5 below, which should probably be done before part 4), and then add it to the addPerson method call at the end of the file. See the comments in the file for the specific things to do.
 
 ## **Part 5: JSP Files (add.jsp) (Front-end)**
 
-The next step is to add the input field for the attribute you decided to create in the person table on the add a person page. You can model it just like the other input fields already there on the page. See the add.jsp file and its comments for exactly where to modify and insert the form field. Whatever field you decide to add, make sure you do not set a not null constraint on the person table for the field. You can see more about html form elements online here: [https://www.w3schools.com/html/html_form_elements.asp](https://www.w3schools.com/html/html_form_elements.asp)
+As of now, there are not that many attributes of a person that are useful in matching people with each other. The next step is to add an additional attribute to a person that will be useful in your match algrotihm. You will need to add this field in all relevant parts of the system --- the database table, the back-end, and also here --- in the front-end. Please create some way for a user to specify the value of this field on the "add a person" page. You can model it just like any of the other input fields already there on the page. See the add.jsp file and its comments for exactly where to modify and insert the form field. Whatever field you decide to add, make sure you do not set a not null constraint on the person table for the field. You can see more about html form elements online here: [https://www.w3schools.com/html/html_form_elements.asp](https://www.w3schools.com/html/html_form_elements.asp)
+
+Furthermore, please modify the fields where the user can enter a gender and seeking\_gender so that there is a menu of options that the user can choose from. The mapping of these options to integers for storage in the database should be hidden from the end user. We certainly don't want to give end users any kind of impression that one gender has a higher value than another one! 
 
 ## **Part 6: Adding a Page**
 
-Finally, we want you to put all of these steps together and add a new page to MatchMaker. The purpose of this page is to let users give feedback on their matches which will increase or decrease their matches approval rating. Follow these steps to create and add the page to your website.
+Finally, we want you to put all of these steps together and add a new page to MatchMaker. The purpose of this page is to let users give feedback on their matches which will increase or decrease the approval rating of the person that they were matched with. Follow these steps to create and add the page to your website:
 
 Note: We are giving you some free range here so we will not be grading you strictly on exactly how your html page looks. We will only be testing to see that your page is added and visible on the website and that it meets the functional requirements discussed below. The purpose of this part is to give you experience adding a new feature to the website from start to finish.
 
-1. First, go to the given file feedback.jsp. This file will contain the html we want to display for the page. It is mostly blank right now. You will need to add a form element to display input boxes for the person’s id who is giving feedback and their match id they are giving feedback for, in addition to a radio button to designate whether they approve or disapprove of the match. View the comments in the file for more guidance.
+1. First, go to the given file feedback.jsp. This file will contain the html that we want to display for the page. It is mostly blank right now. You will need to add a form element to display input boxes corresponding to the person’s id who is giving feedback and their match id they are giving feedback for, in addition to a radio button to designate whether they were treated respectfully and politely by their match (independent on whether or not it was a good match). View the comments in the file for more guidance.
 
 2. Now we need to set up an HttpServlet file to display and handle the form data for the jsp file. You want to create a new java file that will extend HttpServlet and contain the void doPost(HttpServletRequest request, HttpServletResponse response) method. This java file should be placed in the com.match.web directory. Look at the AddPerson.java file for a template on how to create this. Within this file, you need to get the parameters you pass from the request (which will be each field in the form submitted by the user in feedback.jsp), make a call to a method in Match.java that you create to check and submit the new data to the database (described in step 3), and send the response back to the feedback.jsp page where the user can enter another piece of feedback information. If you are really confused on how to do this, view the comments in AddPerson.java that explain what each part of it does and model your file just like it only adapted to the different fields and methods you use.
 
-3. Now we need to add the method in Match to update the approval_rating field in the database appropriately. How much you increment or decrement this field is entirely up to you, but it must be a constant amount (for example, +5 for good and -3 for bad). However, it is required that a user cannot give feedback for someone that they are not matched with. This means the userID and the person matched ID must be an entry in the matches database to be able to give a good or bad rating for their match. If this condition is not met or either of the ids is not in the person table at all, do nothing, otherwise update the approval_rating of the matched person.
+3. Now we need to add the method in Match to update the approval_rating field in the database appropriately. How much you increment or decrement this field is entirely up to you, but it must be a constant amount (for example, +5 for good and -3 for bad). However, it is required that a user cannot give feedback for someone that they are not matched with. This means the userID and the person matched ID must be an entry in the matches table to be able to give a good or bad rating for their match. If this condition is not met or either of the ids is not in the person table at all, do nothing or give an error message; otherwise update the approval_rating of the matched person.
 
 4. The last steps we have to do is connect all of the files we just made and expose them on the website. We need to register our feedback.jsp file as a web page and our HttpServlet file from step 2 as a servlet. To do this, open the web.xml file. Here is a template for what you need to insert: 
 
