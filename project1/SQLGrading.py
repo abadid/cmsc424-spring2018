@@ -2,24 +2,21 @@ import psycopg2
 import os
 import sys
 import datetime
-from operator import itemgetter
 from collections import Counter
 from types import *
 import argparse
 
-from queries import *
-from answers import *
+from queries_large import *
+from answers_large import *
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-v', '--verbose', help="Print out the query results and more details", required=False, action="store_true")
-parser.add_argument('-dbname', '--dbname', help="Provide the database against the query", required=True)
+parser.add_argument('-i', '--interactive', help="Run queries one at a time, and wait for user to proceed", required=False, action="store_true")
 parser.add_argument('-q', '--query', type = int, help="Only run and check the given query number", required=False)
 args = parser.parse_args()
 
-
-dbname = args.dbname
 verbose = args.verbose
-
+interactive = args.interactive
 
 # Check if x and y are almost near match
 def match(x, y):
@@ -56,7 +53,7 @@ def compareAnswers(ans, correct):
 			for (t1x, t2x) in zip(t1, t2):
 				c[match(t1x, t2x)] += 1
 		if c[False] == 0:
-			return ("Score = 5: Exact or Near-exact Match", 5)
+			return ("Score = 4: Exact or Near-exact Match", 4)
 
 	# Let's try to do an approximate match
 	flattened_ans = Counter([str(x).strip() for y in ans for x in y])
@@ -66,9 +63,9 @@ def compareAnswers(ans, correct):
 	jaccard = sum((flattened_correct & flattened_ans).values()) * 1.0/sum((flattened_correct | flattened_ans).values())
 	if verbose:
 		print "------ Creating word counts and comparing answers ---------"
-		print flattened_correct
+		print flattened_correct 
 		print flattened_ans
-		print "Jaccard Coefficient: {}".format(jaccard)
+		print "Jaccard Coefficient: {}".format(jaccard) 
 
 	if jaccard > 0.9:
 		if len(ans) == len(correct):
@@ -79,11 +76,11 @@ def compareAnswers(ans, correct):
 		return ("Score = 1: Somewhat similar answers", 1)
 	return ("Score = 0: Answers too different", 0)
 
-conn = psycopg2.connect("dbname="+dbname+" user=vagrant")
+conn = psycopg2.connect("dbname=large_flights user=vagrant")
 cur = conn.cursor()
 
 totalscore = 0
-for i in range(0, 11):
+for i in range(1, 11):
 	# If a query is specified by -q option, only do that one
 	if args.query is None or args.query == i:
 		try:
@@ -91,10 +88,6 @@ for i in range(0, 11):
 			print queries[i]
 			cur.execute(queries[i])
 			ans = cur.fetchall()
-
-			if i == 1:
-				ans = sorted(ans, key=itemgetter(0))
-				correctanswers[i] = sorted(correctanswers[i], key=itemgetter(0))
 
 			if verbose:
 				print "--------- Your Query Answer ---------"
@@ -108,7 +101,9 @@ for i in range(0, 11):
 			cmp_res = compareAnswers(ans, correctanswers[i])
 			print "-----> " + cmp_res[0]
 			totalscore += cmp_res[1]
-
+			if interactive:
+				raw_input('Press enter to proceed')
+				os.system('clear')
 		except:
 			print sys.exc_info()
 			raise

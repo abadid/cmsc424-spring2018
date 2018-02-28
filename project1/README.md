@@ -72,3 +72,19 @@ Submit the `queries.py` file using the Assignments link on ELMS.
       
 ### Assignment Questions
 See `queries.py` file.
+
+### Run Queries on Large Dataset
+The large dataset `large.sql`, the answers (`correct-queries.py`, `answers_large.py`), and the grading script `SQLGrading.py` has been released.
+To reproduce the grade of your submission, please pull those files, and follow the instructions below in the the VM. 
+
+1. Populate the large dataset
+```bash
+cd /vagrant
+sudo -u vagrant createdb large_flights
+sudo -u vagrant psql large_flights -f large.sql
+```
+2. Test your query file. For example, to try the `correct-queries.py`, first rename it as `queries_large.py`.
+```bash
+cp correct-queries.py queries_large.py
+python SQLGrading.py 
+```

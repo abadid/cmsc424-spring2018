@@ -5,7 +5,7 @@ correctanswers = ["" for i in range(0, 11)]
 
 correctanswers[0] = [('ATL','Atlanta             '),('BOS','Boston              '),('ORD','Chicago             '),('DFW','Dallas-Fort Worth   '),('DEN','Denver              '),('FLL','Fort Lauderdale     '),('LAX','Los Angeles         '),('JFK','New York            '),('OAK','Oakland             '),('IAD','Washington          ')]
 
-correctanswers[1] = [ ('AA113',), ('AA114',), ('AA150',), ('AA151',), ('AA154',), ('AA166',), ('AA167',), ('AA168',), ('AA172',), ('DL141',), ('DL147',), ('DL160',), ('DL162',), ('SW110',), ('SW111',), ('SW112',), ('SW125',), ('SW133',), ('SW136',), ('SW139',), ('SW142',), ('SW144',), ('SW145',), ('SW148',), ('SW149',), ('SW152',), ('SW155',), ('SW156',), ('SW157',), ('SW158',), ('SW159',), ('SW161',), ('SW163',), ('SW165',), ('SW169',), ('SW170',), ('SW171',), ('SW173',), ('SW174',), ('SW175',), ('SW177',), ('SW178',), ('SW179',), ('UA143',), ('UA146',), ('UA153',), ('UA164',), ('UA176',), ('UA180',) ]
+correctanswers[1] = [('Anthony Garcia                ',),('Betty Gonzalez                ',),('Brian Garcia                  ',),('Charles Garcia                ',),('Elizabeth Gonzalez            ',),('George Garcia                 ',),('George Gonzalez               ',),('Jeff Green                    ',)]
 
 correctanswers[2] = [('cust12    ','Betty Brown                   ',datetime.date(1975,8,14),'UA'),('cust41    ','Daniel Hall                   ',datetime.date(1989,8,4),'UA'),('cust123   ','Jeff Baker                    ',datetime.date(1996,8,4),'AA')]
 
