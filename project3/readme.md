@@ -83,24 +83,29 @@ Start the VM with **"vagrant up"**. You will use the database “matchapp” whi
 You will also have to include one more attribute into the person table with any type of your choice. Once you create your tables, you can run /i person.sql in matchapp in psql to populate the person database with people. You will also have to create a user with name **"matchmaker"** and password **“kingofthenorth”** and you must grant all permissions to that user to access your database and tables as it will be the one doing the database manipulation. You should find the commands to do this (check the textbook and past projects in this class and online resources).
 
 ## **Part 1: ER diagram**
-Assume that the ER diagram that was used to generate this schema contained a recursive relationship set. Please answer the following questions:
+Please draw an ER diagram that could have been used to generate this schema specified above such that it contains a recursive relationship set. Please answer the following questions about your ER diagram:
 
-How many entity sets were included in the ER diagram for this appliciation? (You can count weak entity sets as entity sets for the purpose of this question.)
+How many entity sets were included in your ER diagram for this appliciation? (You can count weak entity sets as entity sets for the purpose of this question.)
 
 Does the match table correspond to an entity set, a weak entity set, or a relationship set?
 
-How many attributes were included in the match entity or relationship set in the ER diagram?
+How many attributes were included in the match [entity set or relationship set depedning on your answer above] in the ER diagram?
 
-True or False: There are no one-to-one, many-to-one, or one-to-many mapping cardinalities in the ERE diagram? 
+True or False: There are no one-to-one, many-to-one, or one-to-many mapping cardinalities in the ER diagram? In other words you didn't draw any directed edges in your diagram.
+
+Did you draw any double-lines in your ER model corresponding to a total participation constraint?
 
 Please answer the questions in a text file called part1.txt with one line per answer. For example, the part1.txt file would contain:
 
 5  
 relationship set  
 5  
-false  
+false
+yes
 
-if you thought the answers to the four questions are 5, relationship set, 5, and false respectively. Please note that the grader will not be case sensitive, but it will be spelling sensitive --- so please be careful to spell your answers to the second and fourth questions correctly.
+if you thought the answers to the five questions are 5, relationship set, 5, false, and yes respectively. Please note that the grader will not be case sensitive, but it will be spelling sensitive --- so please be careful to spell your answers to the second, fourth, and fifth questions correctly.
+
+Please submit your ER diagram as a .png, .jpg, or .pdf file. Feel free to draw it by hand, take a picture of what you drew, and submit it that way. It will not be graded seperately, but might be looked at to give you partial credit if you got several of the questions above incorrect. 
 
 ## **Part 2: Person.java (Back-end + DB)**
 
