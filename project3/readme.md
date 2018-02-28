@@ -28,7 +28,7 @@ To begin this project you will have to pull the project 3 folder from our git re
 
 ## **Getting Started**
 
-Start the VM with **"vagrant up"**. You will use the database “matchapp” which we create for you. For this database you must create 2 tables as well as a user role. You will see the technical details in the sections below. We will be using tomcat to run our server locally and eventually through AWS. Here are some useful commands to run (run as super user, i.e. “sudo” or “sudo su”):
+Start the VM with **"vagrant up"**. You will use the database “matchapp” which we create for you. For this database you must create 2 tables as well as a user role. You will see the technical details in the sections below. We will be using tomcat to run our server locally and eventually through Amazon Web Services (aka "the cloud"). Here are some useful commands to run (run as super user, i.e. “sudo” or “sudo su”):
 
 * systemctl start tomcat: Starts your server
 
@@ -62,13 +62,13 @@ Start the VM with **"vagrant up"**. You will use the database “matchapp” whi
 
     * **seeking_relationship_type:** Must be an integer between 1 and 3.
 
-    * **seeking_gender:** You can decide how to represent this field, but you must include a constraint that this column is not null.
+    * **seeking_gender:** You can decide how to represent this field, which corresponds to the gender that a person is seeking for the type of relationship set in the seeking_relationship_type field. But you must include a constraint that this column is not null.
 
     * **language:** Must be 3 characters or less (e.g. English could be represented as ENG).
 
     * **county:** Must be less than or equal to 20 characters long.
 
-    * **approval_rating:** Must be a floating point number with a precision of 2 digits after the decimal. All users start with a rating of 1.0, and the max is 9.99. But this value can go up or down depending on whether they treat the other users on the app with politeness, kindness, and respect. 
+    * **approval_rating:** Must be a floating point number with a precision of 2 digits after the decimal. All users start with a rating of 1.0, and the minimum is 0 and max is 9.99. But this value can go up or down depending on whether they treat the other users on the app with politeness, kindness, and respect. 
 
 * **match**
 
@@ -83,6 +83,26 @@ Start the VM with **"vagrant up"**. You will use the database “matchapp” whi
 You will also have to include one more attribute into the person table with any type of your choice. Once you create your tables, you can run /i person.sql in matchapp in psql to populate the person database with people. You will also have to create a user with name **"matchmaker"** and password **“kingofthenorth”** and you must grant all permissions to that user to access your database and tables as it will be the one doing the database manipulation. You should find the commands to do this (check the textbook and past projects in this class and online resources).
 
 ## **Part 1: Person.java (Back-end + DB)**
+Assume that the ER diagram that was used to generate this schema contained a recursive relationship set. Please answer the following questions:
+
+How many entity sets were included in the ER diagram for this appliciation? (You can count weak entity sets as entity sets for the purpose of this question.)
+
+Does the match table correspond to an entity set, a weak entity set, or a relationship set?
+
+How many attributes were included in the match entity or relationship set in the ER diagram?
+
+True or False: There are no one-to-one, many-to-one, or one-to-many mapping cardinalities in the ERE diagram? 
+
+Please answer the questions in a text file called part1.txt with one line per answer. For example, the part1.txt file would contain:
+
+5
+relationship set
+5
+false
+
+if you thought the answers to the four questions are 5, relationship set, 5, and false respectively. Please note that the grader will not be case sensitive, but it will be spelling sensitive --- so please be careful to spell your answers to the second and fourth questions correctly.
+
+## **Part 2: Person.java (Back-end + DB)**
 
 You will need to complete the following functions in Person.java model file that interface with the person table in the matchapp database. We have completed a few of these methods including the Constructors as well as functions that interface with your database remotely and locally:
 
@@ -94,7 +114,7 @@ You will need to complete the following functions in Person.java model file that
 
 * **getMatchedPeople(id):** Get the top 5 matches for a specific person via id.
 
-## **Part 2: Match.java (Back-end + DB)**
+## **Part 3: Match.java (Back-end + DB)**
 
 You will have to complete most of this file. Here are some general things you will probably need to write:
 
@@ -116,15 +136,15 @@ You will be **required** to write these functions:
 
     * **getRating():** Get the rating of a match.
 
-## **Part 3: Web Servlets (AddPerson.java) (Back-end + Front-end)**
+## **Part 4: Web Servlets (AddPerson.java) (Back-end + Front-end)**
 
 Now that you have successfully finished the majority of the Back-end Components you will now have to hook up the the Back-end with the Front-end Components. This process will be done via the Java files in the **web** directory. We will only be editing the AddPerson.java file and this process is trivial. All you have to do is make sure you alter the file to accept a new field that you added to the person table and then add it to the addPerson method call at the end of the file. See the comments in the file for the specific things to do.
 
-## **Part 4: JSP Files (add.jsp) (Front-end)**
+## **Part 5: JSP Files (add.jsp) (Front-end)**
 
 The next step is to add the input field for the attribute you decided to create in the person table on the add a person page. You can model it just like the other input fields already there on the page. See the add.jsp file and its comments for exactly where to modify and insert the form field. Whatever field you decide to add, make sure you do not set a not null constraint on the person table for the field. You can see more about html form elements online here: [https://www.w3schools.com/html/html_form_elements.asp](https://www.w3schools.com/html/html_form_elements.asp)
 
-## **Part 5: Adding a Page**
+## **Part 6: Adding a Page**
 
 Finally, we want you to put all of these steps together and add a new page to MatchMaker. The purpose of this page is to let users give feedback on their matches which will increase or decrease their matches approval rating. Follow these steps to create and add the page to your website.
 
