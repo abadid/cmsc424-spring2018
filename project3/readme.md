@@ -95,10 +95,10 @@ True or False: There are no one-to-one, many-to-one, or one-to-many mapping card
 
 Please answer the questions in a text file called part1.txt with one line per answer. For example, the part1.txt file would contain:
 
-5\n
-relationship set\n
-5\n
-false\n
+5  
+relationship set  
+5  
+false  
 
 if you thought the answers to the four questions are 5, relationship set, 5, and false respectively. Please note that the grader will not be case sensitive, but it will be spelling sensitive --- so please be careful to spell your answers to the second and fourth questions correctly.
 
