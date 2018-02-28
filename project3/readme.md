@@ -100,7 +100,7 @@ Please answer the questions in a text file called part1.txt with one line per an
 5  
 relationship set  
 5  
-false
+false  
 yes
 
 if you thought the answers to the five questions are 5, relationship set, 5, false, and yes respectively. Please note that the grader will not be case sensitive, but it will be spelling sensitive --- so please be careful to spell your answers to the second, fourth, and fifth questions correctly.
