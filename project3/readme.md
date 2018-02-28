@@ -83,7 +83,7 @@ Start the VM with **"vagrant up"**. You will use the database “matchapp” whi
 You will also have to include one more attribute into the person table with any type of your choice. Once you create your tables, you can run /i person.sql in matchapp in psql to populate the person database with people. You will also have to create a user with name **"matchmaker"** and password **“kingofthenorth”** and you must grant all permissions to that user to access your database and tables as it will be the one doing the database manipulation. You should find the commands to do this (check the textbook and past projects in this class and online resources).
 
 ## **Part 1: ER diagram**
-Please draw an ER diagram that could have been used to generate this schema specified above such that it contains a recursive relationship set. Please answer the following questions about your ER diagram:
+Please draw an ER diagram that could have been used to generate this schema specified above such that it contains at least one recursive relationship set. Please answer the following questions about your ER diagram:
 
 How many entity sets were included in your ER diagram for this appliciation? (You can count weak entity sets as entity sets for the purpose of this question.)
 
