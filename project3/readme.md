@@ -141,15 +141,17 @@ You will be **required** to write these functions:
 
     * **getRating():** Get the rating of a match.
 
-## **Part 4: Web Servlets (AddPerson.java) (Back-end + Front-end)**
 
-Now that you have successfully finished the majority of the back-end (logic tier) components, you will now have to hook up the back-end with the front-end components. This process will be done via the Java files in the **web** directory. We will only be editing the AddPerson.java file and this process is trivial (most of what you need is already there). All you have to do is make sure you alter the file to accept a new field that you added to the person table (see part 5 below, which should probably be done before part 4), and then add it to the addPerson method call at the end of the file. See the comments in the file for the specific things to do.
 
-## **Part 5: JSP Files (add.jsp) (Front-end)**
+## **Part 4: JSP Files (add.jsp) (Front-end)**
 
 As of now, there are not that many attributes of a person that are useful in matching people with each other. The next step is to add an additional attribute to a person that will be useful in your match algrotihm. You will need to add this field in all relevant parts of the system --- the database table, the back-end, and also here --- in the front-end. Please create some way for a user to specify the value of this field on the "add a person" page. You can model it just like any of the other input fields already there on the page. See the add.jsp file and its comments for exactly where to modify and insert the form field. Whatever field you decide to add, make sure you do not set a not null constraint on the person table for the field. You can see more about html form elements online here: [https://www.w3schools.com/html/html_form_elements.asp](https://www.w3schools.com/html/html_form_elements.asp)
 
 Furthermore, please modify the fields where the user can enter a gender and seeking\_gender so that there is a menu of options that the user can choose from. The mapping of these options to integers for storage in the database should be hidden from the end user. We certainly don't want to give end users any kind of impression that one gender has a higher value than another one! 
+
+## **Part 5: Web Servlets (AddPerson.java) (Back-end + Front-end)**
+
+Now that you have successfully finished the majority of the back-end (logic tier) components, you will now have to hook up the back-end with the front-end components. This process will be done via the Java files in the **web** directory. We will only be editing the AddPerson.java file and this process is trivial (most of what you need is already there). All you have to do is make sure you alter the file to accept a new field that you added to the person table (see part 5 below, which should probably be done before part 4), and then add it to the addPerson method call at the end of the file. See the comments in the file for the specific things to do.
 
 ## **Part 6: Adding a Page**
 
