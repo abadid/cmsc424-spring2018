@@ -160,7 +160,7 @@ public class Person {
       }
       
 
-      return new Person[]{"No", "Matches"};
+      return new Person[]{new Person("No", "Matches")};
      
   }
 
