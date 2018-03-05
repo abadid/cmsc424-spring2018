@@ -97,7 +97,7 @@ people.jsp - The People link
 
 You will also have to include one more attribute into the person table with any type of your choice. Once you create your tables, you can run /i person.sql in matchapp in psql to populate the person database with people. You will also have to create a user with name **"matchmaker"** and password **“kingofthenorth”** and you must grant all permissions to that user to access your database and tables as it will be the one doing the database manipulation. You should find the commands to do this (check the textbook and past projects in this class and online resources).
 
-## **Part 1: ER diagram**
+## **Part 1: ER diagram (5 points)** 
 Please draw an ER diagram that could have been used to generate this schema specified above such that it contains at least one recursive relationship set. Please answer the following questions about your ER diagram:
 
 How many entity sets were included in your ER diagram for this appliciation? (You can count weak entity sets as entity sets for the purpose of this question.) Answer must be an integer.
@@ -122,7 +122,7 @@ if you thought the answers to the five questions are 5, relationship set, 5, fal
 
 Please submit your ER diagram as a .png, .jpg, or .pdf file. Feel free to draw it by hand, take a picture of what you drew, and submit it that way. It will not be graded seperately, but might be looked at to give you partial credit if you got several of the questions above incorrect. 
 
-## **Part 2: Person.java (Back-end + DB)**
+## **Part 2: Person.java: Back-end + DB (14 points) **
 
 You will need to complete the following functions in the Person.java model file that interfaces with the person table in the matchapp database. We have already completed a few of these methods, including the constructors as well as functions that interface with your database remotely and locally. You have to complete:
 
@@ -136,7 +136,7 @@ You will need to complete the following functions in the Person.java model file 
 
 * **getMatchedPeople(id):** Get the top 5 matches for a specific person via id.
 
-## **Part 3: Match.java (Back-end + DB)**
+## **Part 3: Match.java: Back-end + DB (10 points)**
 
 A match in this application represents a match between 2 entities(people) in the Person table. Matches are only generated when a user
 goes to the Find Matches page and generates new matches for his or herself. This means that if person A goes to the Find Matches page and gets
@@ -163,17 +163,17 @@ You will be **required** to write these functions:
 
 
 
-## **Part 4: JSP Files (add.jsp) (Front-end)**
+## **Part 4: Add.jsp: Front-end (3 points)**
 
 As of now, there are not that many attributes of a person that are useful in matching people with each other. The next step is to add an additional attribute to a person that will be useful in your match algrotihm. You will need to add this field in all relevant parts of the system --- the database table, the back-end, and also here --- in the front-end. Please create some way for a user to specify the value of this field on the "add a person" page. You can model it just like any of the other input fields already there on the page. See the add.jsp file and its comments for exactly where to modify and insert the form field. Whatever field you decide to add, make sure you do not set a not null constraint on the person table for the field. You can see more about html form elements online here: [https://www.w3schools.com/html/html_form_elements.asp](https://www.w3schools.com/html/html_form_elements.asp)
 
 Furthermore, you can modify the fields where the user can enter a gender and seeking\_gender so that there is a menu of options that the user can choose from to include any other gender that you wish. The mapping of these options to integers for storage in the database should be hidden from the end user. We certainly don't want to give end users any kind of impression that one gender has a higher value than another one! You will not be tested in any way on what genders you add to the dropdown or what values they are mapped to.
 
-## **Part 5: Web Servlets (AddPerson.java) (Back-end + Front-end)**
+## **Part 5: AddPerson.java: Back-end + Front-end (3 points)**
 
 Now that you have successfully finished the majority of the back-end (logic tier) components, you will now have to hook up the back-end with the front-end components. This process will be done via the Java files in the **web** directory. We will only be editing the AddPerson.java file and this process is trivial (most of what you need is already there). All you have to do is make sure you alter the file to accept a new field that you added to the person table, and then add it to the addPerson method call at the end of the file. See the comments in the file for the specific things to do.
 
-## **Part 6: Adding a Page**
+## **Part 6: Adding a Page (10 points)**
 
 Finally, we want you to put all of these steps together and add a new page to MatchMaker. The purpose of this page is to let users give feedback on their matches which will increase or decrease the approval rating of the person that they were matched with. Follow these steps to create and add the page to your website:
 
@@ -217,9 +217,11 @@ javac -classpath WEB-INF/lib/*:WEB-INF/classes -d WEB-INF/classes com/match/web/
 Also, we want to add a link to the new page in the header bar of the site. In header.tag under WEB-INF/tags, add 
 ```<li><a href="your url for the jsp page">Whatever you want the link to say</a></li> ``` so that you can navigate to the page from the header.
 
-## **Part 7 (Optional): Deploying to AWS**
+## **Part 7 (Optional): Deploying to AWS (4 extra credit points)**
 
-More likely than not, you will have to work with a database in the cloud at some point in the future. Here we give you the opportunity to deploy your MatchMaker application to the cloud and get to work with cloud databases a little bit. Follow these steps to do this:
+More likely than not, you will have to work with a database in the cloud at some point in the future. Here we give you the opportunity to deploy your MatchMaker application to the cloud and get to work with cloud databases a little bit. Note that you can sign up for a free tier trial to use AWS with a new account to avoid paying for the service. 
+
+ Follow these steps to do this:
 
 1. Open the [Elastic Beanstalk Management Console](https://console.aws.amazon.com/elasticbeanstalk/home)
 
