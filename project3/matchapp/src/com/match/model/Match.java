@@ -19,7 +19,7 @@ public class Match {
     getDate(): Get date of match.
     getRating(): Get the rating of a match.
 
-  Write method for feedback page in part 5
+  Write method for feedback page in part 6
   Write any other method you think would be useful or needed
   */
 
@@ -30,7 +30,7 @@ public class Match {
   public String getDate() {
     return "";
   }
-  public int getRating() {
+  public double getRating() {
     return 0;
   }
 

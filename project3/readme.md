@@ -2,17 +2,17 @@
 
 ## **Introduction**
 
-This project should help you gain the skills involved in creating a fully functional web application that interfaces with a database database system using JDBC. We will be creating an application that matches users with other users with similar interests and backgrounds. We will be using Java and Tomcat to make this happen in conjunction with a variation of HTML (JSP) to create webpages. You will be a "Full-stack developer" in this project since you will be dealing with all three tiers of a 3-tier architecture: the front-end (presentation tier), the back-end (logic tier), and the database system components of the application!
+This project should help you gain the skills involved in creating a fully functional web application that interfaces with a database system using JDBC. We will be creating an application that matches users with other users with similar interests and backgrounds. We will be using Java and Tomcat to make this happen in conjunction with a variation of HTML (JSP) to create webpages. You will be a "Full-stack developer" in this project since you will be dealing with all three tiers of a 3-tier architecture: the front-end (presentation tier), the back-end (logic tier), and the database system components of the application!
 
 ## **Relevant Project Files**
 
 To begin this project you will have to pull the project 3 folder from our git repo. Below, we give an overview of the important files that you should know about; all of the other files that are included in the code that you pull are just there to make sure that the application works properly:
 
-* **build.sh**: you should run "./build.sh" in order for your project files to build. This will compile all the necessary files for the application. Make sure you run build as the root user **(sudo)** to have it copy the war file to the tomcat directory properly.
+* **build.sh**: you should run "sudo ./build.sh" in order for your project files to build. This will compile all the necessary files for the application. Make sure you run build as the root user **(sudo)** to have it copy the war file to the tomcat directory properly.
 
 * **src/**
 
-    * ***.jsp**: These are the Java Server Pages. JSP allows Java code to be interleaved with static web markup content (HTML in our case), with the resulting page being compiled and executed on the server to deliver a complete HTML page. Basically Java is being used to dynamically create HTML pages. A good overview/tutorial on JSP can be found at: [https://www.tutorialspoint.com/jsp/jsp_overview.htm](https://www.tutorialspoint.com/jsp/jsp_overview.htm) (however, you can skip the parts of the tutorial on how to set up the enviornment, since we’ve already done that for you). For this project, you will have to modify in this is **add.jsp**. Before doing that, it is a good idea to check out the other jsp files that we are providing you, so that you can get a sense of how each page of the app is generated. **(Front-end Component)**
+    * ***.jsp**: These are the Java Server Pages. JSP allows Java code to be interleaved with static web markup content (HTML in our case), with the resulting page being compiled and executed on the server to deliver a complete HTML page. Basically Java is being used to dynamically create HTML pages. A good overview/tutorial on JSP can be found at: [https://www.tutorialspoint.com/jsp/jsp_overview.htm](https://www.tutorialspoint.com/jsp/jsp_overview.htm) (however, you can skip the parts of the tutorial on how to set up the enviornment, since we’ve already done that for you). It is a good idea to check out the other jsp files we are providing you, so that you can get a sense of how each page of the app is generated. **(Front-end Component)**
 
     * **com/match/**
 
@@ -20,7 +20,7 @@ To begin this project you will have to pull the project 3 folder from our git re
 
             * **Match.java:** You must complete this file to interface with the match table in the matchapp database. **(Back-end + DB Component)**
 
-            * **Person.java:** This Java file interfaces with the person table in the matchapp database. We provide basic constructors for a person object but here are several functions missing that you must complete. **(Back-end + DB Component)**
+            * **Person.java:** This Java file interfaces with the person table in the matchapp database. We provide basic constructors for a person object but there are several functions missing that you must complete. **(Back-end + DB Component)**
 
         * **web/**
 
@@ -42,21 +42,34 @@ Start the VM with **"vagrant up"**. You will use the database “matchapp” whi
 
 * tail /opt/tomcat/logs/localhost.(current-date): Checks log file of localhost
 
+
+
+Navigate to the page localhost:8080 in your browser (you can use whatever browser you usually use on your computer) to see the website. Take some time to view the different pages and examine the format of the website. Here is which files correspond to which links on the website:
+
+404.jsp - going to any url that is not set up to be a page on the website
+add.jsp - The Register link
+default.jsp - The home page
+feedback.jsp - Blank page that you will have to create in Part 6
+generate.jsp - The Find Matches page
+invalid_input.jsp - Page shown if the user enters invalid input in the Register page
+matches.jsp - The View Matches link
+people.jsp - The People link
+
 ## **Schema + User**
 
- You will have to create 2 tables (person and match) as you have seen in project 0 and 1. The schema is as follows (you must use intuition as well as the **person.sql** file we use to insert into your tables to infer the types):
+ You will have to create 2 tables (person and match) as you have seen in project 0 and 1. You can create your tables however you wish (directly in psql or with a .sql file). We will be testing your code on tables that we have already created that match the schema described below. The schema is as follows (you must use intuition as well as the **person.sql** file we use to insert into your tables to infer the types): Note you can use either varchars or chars to represent what we refer to as a string in the schema. 
 
 * **person**
 
     * **id:** This is the primary key of the table, to represent a unique person. This should be a serial type which auto generates a next unique id to assign to a new person in the table.
 
-    * **first_name:** Must be less than or equal to 12 characters long.
+    * **first_name:** A string less than or equal to 12 characters long.
 
-    * **last_name:** Must be less than or equal to 18 characters long.
+    * **last_name:** A string less than or equal to 18 characters long.
 
-    * **age:** Must be greater than or equal to 18.
+    * **age:** A number greater than or equal to 18.
 
-    * **major:** Must be less than or equal to 20 characters long.
+    * **major:** A string less than or equal to 20 characters long.
 
     * **gender:** This must be an integer type where you can decide how to map genders to integer values, but you must include a constraint that this column is not null.
 
@@ -64,36 +77,38 @@ Start the VM with **"vagrant up"**. You will use the database “matchapp” whi
 
     * **seeking_gender:** You can decide how to represent this field, which corresponds to the gender that a person is seeking for the type of relationship set in the seeking_relationship_type field. But you must include a constraint that this column is not null.
 
-    * **language:** Must be 3 characters or less (e.g. English could be represented as ENG).
+    * **language:** A string 3 characters or less (e.g. English could be represented as ENG).
 
-    * **county:** Must be less than or equal to 20 characters long.
+    * **county:** A string less than or equal to 20 characters long.
 
-    * **approval_rating:** Must be a floating point number with a precision of 2 digits after the decimal. All users start with a rating of 1.0, and the minimum is 0 and max is 9.99. But this value can go up or down depending on whether they treat the other users on the app with politeness, kindness, and respect. 
+    * **approval_rating:** A floating point number with a precision of 2 digits after the decimal. All users start with a rating of 1.0, where the minimum is 0 and max is 9.99. But this value can go up or down depending on whether they treat the other users on the app with politeness, kindness, and respect. 
 
 * **match**
 
-    * **id1:** This must reference the person tables id attribute. **(Primary Key)** 
+    * **id1:** An integer that must reference the person tables id attribute. **(Primary Key)** id1 is the field for the person who goes to the 
+    Find Matches page and generates matches for his or herself.
 
-    * **id2:** This must also reference the person tables id attribute. **(Primary Key)**
+    * **id2:** An integer that must also reference the person tables id attribute. **(Primary Key)** id2 is the field for the person who gets assigned as
+    a match to the person in id1.
 
-    * **date_of_match:** Must use a date datatype
+    * **date_of_match:** Must be a date datatype
 
-    * **Rating:** Must be a decimal value.
+    * **Rating:** A decimal value.
 
 You will also have to include one more attribute into the person table with any type of your choice. Once you create your tables, you can run /i person.sql in matchapp in psql to populate the person database with people. You will also have to create a user with name **"matchmaker"** and password **“kingofthenorth”** and you must grant all permissions to that user to access your database and tables as it will be the one doing the database manipulation. You should find the commands to do this (check the textbook and past projects in this class and online resources).
 
 ## **Part 1: ER diagram**
 Please draw an ER diagram that could have been used to generate this schema specified above such that it contains at least one recursive relationship set. Please answer the following questions about your ER diagram:
 
-How many entity sets were included in your ER diagram for this appliciation? (You can count weak entity sets as entity sets for the purpose of this question.)
+How many entity sets were included in your ER diagram for this appliciation? (You can count weak entity sets as entity sets for the purpose of this question.) Answer must be an integer.
 
-Does the match table correspond to an entity set, a weak entity set, or a relationship set?
+Does the match table correspond to an entity set, a weak entity set, or a relationship set? Answer must be one of "entity set", "weak entity set", or "relationship set"
 
-How many attributes were included in the match [entity set or relationship set depending on your answer above] in the ER diagram?
+How many attributes were included in the match [entity set or relationship set depending on your answer above] in the ER diagram? Answer must be "yes" or "no"
 
-True or False: There are no one-to-one, many-to-one, or one-to-many mapping cardinalities in the ER diagram? In other words you didn't draw any directed edges in your diagram.
+True or False: There are no one-to-one, many-to-one, or one-to-many mapping cardinalities in the ER diagram? In other words you didn't draw any directed edges in your diagram. Answer either "true" or "false"
 
-Did you draw any double-lines in your ER model corresponding to a total participation constraint?
+Did you draw any double-lines in your ER model corresponding to a total participation constraint? Answer either "yes" or "no"
 
 Please answer the questions in a text file called part1.txt with one line per answer. For example, the part1.txt file would contain:
 
@@ -103,7 +118,7 @@ relationship set
 false  
 yes
 
-if you thought the answers to the five questions are 5, relationship set, 5, false, and yes respectively. Please note that the grader will not be case sensitive, but it will be spelling sensitive --- so please be careful to spell your answers to the second, fourth, and fifth questions correctly.
+if you thought the answers to the five questions are 5, relationship set, 5, false, and yes respectively. Please note that the grader will not be case sensitive, but it will be spelling sensitive --- so please be careful to spell your answers to the second, fourth, and fifth questions correctly. Use the exact format shown after each question. Note the possible answers for 2 are as follows: "entity set", "weak entity set", and "relationship set". If you have an answer that is not spelled exactly like one of those three it will be marked wrong. 
 
 Please submit your ER diagram as a .png, .jpg, or .pdf file. Feel free to draw it by hand, take a picture of what you drew, and submit it that way. It will not be graded seperately, but might be looked at to give you partial credit if you got several of the questions above incorrect. 
 
@@ -115,29 +130,34 @@ You will need to complete the following functions in the Person.java model file 
 
 * **getPerson(id):** Get a specific person given a value for the id attribute.
 
+* **getPersonSearch(query):** Return people in the Person table that have an attribute that have a substring match with the query
+
 * **addPerson(*all person attributes*):** Add a person with the specified values for all attributes of that person.
 
 * **getMatchedPeople(id):** Get the top 5 matches for a specific person via id.
 
 ## **Part 3: Match.java (Back-end + DB)**
 
+A match in this application represents a match between 2 entities(people) in the Person table. Matches are only generated when a user
+goes to the Find Matches page and generates new matches for his or herself. This means that if person A goes to the Find Matches page and gets
+matched with person B, a match should be written to the table with id1 as A and id2 as B only. Person B should still have 0 matches until that person
+goes to the Find Matches page and generates matches, where they would then match with A and be written to the matches database. 
 You will have to complete most of this file. Here are some general things you will probably need to write:
 
 * Constructors for the Match object to be written to the database.
 
 * Functions to make data retrieval easy.
 
-* Functions to connect with the database remotely and locally (this should be similar to the ones in Person).
-
 You will be **required** to write these functions:
 
-* **getMatchesFor(id):** Get the matches from the match table that include the person with specified value for the id attribute
+* **getMatchesFor(id):** Get the matches from the match table that include the person with the specified value for the id attribute
 
 * **At least these fields and getter methods:**
 
-    * **getMatchedID():** Get the id of the person that the user is matched with.
+    * **getMatchedID():** Get the id of the person that was matched to the user who called getMatchesFor. In other words, the id of the person 
+    who did not generate the match, and who was assigned as a match to the person who did call getMatchesFor. (which should be the id2 field in the schema)
 
-    * **getDate():** Get date of match.
+    * **getDate():** Get the date of match in a string form. This should follow string form of an java.sql.date object, which looks like yyyy-mm-dd. You can view more at the documentation here https://docs.oracle.com/javase/7/docs/api/java/sql/Date.html
 
     * **getRating():** Get the rating of a match.
 
@@ -147,11 +167,11 @@ You will be **required** to write these functions:
 
 As of now, there are not that many attributes of a person that are useful in matching people with each other. The next step is to add an additional attribute to a person that will be useful in your match algrotihm. You will need to add this field in all relevant parts of the system --- the database table, the back-end, and also here --- in the front-end. Please create some way for a user to specify the value of this field on the "add a person" page. You can model it just like any of the other input fields already there on the page. See the add.jsp file and its comments for exactly where to modify and insert the form field. Whatever field you decide to add, make sure you do not set a not null constraint on the person table for the field. You can see more about html form elements online here: [https://www.w3schools.com/html/html_form_elements.asp](https://www.w3schools.com/html/html_form_elements.asp)
 
-Furthermore, please modify the fields where the user can enter a gender and seeking\_gender so that there is a menu of options that the user can choose from. The mapping of these options to integers for storage in the database should be hidden from the end user. We certainly don't want to give end users any kind of impression that one gender has a higher value than another one! 
+Furthermore, you can modify the fields where the user can enter a gender and seeking\_gender so that there is a menu of options that the user can choose from to include any other gender that you wish. The mapping of these options to integers for storage in the database should be hidden from the end user. We certainly don't want to give end users any kind of impression that one gender has a higher value than another one! You will not be tested in any way on what genders you add to the dropdown or what values they are mapped to.
 
 ## **Part 5: Web Servlets (AddPerson.java) (Back-end + Front-end)**
 
-Now that you have successfully finished the majority of the back-end (logic tier) components, you will now have to hook up the back-end with the front-end components. This process will be done via the Java files in the **web** directory. We will only be editing the AddPerson.java file and this process is trivial (most of what you need is already there). All you have to do is make sure you alter the file to accept a new field that you added to the person table (see part 5 below, which should probably be done before part 4), and then add it to the addPerson method call at the end of the file. See the comments in the file for the specific things to do.
+Now that you have successfully finished the majority of the back-end (logic tier) components, you will now have to hook up the back-end with the front-end components. This process will be done via the Java files in the **web** directory. We will only be editing the AddPerson.java file and this process is trivial (most of what you need is already there). All you have to do is make sure you alter the file to accept a new field that you added to the person table, and then add it to the addPerson method call at the end of the file. See the comments in the file for the specific things to do.
 
 ## **Part 6: Adding a Page**
 

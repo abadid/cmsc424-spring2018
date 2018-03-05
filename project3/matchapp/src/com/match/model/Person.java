@@ -18,9 +18,9 @@ public class Person {
   remember to add one of your own choice of fields 
   */
 	private String firstName, lastName, major, language, county;
-	private int age, gender, relationship, seeking;
-	private double approval_rating;
-  private int id;
+	private int age, gender, seeking_relationship, seeking_gender;
+
+  private double approval_rating;
 
   //used for logging output, see catalina.out for log files
   private static final Logger logger = LogManager.getLogger("match");
@@ -37,15 +37,15 @@ public class Person {
 	}
 
   //constructor for person with all fields
-	public Person(String firstName, String lastName, int age, String major, int gender, int relationship, int seeking, 
+	public Person(String firstName, String lastName, int age, String major, int gender, int seeking_relationship, int seeking_gender, 
 					String language, String county, double approval_rating) { 
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
 		this.major = major;
 		this.gender = gender;
-		this.relationship = relationship;
-		this.seeking = seeking;
+		this.seeking_relationship = seeking_relationship;
+		this.seeking_gender = seeking_gender;
 		this.language = language;
 		this.county = county;
 		this.approval_rating= approval_rating;
@@ -76,16 +76,19 @@ public class Person {
   }
 
   /*Search the database for a person with a substring match to the query entered in any of its character fields
-  Return everything that matches with every char/varchar column
+  Return everything that matches with every char/varchar column. This should be case senstive in finding substring matches
 
   For example if we have 2 people with:
   First: Alex, Last: Westmore, Major: Biology, County: Howard, Language: ENG
   First: Dave, Last: Howland, Major: Geology, County: Frederick, Language: ENG
 
-  If we query with the string: "How" we return both 
-  and with the string: "more" just Alex
+  If we query with the string: "How", we return both 
+  with the string: "more", just Alex
+  and with the string: COUNT, none
 
-  The order does not matter
+  The order of the people returned does not matter
+
+  If no rows in the database are found with a substring match, you should return an empty array of Person.
 
   */
 
@@ -130,7 +133,7 @@ public class Person {
 
   You must use a prepared statement to insert the person
   */
-  public static int addPerson(String first, String last, int age, String major, int gender, int relationship, int seeking, 
+  public static int addPerson(String first, String last, int age, String major, int gender, int seeking_relationship, int seeking_gender, 
   								String language, String county, double approval_rating) {
 
     return -1;
