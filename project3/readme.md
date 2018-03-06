@@ -42,7 +42,7 @@ Start the VM with **"vagrant up"**. You will use the database “matchapp” whi
 
 * tail /opt/tomcat/logs/localhost.(current-date): Checks log file of localhost
 
-
+You won't be able to debug this web application with print statements like you would for other programs. With Tomcat, you can print values and errors to the log and view the output they produce in the log file. We have set up the log and have included some uses of the logger in the getConnection method but you may want to add your own statements that log information in the methods you write to debug what your program is doing.[Here](https://logging.apache.org/log4j/2.x/manual/messages.html) is a useful link to using the log with examples. Basically, you can add logger.info and logger.trace statements to print values when your code runs that you can then view the output of in the catalina.out file. If your application isn't behaving as expected or is crashing, add logging statements to your code and view the log to figure out the issue.
 
 Navigate to the page localhost:8080 in your browser (you can use whatever browser you usually use on your computer) to see the website. Take some time to view the different pages and examine the format of the website. Here is which files correspond to which links on the website:
 
@@ -85,15 +85,14 @@ people.jsp - The People link
 
 * **match**
 
-    * **id1:** An integer that must reference the person tables id attribute. **(Primary Key)** id1 is the field for the person who goes to the 
-    Find Matches page and generates matches for his or herself.
+    * **id1:** **(Primary Key)**  An integer that must reference the person tables id attribute. This means that id must appear in the person table in order to appear in this table as id1. id1 is the field for the person who goes to the Find Matches page and generates matches for his or herself. 
 
-    * **id2:** An integer that must also reference the person tables id attribute. **(Primary Key)** id2 is the field for the person who gets assigned as
-    a match to the person in id1.
+    * **id2:** **(Primary Key)** An integer that must also reference the person tables id attribute. This means that id2 must appear in the person table in order to appear in this table as id2. id2 is the field for the person who gets assigned as a match to the person in id1.
 
     * **date_of_match:** Must be a date datatype
 
     * **Rating:** A decimal value.
+
 
 You will also have to include one more attribute into the person table with any type of your choice. Once you create your tables, you can run /i person.sql in matchapp in psql to populate the person database with people. You will also have to create a user with name **"matchmaker"** and password **“kingofthenorth”** and you must grant all permissions to that user to access your database and tables as it will be the one doing the database manipulation. You should find the commands to do this (check the textbook and past projects in this class and online resources).
 
@@ -122,7 +121,7 @@ if you thought the answers to the five questions are 5, relationship set, 5, fal
 
 Please submit your ER diagram as a .png, .jpg, or .pdf file. Feel free to draw it by hand, take a picture of what you drew, and submit it that way. It will not be graded seperately, but might be looked at to give you partial credit if you got several of the questions above incorrect. 
 
-## **Part 2: Person.java: Back-end + DB (14 points) **
+## **Part 2: Person.java: Back-end + DB (14 points)**
 
 You will need to complete the following functions in the Person.java model file that interfaces with the person table in the matchapp database. We have already completed a few of these methods, including the constructors as well as functions that interface with your database remotely and locally. You have to complete:
 
@@ -135,6 +134,8 @@ You will need to complete the following functions in the Person.java model file 
 * **addPerson(*all person attributes*):** Add a person with the specified values for all attributes of that person.
 
 * **getMatchedPeople(id):** Get the top 5 matches for a specific person via id.
+
+We will be testing each of these methods individually that they produce the output as specified for each method (seen in comments above each method) on a database with different people and matches that we make. The data we test it on will be exactly the same as the form we have given to you in person.sql only be different in the actual values.  
 
 ## **Part 3: Match.java: Back-end + DB (10 points)**
 
@@ -159,13 +160,15 @@ You will be **required** to write these functions:
 
     * **getDate():** Get the date of match in a string form. This should follow string form of an java.sql.date object, which looks like yyyy-mm-dd. You can view more at the documentation here https://docs.oracle.com/javase/7/docs/api/java/sql/Date.html
 
-    * **getRating():** Get the rating of a match.
+    * **getRating():** Get the rating (or score) of a match.
 
-
+This will be tested in the same kind of fashion as described for part 3. Your web application should properly add and display the matches on the webpage as well. For example, if I know the person with id 1 is matched with id 2, 3, and 4, when I navigate to the View matches page and submit id = 1, I should see the entries for id 2, 3, and 4 on the webpage.
 
 ## **Part 4: Add.jsp: Front-end (3 points)**
 
-As of now, there are not that many attributes of a person that are useful in matching people with each other. The next step is to add an additional attribute to a person that will be useful in your match algrotihm. You will need to add this field in all relevant parts of the system --- the database table, the back-end, and also here --- in the front-end. Please create some way for a user to specify the value of this field on the "add a person" page. You can model it just like any of the other input fields already there on the page. See the add.jsp file and its comments for exactly where to modify and insert the form field. Whatever field you decide to add, make sure you do not set a not null constraint on the person table for the field. You can see more about html form elements online here: [https://www.w3schools.com/html/html_form_elements.asp](https://www.w3schools.com/html/html_form_elements.asp)
+As of now, there are not that many attributes of a person that are useful in matching people with each other. The next step is to add an additional attribute to a person that will be useful in your match algrotihm. You will need to add this field in all relevant parts of the system --- the database table, the back-end, and also here --- in the front-end. 
+
+Please create some way for a user to specify the value of this field on the "add a person" page. You can model it just like any of the other input fields already there on the page. See the add.jsp file and its comments for exactly where to modify and insert the form field. Whatever field you decide to add, make sure you do not set a not null constraint on the person table for the field. You can see more about html form elements online here: [https://www.w3schools.com/html/html_form_elements.asp](https://www.w3schools.com/html/html_form_elements.asp)
 
 Furthermore, you can modify the fields where the user can enter a gender and seeking\_gender so that there is a menu of options that the user can choose from to include any other gender that you wish. The mapping of these options to integers for storage in the database should be hidden from the end user. We certainly don't want to give end users any kind of impression that one gender has a higher value than another one! You will not be tested in any way on what genders you add to the dropdown or what values they are mapped to.
 
@@ -183,7 +186,7 @@ Note: We are giving you some free range here so we will not be grading you stric
 
 2. Now we need to set up an HttpServlet file to display and handle the form data for the jsp file. You want to create a new java file that will extend HttpServlet and contain the void doPost(HttpServletRequest request, HttpServletResponse response) method. This java file should be placed in the com.match.web directory. Look at the AddPerson.java file for a template on how to create this. Within this file, you need to get the parameters you pass from the request (which will be each field in the form submitted by the user in feedback.jsp), make a call to a method in Match.java that you create to check and submit the new data to the database (described in step 3), and send the response back to the feedback.jsp page where the user can enter another piece of feedback information. If you are really confused on how to do this, view the comments in AddPerson.java that explain what each part of it does and model your file just like it only adapted to the different fields and methods you use.
 
-3. Now we need to add the method in Match to update the approval_rating field in the database appropriately. How much you increment or decrement this field is entirely up to you, but it must be a constant amount (for example, +5 for good and -3 for bad). However, it is required that a user cannot give feedback for someone that they are not matched with. This means the userID and the person matched ID must be an entry in the matches table to be able to give a good or bad rating for their match. If this condition is not met or either of the ids is not in the person table at all, do nothing or give an error message; otherwise update the approval_rating of the matched person.
+3. Now we need to add the method in Match to update the approval_rating field in the database appropriately. How much you increment or decrement this field is entirely up to you, but it must be a constant amount (for example, +1 for good and -1 for bad). However, it is required that a user cannot give feedback for someone that they are not matched with. This means the userID and the person matched ID must be an entry in the matches table to be able to give a good or bad rating for their match. If this condition is not met or either of the ids is not in the person table at all, do nothing or give an error message; otherwise update the approval_rating of the matched person.
 
 4. The last steps we have to do is connect all of the files we just made and expose them on the website. We need to register our feedback.jsp file as a web page and our HttpServlet file from step 2 as a servlet. To do this, open the web.xml file. Here is a template for what you need to insert: 
 
