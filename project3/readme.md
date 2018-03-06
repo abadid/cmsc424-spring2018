@@ -42,18 +42,18 @@ Start the VM with **"vagrant up"**. You will use the database “matchapp” whi
 
 * tail /opt/tomcat/logs/localhost.(current-date): Checks log file of localhost
 
-You won't be able to debug this web application with print statements like you would for other programs. With Tomcat, you can print values and errors to the log and view the output they produce in the log file. We have set up the log and have included some uses of the logger in the getConnection method but you may want to add your own statements that log information in the methods you write to debug what your program is doing.[Here](https://logging.apache.org/log4j/2.x/manual/messages.html) is a useful link to using the log with examples. Basically, you can add logger.info and logger.trace statements to print values when your code runs that you can then view the output of in the catalina.out file. If your application isn't behaving as expected or is crashing, add logging statements to your code and view the log to figure out the issue.
+You won't be able to debug this web application with print statements like you would for other programs. With Tomcat, you can print values and errors to the log and view the output they produce in the log file. We have set up the log and have included some uses of the logger in the getConnection method but you may want to add your own statements that log information in the methods you write to debug what your program is doing. [Here](https://logging.apache.org/log4j/2.x/manual/messages.html) is a useful link to using the log with examples. Basically, you can add logger.info and logger.trace statements to print values when your code runs that you can then view the output of in the catalina.out file. If your application isn't behaving as expected or is crashing, add logging statements to your code and view the log to figure out the issue.
 
 Navigate to the page localhost:8080 in your browser (you can use whatever browser you usually use on your computer) to see the website. Take some time to view the different pages and examine the format of the website. Here is which files correspond to which links on the website:
 
-404.jsp - going to any url that is not set up to be a page on the website
-add.jsp - The Register link
-default.jsp - The home page
-feedback.jsp - Blank page that you will have to create in Part 6
-generate.jsp - The Find Matches page
-invalid_input.jsp - Page shown if the user enters invalid input in the Register page
-matches.jsp - The View Matches link
-people.jsp - The People link
+404.jsp - going to any url that is not set up to be a page on the website  
+add.jsp - The Register link  
+default.jsp - The home page  
+feedback.jsp - Blank page that you will have to create in Part 6  
+generate.jsp - The Find Matches page  
+invalid_input.jsp - Page shown if the user enters invalid input in the Register page  
+matches.jsp - The View Matches link  
+people.jsp - The People link  
 
 ## **Schema + User**
 
