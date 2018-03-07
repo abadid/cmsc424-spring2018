@@ -1,0 +1,159 @@
+
+
+
+html,
+body {
+  height: 100%;
+  background-color: white;
+}
+
+body {
+  color: black;
+  text-align: center;
+  padding-top: 62px;
+}
+
+
+a {
+  color: black;
+}
+a:hover,
+a:focus {
+  color: white;
+}
+
+#love {
+  display: none;
+}
+
+.heading {
+}
+
+input {
+  margin-bottom: 10px;
+}
+
+select {
+  margin-bottom: 18px;
+}
+.column
+{
+    float: left;
+    width: 33.33%;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+h2 {
+  margin-bottom: 30px;
+}
+
+/* Table */
+th, td {
+  padding: 10px;
+  padding-right: 40px;
+  padding-left: 40px;
+  font-size: 22px;
+}
+
+th {
+  text-align: center;
+}
+
+/*
+ * Header
+ */
+
+.brand > img {
+  padding-top: 8px;
+  padding-bottom: 4px;
+  padding-left: 20px;
+  height: 50px;
+  float: left;
+}
+
+.masthead-nav > li {
+  display: inline-block;
+}
+
+.masthead-nav > li > a {
+  padding-top: 8px;
+  font-family: helvetica;
+  text-transform: uppercase;
+  font-size: 16px;
+}
+
+.masthead-nav > li > a:hover,
+.masthead-nav > li > a:focus {
+  background-color: transparent;
+  border-bottom-color: white;
+}
+
+.sample {
+  color: red;
+  padding-top: 15px;
+}
+
+/* 768+ px */
+@media (min-width: 768px) {
+  body {
+    padding-top: 82px;
+  }
+  /* Pull out the header and footer */
+  .masthead {
+    position: fixed;
+    top: 0;
+    background-color: red;
+  }
+
+  .masthead-nav {
+    float: right;
+  }
+
+  .masthead-nav > li > a {
+    padding-top: 26px;
+    font-size: 20px;
+    font-weight: normal;
+    border-bottom: 2px solid transparent;
+  }
+
+  .masthead-nav > li + li {
+    margin-left: 20px;
+  }
+
+  .brand > img {
+    padding-top: 8px;
+    padding-bottom: 4px;
+    height: 70px;
+  }
+
+  /* Handle the widths */
+  .masthead,
+  .sheading {
+    width: 100%; /* Must be percentage or pixels for horizontal alignment */
+  }
+}
+
+/* 992+ px */
+@media (min-width: 992px) {
+  .masthead,
+  .heading {
+    width: 700px;
+  }
+}
+
+/* Selection */
+
+::-moz-selection {
+       background-color: #ff9900;
+       color: #000;
+}
+
+::selection {
+       background-color: #ff9900;
+       color: #000;
+}
