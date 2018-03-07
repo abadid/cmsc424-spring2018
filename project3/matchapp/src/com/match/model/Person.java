@@ -75,16 +75,16 @@ public class Person {
 	    return new Person[]{} ;
   }
 
-  /*Search the database for a person with a substring match to the query entered in any of its character fields
+  /* For every person record in the database, search each of its character fields to see if input query is a substring of any of them
   Return everything that matches with every char/varchar column. This should be case senstive in finding substring matches
 
   For example if we have 2 people with:
   First: Alex, Last: Westmore, Major: Biology, County: Howard, Language: ENG
   First: Dave, Last: Howland, Major: Geology, County: Frederick, Language: ENG
 
-  If we query with the string: "How", we return both 
-  with the string: "more", just Alex
-  and with the string: COUNT, none
+  If we query with the string: "How", the Person array that is returned contains both people 
+  If we query with the string: "more", the Person array that is returned contains just Alex
+  If we query with the string: COUNT, the Person array is empty
 
   The order of the people returned does not matter
 
@@ -107,11 +107,11 @@ public class Person {
   }	
 
   /*This should return a Person object with all of its fields instatiated 
-  with the given id in the person table. Note since id is unique there
+  for the person with the given id in the person table. Note that since id is unique, there
   will only be one person ever returned by this method 
 
   Return a person with the first name "No" and the last name "Matches" if
-  the person with the id does not exist
+  the person with the id does not exist.
   */
   public static Person getPerson(String id) {
     
@@ -139,9 +139,10 @@ public class Person {
     return -1;
   }
 
-  /*Return a list of the best 5 matches in the database for the person with the given id based on your score method
+  /*Return a list of the best 5 matches in the database for the person with the given id based on the score method that
+    you write later in this file (see below).
 
-  You must also write these matches to the matches database including the date and their score
+  You must also write these matches to the matches table including the date and their score
 
   Note: Once someone has already matched with someone, do not return them again. This means your method will return the
   top 5 matches for that person in the entire database on the first call. On the second call it should return the next
