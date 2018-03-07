@@ -46,7 +46,8 @@ public class Match {
      the id1 value is equal to the id parameter of this method. 
      Ignore any records in the matches table for which the id2 column is equal to the id parameter.
      If id does not represent a person in the database or if the person with that id does not appear as id1 
-     in any matches, return an empty array.  
+     in any matches, return an empty array. 
+     A person cannot match with his or her self and should be prevented from occurring. 
   */
 	public static Match[] getMatchesFor(String id) {
 		return new Match[]{}; // replace with your code
