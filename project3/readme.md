@@ -126,7 +126,7 @@ Please submit your ER diagram as a .png, .jpg, or .pdf file. Feel free to draw i
 
 ## **Part 2: Person.java: Back-end + DB (14 points)**
 
-You will need to complete the following functions in the Person.java model file that interfaces with the person table in the matchapp database. We have already completed a few of these methods, including the constructors as well as functions that interface with your database remotely and locally. You have to complete:
+You will need to complete the following methods in the Person.java model file that interfaces with the person table in the matchapp database. We have already completed a few of these methods, including the constructors as well as functions that interface with your database remotely and locally. You have to complete:
 
 * **getPeople():** Get a list of all the people in the database.
 
@@ -138,7 +138,7 @@ You will need to complete the following functions in the Person.java model file 
 
 * **getMatchedPeople(id):** Get the top 5 matches for a specific person via id.
 
-We will be testing each of these methods individually that they produce the output as specified for each method (seen in comments above each method) on a database with different people and matches that we make. The data we test it on will be exactly the same as the form we have given to you in person.sql only be different in the actual values.  
+The Person.java file has comments above each method with more details about what each method should do. We will be testing each of these methods individually to ensure that they produce the output as specified by the comments above each method on a database with different people and matches that we make. The data we test it on will be exactly the same as the form we have given to you in person.sql --- only the actual values will be different.  
 
 ## **Part 3: Match.java: Back-end + DB (10 points)**
 
