@@ -94,7 +94,7 @@ people.jsp - The People link
     * **Rating:** A decimal value.
 
 
-You will also have to add one more attribute in the person table with any type of your choice. Once you create your tables, you can run /i person.sql in matchapp in psql to populate the person database with people. You will also have to create a user with name **"matchmaker"** and password **“kingofthenorth”** and you must grant all permissions to that user to access your database and tables as it will be the one doing the database manipulation. You should find the commands to do this (check the textbook and past projects in this class and online resources).
+You will also have to add one more attribute to the person table with any type of your choice. Once you create your tables, you can run /i person.sql in matchapp in psql to populate the person database with people. You will also have to create a user with name **"matchmaker"** and password **“kingofthenorth”** and you must grant all permissions to that user to access your database and tables as it will be the one doing the database manipulation. You should find the commands to do this (check the textbook and past projects in this class and online resources).
 
 ## **Part 1: ER diagram (5 points)** 
 Please draw an ER diagram that could have been used to generate this schema specified above such that it contains at least one recursive relationship set. Please answer the following questions about your ER diagram:
