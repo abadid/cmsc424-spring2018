@@ -143,8 +143,10 @@ public class Person {
 
   /*Return a list of the best 5 matches in the database for the person with the given id based on the score method that
     you write later in this file (see below).
+    
+    A person is not allowed to be matched with herself or himself.
 
-  You must also write these matches to the matches table including the date and their score
+  You must write these matches to the matches table including the date and their score
 
   Note: Once someone has already matched with someone, do not return them again. This means your method will return the
   top 5 matches for that person in the entire database on the first call. On the second call it should return the next
