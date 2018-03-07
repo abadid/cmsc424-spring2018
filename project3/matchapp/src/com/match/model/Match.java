@@ -13,36 +13,43 @@ public class Match {
 
   /*
   TODO: 
-  Write getMatchesFor(String id) function
-  Add fields and write getter methods:
-    getMatchedID(): Get the current match id.
-    getDate(): Get date of match.
-    getRating(): Get the rating of a match.
+  Each Match object corresponds to a row in the matches table
+  Therefore, you should have one field in this class corresponding to each attribute of the matches table (id1, id2, etc).
+  You should also write getter methods that returns the current value for each of these fields:
+    getUserID(): Returns the value of the id1 field. --- this is optional
+    getMatchedID(): Returns the value of the id2 field --- this is required
+    getDate(): Returns the date of the match as a String --- this is required
+               (This should follow string form of an java.sql.date object, which looks like yyyy-mm-dd).
+    getRating(): Get the value of the rating field --this is required
+  
+  Also, you should write the getMatchesFor(String id) function (see below)
 
   Write method for feedback page in part 6
   Write any other method you think would be useful or needed
   */
 
   public int getMatchedID() {
-    return 0;
+    return 0; // replace with your code
   }
 
   public String getDate() {
-    return "";
+    return ""; // replace with your code
   }
   public double getRating() {
-    return 0;
+    return 0; // replace with your code
   }
 
 	private static final Logger logger = LogManager.getLogger("match");
 	static JsonFactory factory = new JsonFactory();
 
-  /* Return an array of matches for the id, where all of id's matches will appear if id is equivalent to id1. 
-  If id does appear in some other's matches (in the id2 column) but not at all in id1, this should return an empty array.
-  If id does not represent a person in the database or as above if the person with that id has no matches, return an empty array.  
+  /* Return an array of Match objects that correspond to each match in the matches tables for which
+     the id1 value is equal to the id parameter of this method. 
+     Ignore any records in the matches table for which the id2 column is equal to the id parameter.
+     If id does not represent a person in the database or if the person with that id does not appear as id1 
+     in any matches, return an empty array.  
   */
 	public static Match[] getMatchesFor(String id) {
-		return new Match[]{};
+		return new Match[]{}; // replace with your code
 	}
 
 	private static Connection getConnection() {
