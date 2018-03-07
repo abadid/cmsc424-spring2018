@@ -10,6 +10,11 @@ To begin this project you will have to pull the project 3 folder from our git re
 
 * **build.sh**: you should run "sudo ./build.sh" in order for your project files to build. This will compile all the necessary files for the application. Make sure you run build as the root user **(sudo)** to have it copy the war file to the tomcat directory properly.
 
+You may encounter an issue with running sudo ./build.sh you are using Windows to edit build.sh. This might cause issues with carriage return characters and when you try to run it no command runs properly (the first line will be along the lines of "1: cd: can't cd to ./src"). If this happens, you can resolve this by doing the following:
+
+ - Download the program dos2unix on your vagrant machine with: sudo apt-get install dos2unix
+ - Run dos2unix build.sh in your vagrant command line
+
 * **src/**
 
     * ***.jsp**: These are the Java Server Pages. JSP allows Java code to be interleaved with static web markup content (HTML in our case), with the resulting page being compiled and executed on the server to deliver a complete HTML page. Basically Java is being used to dynamically create HTML pages. A good overview/tutorial on JSP can be found at: [https://www.tutorialspoint.com/jsp/jsp_overview.htm](https://www.tutorialspoint.com/jsp/jsp_overview.htm) (however, you can skip the parts of the tutorial on how to set up the enviornment, since we’ve already done that for you). It is a good idea to check out the other jsp files we are providing you, so that you can get a sense of how each page of the app is generated. **(Front-end Component)**
@@ -220,7 +225,7 @@ For the second servlet, make sure the url pattern is the same as the action fiel
 
 javac -classpath WEB-INF/lib/*:WEB-INF/classes -d WEB-INF/classes com/match/web/AddFeedback.java
 
-You may encounter an issue with running sudo ./build.sh you are using Windows to edit build.sh. This might cause issues with carriage return characters and when you try to run it no command runs properly (the first line will be along the lines of "1: cd: can't cd to ./src"). If this happens, you can resolve this by doing the following:
+As described earlier, you may encounter an issue with running sudo ./build.sh you are using Windows to edit build.sh. This might cause issues with carriage return characters and when you try to run it no command runs properly (the first line will be along the lines of "1: cd: can't cd to ./src"). If this happens, you can resolve this by doing the following:
 
  - Download the program dos2unix on your vagrant machine with: sudo apt-get install dos2unix
  - Run dos2unix build.sh in your vagrant command line
