@@ -228,9 +228,9 @@ You may encounter an issue with running sudo ./build.sh you are using Windows to
 In addition to editing ./build.sh, we want to add a link to the new page in the header bar of the site. In header.tag under WEB-INF/tags, add 
 ```<li><a href="your url for the jsp page">Whatever you want the link to say</a></li> ``` so that you can navigate to the page from the header.
 
-## **Part 7 (Optional): Deploying to AWS (4 extra credit points)**
+## **Part 7 (Optional): Deploying to AWS (2 extra credit points)**
 
-More likely than not, you will have to work with a database in the cloud at some point in the future. Here we give you the opportunity to deploy your MatchMaker application to the cloud and get to work with cloud databases a little bit. Note that you can sign up for a free tier trial to use AWS with a new account to avoid paying for the service. 
+More likely than not, you will have to work with a database in the cloud at some point in the future. Here we give you the opportunity to deploy your MatchMaker application to the cloud, turn it into a publicly accessible Website, and get to work with cloud databases a little bit. Note that you can sign up for a free tier trial to use AWS with a new account; however Amazon may charge money to deploy this app. However, you can apply for free Amazon credit as a student (https://www.awseducate.com/Registration) that should cover the costs of the initial deployment. Please note that this application process may take several days for them to get back to you.
 
  Follow these steps to do this:
 
@@ -317,6 +317,8 @@ The dbname should be ebdb by default, if it is not, find the database name on th
 You should get the prompt from ebdb, once there, create your tables.
 
 We won’t go through filling our tables with prepopulated values like we did locally. Test adding people on the register page and generating matches for them to make sure it is working. You will receive credit as long as we can add a person to your cloud deployed application, view added people in the people tab, and generate a match that writes to the match table. Add a line to the end of your part1.txt file with the url to your deployed application to receive extra credit for completing Part 6. 
+
+Don't forget to delete your account (or at least undeploy the Website) after you receive the extra credit --- otherwise Amazon will continue to charge you after your free credits are used up. Alternateively, you can get a real domain name, get users to pay for the app (which means you will probably have to add more features), and cover your costs that way ;)
 
 ## **Submission**
 
