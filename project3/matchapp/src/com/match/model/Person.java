@@ -59,8 +59,10 @@ public class Person {
 		return lastName;
 	}
 
-  //Return a list of all the people in the person table
-  //Only need to display person first and last name on the webpage
+  //Return an array of all the people in the person table
+  //You will need to make a SQL call via JDBC to the database to get all of the people
+  //Since the webpage only needs to display the person's first and last name, only those fields 
+  //of the Person object need to be instantiated (i.e., you can use the second of the three Person constructors above) 
 	public static Person[] getPeople() {
 	    
 	     con = getConnection();
@@ -72,7 +74,7 @@ public class Person {
        }
 	      
 
-	    return new Person[]{} ;
+	    return new Person[]{} ; //remove this line and replace with your code
   }
 
   /* For every person record in the database, search each of its character fields to see if input query is a substring of any of them
@@ -103,7 +105,7 @@ public class Person {
       }
       
 
-      return new Person[]{};
+      return new Person[]{}; //remove this line and replace with your code
   }	
 
   /*This should return a Person object with all of its fields instatiated 
@@ -124,7 +126,7 @@ public class Person {
       }
      
 
-      return new Person("Blank", "Person");
+      return new Person("Blank", "Person");  //remove this line and replace with your code
   }
 
   /*Add a person to the database with all of the fields specified
@@ -136,7 +138,7 @@ public class Person {
   public static int addPerson(String first, String last, int age, String major, int gender, int seeking_relationship, int seeking_gender, 
   								String language, String county, double approval_rating) {
 
-    return -1;
+    return -1;  //remove this line and replace with your code
   }
 
   /*Return a list of the best 5 matches in the database for the person with the given id based on the score method that
@@ -164,7 +166,7 @@ public class Person {
       }
       
 
-      return new Person[]{new Person("No", "Matches")};
+      return new Person[]{new Person("No", "Matches")};  //remove this line and replace with your code
      
   }
 
@@ -177,7 +179,7 @@ public class Person {
   the same score every time the method is called
   */
   public static int computeMatchScore (Person p, Person alt){
-    return 0;
+    return 0;  //remove this line and replace with your code
   }
 
   private static Connection getConnection() {
