@@ -85,9 +85,9 @@ people.jsp - The People link
 
 * **match**
 
-    * **id1:** **(Primary Key)**  An integer that must reference the person tables id attribute. This means that id must appear in the person table in order to appear in this table as id1. id1 is the field for the person who goes to the Find Matches page and generates matches for his or herself. 
+    * **id1:** **(Primary Key)**  An integer that must reference the person table's id attribute. This means that id must appear in the person table in order to appear in this table as id1. id1 is the field for the person who goes to the Find Matches page and generates matches for his or herself. 
 
-    * **id2:** **(Primary Key)** An integer that must also reference the person tables id attribute. This means that id2 must appear in the person table in order to appear in this table as id2. id2 is the field for the person who gets assigned as a match to the person in id1.
+    * **id2:** **(Primary Key)** An integer that must also reference the person table's id attribute. This means that id2 must appear in the person table in order to appear in this table as id2. id2 is the field for the person who gets assigned as a match to the person in id1.
 
     * **date_of_match:** Must be a date datatype
 
