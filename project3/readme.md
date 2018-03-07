@@ -61,7 +61,7 @@ people.jsp - The People link
 
 * **person**
 
-    * **id:** This is the primary key of the table, to represent a unique person. This should variable should be the type "serial" which auto generates a next unique id to assign to a new person in the table.
+    * **id:** This is the primary key of the table, to represent a unique person. This should should be of type "serial" which we have not seen yet this semester; this data type auto generates a next unique id to assign to a new person in the table.
 
     * **first_name:** A string less than or equal to 12 characters long.
 
@@ -94,7 +94,7 @@ people.jsp - The People link
     * **Rating:** A decimal value.
 
 
-You will also have to add one more attribute to the person table with any type of your choice. Once you create your tables, you can run /i person.sql in matchapp in psql to populate the person database with people. You will also have to create a user with name **"matchmaker"** and password **“kingofthenorth”** and you must grant all permissions to that user to access your database and tables as it will be the one doing the database manipulation. Here we have given you the commands to do this (which you can run in psql or add to a .sql file):
+You will also have to add one more attribute to the person table with any type of your choice. Once you create your tables, you can run /i person.sql in matchapp in psql to populate the person database with people. You will also have to create a user with name **"matchmaker"** and password **“kingofthenorth”** and you must grant all permissions to that user to access your database and tables as it will be the one doing the database manipulation. Below is the command to do this (which you can run in psql or add to a .sql file):
 
 create user matchmaker with password 'kingofthenorth';
 grant all on (insert table name) to matchmaker;
