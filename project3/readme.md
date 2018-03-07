@@ -154,7 +154,7 @@ You will have to complete most of this file. Here are some general things you wi
 
 You will be **required** to write these functions:
 
-* **getMatchesFor(id):** Get the matches from the match table that include the person with the specified value for the id attribute
+* **getMatchesFor(id):** Get the matches from the match table that include the person with the specified value for the id attribute. Note that all matches this should return should be where id matches the id1 field in the match table only. 
 
 * **At least these fields and getter methods:**
 
@@ -189,7 +189,7 @@ Note: We are giving you some free range here so we will not be grading you stric
 
 2. Now we need to set up an HttpServlet file to display and handle the form data for the jsp file. You want to create a new java file that will extend HttpServlet and contain the void doPost(HttpServletRequest request, HttpServletResponse response) method. This java file should be placed in the com.match.web directory. Look at the AddPerson.java file for a template on how to create this. Within this file, you need to get the parameters you pass from the request (which will be each field in the form submitted by the user in feedback.jsp), make a call to a method in Match.java that you create to check and submit the new data to the database (described in step 3), and send the response back to the feedback.jsp page where the user can enter another piece of feedback information. If you are really confused on how to do this, view the comments in AddPerson.java that explain what each part of it does and model your file just like it, only adapted to the different fields and methods you use.
 
-3. Now we need to add the method in Match to update the approval_rating field in the database appropriately. How much you increment or decrement this field is entirely up to you, but it must be a constant amount (for example, +1 for good and -1 for bad). However, it is required that a user cannot give feedback for someone that they are not matched with. This means the userID and the person matched ID must be an entry in the matches table. If this condition is not met or either of the ids is not in the person table at all, do nothing or give an error message; otherwise update the approval_rating of the matched person.
+3. Now we need to add the method in Match to update the approval_rating field in the database appropriately. How much you increment or decrement this field is entirely up to you, but it must be a constant amount (for example, +1 for good and -1 for bad). However, it is required that a user cannot give feedback for someone that they are not matched with. This means the ID of the user giving feedback and the person matched ID must be an entry in the matches table (where userID is id1 and matchedID is id2 only). If this condition is not met or either of the ids is not in the person table at all, do nothing or give an error message (you can decide); otherwise update the approval_rating of the matched person. Note that for this project it is fine if a user gives feedback on one of their matches as many times as they like and each time it affects the other users approval_rating. 
 
 4. The last steps we have to do is connect all of the files we just made and expose them on the website. We need to register our feedback.jsp file as a web page and our HttpServlet file from step 2 as a servlet. To do this, open the web.xml file. Here is a template for what you need to insert: 
 

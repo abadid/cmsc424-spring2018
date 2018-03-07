@@ -37,7 +37,10 @@ public class Match {
 	private static final Logger logger = LogManager.getLogger("match");
 	static JsonFactory factory = new JsonFactory();
 
-
+  /* Return an array of matches for the id, where all of id's matches will appear if id is equivalent to id1. 
+  If id does appear in some other's matches (in the id2 column) but not at all in id1, this should return an empty array.
+  If id does not represent a person in the database or as above if the person with that id has no matches, return an empty array.  
+  */
 	public static Match[] getMatchesFor(String id) {
 		return new Match[]{};
 	}
