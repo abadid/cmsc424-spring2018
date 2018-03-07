@@ -145,7 +145,7 @@ The Person.java file has comments above each method with more details about what
 A match in this application represents a match between 2 entities(people) in the Person table. Matches are only generated when a user
 goes to the Find Matches page and generates new matches for his or herself. This means that if person A goes to the Find Matches page and gets
 matched with person B, a match should be written to the table with id1 as A and id2 as B only. Person B should still have 0 matches until that person
-goes to the Find Matches page and generates matches, where they would then match with A and be written to the matches database. 
+goes to the Find Matches page and generates matches, at which point they could potentially match with A and be written to the matches database as a seperate tuple. 
 You will have to complete most of this file. Here are some general things you will probably need to write:
 
 * Constructors for the Match object to be written to the database.
