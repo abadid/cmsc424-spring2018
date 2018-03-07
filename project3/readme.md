@@ -71,7 +71,7 @@ people.jsp - The People link
 
     * **major:** A string less than or equal to 20 characters long.
 
-    * **gender:** This must be an integer type that is not null. Below we will ask you to decide how map real-world genders to integer values.
+    * **gender:** This must be an integer type that is not null. Below, we will ask you to decide how to map real-world genders that the user sees in the app interface to integer values that are stored in the database. But as far the database is concerned, each gender option is stored as an integer.
 
     * **seeking_relationship_type:** Must be an integer between 1 and 3.
 
