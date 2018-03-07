@@ -42,9 +42,8 @@
             
             Gender: <br />
             <select name = "gender">
-              <option value="1">Male</option>
-              <option value="2">Female</option>
-              <option value="3">Add your gender here</option>
+              <option value="1">Add your gender here</option>
+              <option value="2">Add your gender here</option>
             </select>
             </br>
  
@@ -58,9 +57,8 @@
 
             Gender Seeking: <br />
             <select name = "seeking">
-              <option value="1">Male</option>
-              <option value="2">Female</option>
-              <option value="3">Add your gender here</option>
+              <option value="1">Add your gender here</option>
+              <option value="2">Add your gender here</option>
             </select>
             <br/>
           </div>
