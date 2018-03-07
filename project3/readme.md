@@ -106,7 +106,7 @@ How many entity sets were included in your ER diagram for this appliciation? (Yo
 
 Does the match table correspond to an entity set, a weak entity set, or a relationship set? Answer must be one of "entity set", "weak entity set", or "relationship set"
 
-How many attributes were included in the match [entity set or relationship set depending on your answer above] in the ER diagram? Answer must be "yes" or "no"
+How many attributes were included in the match [entity set or relationship set depending on your answer above] in the ER diagram? Answer must be an integer.
 
 True or False: There are no one-to-one, many-to-one, or one-to-many mapping cardinalities in the ER diagram? In other words you didn't draw any directed edges in your diagram. Answer either "true" or "false"
 
