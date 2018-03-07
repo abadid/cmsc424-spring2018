@@ -61,7 +61,7 @@ people.jsp - The People link
 
 * **person**
 
-    * **id:** This is the primary key of the table, to represent a unique person. This should be a serial type which auto generates a next unique id to assign to a new person in the table.
+    * **id:** This is the primary key of the table, to represent a unique person. This should variable should be the type "serial" which auto generates a next unique id to assign to a new person in the table.
 
     * **first_name:** A string less than or equal to 12 characters long.
 
@@ -94,7 +94,10 @@ people.jsp - The People link
     * **Rating:** A decimal value.
 
 
-You will also have to add one more attribute to the person table with any type of your choice. Once you create your tables, you can run /i person.sql in matchapp in psql to populate the person database with people. You will also have to create a user with name **"matchmaker"** and password **“kingofthenorth”** and you must grant all permissions to that user to access your database and tables as it will be the one doing the database manipulation. You should find the commands to do this (check the textbook and past projects in this class and online resources).
+You will also have to add one more attribute to the person table with any type of your choice. Once you create your tables, you can run /i person.sql in matchapp in psql to populate the person database with people. You will also have to create a user with name **"matchmaker"** and password **“kingofthenorth”** and you must grant all permissions to that user to access your database and tables as it will be the one doing the database manipulation. Here we have given you the commands to do this (which you can run in psql or add to a .sql file):
+
+create user matchmaker with password 'kingofthenorth';
+grant all on (insert table name) to matchmaker;
 
 ## **Part 1: ER diagram (5 points)** 
 Please draw an ER diagram that could have been used to generate this schema specified above such that it contains at least one recursive relationship set. Please answer the following questions about your ER diagram:
@@ -217,7 +220,12 @@ For the second servlet, make sure the url pattern is the same as the action fiel
 
 javac -classpath WEB-INF/lib/*:WEB-INF/classes -d WEB-INF/classes com/match/web/AddFeedback.java
 
-Also, we want to add a link to the new page in the header bar of the site. In header.tag under WEB-INF/tags, add 
+You may encounter an issue with running sudo ./build.sh you are using Windows to edit build.sh. This might cause issues with carriage return characters and when you try to run it no command runs properly (the first line will be along the lines of "1: cd: can't cd to ./src"). If this happens, you can resolve this by doing the following:
+
+ - Download the program dos2unix on your vagrant machine with: sudo apt-get install dos2unix
+ - Run dos2unix build.sh in your vagrant command line
+
+In addition to editing ./build.sh, we want to add a link to the new page in the header bar of the site. In header.tag under WEB-INF/tags, add 
 ```<li><a href="your url for the jsp page">Whatever you want the link to say</a></li> ``` so that you can navigate to the page from the header.
 
 ## **Part 7 (Optional): Deploying to AWS (4 extra credit points)**
