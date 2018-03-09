@@ -178,6 +178,8 @@ As of now, there are not that many attributes of a person that are useful in mat
 
 Please create some way for a user to specify the value of this field on the "add a person" page. You can model it just like any of the other input fields already there on the page. See the add.jsp file and its comments for exactly where to modify and insert the form field. Whatever field you decide to add, make sure you do not set a not null constraint on the person table for the field. You can see more about html form elements online here: [https://www.w3schools.com/html/html_form_elements.asp](https://www.w3schools.com/html/html_form_elements.asp)
 
+We have also added as a request that you make your attribute a string attribute and name your column in the table for it as "foo". You can and should make this represent whatever attribute you want it to, but to make things easier for testing we ask that you make it a string and name the column "foo". We won't deduct if you don't do this but we ask that we do to make testing faster and easier (and you can get your grade back faster). 
+
 Furthermore, you can modify the fields where the user can enter a gender and seeking\_gender so that the current menu of options correspond to real-world genders. The mapping of these options to integers for storage in the database is (and should remain) hidden from the end user. We certainly don't want to give end users any kind of impression that one gender has a higher value than another one! You will not be tested in any way on what genders you specify in the dropdown or what values they are mapped to. Feel free to make them as realistic or unrealistic as you wish.
 
 ## **Part 5: AddPerson.java: Back-end + Front-end (3 points)**
