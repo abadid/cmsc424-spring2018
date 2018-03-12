@@ -81,7 +81,7 @@ Vagrant.configure("2") do |config|
 
      groupadd tomcat
      useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat
-     curl -O http://apache.mirrors.ionfish.org/tomcat/tomcat-8/v8.5.28/bin/apache-tomcat-8.5.28.tar.gz
+     curl -O http://apache.mirrors.ionfish.org/tomcat/tomcat-8/v8.5.29/bin/apache-tomcat-8.5.29.tar.gz
      mkdir /opt/tomcat
      tar xzvf apache-tomcat-8*tar.gz -C /opt/tomcat --strip-components=1
      cd /opt/tomcat
