@@ -74,7 +74,7 @@ We have provided a package `queryproc` with the following java classes:
 1. **TupleType3.java**: Class defining the attributes for table `ResultTable` with helper methods.
 
 ### Coding Restrictions:
-1. You are only allowed to **add/modify** your **own** code to the following: (i) **JoinOperators.java**: Put all your code within the SortMergeJoin method, (ii) **Relation.java**: If you think you require additional helper methods in Relation.java, you may include them. 
+1. You are only allowed to **add/modify** your **own** code to the following: (i) **JoinOperators.java**: Put all your code within the SortMergeJoin method, (ii) **Relation.java**: If you think you need additional variables or helper methods in Relation.java, you may include them. 
 1. Please do not modify any existing code in any of the java files.
 1. Please remember to maintain the same order of attributes as shown in the example above when inserting a tuple in the table `ResultTable`. More instructions provided in JoinOperators.java.
 1. You may write your code with/without the help of an IDE of your choice (We encourage you to write/debug your code in an IDE). However your final code should compile and run with the following commands within the VM.
