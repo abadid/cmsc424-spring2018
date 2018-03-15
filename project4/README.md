@@ -163,7 +163,7 @@ We say *R<sub>1</sub> has a fuzzy functional dependency R<sub>2</sub> iff*
 
 We set the threshold based on the application requirement. *For the purpose of this project we will deal with functional dependencies of the form X->Y*.
 
-###Coding Details:###
+#### Coding Details:
 
 We have provided you with a package `functionaldependency` with the following files (inside src directory):
 
@@ -182,7 +182,7 @@ We have provided you with a package `functionaldependency` with the following fi
 	4. `make test`: Compiles and runs the code against *test.csv*.
 	5. `make run`: Compiles and runs the code against *data.csv*.  			 
 
-###Tasks:
+#### Tasks:
 1. **Functional Dependency**: Implement the checkDependency method inside src/CheckFD.java.
 2. **Fuzzy Functional Dependency**: Implement the checkFuzzyDependency method inside src/CheckFD.java.
 
