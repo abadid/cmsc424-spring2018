@@ -220,7 +220,7 @@ CompanyName (id, cId, cName)
 ```
 and the resulting table will be
 ```
-ResultTable (cId, cLoc, id, cLoc, cName)
+ResultRelation (cId, cLoc, id, cLoc, cName)
 ```
 The two tables will be joined on the attribute `cId` which is the primary key in `CompanyLocation` and foreign key in `CompanyName`. Note that for sort merge join, we need both the tables to be sorted on the join keys. We have already sorted the tables on the join keys for you. Now let us see an example below:
 
@@ -245,7 +245,7 @@ The two tables will be joined on the attribute `cId` which is the primary key in
 | 3 | 4 | Microsoft |
 
 
-`ResultTable`
+`ResultRelation`
 
 | cId | cLoc | id | cId | cName |  
 |:---:|:---:|:---:|:---:|:---:|
@@ -261,7 +261,7 @@ We have provided a package `queryproc` with the following java classes:
 1. **Relation.java**: The relation class with some helper methods.
 1. **TupleType1.java**: Class defining the attributes for table `CompanyLoc` with helper methods.
 1. **TupleType2.java**: Class defining the attributes for table `CompanyName` with helper methods.
-1. **TupleType3.java**: Class defining the attributes for table `ResultTable` with helper methods.
+1. **TupleType3.java**: Class defining the attributes for table `ResultRelation` with helper methods.
 
 You may write your code with/without the help of an IDE of your choice (We encourage you to write/debug your code in an IDE). However your final code should compile and run with the following commands within the VM.
 ```
@@ -278,7 +278,7 @@ java queryproc/QueryProcessing
 #### Coding Restrictions:
 1. You are only allowed to **add/modify** your **own** code to the following java files: (i) **JoinOperators.java**: Put all your code within the SortMergeJoin method, (ii) **Relation.java**: If you think you need additional variables or helper methods in Relation.java, you may include them. You may also add additional code in the constructor if required, but you are not allowed to modify the constructor input parameters. 
 1. Please do not modify any existing code in any of the java files.
-1. Please remember to maintain the same order of attributes as shown in the example above when inserting a tuple in the table `ResultTable`. More instructions provided in JoinOperators.java.
+1. Please remember to maintain the same order of attributes as shown in the example above when inserting a tuple in the table `ResultRelation`. More instructions provided in JoinOperators.java.
 
 #### What to turn in:
 Please submit `JoinOperators.java` and `Relation.java`.
