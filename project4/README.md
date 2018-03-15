@@ -219,7 +219,7 @@ CompanyLocation (cId, cLoc)
 CompanyName (id, cId, cName)
 ResultRelation (cId, cLoc, id, cLoc, cName)
 ```
-The two tables will be joined on the attribute `cId` which is the primary key in `CompanyLocation` and foreign key in `CompanyName`. Note that for sort merge join, we need both the tables to be sorted on the join keys. You can assume that both input tables will be sorted on the join keys. Now let us see an example below:
+The two tables (`CompanyLocation` and `CompanyName`) will be joined on the attribute `cId` which is the primary key in `CompanyLocation` and foreign key in `CompanyName`. Note that for sort merge join, we need both the tables to be sorted on the join keys. You can assume that both input tables will be sorted on the join keys. Now let us see an example below:
 
 
 `CompanyLocation`
