@@ -67,5 +67,7 @@ Vagrant.configure("2") do |config|
      apt-get update
      apt-get install -y postgresql postgresql-contrib python python-pip build-essential python-dev python-psycopg2 default-jre default-jdk systemd 
      sudo -u postgres createuser -s vagrant
+     sudo -u vagrant createdb q2db
+     sudo -u vagrant psql q2db -f /vagrant/populate-customers.sql
   SHELL
 end
