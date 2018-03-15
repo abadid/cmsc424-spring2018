@@ -71,7 +71,7 @@ You do not need to run the query; You need to understand the query plan and answ
 #### What to turn in:
 Submit `q4p1.txt` file. 
 
-**Q2 (10pt)**. [Query Debugging] For this problem, you are required to switch to `q2db` database (`psql q2db`) where we have already populated the `customers` table with a large dataset. The `customers` table has the same schema as the one that we had used in Project 1. The following query counts the number of customer pairs whose year of birth differ by a year.
+**Q2 (10pt)**. [Query Debugging] For this problem, you are required to switch to `q2db` database (`psql q2db`) where we have already populated the `customers` table with a relatively large dataset. The `customers` table has the same schema as the one that we had used in Project 1. The following query counts the number of customer pairs whose year of birth differ by a year.
 
 ```
 select count(*)
@@ -213,16 +213,13 @@ State true or false.
 #### What to turn in:
 Please submit `CheckFD.java` and `p4q3.txt`.
 
-**Q4 (10pt)**. [Sort Merge Join] In this problem, you will implement the sort merge join algorithm, more specifically the merge algorithm. You will be joining the following two tables, 
+**Q4 (10pt)**. [Sort Merge Join] In this problem, you will implement the sort merge join algorithm, more specifically the merge algorithm. The schema of the two tables to be joined and the resulting table are as follows:
 ``` 
 CompanyLocation (cId, cLoc)
 CompanyName (id, cId, cName)
-```
-and the resulting table will be
-```
 ResultRelation (cId, cLoc, id, cLoc, cName)
 ```
-The two tables will be joined on the attribute `cId` which is the primary key in `CompanyLocation` and foreign key in `CompanyName`. Note that for sort merge join, we need both the tables to be sorted on the join keys. We have already sorted the tables on the join keys for you. Now let us see an example below:
+The two tables will be joined on the attribute `cId` which is the primary key in `CompanyLocation` and foreign key in `CompanyName`. Note that for sort merge join, we need both the tables to be sorted on the join keys. You can assume that both input tables will be sorted on the join keys. Now let us see an example below:
 
 
 `CompanyLocation`
@@ -274,10 +271,11 @@ java queryproc/QueryProcessing
 1. The join key in the `rightRelation` will always refer to the primary key of the `leftRelation`, i.e. it is a foreign key.
 1. There would not be any `NULL` values in the tables provided.
 1. The input tables can be assumed to have at least one tuple.
+1. The input tables will be sorted on the join keys.
 
 #### Coding Restrictions:
 1. You are only allowed to **add/modify** your **own** code to the following java files: (i) **JoinOperators.java**: Put all your code within the SortMergeJoin method, (ii) **Relation.java**: If you think you need additional variables or helper methods in Relation.java, you may include them. You may also add additional code in the constructor if required, but you are not allowed to modify the constructor input parameters. 
-1. Please do not modify any existing code in any of the java files.
+1. For the remaining java files, please do not modify any existing code in any of those files.
 1. Please remember to maintain the same order of attributes as shown in the example above when inserting a tuple in the table `ResultRelation`. More instructions provided in JoinOperators.java.
 
 #### What to turn in:
