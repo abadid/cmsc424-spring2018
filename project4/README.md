@@ -132,7 +132,7 @@ Let a’s and b’s be the set of values corresponding to attributes R<sub>1</su
 Let us define Cardinality(a) *for each distinct* value a of attribute R<sub>1</sub> as follows,
 
 
-<img src="https://latex.codecogs.com/gif.latex?Cardinality(a)=\frac{1}{\text{number of unique (a,b) pairs}}" /> 
+<img src="https://latex.codecogs.com/svg.latex?Cardinality(a)=\frac{1}{\text{number of unique (a,b) pairs}}" /> 
 
 
 For Relation *P*, Cardinality(1) = ⅓ [Presence of (1,2), (1,3), (1,4)], Cardinality(2) = ½ [Presence of (2,3), (2,4)] and Cardinality(7) = 1 [Presence of (7,16)]. We consider only the unique pairs of the form (a,b) while defining Cardinality.
@@ -140,24 +140,24 @@ For Relation *P*, Cardinality(1) = ⅓ [Presence of (1,2), (1,3), (1,4)], Cardin
 
 Let us define Consistency(a) *for each distinct* value a of attribute R<sub>1</sub> as follows,
 
-<img src="https://latex.codecogs.com/gif.latex?Consistency(a)=\frac{\text{maximum number of times a occurs with some b}}{\text{total number of (a,b) pairs}}" />
+<img src="https://latex.codecogs.com/svg.latex?Consistency(a)=\frac{\text{maximum number of times a occurs with some b}}{\text{total number of (a,b) pairs}}" />
 
 For Relation *P*, Consistency(1)=⅓ [1 occurs once each with 2, 3 and 4],  Consistency(2) = ⅔ [2 occurs once with 4 and 2 times with 3] and Consistency(3) = 2/2 [3 occurs with 3 twice]. We consider all the tuples of the form (a,b) while defining Consistency.
 
 
 Further, let us define Rep(a) as follows,
 
-<img src="https://latex.codecogs.com/gif.latex?Rep(a)= \begin{cases} \text{maximum number of times a occurs with some b}, \text{if} \;Cardinality(a)=1 \\ 0, \text{else} \end{cases}" />
+<img src="https://latex.codecogs.com/svg.latex?Rep(a)= \begin{cases} \text{maximum number of times a occurs with some b}, \text{if} \;Cardinality(a)=1 \\ 0, \text{else} \end{cases}" />
 
 For Relation *P*, Rep(1)=0, Rep(2)=0 and Rep(3)=2 [3 occurs 2 times with 3].
 
 Using the above definitions, we compute Confidence(R<sub>1</sub>->R<sub>2</sub>) as follows,          
 
-<img src="https://latex.codecogs.com/gif.latex?Confidence(R_1,R_2)=\frac{\sum_{a \in R_1} Cardinality(a)*Consistency(a)}{\text{number of unique values a in }R_1}   + \frac{\sum_{a \in R_1} Rep(a)}{\text{total number of tuples in relation}}" />
+<img src="https://latex.codecogs.com/svg.latex?Confidence(R_1,R_2)=\frac{\sum_{a \in R_1} Cardinality(a)*Consistency(a)}{\text{number of unique values a in }R_1}   + \frac{\sum_{a \in R_1} Rep(a)}{\text{total number of tuples in relation}}" />
 
 We say *R<sub>1</sub> has a fuzzy functional dependency R<sub>2</sub> iff* 
 
-<img src="https://latex.codecogs.com/gif.latex?Confidence(R_1,R_2) \geq \text{threshold}" />
+<img src="https://latex.codecogs.com/svg.latex?Confidence(R_1,R_2) \geq \text{threshold}" />
 
 
 We set the threshold based on the application requirement. *For the purpose of this project we will deal with functional dependencies of the form X->Y*.
