@@ -60,18 +60,18 @@ You do not need to run the query; You need to understand the query plan and answ
 1. State True or False: The first join operation is executed on the condition fl.flightid = f.flightid. 
 2. State True or False: The filter condition (a.hub=f.source or a.hub=f.dest) is executed after all the join operations are performed. 
 3. State 1,2 or 3 (only 1 correct answer): The join operations are performed in the following order (earliest to last): 
-	4. fl.flightid=f.flightid, fl.customerid = c.customerid, c.frequentflieron = a.airlineid. 
-	5. c.frequentflieron = a.airlineid, fl.customerid = c.customerid, fl.flightid=f.flightid.
-	6. fl.customerid = c.customerid, fl.flightid=f.flightid, c.frequentflieron = a.airlineid.
-7. State 1,2 or 3 (only 1 correct answer): On which of the following join conditions does the query optimizer perform poorly in terms of overestimating or underestimating the size of the output?
-	8. fl.flightid=f.flightid
-	9. fl.customerid = c.customerid
-	10. c.frequentflieron = a.airlineid
+   1. fl.flightid=f.flightid, fl.customerid = c.customerid, c.frequentflieron = a.airlineid. 
+   2. c.frequentflieron = a.airlineid, fl.customerid = c.customerid, fl.flightid=f.flightid.
+   3. fl.customerid = c.customerid, fl.flightid=f.flightid, c.frequentflieron = a.airlineid.
+4. State 1,2 or 3 (only 1 correct answer): On which of the following join conditions does the query optimizer perform poorly in terms of overestimating or underestimating the size of the output?
+   1. fl.flightid=f.flightid
+   2. fl.customerid = c.customerid
+   3. c.frequentflieron = a.airlineid
 
 #### What to turn in:
 Submit `q4p1.txt` file. 
 
-**Q2 (10pt)**. [Query Debugging] For this problem you are required to switch to `q2db` database (`psql q2db`) where we have already populated the `customers` table with a large dataset. The `customers` table has the same schema as the one that we had used in Project 1. The following query counts the number of customer pairs whose year of birth differ by a year.
+**Q2 (10pt)**. [Query Debugging] For this problem, you are required to switch to `q2db` database (`psql q2db`) where we have already populated the `customers` table with a large dataset. The `customers` table has the same schema as the one that we had used in Project 1. The following query counts the number of customer pairs whose year of birth differ by a year.
 
 ```
 select count(*)
@@ -81,7 +81,7 @@ and extract(year from a.birthdate) < extract(year from b.birthdate);
 ```
 This query takes around 10 seconds to execute in the VM. Could you rewrite the query to make it execute more efficiently.
 
-[**Note**: In general, query optimizers does not require the users to rewrite the most efficient query. For a given query, the query optimizer enumerates all possible query plans and chooses the most efficient plan based on some heuristic. Surprisingly in this case, the query optimizer of Postgres does not do a good job!] 
+[**Note**: In general, query optimizers does not require users to write the most efficient query. For a given query, the query optimizer enumerates all possible query plans and chooses the most efficient plan based on some heuristic. Surprisingly in this case, the query optimizer of Postgres does not do a good job!] 
 
 #### What to turn in:
 Submit your efficient version of the query above in the `queries4.py` file. 
@@ -222,8 +222,10 @@ and the resulting table will be
 ```
 ResultTable (cId, cLoc, id, cLoc, cName)
 ```
-The two tables will be joined on `cId` which is the primary key in `CompanyLocation` and foreign key in `CompanyName`. Note that for sort merge join, we need the two tables to be sorted on the join keys. We have already sorted the tables on the join keys for you. Now let us see an example below:
+The two tables will be joined on the attribute `cId` which is the primary key in `CompanyLocation` and foreign key in `CompanyName`. Note that for sort merge join, we need both the tables to be sorted on the join keys. We have already sorted the tables on the join keys for you. Now let us see an example below:
 
+
+`CompanyLocation`
 | cId | cLoc |  
 |:---:|:---:| 
 | 1 | NY | 
@@ -231,8 +233,8 @@ The two tables will be joined on `cId` which is the primary key in `CompanyLocat
 | 3 | OR |
 | 4 | WA | 
 
-`CompanyLocation`
 
+`CompanyName`
 | id | cId | cName |  
 |:---:|:---:|:---:|
 | 1 | 1 | IBM |
@@ -240,16 +242,14 @@ The two tables will be joined on `cId` which is the primary key in `CompanyLocat
 | 4 | 2 | Facebook |
 | 3 | 4 | Microsoft |
 
-`CompanyName`
 
+`ResultTable`
 | cId | cLoc | id | cId | cName |  
 |:---:|:---:|:---:|:---:|:---:|
 | 1 | NY | 1 | 1 | IBM |
 | 2 | CA | 2 | 2 | Google |
 | 2 | CA | 4 | 2 | Facebook |
 | 4 | WA | 3 | 4 | Microsoft |
-
-`ResultTable`
 
 #### Coding Details:
 We have provided a package `queryproc` with the following java classes:
@@ -260,15 +260,16 @@ We have provided a package `queryproc` with the following java classes:
 1. **TupleType2.java**: Class defining the attributes for table `CompanyName` with helper methods.
 1. **TupleType3.java**: Class defining the attributes for table `ResultTable` with helper methods.
 
-#### Coding Restrictions:
-1. You are only allowed to **add/modify** your **own** code to the following: (i) **JoinOperators.java**: Put all your code within the SortMergeJoin method, (ii) **Relation.java**: If you think you need additional variables or helper methods in Relation.java, you may include them. You may also add additional code in the constructor if required, but you are not allowed to modify the constructor input parameters. 
-1. Please do not modify any existing code in any of the java files.
-1. Please remember to maintain the same order of attributes as shown in the example above when inserting a tuple in the table `ResultTable`. More instructions provided in JoinOperators.java.
-1. You may write your code with/without the help of an IDE of your choice (We encourage you to write/debug your code in an IDE). However your final code should compile and run with the following commands within the VM.
+You may write your code with/without the help of an IDE of your choice (We encourage you to write/debug your code in an IDE). However your final code should compile and run with the following commands within the VM.
 ```
 javac queryproc/*.java
 java queryproc/QueryProcessing
 ```
+
+#### Coding Restrictions:
+1. You are only allowed to **add/modify** your **own** code to the following: (i) **JoinOperators.java**: Put all your code within the SortMergeJoin method, (ii) **Relation.java**: If you think you need additional variables or helper methods in Relation.java, you may include them. You may also add additional code in the constructor if required, but you are not allowed to modify the constructor input parameters. 
+1. Please do not modify any existing code in any of the java files.
+1. Please remember to maintain the same order of attributes as shown in the example above when inserting a tuple in the table `ResultTable`. More instructions provided in JoinOperators.java.
 
 #### What to turn in:
 Please submit `JoinOperators.java` and `Relation.java`.
