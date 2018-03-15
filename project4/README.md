@@ -5,7 +5,7 @@
 Please do a `git pull` to download the directory `project4`. The files are:
 
 ### Getting started
-Start the VM with `vagrant up` in the `project4/` directory. The database `q2db` should already be set up.
+Start the VM with `vagrant up` in the `project4/` directory.
 
 **Q2 (10pt)**. [Query Debugging] For this problem you are required to switch to `q2db` database (`psql q2db`) where we have already populated the `customers` table with a large dataset. The `customers` table has the same schema as the one that we had used in Project 1. The following query counts the number of customer pairs whose year of birth differ by a year.
 
