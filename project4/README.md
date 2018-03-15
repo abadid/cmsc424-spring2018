@@ -20,7 +20,7 @@ This query takes around 10 seconds to execute in the VM. Could you rewrite the q
 [**Note**: In general, query optimizers does not require the users to rewrite the most efficient query. For a given query, the query optimizer enumerates all possible query plans and chooses the most efficient plan based on some heuristic. Surprisingly in this case, the query optimizer of Postgres does not do a good job!] 
 
 ### What to turn in:
-Submit your efficient version of the query above in the `queries.py` file. 
+Submit your efficient version of the query above in the `queries4.py` file. 
 
 **Q4 (10pt)**. [Sort Merge Join] In this problem, you will implement the sort merge join algorithm, more specifically the merge algorithm. You will be joining the following two tables, 
 ``` 
