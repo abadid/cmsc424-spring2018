@@ -226,6 +226,7 @@ The two tables will be joined on the attribute `cId` which is the primary key in
 
 
 `CompanyLocation`
+
 | cId | cLoc |  
 |:---:|:---:| 
 | 1 | NY | 
@@ -235,6 +236,7 @@ The two tables will be joined on the attribute `cId` which is the primary key in
 
 
 `CompanyName`
+
 | id | cId | cName |  
 |:---:|:---:|:---:|
 | 1 | 1 | IBM |
@@ -244,6 +246,7 @@ The two tables will be joined on the attribute `cId` which is the primary key in
 
 
 `ResultTable`
+
 | cId | cLoc | id | cId | cName |  
 |:---:|:---:|:---:|:---:|:---:|
 | 1 | NY | 1 | 1 | IBM |
