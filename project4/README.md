@@ -10,7 +10,7 @@ Start the VM with `vagrant up` in the `project4/` directory.
 **Q2 (10pt)**. [Query Debugging] For this problem you are required to switch to `q2db` database (`psql q2db`) where we have already populated the `customers` table with a large dataset. The `customers` table has the same schema as the one that we had used in Project 1. The following query counts the number of customer pairs whose year of birth differ by a year.
 
 ```
-select count(\*)
+select count(*)
 from customers a, customers b
 where extract(year from b.birthdate) - extract(year from a.birthdate) = 1 
 and extract(year from a.birthdate) < extract(year from b.birthdate);
@@ -19,7 +19,7 @@ This query takes around 10 seconds to execute in the VM. Could you rewrite the q
 
 [**Note**: In general, query optimizers does not require the users to rewrite the most efficient query. For a given query, the query optimizer enumerates all possible query plans and chooses the most efficient plan based on some heuristic. Surprisingly in this case, the query optimizer of Postgres does not do a good job!] 
 
-### What to turn in:
+## What to turn in:
 Submit your efficient version of the query above in the `queries4.py` file. 
 
 **Q4 (10pt)**. [Sort Merge Join] In this problem, you will implement the sort merge join algorithm, more specifically the merge algorithm. You will be joining the following two tables, 
@@ -60,7 +60,7 @@ The two tables will be joined on `cId` which is the primary key in `CompanyLocat
 
 `ResultTable`
 
-### Coding Details:
+## Coding Details:
 We have provided a package `queryproc` with the following java classes:
 1. **JoinOperators.java**: Your join algorithm must be written within the SortMergeJoin method.
 1. **QueryProcessing.java**: Contains the main method with some helper methods for displaying the tables and testing the result.
@@ -69,7 +69,7 @@ We have provided a package `queryproc` with the following java classes:
 1. **TupleType2.java**: Class defining the attributes for table `CompanyName` with helper methods.
 1. **TupleType3.java**: Class defining the attributes for table `ResultTable` with helper methods.
 
-### Coding Restrictions:
+## Coding Restrictions:
 1. You are only allowed to **add/modify** your **own** code to the following: (i) **JoinOperators.java**: Put all your code within the SortMergeJoin method, (ii) **Relation.java**: If you think you need additional variables or helper methods in Relation.java, you may include them. You may also add additional code in the constructor if required, but you are not allowed to modify the constructor input parameters. 
 1. Please do not modify any existing code in any of the java files.
 1. Please remember to maintain the same order of attributes as shown in the example above when inserting a tuple in the table `ResultTable`. More instructions provided in JoinOperators.java.
@@ -78,5 +78,5 @@ We have provided a package `queryproc` with the following java classes:
 javac queryproc/*.java
 java queryproc/QueryProcessing
 ```
-### What to turn in:
+## What to turn in:
 Please submit JoinOperators.java and Relation.java.
