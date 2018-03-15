@@ -178,9 +178,9 @@ We have provided you with a package `functionaldependency` with the following fi
 #### Coding Restrictions:
 1. You are only allowed to **add/modify** your **own** code to **src/CheckFD.java**. You can add any helper functions under **src/CheckFD.java**. Please do not modify anything else. This will create a problem when we test your implementation as you will be turning in only CheckFD.java. There are specific instructions in src/CheckFD.java.
 2. We provide you a Makefile for making it easy for you. After performing `cd functionaldependency`, you can use the following commands associated to the make file. 
-	3. `make clean`: Removes the current .class files.
-	4. `make test`: Compiles and runs the code against *test.csv*.
-	5. `make run`: Compiles and runs the code against *data.csv*.  			 
+   1. `make clean`: Removes the current .class files.
+   2. `make test`: Compiles and runs the code against *test.csv*.
+   3. `make run`: Compiles and runs the code against *data.csv*.  			 
 
 #### Tasks:
 1. **Functional Dependency**: Implement the checkDependency method inside src/CheckFD.java.
@@ -256,7 +256,7 @@ The two tables will be joined on the attribute `cId` which is the primary key in
 
 #### Coding Details:
 We have provided a package `queryproc` with the following java classes:
-1. **JoinOperators.java**: Your join algorithm must be written within the SortMergeJoin method.
+1. **JoinOperators.java**: Your join algorithm must be written within the SortMergeJoin method. This method takes in two relations (or tables) as input (`leftRelation` and `rightRelation`) and returns the `resultRelation`.
 1. **QueryProcessing.java**: Contains the main method with some helper methods for displaying the tables and testing the result.
 1. **Relation.java**: The relation class with some helper methods.
 1. **TupleType1.java**: Class defining the attributes for table `CompanyLoc` with helper methods.
@@ -269,8 +269,14 @@ javac queryproc/*.java
 java queryproc/QueryProcessing
 ```
 
+**Assumptions**: Please note the following assumptions in regards to testing your code:
+1. The join key in the `leftRelation` will always be the primary key of the `leftRelation`.
+1. The join key in the `rightRelation` will always refer to the primary key of the `leftRelation`, i.e. it is a foreign key.
+1. There would not be any `NULL` values in the tables provided.
+1. The input tables can be assumed to have at least one tuple.
+
 #### Coding Restrictions:
-1. You are only allowed to **add/modify** your **own** code to the following: (i) **JoinOperators.java**: Put all your code within the SortMergeJoin method, (ii) **Relation.java**: If you think you need additional variables or helper methods in Relation.java, you may include them. You may also add additional code in the constructor if required, but you are not allowed to modify the constructor input parameters. 
+1. You are only allowed to **add/modify** your **own** code to the following java files: (i) **JoinOperators.java**: Put all your code within the SortMergeJoin method, (ii) **Relation.java**: If you think you need additional variables or helper methods in Relation.java, you may include them. You may also add additional code in the constructor if required, but you are not allowed to modify the constructor input parameters. 
 1. Please do not modify any existing code in any of the java files.
 1. Please remember to maintain the same order of attributes as shown in the example above when inserting a tuple in the table `ResultTable`. More instructions provided in JoinOperators.java.
 
