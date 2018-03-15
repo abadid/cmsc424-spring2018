@@ -4,27 +4,23 @@
 
 Please do a `git pull` to download the directory `project4`. The files are:
 
-1. README.md: This file
-1. small.sql: SQL script for populating `flights` database.
-1. queries.py: The file where to enter your answer for Q1; this file has to be submitted
-1. answers.py: The answers to query Q1 and Q3.
-1. answers.txt: The answers to queries Q2 and Q3.
-1. SQLTesting.py: File to be used for testing your SQL submission -- see below 
-1. table4storedproc.sql: SQL script for populating `stpc` database.
-1. trigger-database.sql: SQL script for setting up the `flightsales` database.
-1. trigger-test.py: Python script for testing the trigger.
-1. Vagrantfile: Vagrantfile that creates the required databases and populates some of them.
-
 ### Getting started
 Start the VM with `vagrant up` in the `project4/` directory. The database `q2db` should already be set up.
 
-### Submission Instructions
-- Submit your answers to Q1 in `queries.py`
-- Submit your answers to Q2, Q3 in `answers.txt`
-- Submit your answer to Q4 in `trigger.sql`
+**Q2 (10pt)**. [Query Debugging] For this problem you are required to switch to `q2db` database (`psql q2db`) where we have already populated the `customers` table with a large dataset. The `customers` table has the same schema as the one that we had used in Project 1. The following query counts the number of customer pairs whose year of birth differ by a year.
 
-<br />
+```
+select count(\*)
+from customers a, customers b
+where extract(year from b.birthdate) - extract(year from a.birthdate) = 1 
+and extract(year from a.birthdate) < extract(year from b.birthdate);
+```
+This query takes around 10 seconds to execute in the VM. Could you rewrite the query to make it execute more efficiently.
 
+[**Note**: In general, query optimizers does not require the users to rewrite the most efficient query. For a given query, the query optimizer enumerates all possible query plans and chooses the most efficient plan based on some heuristic. Surprisingly in this case, the query optimizer of Postgres does not do a good job!] 
+
+### What to turn in:
+Submit your efficient version of the query above in the `queries.py` file. 
 
 **Q4 (10pt)**. [Sort Merge Join] In this problem, you will implement the sort merge join algorithm, more specifically the merge algorithm. You will be joining the following two tables, 
 ``` 
