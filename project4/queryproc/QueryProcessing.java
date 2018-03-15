@@ -19,6 +19,9 @@ public class QueryProcessing {
         correctOutput.insert(new TupleType3(10, "NC", 13, 10, "RedHat"));
         correctOutput.insert(new TupleType3(10, "NC", 14, 10, "Lenovo"));
 
+        System.out.println("\n\n++++ Correct ResultTable ++++");
+        printRelation(correctOutput);
+
         if (correctOutput.getSize() != actualOutput.getSize()) {
             return false;
         }
@@ -54,7 +57,6 @@ public class QueryProcessing {
 
     public static void printRelation1(Relation<TupleType1> relation) {
 
-        System.out.println("\n\nCompany Locations:");
         for (TupleType1 t : relation.getRelation()) {
             System.out.println(t.getcId() + " " + t.getcLoc());
         }
@@ -62,7 +64,6 @@ public class QueryProcessing {
 
     public static void printRelation2(Relation<TupleType2> relation) {
 
-        System.out.println("\n\nCompany Names:");
         for (TupleType2 t : relation.getRelation()) {
             System.out.println(t.getId() + " " + t.getcId() + " " + t.getcName());
         }
@@ -70,7 +71,6 @@ public class QueryProcessing {
 
     public static void printRelation(Relation<TupleType3> relation) {
 
-        System.out.println("\n\nResultTable: ");
         for (TupleType3 t : relation.getRelation()) {
             System.out.println(t.getcId() + " " + t.getcLoc() + " " + t.getId() + " " + t.getc_Id() + " " + t.getcName());
         }
@@ -78,48 +78,52 @@ public class QueryProcessing {
 
     public static void main(String[] args) {
 
-        Relation<TupleType1> lr = new Relation<TupleType1>();
-        lr.insert(new TupleType1(1, "NY"));
-        lr.insert(new TupleType1(2, "CA"));
-        lr.insert(new TupleType1(3, "WA"));
-        lr.insert(new TupleType1(4, "MD"));
-        lr.insert(new TupleType1(5, "IL"));
-        lr.insert(new TupleType1(6, "GA"));
-        lr.insert(new TupleType1(7, "TX"));
-        lr.insert(new TupleType1(8, "MA"));
-        lr.insert(new TupleType1(9, "NJ"));
-        lr.insert(new TupleType1(10, "NC"));
-        lr.insert(new TupleType1(11, "AZ"));
+        Relation<TupleType1> companyLocation = new Relation<TupleType1>();
+        companyLocation.insert(new TupleType1(1, "NY"));
+        companyLocation.insert(new TupleType1(2, "CA"));
+        companyLocation.insert(new TupleType1(3, "WA"));
+        companyLocation.insert(new TupleType1(4, "MD"));
+        companyLocation.insert(new TupleType1(5, "IL"));
+        companyLocation.insert(new TupleType1(6, "GA"));
+        companyLocation.insert(new TupleType1(7, "TX"));
+        companyLocation.insert(new TupleType1(8, "MA"));
+        companyLocation.insert(new TupleType1(9, "NJ"));
+        companyLocation.insert(new TupleType1(10, "NC"));
+        companyLocation.insert(new TupleType1(11, "AZ"));
 
 
-        Relation<TupleType2> rr = new Relation<TupleType2>();
-        rr.insert(new TupleType2(1, 1, "IBM"));
-        rr.insert(new TupleType2(2, 1, "MorganStanley"));
-        rr.insert(new TupleType2(3, 2, "Google"));
-        rr.insert(new TupleType2(4, 2, "Apple"));
-        rr.insert(new TupleType2(5, 3, "Microsoft"));
-        rr.insert(new TupleType2(7, 3, "Amazon"));
-        rr.insert(new TupleType2(8, 3, "Boeing"));
-        rr.insert(new TupleType2(9, 4, "Geico"));
-        rr.insert(new TupleType2(10, 7, "AT&T"));
-        rr.insert(new TupleType2(11, 8, "GE"));
-        rr.insert(new TupleType2(12, 9, "Johnson&Johnson"));
-        rr.insert(new TupleType2(13, 10, "RedHat"));
-        rr.insert(new TupleType2(14, 10, "Lenovo"));
+        Relation<TupleType2> companyName = new Relation<TupleType2>();
+        companyName.insert(new TupleType2(1, 1, "IBM"));
+        companyName.insert(new TupleType2(2, 1, "MorganStanley"));
+        companyName.insert(new TupleType2(3, 2, "Google"));
+        companyName.insert(new TupleType2(4, 2, "Apple"));
+        companyName.insert(new TupleType2(5, 3, "Microsoft"));
+        companyName.insert(new TupleType2(7, 3, "Amazon"));
+        companyName.insert(new TupleType2(8, 3, "Boeing"));
+        companyName.insert(new TupleType2(9, 4, "Geico"));
+        companyName.insert(new TupleType2(10, 7, "AT&T"));
+        companyName.insert(new TupleType2(11, 8, "GE"));
+        companyName.insert(new TupleType2(12, 9, "Johnson&Johnson"));
+        companyName.insert(new TupleType2(13, 10, "RedHat"));
+        companyName.insert(new TupleType2(14, 10, "Lenovo"));
 
-        printRelation1(lr);
-        printRelation2(rr);
+        System.out.println("\n\n++++ CompanyLocation ++++");
+        printRelation1(companyLocation);
 
-        Relation<TupleType3> resRel = JoinOperators.SortMergeJoin(lr, rr);
+        System.out.println("\n\n++++ CompanyName ++++");
+        printRelation2(companyName);
 
-        printRelation(resRel);
+        Relation<TupleType3> resultTable = JoinOperators.SortMergeJoin(companyLocation, companyName);
 
-        System.out.print("\n\nTest: ");
-        if (testOutput(resRel)){
-            System.out.println("Pass!");
+        System.out.println("\n\n++++ Your ResultTable ++++");
+        printRelation(resultTable);
+
+
+        if (testOutput(resultTable)){
+            System.out.println("\n\nTest: Pass!");
         }
         else {
-            System.out.println("Fail!");
+            System.out.println("\n\nTest: Fail!");
         }
     }
 }
