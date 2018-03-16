@@ -55,7 +55,7 @@ QUERY PLAN
  Total runtime: 1.030 ms
 ```
 
-You do not need to run the query; You need to understand the query plan and answer the following questions in `p4q1.txt` for each of the following questions. Please write the answer corresponding to each of the following questions in a new line in `p4q1.txt`.
+You do not need to run the query; You need to understand the query plan shown above and answer the following questions in `p4q1.txt` for each of the following questions. Please write the answer corresponding to each of the following questions in a new line in `p4q1.txt`.
 
 1. State True or False: The first join operation is executed on the condition fl.flightid = f.flightid. 
 2. State True or False: The filter condition (a.hub=f.source or a.hub=f.dest) is executed after all the join operations are performed. 
