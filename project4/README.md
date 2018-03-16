@@ -87,7 +87,7 @@ This query takes around 10 seconds to execute in the VM. Could you rewrite the q
 Submit your efficient version of the query above in the `queries4.py` file. 
 
 
-**Q3 (10pt).** [Functional Dependency] Let us consider a relation *R* having two attributes *X* and *Y*. We say `X -> Y` (X functionally determines Y) in R iff each value in X is associated precisely with only one value in Y. (Note that each X and Y can be sets of attributes). However, for this project we deal only with dependencies of the form X->Y where X and Y consist of 1 attribute each e.g. R1->R2. In essence, functional dependency determines some kind of association between two attributes or sets of attributes.  
+**Q3 (10pt).** [Functional Dependency] According to your book `X -> Y` (X functionally determines Y) if each value in X is associated precisely with only one value in Y. Your book allows multiple attributes of a relation to combine to form X and/or Y. However, for this project will only consider functional dependencies for which X and Y can correspond to only one attribute from a given relation.   
 
 
 Consider the following relation *S* having two attributes R<sub>1</sub> and R<sub>2</sub>. 
