@@ -57,7 +57,7 @@ QUERY PLAN
 
 You do not need to run the query. You just need to understand the query plan shown above and answer the following questions in `p4q1.txt`. Please write the answer corresponding to each of the following questions in a new line in `p4q1.txt` (answers are not case sensitive).
 
-1. State True or False: The first join operation is executed on the condition fl.flightid = f.flightid. 
+1. State True or False. For all hash joins involved in this query, the smaller of the two relations is always hashed. 
 2. State True or False: The filter condition (a.hub=f.source or a.hub=f.dest) is executed after all the join operations are performed. 
 3. State 1,2 or 3 (only 1 correct answer): The join operations are performed in the following order (earliest to last): 
    1. fl.flightid=f.flightid, fl.customerid = c.customerid, c.frequentflieron = a.airlineid. 
@@ -69,22 +69,36 @@ You do not need to run the query. You just need to understand the query plan sho
    3. c.frequentflieron = a.airlineid
 
 #### What to turn in:
-Submit `q4p1.txt` file. 
+Answer the questions in ELMS. 
 
 **Q2 (10pt)**. [Query Debugging] For this problem, you are required to switch to `q2db` database (`psql q2db`) where we have already populated the `customers` table with a relatively large dataset. The `customers` table has the same schema as the one that we had used in Project 1. The following query counts the number of customer pairs whose year of birth differ by a year.
 
 ```
+with custbyear as (
+select customerid, name, extract(year from birthdate) as birthyear, frequentflieron
+from customers)
 select count(*)
-from customers a, customers b
-where extract(year from b.birthdate) - extract(year from a.birthdate) = 1 
-and extract(year from a.birthdate) < extract(year from b.birthdate);
+from custbyear a, custbyear b
+where b.birthyear - a.birthyear = 1;
 ```
-This query takes around 10 seconds to execute in the VM. Could you rewrite the query to make it execute more efficiently.
+This query takes around 3.5 seconds to execute in the VM. Could you rewrite the query to make it execute more efficiently.
+
+[**Hint**: You might want to use EXPLAIN to view the query plan of the query.]
+
+The query above is inefficient because of which of the following condition [only one correct answer]:
+
+1. The query involves a self join.
+1. The query involves a self join and also on the choice of the join algorithm by the query optimizer.
+1. The choice of the join algorithm by the query optimizer.
+1. There are no indexes created on the birthdate column before executing the query.
+1. The query involves doing a cartesian product due to the absence of a join condition.
+
 
 [**Note**: In general, query optimizers does not require users to write the most efficient query. For a given query, the query optimizer enumerates all possible query plans and chooses the most efficient plan based on some heuristic. Surprisingly in this case, the query optimizer of Postgres does not do a good job!] 
 
 #### What to turn in:
-Submit your efficient version of the query above in the `queries4.py` file. 
+1. Submit your efficient version of the query above in the `queries4.py` file.
+1. Answer the multiple choice question in ELMS.
 
 
 **Q3 (10pt).** [Functional Dependency] According to your book `X -> Y` (X functionally determines Y) if each value in X is associated precisely with only one value in Y. Your book allows multiple attributes of a relation to combine to form X and/or Y. However, for this project will only consider functional dependencies for which X and Y can correspond to only one attribute from a given relation.   
