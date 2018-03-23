@@ -166,32 +166,39 @@ For the above shown relation R, the corresponding R<sub>DUP</sub> will be as fol
 
 Let us define Cardinality(x) *for each distinct* value x of attribute R(X) *on relation R* as follows,
 
+<!---
 <img src="https://latex.codecogs.com/svg.latex?Cardinality(x)=\frac{1}{\text{number of distinct (x,y) pairs}}" /> 
+--->
 
-<!---![](./eqn/eqn1.jpeg)--->
+![](./eqn/eqn1.jpeg)
 
 For Relation *R*, Cardinality(1) = ⅓ [Presence of (1,2), (1,3), (1,4)], Cardinality(2) = ½ [Presence of (2,3), (2,4)] and Cardinality(7) = 1 [Presence of (7,16)]. We consider only the unique pairs of the form (x,y) while defining Cardinality. Further, cardinality is defined on the original relation R. 
 
 Let us define Consistency(x) *for each distinct* value x of attribute R<sub>DUP</sub>(x) as follows,
 
+<!---
 <img src="https://latex.codecogs.com/svg.latex?Consistency(x)=\frac{\text{maximum number of times x occurs with some y in }  R_{DUP}}{\text{total number of (x,y) pairs in }R_{DUP}}" />
+--->
 
-<!---![](./eqn/eqn2.jpeg)--->
+![](./eqn/eqn2.jpeg)
 
 For Relation *R<sub>DUP</sub>*, Consistency(1)=⅓ [1 occurs once each with 2, 3 and 4],  Consistency(2) = ⅔ [2 occurs once with 4 and 2 times with 3] and Consistency(3) = 2/2 [3 occurs with 3 twice]. We consider all the tuples of the form (x,y) while defining consistency. Further, consistency is defined on the duplicate relation R<sub>DUP</sub>.
 
 Using the above definitions, we compute Confidence(X,Y) as follows,          
 
+<!---
 <img src="https://latex.codecogs.com/svg.latex?Confidence(X,Y)=\frac{\sum_{x \in R(X)} Cardinality(a)}{\text{number of unique values in }R(X)}   + \frac{\sum_{x \in R_{DUP}} Consistency(x)}{\text{number of unique values in }R_{DUP}(X)}" />
+--->
 
-<!---![](./eqn/eqn4.jpeg)--->
+![](./eqn/eqn3.jpeg)
 
 We say *X has a fuzzy functional dependency on Y iff* 
 
-
+<!---
 <img src="https://latex.codecogs.com/svg.latex?Confidence(X,Y) \geq \text{threshold}" />
+--->
 
-<!---![](./eqn/eqn5.jpeg)--->
+![](./eqn/eqn4.jpeg)
 
 
 We set the threshold based on the application requirement. *For the purpose of this project we will deal with functional dependencies of the form X->Y*.
