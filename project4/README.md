@@ -104,106 +104,26 @@ The query above is inefficient because of which of the following condition [only
 **Q3 (10pt).** [Functional Dependency] According to your book `X -> Y` (X functionally determines Y) if each value in X is associated precisely with only one value in Y. Your book allows multiple attributes of a relation to combine to form X and/or Y. However, for this project will only consider functional dependencies for which X and Y can correspond to only one attribute from a given relation.   
 
 
-Consider the following relation *S* having two attributes R<sub>1</sub> and R<sub>2</sub>. 
+Consider the following relation *S* having two attributes X and Y. 
 
-`Relation S`
+**Relation S**
 
-| R<sub>1</sub> | R<sub>2</sub> |
+| X | Y |
 |:---:|:---:| 
 | 1 | 2 | 
 | 2 | 3 | 
 | 2 | 3 |
-| 2 | 4 |
 | 3 | 3 |
 | 4 | 18|
 | 7 | 16|
 
-From *S*, we observe that R<sub>1</sub>->R<sub>2</sub>. However,  R<sub>2</sub>->R<sub>1</sub> does not hold. This is because 3 in R<sub>2</sub> has two possible values of 2 and 3 in R<sub>1</sub>. 
+From *S*, we observe that X->Y. However, *Y->X does not hold*. This is because 3 in Y has two possible values of 2 and 3 in X. 
 
-As we know that data in each of these tables could be collected from multiple sources, it could be highly prone to errors during various stages of data acquisition and processing. However, in spite of containing some errors, it could still be the case that two attributes or sets of attributes are associated with a reasonable confidence. To accommodate such cases we define the notion of **fuzzy functional dependency** for this project. 
+As we know that data in each of these tables could be collected from multiple sources, it is prone to errors during various stages of data acquisition and processing. However, in spite of containing some errors, it could still be the case that two attributes or sets of attributes are associated with a reasonable confidence. To accommodate such cases we define the notion of **fuzzy functional dependency** for this project. 
 
-For illustrating fuzzy functional dependency consider the following relation *P* having two attributes R<sub>1</sub> and R<sub>2</sub>. We observe that *neither* R<sub>1</sub>->R<sub>2</sub> nor R<sub>2</sub>->R<sub>1</sub> in P.
+For illustrating fuzzy functional dependency consider the following relation *R* having two attributes X and Y. We observe that *neither* X->Y nor Y->X holds in R. Further, let us define R(X) and R(Y) as attribute X and Y of relation R respectively. 
 
-`Relation P`
-
-| R<sub>1</sub> | R<sub>2</sub> |
-|:---:|:---:| 
-| 1 | 2 | 
-| 1 | 3 | 
-| 1 | 4 |
-| 2 | 3 |
-| 2 | 3 |
-| 2 | 4 |
-| 3 | 3 |
-| 3 | 3 |
-| 4 | 18|
-| 7 | 16|
-
-
-
-Let a’s and b’s be the set of values corresponding to attributes R<sub>1</sub> and R<sub>2</sub> of relation P respectively. Let us define Cardinality(a) *for each distinct* value a of attribute R<sub>1</sub> as follows,
-
-<!---
-<img src="https://latex.codecogs.com/svg.latex?Cardinality(a)=\frac{1}{\text{number of unique (a,b) pairs}}" /> 
---->
-![](./eqn/eqn1.jpeg)
-
-For Relation *P*, Cardinality(1) = ⅓ [Presence of (1,2), (1,3), (1,4)], Cardinality(2) = ½ [Presence of (2,3), (2,4)] and Cardinality(7) = 1 [Presence of (7,16)]. We consider only the unique pairs of the form (a,b) while defining Cardinality. Let us define Consistency(a) *for each distinct* value a of attribute R<sub>1</sub> as follows,
-<!---
-<img src="https://latex.codecogs.com/svg.latex?Consistency(a)=\frac{\text{maximum number of times a occurs with some b}}{\text{total number of (a,b) pairs}}" />
---->
-![](./eqn/eqn2.jpeg)
-
-For Relation *P*, Consistency(1)=⅓ [1 occurs once each with 2, 3 and 4],  Consistency(2) = ⅔ [2 occurs once with 4 and 2 times with 3] and Consistency(3) = 2/2 [3 occurs with 3 twice]. We consider all the tuples of the form (a,b) while defining Consistency. Further, let us define Rep(a) as follows,
-<!---
-<img src="https://latex.codecogs.com/svg.latex?Rep(a)= \begin{cases} \text{maximum number of times a occurs with some b}, \text{if} \;Cardinality(a)=1 \\ 0, \text{else} \end{cases}" />
---->
-
-![](./eqn/eqn3.jpeg)
-
-For Relation *P*, Rep(1)=0, Rep(2)=0 and Rep(3)=2 [3 occurs 2 times with 3]. Using the above definitions, we compute Confidence(R<sub>1</sub>->R<sub>2</sub>) as follows,          
-<!---
-<img src="https://latex.codecogs.com/svg.latex?Confidence(R_1,R_2)=\frac{\sum_{a \in R_1} Cardinality(a)*Consistency(a)}{\text{number of unique values a in }R_1}   + \frac{\sum_{a \in R_1} Rep(a)}{\text{total number of tuples in relation}}" />
---->
-![](./eqn/eqn4.jpeg)
-
-We say *R<sub>1</sub> has a fuzzy functional dependency R<sub>2</sub> iff* 
-
-<!---
-<img src="https://latex.codecogs.com/svg.latex?Confidence(R_1,R_2) \geq \text{threshold}" />
---->
-![](./eqn/eqn5.jpeg)
-
-
-We set the threshold based on the application requirement. *For the purpose of this project we will deal with functional dependencies of the form X->Y*.
-
-#### Coding Details:
-
-We have provided you with a package `functionaldependency` with the following files (inside src directory):
-
-1. **src/Table.java**: Loads the table with the data from the input file.
-2. **src/Dependency.java**: Enumerates all pairs of possible columns to check for a possible functional dependency or fuzzy functional dependency.
-3. **src/CheckFD.java**: You will be implementing methods that check for functional dependency and fuzzy functional dependency.
-4. **src/Run.java**: Prints the output corresponding to your implementation of the two methods on `data.csv`.
-5. **src/Test.java**: Prints the output corresponding to your implementation of the two methods on `test.csv`. You can cross check the output with a predefined loaded expected output on `test.csv`.
-6. **test.csv**: A small table where you could test your implementation.
-7. **data.csv**: Actual file on which *we would be testing your implementation*. 
-
-#### Coding Restrictions:
-1. You are only allowed to **add/modify** your **own** code to **src/CheckFD.java**. You can add any helper functions under **src/CheckFD.java**. Please do not modify anything else. This will create a problem when we test your implementation as you will be turning in only CheckFD.java. There are specific instructions in src/CheckFD.java.
-2. We provide you a Makefile for making it easy for you. After performing `cd functionaldependency`, you can use the following commands associated to the make file. 
-   1. `make clean`: Removes the current .class files.
-   2. `make test`: Compiles and runs the code against *test.csv*.
-   3. `make run`: Compiles and runs the code against *data.csv*.  			 
-
-#### Tasks:
-1. **Functional Dependency**: Implement the checkDependency method inside src/CheckFD.java.
-2. **Fuzzy Functional Dependency**: Implement the checkFuzzyDependency method inside src/CheckFD.java.
-
-
-Based on your implementation and understanding of fuzzy functional dependency answer the following questions in `p4q3.txt` (create it). Consider that we have `Relation Z` shown below having two attributes `X` and `Y`, dependency X->Y where x and y are values of X and Y respectively. *Please make sure to enter the answers corresponding to each of the questions in a separate line.*
-
-`Relation Z`
+**Relation R**
 
 | X | Y |
 |:---:|:---:| 
@@ -212,20 +132,167 @@ Based on your implementation and understanding of fuzzy functional dependency an
 | 1 | 4 |
 | 2 | 3 |
 | 2 | 3 |
+| 2 | 4 |
 | 3 | 3 |
 | 3 | 3 |
 | 4 | 18|
 | 7 | 16|
 
-State true or false. 	
- 
- 1. Cardinality(1) > Cardinality(7). 
- 2. Consistency(3) > Consistency(2).
- 3. Rep(2) = Rep(3).
+
+Let us assume that we are interested to check if X and Y have a fuzzy functional dependency between each other in R i.e. Y is fuzzy functional dependent on X (X->Y). In this case, X is the first attribute and Y is the second attribute. 
+
+Further, let us define R<sub>DUP</sub>, while considering X->Y, as the relation obtained from R that retains all duplicates defined on the first attribute (X). We define duplicates in two ways in the context of X->Y:
+	
+1. x appears multiple times with the same y : e.g. x=3 (3,3)
+2. x appears multiple times with different y's : e.g. x=1 (1,2),(1,3),(1,4), x=2 (2,3),(2,3),(2,4)
+
+
+For the above shown relation R, the corresponding R<sub>DUP</sub> will be as follows:
+
+**Relation R<sub>DUP</sub>**
+
+| X | Y |
+|:---:|:---:| 
+| 1 | 2 | 
+| 1 | 3 | 
+| 1 | 4 |
+| 2 | 3 |
+| 2 | 3 |
+| 2 | 4 |
+| 3 | 3 |
+| 3 | 3 |
+
+
+
+Let us define Cardinality(x) *for each distinct* value x of attribute R(X) *on relation R* as follows,
+
+<img src="https://latex.codecogs.com/svg.latex?Cardinality(x)=\frac{1}{\text{number of distinct (x,y) pairs}}" /> 
+
+<!---![](./eqn/eqn1.jpeg)--->
+
+For Relation *R*, Cardinality(1) = ⅓ [Presence of (1,2), (1,3), (1,4)], Cardinality(2) = ½ [Presence of (2,3), (2,4)] and Cardinality(7) = 1 [Presence of (7,16)]. We consider only the unique pairs of the form (x,y) while defining Cardinality. Further, cardinality is defined on the original relation R. 
+
+Let us define Consistency(x) *for each distinct* value x of attribute R<sub>DUP</sub>(x) as follows,
+
+<img src="https://latex.codecogs.com/svg.latex?Consistency(x)=\frac{\text{maximum number of times x occurs with some y in }  R_{DUP}}{\text{total number of (x,y) pairs in }R_{DUP}}" />
+
+<!---![](./eqn/eqn2.jpeg)--->
+
+For Relation *R<sub>DUP</sub>*, Consistency(1)=⅓ [1 occurs once each with 2, 3 and 4],  Consistency(2) = ⅔ [2 occurs once with 4 and 2 times with 3] and Consistency(3) = 2/2 [3 occurs with 3 twice]. We consider all the tuples of the form (x,y) while defining consistency. Further, consistency is defined on the duplicate relation R<sub>DUP</sub>.
+
+Using the above definitions, we compute Confidence(X,Y) as follows,          
+
+<img src="https://latex.codecogs.com/svg.latex?Confidence(X,Y)=\frac{\sum_{x \in R(X)} Cardinality(a)}{\text{number of unique values in }R(X)}   + \frac{\sum_{x \in R_{DUP}} Consistency(x)}{\text{number of unique values in }R_{DUP}(X)}" />
+
+<!---![](./eqn/eqn4.jpeg)--->
+
+We say *X has a fuzzy functional dependency on Y iff* 
+
+
+<img src="https://latex.codecogs.com/svg.latex?Confidence(X,Y) \geq \text{threshold}" />
+
+<!---![](./eqn/eqn5.jpeg)--->
+
+
+We set the threshold based on the application requirement. *For the purpose of this project we will deal with functional dependencies of the form X->Y*.
+
+#### Coding Details:
+
+We have provided you with a package `functionaldependency` with the following files:
+
+1. **src/Test.java**: Computes and prints all the pairs that have a fuzzy functional dependency on each other using jdbc.
+2. **populate-fd.sql**: Loads `functionaldependency/data.csv` into `q3db` database. 
+
+`q3db` is already populated with the dataset. You can check it using 
+
+```
+$ psql q3db
+q3db=# select * from dataset;
+```
+
+#### Task:
+
+**Fuzzy Functional Dependency**: Add your SQL query that computes the fuzzy functional dependency between two columns. More details in doQuery method in Test.java.
+
+In order to compile and run your implementation, run the following commands (from \vagrant\),
+
+```
+$ javac -cp functionaldependency/postgresql-42.2.2.jre7.jar:. functionaldependency/Test.java 
+$ java -cp functionaldependency/postgresql-42.2.2.jre7.jar:. functionaldependency/Test
+```
+
+
+#### Coding Restrictions:
+1. Please do not modify anything else.
+
+
+##Questions to answered on ELMS
+			 
+Based on your understanding of fuzzy functional dependency answer the following questions: 
+
+1. A high cardinality score is assigned to ‘x’ in X if it occurs with different ‘y’ values in Y. (True or False)
+
+2. A high cardinality score is assigned to ‘x’ in X if it occurs with exactly one of the ‘y’ values multiple times. (True or False)
+
+3. A high consistency score is assigned to ‘x’ in X if it occurs multiple times with a fixed ‘y1’ in Y and with possibly few other values ‘y2’ in Y. (True or False)
+
+4. The confidence equation includes two parts --- one part is focused on cardinality and the other part focused on consistency. Do we really need both parts? Let’s say that we removed the **consistency** part, and kept the **cardinality** part. Describe an (incorrect) functional dependency X-->Y that would likely be above threshold if we just doubled the cardinality part (instead of adding the cardinality part to the consistency part), but would correctly be below threshold if the original confidence equation is used (because X and Y have nothing to do with each other): 
+	
+	(check all that apply)
+
+	X is:
+		
+	* Mostly unique (only a few repeats).
+	* 	Medium number of unique values, with each value repeating approximately the same number of times.
+	*  	Few number of unique values, and heavily skewed (99% of column has only one value).
+	Non-integer values.
+	* Doesn’t matter! Only Y matters.
+	* Doesn’t matter! We don’t need the consistency part of the equation!
+
+	And Y is:
+	
+	* Mostly unique (only a few repeats)
+	* Medium number of unique values, with each value repeating approximately the same number of times
+	* Few number of unique values, and heavily skewed (99% of column has only one value)
+	* Non-integer values
+	* Doesn’t matter! Only X matters.
+	* Doesn’t matter! We don’t need the consistency part of the equation!
+
+
+5. As mentioned in the previous question, the confidence equation includes two parts --- one part is focused on cardinality and the other part focused on consistency. We already asked: do we really need both parts? What if we removed the **cardinality** part, and kept the **consistency** part. Describe an (incorrect) functional dependency X-->Y that would likely be above threshold if we just doubled the consistency part (instead of adding the cardinality part to the consistency part), but would correctly be below threshold if the original confidence equation is used (because X and Y have nothing to do with each other): 
+
+	(check all that apply)
+
+	X is:
+	
+	* Mostly unique (only a few repeats).
+	* Medium number of unique values, with each value repeating approximately the same number of times.
+	* Few number of unique values, and heavily skewed (99% of column has only one value).
+	* Non-integer values.
+	* Doesn’t matter! Only Y matters.
+	* Doesn’t matter! We don’t need the consistency part of the equation!
+
+	And Y is:
+	
+	* Mostly unique (only a few repeats).
+	* Medium number of unique values, with each value repeating approximately the same number of times.
+	* Few number of unique values, and heavily skewed (99% of column has only one value).
+	* Non-integer values.
+	* Doesn’t matter! Only X matters.
+	* Doesn’t matter! We don’t need the consistency part of the equation!
+
+6. Give an example of a dataset where the full confidence equation (with both parts) still incorrectly predicts a functional dependency that doesn’t really exist (X and Y have nothing to do with each other). Don’t give the actual dataset, just describe X and Y using similar types of descriptions as the options given above (e.g. X has 100 unique values, and is skewed in a certain way, etc.)  (open-ended text response question)
+
+7. Which of the following conditions yield the least confidence according to our formulation? 
+	1. 	When X is a random number drawn uniformly from a medium sized domain (e.g. 100 unique values).  Y is a random number drawn from a small domain (e.g. it is a Boolean attribute with only two possible values) and is heavily skewed (90% of all rows have the same value for this attribute). 
+	2. When X is a random number drawn uniformly from a domain of size equal to the number of rows in the table. In other words, X is mostly unique, but has a few repeats. Y is a random number drawn uniformly from a small domain (e.g. 2 unique values). 
+	3. X is a number drawn from a domain of 20 unique values. 19 of those values only appear once in the entire dataset. Every other tuple has the 20th value of X. Y is random numbers drawn from a small domain (e.g. 2 unique values) and is heavily skewed (99.9% of all rows have the same value).
+	4. X and Y are both zero for all but 30 tuples in the dataset. For those remaining 30 tuples, both X and Y can have one of 3 values, each drawn from a uniform distribution.  
+	5. X and Y are both zero for all but 100 tuples in the dataset. For those remaining 100 tuples, both X and Y can have one of 10 values, but X is uniformly distributed and Y is skewed (80% of all Y values are the same). 
 
 
 #### What to turn in:
-Please submit `CheckFD.java` and `p4q3.txt`.
+Please submit `Test.java` and answer the questions in ELMS.
 
 **Q4 (10pt)**. [Sort Merge Join] In this problem, you will implement the sort merge join algorithm, more specifically the merge algorithm. The schema of the two tables to be joined and the resulting table are as follows:
 ``` 
@@ -275,6 +342,7 @@ We have provided a package `queryproc` with the following java classes:
 1. **TupleType3.java**: Class defining the attributes for table `ResultRelation` with helper methods.
 
 You may write your code with/without the help of an IDE of your choice (We encourage you to write/debug your code in an IDE). However your final code should compile and run with the following commands within the VM.
+
 ```
 javac queryproc/*.java
 java queryproc/QueryProcessing

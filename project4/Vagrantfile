@@ -65,9 +65,11 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
      apt-get update
-     apt-get install -y postgresql postgresql-contrib python python-pip build-essential python-dev python-psycopg2 default-jre default-jdk systemd 
+     apt-get install -y postgresql postgresql-contrib python python-pip build-essential python-dev python-psycopg2 default-jre default-jdk systemd
      sudo -u postgres createuser -s vagrant
      sudo -u vagrant createdb q2db
      sudo -u vagrant psql q2db -f /vagrant/populate-customers.sql
+     sudo -u vagrant createdb q3db
+     sudo -u vagrant psql q3db -f /vagrant/populate-fd.sql
   SHELL
 end
