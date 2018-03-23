@@ -121,7 +121,7 @@ From *S*, we observe that X->Y. However, *Y->X does not hold*. This is because 3
 
 As we know that data in each of these tables could be collected from multiple sources, it is prone to errors during various stages of data acquisition and processing. However, in spite of containing some errors, it could still be the case that two attributes or sets of attributes are associated with a reasonable confidence. To accommodate such cases we define the notion of **fuzzy functional dependency** for this project. 
 
-For illustrating fuzzy functional dependency consider the following relation *R* having two attributes X and Y. We observe that *neither* X->Y nor Y->X holds in R. Further, let us define R(X) and R(Y) as attribute X and Y of relation R respectively. 
+For illustrating fuzzy functional dependency, consider the following relation *R* having two attributes X and Y. We observe that *neither* X->Y nor Y->X holds in R. Further, let us define R(X) and R(Y) as values of attribute X and Y of relation R respectively. 
 
 **Relation R**
 
@@ -139,9 +139,9 @@ For illustrating fuzzy functional dependency consider the following relation *R*
 | 7 | 16|
 
 
-Let us assume that we are interested to check if X and Y have a fuzzy functional dependency between each other in R i.e. Y is fuzzy functional dependent on X (X->Y). In this case, X is the first attribute and Y is the second attribute. 
+Let us say that we want to check if X and Y have a fuzzy functional dependency between each other in R i.e. Y is fuzzy functional dependent on X (X->Y). In this case, X is the first attribute and Y is the second attribute. 
 
-Further, let us define R<sub>DUP</sub>, while considering X->Y, as the relation obtained from R that retains all duplicates defined on the first attribute (X). We define duplicates in two ways in the context of X->Y:
+Further, let us define R<sub>DUP</sub>, while considering X->Y, as the relation obtained from R that *only* retains all duplicates defined on the first attribute (X). We define duplicates in two ways in the context of X->Y:
 	
 1. x appears multiple times with the same y : e.g. x=3 (3,3)
 2. x appears multiple times with different y's : e.g. x=1 (1,2),(1,3),(1,4), x=2 (2,3),(2,3),(2,4)
@@ -162,9 +162,9 @@ For the above shown relation R, the corresponding R<sub>DUP</sub> will be as fol
 | 3 | 3 |
 | 3 | 3 |
 
+Observe that the unique values corresponding to R(X) do not show up in R<sub>DUP</sub>.
 
-
-Let us define Cardinality(x) *for each distinct* value x of attribute R(X) *on relation R* as follows,
+Let us define Cardinality(x) *for each distinct* value x of R(X) as follows,
 
 <!---
 <img src="https://latex.codecogs.com/svg.latex?Cardinality(x)=\frac{1}{\text{number of distinct (x,y) pairs}}" /> 
@@ -174,7 +174,7 @@ Let us define Cardinality(x) *for each distinct* value x of attribute R(X) *on r
 
 For Relation *R*, Cardinality(1) = ⅓ [Presence of (1,2), (1,3), (1,4)], Cardinality(2) = ½ [Presence of (2,3), (2,4)] and Cardinality(7) = 1 [Presence of (7,16)]. We consider only the unique pairs of the form (x,y) while defining Cardinality. Further, cardinality is defined on the original relation R. 
 
-Let us define Consistency(x) *for each distinct* value x of attribute R<sub>DUP</sub>(x) as follows,
+Let us define Consistency(x) *for each distinct* value x of R<sub>DUP</sub>(x) as follows,
 
 <!---
 <img src="https://latex.codecogs.com/svg.latex?Consistency(x)=\frac{\text{maximum number of times x occurs with some y in }  R_{DUP}}{\text{total number of (x,y) pairs in }R_{DUP}}" />
@@ -187,7 +187,7 @@ For Relation *R<sub>DUP</sub>*, Consistency(1)=⅓ [1 occurs once each with 2, 3
 Using the above definitions, we compute Confidence(X,Y) as follows,          
 
 <!---
-<img src="https://latex.codecogs.com/svg.latex?Confidence(X,Y)=\frac{\sum_{x \in R(X)} Cardinality(a)}{\text{number of unique values in }R(X)}   + \frac{\sum_{x \in R_{DUP}} Consistency(x)}{\text{number of unique values in }R_{DUP}(X)}" />
+<img src="https://latex.codecogs.com/svg.latex?Confidence(X,Y)=\frac{\sum_{x \in R(X)} Cardinality(x)}{\text{number of unique values in }R(X)}   + \frac{\sum_{x \in R_{DUP}} Consistency(x)}{\text{number of unique values in }R_{DUP}(X)}" />
 --->
 
 ![](./eqn/eqn3.jpeg)
@@ -205,12 +205,12 @@ We set the threshold based on the application requirement. *For the purpose of t
 
 #### Coding Details:
 
-We have provided you with a package `functionaldependency` with the following files:
+For this problem, we have provided you with the following files:
 
-1. **src/Test.java**: Computes and prints all the pairs that have a fuzzy functional dependency on each other using jdbc.
+1. **functionaldependncy/Test.java**: Computes and prints all the pairs that have a fuzzy functional dependency on each other using jdbc.
 2. **populate-fd.sql**: Loads `functionaldependency/data.csv` into `q3db` database. 
 
-`q3db` is already populated with the dataset. You can check it using 
+Note that `q3db` is already populated with the dataset. You can check it using: 
 
 ```
 $ psql q3db
@@ -233,13 +233,13 @@ $ java -cp functionaldependency/postgresql-42.2.2.jre7.jar:. functionaldependenc
 1. Please do not modify anything else.
 
 
-##Questions to answered on ELMS
+## Questions to answered on ELMS
 			 
 Based on your understanding of fuzzy functional dependency answer the following questions: 
 
 1. A high cardinality score is assigned to ‘x’ in X if it occurs with different ‘y’ values in Y. (True or False)
 
-2. A high cardinality score is assigned to ‘x’ in X if it occurs with exactly one of the ‘y’ values multiple times. (True or False)
+2. A high cardinality score is assigned to ‘x’ in X if it occurs with exactly one ‘y’ value multiple times. (True or False)
 
 3. A high consistency score is assigned to ‘x’ in X if it occurs multiple times with a fixed ‘y1’ in Y and with possibly few other values ‘y2’ in Y. (True or False)
 
@@ -290,7 +290,7 @@ Based on your understanding of fuzzy functional dependency answer the following 
 
 6. Give an example of a dataset where the full confidence equation (with both parts) still incorrectly predicts a functional dependency that doesn’t really exist (X and Y have nothing to do with each other). Don’t give the actual dataset, just describe X and Y using similar types of descriptions as the options given above (e.g. X has 100 unique values, and is skewed in a certain way, etc.)  (open-ended text response question)
 
-7. Which of the following conditions yield the least confidence according to our formulation? 
+7. Which of the following condition yields the least confidence according to our formulation? (Only one)
 	1. 	When X is a random number drawn uniformly from a medium sized domain (e.g. 100 unique values).  Y is a random number drawn from a small domain (e.g. it is a Boolean attribute with only two possible values) and is heavily skewed (90% of all rows have the same value for this attribute). 
 	2. When X is a random number drawn uniformly from a domain of size equal to the number of rows in the table. In other words, X is mostly unique, but has a few repeats. Y is a random number drawn uniformly from a small domain (e.g. 2 unique values). 
 	3. X is a number drawn from a domain of 20 unique values. 19 of those values only appear once in the entire dataset. Every other tuple has the 20th value of X. Y is random numbers drawn from a small domain (e.g. 2 unique values) and is heavily skewed (99.9% of all rows have the same value).
