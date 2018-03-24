@@ -55,7 +55,9 @@ QUERY PLAN
  Total runtime: 1.030 ms
 ```
 
-You do not need to run the query. You just need to understand the query plan shown above and answer the following questions in `p4q1.txt`. Please write the answer corresponding to each of the following questions in a new line in `p4q1.txt` (answers are not case sensitive).
+You do not need to run the query. You just need to understand the query plan shown above.
+
+## Answer the following questions on ELMS
 
 1. State True or False. For all hash joins involved in this query, the smaller of the two relations is always hashed. 
 2. State True or False: The filter condition (a.hub=f.source or a.hub=f.dest) is executed after all the join operations are performed. 
@@ -66,10 +68,7 @@ You do not need to run the query. You just need to understand the query plan sho
 4. State 1,2 or 3 (only 1 correct answer): On which of the following join conditions does the query optimizer perform poorly in terms of overestimating or underestimating the size of the output?
    1. fl.flightid=f.flightid
    2. fl.customerid = c.customerid
-   3. c.frequentflieron = a.airlineid
-
-#### What to turn in:
-Answer the questions in ELMS. 
+   3. c.frequentflieron = a.airlineid 
 
 **Q2 (10pt)**. [Query Debugging] For this problem, you are required to switch to `q2db` database (`psql q2db`) where we have already populated the `customers` table with a relatively large dataset. The `customers` table has the same schema as the one that we had used in Project 1. The following query counts the number of customer pairs whose year of birth differ by a year.
 
@@ -172,7 +171,7 @@ Let us define Cardinality(x) *for each distinct* value x of R(X) as follows,
 
 ![](./eqn/eqn1.jpeg)
 
-For Relation *R*, Cardinality(1) = ⅓ [Presence of (1,2), (1,3), (1,4)], Cardinality(2) = ½ [Presence of (2,3), (2,4)] and Cardinality(7) = 1 [Presence of (7,16)]. We consider only the unique pairs of the form (x,y) while defining Cardinality. Further, cardinality is defined on the original relation R. 
+For Relation *R*, Cardinality(1) = ⅓ [Presence of (1,2), (1,3), (1,4)], Cardinality(2) = ½ [Presence of (2,3), (2,4)] and Cardinality(7) = 1 [Presence of (7,16)]. We consider only the **unique pairs** of the form (x,y) while defining Cardinality. Thus, Cardinality(3) = 1 [Presence of (3, 3)]. **Note that cardinality is defined on the original relation R**. 
 
 Let us define Consistency(x) *for each distinct* value x of R<sub>DUP</sub>(x) as follows,
 
@@ -182,7 +181,7 @@ Let us define Consistency(x) *for each distinct* value x of R<sub>DUP</sub>(x) a
 
 ![](./eqn/eqn2.jpeg)
 
-For Relation *R<sub>DUP</sub>*, Consistency(1)=⅓ [1 occurs once each with 2, 3 and 4],  Consistency(2) = ⅔ [2 occurs once with 4 and 2 times with 3] and Consistency(3) = 2/2 [3 occurs with 3 twice]. We consider all the tuples of the form (x,y) while defining consistency. Further, consistency is defined on the duplicate relation R<sub>DUP</sub>.
+For Relation *R<sub>DUP</sub>*, Consistency(1)=⅓ [1 occurs once each with 2, 3 and 4],  Consistency(2) = ⅔ [2 occurs once with 4 and 2 times with 3] and Consistency(3) = 2/2 [3 occurs with 3 twice]. We consider all the tuples of the form (x,y) while defining consistency. **Note that consistency is defined on the duplicate relation R<sub>DUP</sub>**.
 
 Using the above definitions, we compute Confidence(X,Y) as follows,          
 
@@ -233,7 +232,7 @@ $ java -cp functionaldependency/postgresql-42.2.2.jre7.jar:. functionaldependenc
 1. Please do not modify anything else.
 
 
-## Questions to answered on ELMS
+## Answer the following questions on ELMS
 			 
 Based on your understanding of fuzzy functional dependency answer the following questions: 
 
