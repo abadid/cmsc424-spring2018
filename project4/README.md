@@ -199,8 +199,25 @@ We say *X has a fuzzy functional dependency on Y iff*
 
 ![](./eqn/eqn4.jpeg)
 
-
 We set the threshold based on the application requirement. *For the purpose of this project we will deal with functional dependencies of the form X->Y*.
+
+##### Illustrating Confidence Computation
+
+Let us consider the earlier populated tables R and R<sub>DUP</sub> to demonstrate how confidence is computed. We use R to compute **cardinality** as follows:
+
+Cardinality(1) = 1/3, Cardinality(2) = 1/2, Cardinality(3) = 1, Cardinality(4) = 1, Cardinality(7) = 1
+
+Sum of confidence values = (1/3+1/2+1+1+1) <br/>
+Number of unique values in R(X) = 5
+
+Further, we use R<sub>DUP</sub> to compute **consistency** as follows: 
+
+Consistency(1)=1/3, Consistency(2) = 2/3, Consistency(3) = 2/2 
+
+Sum of consistency values = (1/3+2/3+1) <br/>
+Number of unique values in R<sub>DUP</sub>(X) = 3
+ 
+Confidence = (1/3+1/2+1+1+1)/5 + [1+(1/3+2/3+1)]/[1+3] = 0.766 + 0.75 = 1.516
 
 #### Coding Details:
 
