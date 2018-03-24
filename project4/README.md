@@ -268,7 +268,7 @@ Based on your understanding of fuzzy functional dependency answer the following 
 	* Mostly unique (only a few repeats).
 	* 	Medium number of unique values, with each value repeating approximately the same number of times.
 	*  	Few number of unique values, and heavily skewed (99% of column has only one value).
-	Non-integer values.
+	*   Non-integer values.
 	* Doesn’t matter! Only Y matters.
 	* Doesn’t matter! We don’t need the consistency part of the equation!
 
