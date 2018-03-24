@@ -57,7 +57,7 @@ QUERY PLAN
 
 You do not need to run the query. You just need to understand the query plan shown above.
 
-## Answer the following questions on ELMS
+#### Answer the following questions on ELMS
 
 1. State True or False. For all hash joins involved in this query, the smaller of the two relations is always hashed. 
 2. State True or False: The filter condition (a.hub=f.source or a.hub=f.dest) is executed after all the join operations are performed. 
@@ -232,7 +232,7 @@ $ java -cp functionaldependency/postgresql-42.2.2.jre7.jar:. functionaldependenc
 1. Please do not modify anything else.
 
 
-## Answer the following questions on ELMS
+#### Answer the following questions on ELMS
 			 
 Based on your understanding of fuzzy functional dependency answer the following questions: 
 
