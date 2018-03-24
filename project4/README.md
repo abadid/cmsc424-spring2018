@@ -186,7 +186,7 @@ For Relation *R<sub>DUP</sub>*, Consistency(1)=⅓ [1 occurs once each with 2, 3
 Using the above definitions, we compute Confidence(X,Y) as follows,          
 
 <!---
-<img src="https://latex.codecogs.com/svg.latex?Confidence(X,Y)=\frac{\sum_{x \in R(X)} Cardinality(x)}{\text{number of unique values in }R(X)}   + \frac{\sum_{x \in R_{DUP}} Consistency(x)}{\text{number of unique values in }R_{DUP}(X)}" />
+<img src="https://latex.codecogs.com/svg.latex?Confidence(X,Y)=\frac{\sum_{x \in R(X)} Cardinality(x)}{\text{number of unique values in }R(X)}   + \frac{1 + \sum_{x \in R_{DUP}} Consistency(x)}{\text{1 + number of unique values in }R_{DUP}(X)}" />
 --->
 
 ![](./eqn/eqn3.jpeg)
