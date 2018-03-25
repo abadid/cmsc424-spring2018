@@ -257,9 +257,9 @@ Based on your understanding of fuzzy functional dependency answer the following 
 
 2. A high cardinality score is assigned to ‘x’ in X if it occurs with exactly one ‘y’ value multiple times. (True or False)
 
-3. A high consistency score is assigned to ‘x’ in X if it occurs multiple times with a fixed ‘y1’ in Y and with possibly few other values ‘y2’ in Y. (True or False)
+3. A high consistency score is assigned to ‘x’ in X if it occurs mostly with a fixed ‘y1’ in Y and with possibly few other values in Y. (True or False)
 
-4. The confidence equation includes two parts --- one part is focused on cardinality and the other part focused on consistency. Do we really need both parts? Let’s say that we removed the **consistency** part, and kept the **cardinality** part. Describe an (incorrect) functional dependency X-->Y that would likely be above threshold if we just doubled the cardinality part (instead of adding the cardinality part to the consistency part), but would correctly be below threshold if the original confidence equation is used (because X and Y have nothing to do with each other): 
+4. The confidence equation includes two parts --- one part is focused on cardinality and the other part focused on consistency. Do we really need both parts? Let’s say that we removed the **consistency** part, and kept the **cardinality** part. The functional dependency X-->Y might incorrectly exist, (i.e. when the confidence is above threshold) if we just doubled the cardinality part (i.e. confidence = 2*cardinality part instead of having confidence = cardinality part + consistency part), but would correctly be below threshold if the original confidence equation is used (because X and Y have nothing to do with each other). Which of the following would yield in such an incorrect functional dependency?
 	
 	(check all that apply)
 
@@ -282,7 +282,7 @@ Based on your understanding of fuzzy functional dependency answer the following 
 	* Doesn’t matter! We don’t need the consistency part of the equation!
 
 
-5. As mentioned in the previous question, the confidence equation includes two parts --- one part is focused on cardinality and the other part focused on consistency. We already asked: do we really need both parts? What if we removed the **cardinality** part, and kept the **consistency** part. Describe an (incorrect) functional dependency X-->Y that would likely be above threshold if we just doubled the consistency part (instead of adding the cardinality part to the consistency part), but would correctly be below threshold if the original confidence equation is used (because X and Y have nothing to do with each other): 
+5. The confidence equation includes two parts --- one part is focused on cardinality and the other part focused on consistency. Do we really need both parts? Let’s say that we removed the **cardinality** part, and kept the **consistency** part. The functional dependency X-->Y might incorrectly exist, (i.e. when the confidence is above threshold) if we just doubled the consistency part (i.e. confidence = 2*consistency part instead of having confidence = cardinality part + consistency part), but would correctly be below threshold if the original confidence equation is used (because X and Y have nothing to do with each other). Which of the following would yield in such an incorrect functional dependency? 
 
 	(check all that apply)
 
@@ -306,13 +306,14 @@ Based on your understanding of fuzzy functional dependency answer the following 
 
 6. Give an example of a dataset where the full confidence equation (with both parts) still incorrectly predicts a functional dependency that doesn’t really exist (X and Y have nothing to do with each other). Don’t give the actual dataset, just describe X and Y using similar types of descriptions as the options given above (e.g. X has 100 unique values, and is skewed in a certain way, etc.)  (open-ended text response question)
 
+<!---
 7. Which of the following condition yields the least confidence according to our formulation? (Only one)
 	1. 	When X is a random number drawn uniformly from a medium sized domain (e.g. 100 unique values).  Y is a random number drawn from a small domain (e.g. it is a Boolean attribute with only two possible values) and is heavily skewed (90% of all rows have the same value for this attribute). 
 	2. When X is a random number drawn uniformly from a domain of size equal to the number of rows in the table. In other words, X is mostly unique, but has a few repeats. Y is a random number drawn uniformly from a small domain (e.g. 2 unique values). 
 	3. X is a number drawn from a domain of 20 unique values. 19 of those values only appear once in the entire dataset. Every other tuple has the 20th value of X. Y is random numbers drawn from a small domain (e.g. 2 unique values) and is heavily skewed (99.9% of all rows have the same value).
 	4. X and Y are both zero for all but 30 tuples in the dataset. For those remaining 30 tuples, both X and Y can have one of 3 values, each drawn from a uniform distribution.  
 	5. X and Y are both zero for all but 100 tuples in the dataset. For those remaining 100 tuples, both X and Y can have one of 10 values, but X is uniformly distributed and Y is skewed (80% of all Y values are the same). 
-
+--->
 
 #### What to turn in:
 Please submit `Test.java` and answer the questions in ELMS.
