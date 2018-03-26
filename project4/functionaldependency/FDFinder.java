@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.sql.Statement;
 
 // Do not modify any other part of the code
-// other than where you place marked with TO-DO
+// other than the place marked below as "TO-DO"
 
 public class FDFinder {
 
@@ -88,10 +88,13 @@ public class FDFinder {
 	public static double doQuery(Connection c, String col1, String col2) {
 
 		// TO-DO
-		// Replace the existing SQL query select 0
-		// with your SQL query of confidence
-		// SQL query that calculates confidence(C1,C2)
-		String query = "select 0;";
+		// Replace the existing SQL query in the string below with your SQL query. 
+		// Your query should return a single row with a single column
+		// that contains the confidence calculation for col1 and col2 which are parameters to this method
+		// In other words, your SQL query returns confidence(col1,col2)
+		// Do not use stored procedures --- just a regular SQL query
+		// See the README for a hint about how to cast integers as floats in Postgres (which you may need to do)
+		String query = "select max(" + col1 + ") from dataset;";
 
 		try {
 			Statement s = c.createStatement();
