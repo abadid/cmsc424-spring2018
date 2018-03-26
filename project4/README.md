@@ -153,7 +153,7 @@ Note that `fddb` is already populated with the dataset. You can check it using:
 
 ```
 $ psql fddb
-q3db=# select * from dataset;
+fddb=# select * from dataset;
 ```
 
 #### Task:
