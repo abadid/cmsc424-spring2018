@@ -38,7 +38,7 @@ public class FDFinder {
 		try {
 
 			connection = DriverManager.getConnection(
-					"jdbc:postgresql://127.0.0.1:5432/q3db", "test1",
+					"jdbc:postgresql://127.0.0.1:5432/fddb", "test1",
 					"asdf");
 
 		} catch (SQLException e) {
