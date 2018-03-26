@@ -174,7 +174,7 @@ For the above shown relation R, the corresponding R<sub>DUP</sub> will be as fol
 | 3 | 3 |
 | 3 | 3 |
 
-Observe that the unique values corresponding to R(X) do not show up in R<sub>DUP</sub>.
+Observe that the singleton values from R(X) do not show up in R<sub>DUP</sub>.
 
 Let us define Cardinality(x) *for each distinct* value x of R(X) as follows,
 
