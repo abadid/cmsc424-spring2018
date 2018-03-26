@@ -151,12 +151,12 @@ Consider the following relation *R* having two attributes X and Y. Let us define
 | 7 | 16|
 
 
-We want to check if X and Y have a fuzzy functional dependency between each other (Y is fuzzy functionally dependent on X, which we will notate as: X ~->Y). 
+We want to check if X and Y have a fuzzy functional dependency between each other (Y is fuzzy functionally dependent on X, which we will notate as: X~->Y). 
 
-Further, let us define R<sub>DUP</sub>, while considering X->Y, as the relation obtained from R that *only* retains all duplicates defined on the first attribute (X). We define duplicates in two ways in the context of X~->Y:
+Further, let us define R<sub>DUP</sub>, while considering X~->Y, as the relation obtained from R which removes all tuples for which the value of X only appears once across the entire dataset. Therefore, in R<sub>DUP</sub>, for each value x of R<sub>DUP</sub>(X):
 	
-1. x appears multiple times with the same y : e.g. x=3 (3,3)
-2. x appears multiple times with different y's : e.g. x=1 (1,2),(1,3),(1,4), x=2 (2,3),(2,3),(2,4)
+1. x appears multiple times with the same value y from R<sub>DUP</sub>(Y): e.g. x=3 (3,3)
+2. x appears multiple times with different y values from value y from R<sub>DUP</sub>(Y) : e.g. x=1 (1,2),(1,3),(1,4), x=2 (2,3),(2,3),(2,4)
 
 
 For the above shown relation R, the corresponding R<sub>DUP</sub> will be as follows:
