@@ -194,7 +194,7 @@ Let mode(x, Y) be the most frequent value of attribute Y that exists in the data
 <img src="http://latex.codecogs.com/svg.latex?Consistency(x)=\frac{\text{number of times (x,mode(x, Y)) appears in }  R_{DUP}}{\text{total number of tuples with X = x in }R_{DUP}}" />
 --->
 
-![](./eqn/eqn2.jpeg)
+![](./eqn/fig2.png)
 
 For Relation *R<sub>DUP</sub>*, Consistency(X, Y, 1)=⅓ [1 occurs once each with 2, 3 and 4],  Consistency(2) = ⅔ [2 occurs once with 4 and 2 times with 3] and Consistency(3) = 2/2 [3 occurs with 3 twice]. **Note that consistency is defined on the duplicate relation R<sub>DUP</sub> and not R**.
 
@@ -204,7 +204,7 @@ Using the above definitions, we compute Confidence(X,Y) as follows,
 <img src="http://latex.codecogs.com/svg.latex?Confidence(X,Y)=\frac{\sum_{x \in R(X)} Cardinality(X, Y, x)}{\text{number of unique values in }R(X)}   + \frac{1 + \sum_{x \in R_{DUP}} Consistency(X, Y, x)}{\text{1 + number of unique values in }R_{DUP}(X)}" />
 --->
 
-![](./eqn/eqn3.jpeg)
+![](./eqn/fig3.png)
 
 We say *X has a fuzzy functional dependency on Y iff* 
 
