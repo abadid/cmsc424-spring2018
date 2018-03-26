@@ -160,7 +160,9 @@ fddb=# select * from dataset;
 
 **Fuzzy Functional Dependency**: The Java code iterates through every possible pairs of columns in a dataset and then calls a SQL query over JDBC to calculate the confidence of a fuzzy functional dependency between those two columns. You have to write this SQL query (it will likely be a complicated query with several components in the with clause). See the doQuery method in Test.java and the context for how it is called in order to understand the nature of the SQL query that is sent to the database.
 
-In order to compile and run your implementation, run the following commands (from \vagrant\),
+Hint: You many need to cast integers as floats in order to complete your query. In Postgres, there are multiple ways to do this. One is to add ::float at the end. E.g. 1 is an integer, but 1::float is a float.
+
+In order to compile and run your implementation, run the following commands (from the /vagrant directory; not /vagrant/functionaldependency or anywhere else --- **otherwise you will get errors**),
 
 ```
 $ javac -cp functionaldependency/postgresql-42.2.2.jre7.jar:. functionaldependency/FDFinder.java 
