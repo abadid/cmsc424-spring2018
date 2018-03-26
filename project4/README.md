@@ -176,17 +176,17 @@ For the above shown relation R, the corresponding R<sub>DUP</sub> will be as fol
 
 Observe that the singleton values from R(X) do not show up in R<sub>DUP</sub>.
 
-Let us define Cardinality(x) *for each distinct* value x of R(X) as follows,
+Let us define Cardinality(X, Y, x) *for each distinct* value x of R(X) as follows,
 
 <!---
-<img src="https://latex.codecogs.com/svg.latex?Cardinality(x)=\frac{1}{\text{number of distinct y values found in tuples for which X=x}}" /> 
+<img src="http://latex.codecogs.com/svg.latex?Cardinality(X, Y, x)=\frac{1}{\text{number of distinct values for attribute Y found in tuples for which attribute X=x}}" /> 
 --->
 
-![](./eqn/eqn1.jpeg)
+![](./eqn/fig1.png)
 
-For Relation *R*, for the potential functional dependency X~->Y, Cardinality(1) = ⅓ [Presence of (1,2), (1,3), (1,4)], Cardinality(2) = ½ [Presence of (2,3), (2,4)] and Cardinality(7) = 1 [Presence of (7,16)]. We consider only the **unique pairs** of the form (x,y) while defining Cardinality. Thus, Cardinality(3) = 1 [Presence of (3, 3)]. **Note that cardinality is defined on the original relation R, not R<sub>DUP</sub>**. 
+For Relation *R*, Cardinality(X, Y, 1) = ⅓ [Presence of (1,2), (1,3), (1,4)], Cardinality(X, Y, 2) = ½ [Presence of (2,3), (2,4)] and Cardinality(X, Y, 7) = 1 [Presence of (7,16)]. We consider only the **unique pairs** of the form (x,y) while defining Cardinality. Thus, Cardinality(X, Y, 3) = 1 [Presence of (3, 3)]. **Note that cardinality is defined on the original relation R, not R<sub>DUP</sub>**. 
 
-Let us define Consistency(x) *for each distinct* value x of R<sub>DUP</sub>(x) as follows,
+Let us define Consistency(X, Y, x) *for each distinct* value x of R<sub>DUP</sub>(x) as follows,
 
 <!---
 <img src="https://latex.codecogs.com/svg.latex?Consistency(x)=\frac{\text{maximum number of times x occurs with some y in }  R_{DUP}}{\text{total number of (x,y) pairs in }R_{DUP}}" />
