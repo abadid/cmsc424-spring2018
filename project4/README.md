@@ -186,20 +186,22 @@ Let us define Cardinality(X, Y, x) *for each distinct* value x of R(X) as follow
 
 For Relation *R*, Cardinality(X, Y, 1) = ⅓ [Presence of (1,2), (1,3), (1,4)], Cardinality(X, Y, 2) = ½ [Presence of (2,3), (2,4)] and Cardinality(X, Y, 7) = 1 [Presence of (7,16)]. We consider only distinct values of Y when defining Cardinality. Thus, Cardinality(X, Y, 3) = 1 [Presence of (3, 3)]. **Note that cardinality is defined on the original relation R, not R<sub>DUP</sub>**. 
 
-Let us define Consistency(X, Y, x) *for each distinct* value x of R<sub>DUP</sub>(x) as follows,
+Let us define Consistency(X, Y, x) *for each distinct* value x of R<sub>DUP</sub>(x) as follows:
+
+Let mode(x, Y) be the most frequent value of attribute Y that exists in the dataset when X = x, 
 
 <!---
-<img src="https://latex.codecogs.com/svg.latex?Consistency(x)=\frac{\text{maximum number of times x occurs with some y in }  R_{DUP}}{\text{total number of (x,y) pairs in }R_{DUP}}" />
+<img src="http://latex.codecogs.com/svg.latex?Consistency(x)=\frac{\text{number of times (x,mode(x, Y)) appears in }  R_{DUP}}{\text{total number of tuples with X = x in }R_{DUP}}" />
 --->
 
 ![](./eqn/eqn2.jpeg)
 
-For Relation *R<sub>DUP</sub>*, Consistency(1)=⅓ [1 occurs once each with 2, 3 and 4],  Consistency(2) = ⅔ [2 occurs once with 4 and 2 times with 3] and Consistency(3) = 2/2 [3 occurs with 3 twice]. We consider all the tuples of the form (x,y) while defining consistency. **Note that consistency is defined on the duplicate relation R<sub>DUP</sub>**.
+For Relation *R<sub>DUP</sub>*, Consistency(X, Y, 1)=⅓ [1 occurs once each with 2, 3 and 4],  Consistency(2) = ⅔ [2 occurs once with 4 and 2 times with 3] and Consistency(3) = 2/2 [3 occurs with 3 twice]. **Note that consistency is defined on the duplicate relation R<sub>DUP</sub> and not R**.
 
 Using the above definitions, we compute Confidence(X,Y) as follows,          
 
 <!---
-<img src="https://latex.codecogs.com/svg.latex?Confidence(X,Y)=\frac{\sum_{x \in R(X)} Cardinality(x)}{\text{number of unique values in }R(X)}   + \frac{1 + \sum_{x \in R_{DUP}} Consistency(x)}{\text{1 + number of unique values in }R_{DUP}(X)}" />
+<img src="http://latex.codecogs.com/svg.latex?Confidence(X,Y)=\frac{\sum_{x \in R(X)} Cardinality(X, Y, x)}{\text{number of unique values in }R(X)}   + \frac{1 + \sum_{x \in R_{DUP}} Consistency(X, Y, x)}{\text{1 + number of unique values in }R_{DUP}(X)}" />
 --->
 
 ![](./eqn/eqn3.jpeg)
@@ -212,20 +214,20 @@ We say *X has a fuzzy functional dependency on Y iff*
 
 ![](./eqn/eqn4.jpeg)
 
-We set the threshold based on the application requirement. *For the purpose of this project we will deal with functional dependencies of the form X->Y*.
+We set the threshold based on the application requirement.
 
 ##### Illustrating Confidence Computation
 
 Let us consider the earlier populated tables R and R<sub>DUP</sub> to demonstrate how confidence is computed. We use R to compute **cardinality** as follows:
 
-Cardinality(1) = 1/3, Cardinality(2) = 1/2, Cardinality(3) = 1, Cardinality(4) = 1, Cardinality(7) = 1
+Cardinality(X, Y, 1) = 1/3, Cardinality(X, Y, 2) = 1/2, Cardinality(X, Y, 3) = 1, Cardinality(X, Y, 4) = 1, Cardinality(X, Y, 7) = 1
 
-Sum of confidence values = (1/3+1/2+1+1+1) <br/>
+Sum of cardinality values = (1/3+1/2+1+1+1) <br/>
 Number of unique values in R(X) = 5
 
 Further, we use R<sub>DUP</sub> to compute **consistency** as follows: 
 
-Consistency(1)=1/3, Consistency(2) = 2/3, Consistency(3) = 2/2 
+Consistency(X, Y, 1)=1/3, Consistency(X, Y, 2) = 2/3, Consistency(X, Y, 3) = 2/2 
 
 Sum of consistency values = (1/3+2/3+1) <br/>
 Number of unique values in R<sub>DUP</sub>(X) = 3
@@ -248,7 +250,7 @@ q3db=# select * from dataset;
 
 #### Task:
 
-**Fuzzy Functional Dependency**: Add your SQL query that computes the fuzzy functional dependency between two columns. More details in doQuery method in Test.java.
+**Fuzzy Functional Dependency**: The Java code iterates through every possible pairs of columns in a dataset and then calls a SQL query over JDBC to calculate the confidence of a fuzzy functional dependency between those two columns. You have to write this SQL query (it will likely be a complicated query with several components in the with clause). See the doQuery method in Test.java and the context for how it is called in order to understand the nature of the SQL query that is sent to the database.
 
 In order to compile and run your implementation, run the following commands (from \vagrant\),
 
@@ -259,20 +261,26 @@ $ java -cp functionaldependency/postgresql-42.2.2.jre7.jar:. functionaldependenc
 
 
 #### Coding Restrictions:
-1. Please do not modify anything else.
+1. Please do not modify anything in the code aside from the SQL query.
 
 
 #### Answer the following questions on ELMS
 			 
-Based on your understanding of fuzzy functional dependency answer the following questions: 
+Based on your experience with calculating fuzzy functional dependency confidence as part of this assignment, please answer the following questions via the Quiz on ELMS that corresponds to this project: 
 
-1. A high cardinality score is assigned to ‘x’ in X if it occurs with different ‘y’ values in Y. (True or False)
+1. A high cardinality score is assigned to ‘x’ in X if it occurs with many different ‘y’ values in Y. (True or False)
 
 2. A high cardinality score is assigned to ‘x’ in X if it occurs with exactly one ‘y’ value multiple times. (True or False)
 
 3. A high consistency score is assigned to ‘x’ in X if it occurs mostly with a fixed ‘y1’ in Y and with possibly few other values in Y. (True or False)
 
-4. The confidence equation includes two parts --- one part is focused on cardinality and the other part focused on consistency. Do we really need both parts? Let’s say that we removed the **consistency** part, and kept the **cardinality** part. The functional dependency X-->Y might incorrectly exist, (i.e. when the confidence is above threshold) if we just doubled the cardinality part (i.e. confidence = 2*cardinality part instead of having confidence = cardinality part + consistency part), but would correctly be below threshold if the original confidence equation is used (because X and Y have nothing to do with each other). Which of the following would yield in such an incorrect functional dependency?
+4. It is impossible for cardinality(X,Y,x) to be 1 and consistency(X,Y,x) to not be 1. (True or False)
+
+5. It is impossible for consistency(X,Y,x) to be 1 and cardinality(X,Y,x) to not be 1. (True or false)
+
+6. How high does the threshold have to be for the fuzzy functional dependency calculation to be the same as a regular functional dependency? (Fill in the blank)
+
+7. The confidence equation adds together two parts --- one part is focused on cardinality and the other part focused on consistency. Do we really need both parts? Let’s say that we removed the **consistency** part, and doubled the **cardinality** part. Under what situations would we be likely to incorrectly identify fuzzy functional dependencies X~->Y when in fact X and Y have nothing to do with each other. (But if we used the original confidence equation, we would likely correctly not identify X~->Y as a fuzzy functional dependency.) Assume reasonable thresholds and data sizes (e.g., a threshold in the range of 1.5-1.7 and 10000-100000 tuples).
 	
 	(check all that apply)
 
@@ -295,7 +303,7 @@ Based on your understanding of fuzzy functional dependency answer the following 
 	* Doesn’t matter! We don’t need the consistency part of the equation!
 
 
-5. The confidence equation includes two parts --- one part is focused on cardinality and the other part focused on consistency. Do we really need both parts? Let’s say that we removed the **cardinality** part, and kept the **consistency** part. The functional dependency X-->Y might incorrectly exist, (i.e. when the confidence is above threshold) if we just doubled the consistency part (i.e. confidence = 2*consistency part instead of having confidence = cardinality part + consistency part), but would correctly be below threshold if the original confidence equation is used (because X and Y have nothing to do with each other). Which of the following would yield in such an incorrect functional dependency? 
+8. The confidence equation includes two parts --- one part is focused on cardinality and the other part focused on consistency. Do we really need both parts? Let’s say that we removed the **cardinality** part, and doubled the **consistency** part. Under what situations would we be likely to incorrectly identify fuzzy functional dependencies X~->Y when in fact X and Y have nothing to do with each other. (But if we used the original confidence equation, we would likely correctly not identify X~->Y as a fuzzy functional dependency.) Assume reasonable thresholds and data sizes (e.g., a threshold in the range of 1.5-1.7 and 10000-100000 tuples).
 
 	(check all that apply)
 
@@ -317,7 +325,7 @@ Based on your understanding of fuzzy functional dependency answer the following 
 	* Doesn’t matter! Only X matters.
 	* Doesn’t matter! We don’t need the consistency part of the equation!
 
-6. Give an example of a dataset where the full confidence equation (with both parts) still incorrectly predicts a functional dependency that doesn’t really exist (X and Y have nothing to do with each other). Don’t give the actual dataset, just describe X and Y using similar types of descriptions as the options given above (e.g. X has 100 unique values, and is skewed in a certain way, etc.)  (open-ended text response question)
+9. Give an example of a dataset where the full confidence equation (with both parts) still incorrectly predicts a functional dependency that doesn’t really exist (X and Y have nothing to do with each other). Don’t give the actual dataset, just describe X and Y using similar types of descriptions as the options given above (e.g. X has 100 unique values, and is skewed in a certain way, etc.)  (open-ended text response question)
 
 <!---
 7. Which of the following condition yields the least confidence according to our formulation? (Only one)
