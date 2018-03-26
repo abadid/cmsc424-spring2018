@@ -120,7 +120,7 @@ From *S*, we observe that X->Y. However, *Y->X does not hold*. This is because 3
 
 There are two primary ways to determine the functional dependencies that exist for a database schema. One option is ask a domain expert (someone who knows the real-world domain that is being modeled by the database schema) to list them all. Unfortunately, many domain experts charge huge sums of money for their time, and other domain experts are lazy. A viable alternative is to sample existing data and try to algorithmically detect functional dependencies. (Even if you choose this approach, it is still a good idea to verify the output of the algorithm with a domain expert). We will get some experience with this alternative approach in this assignment. 
 
-As an additional complication, many real world datasets are collected though a human manually typing the data. Such datasets are prone some amount of dirtiness in the data. For example, even though name is usually dependent on social security number or some other ID value, in some cases a name is mistyped, and will appear in a dataset alongside other instances of the ID-name pair with the name typed correctly. Take, for example, the following dataset, containing the list of MLB players who hit a home run each day:
+As an additional complication, many real world datasets are collected through a human manually typing the data. Such datasets are prone to some amount of dirtiness in the data. For example, even though name is usually dependent on social security number or some other ID value, in some cases a name is mistyped, and will appear in a dataset alongside other instances of the ID-name pair with the name typed correctly. Take, for example, the following dataset, containing the list of MLB players who hit a home run each day:
 
 | Date | PlayerID | PlayerName | Distance (feet)
 |:---:|:---:|:---:|:---:| 
@@ -191,10 +191,10 @@ Let us define Consistency(X, Y, x) *for each distinct* value x of R<sub>DUP</sub
 Let mode(x, Y) be the most frequent value of attribute Y that exists in the dataset when X = x, 
 
 <!---
-<img src="http://latex.codecogs.com/svg.latex?Consistency(x)=\frac{\text{number of times (x,mode(x, Y)) appears in }  R_{DUP}}{\text{total number of tuples with X = x in }R_{DUP}}" />
+<img src="http://latex.codecogs.com/svg.latex?Consistency(X,Y,x)=\frac{\text{number of times (x,mode(x, Y)) appears in }  R_{DUP}}{\text{total number of tuples with X = x in }R_{DUP}}" />
 --->
 
-![](./eqn/fig2.png)
+![](./eqn/fig2.jpeg)
 
 For Relation *R<sub>DUP</sub>*, Consistency(X, Y, 1)=⅓ [1 occurs once each with 2, 3 and 4],  Consistency(2) = ⅔ [2 occurs once with 4 and 2 times with 3] and Consistency(3) = 2/2 [3 occurs with 3 twice]. **Note that consistency is defined on the duplicate relation R<sub>DUP</sub> and not R**.
 
@@ -238,7 +238,7 @@ Confidence = (1/3+1/2+1+1+1)/5 + [1+(1/3+2/3+1)]/[1+3] = 0.766 + 0.75 = 1.516
 
 For this problem, we have provided you with the following files:
 
-1. **functionaldependncy/Test.java**: Computes and prints all the pairs that have a fuzzy functional dependency on each other using jdbc.
+1. **functionaldependncy/FDFinder.java**: Computes and prints all the pairs that have a fuzzy functional dependency on each other using jdbc.
 2. **populate-fd.sql**: Loads `functionaldependency/data.csv` into `q3db` database. 
 
 Note that `q3db` is already populated with the dataset. You can check it using: 
@@ -255,8 +255,8 @@ q3db=# select * from dataset;
 In order to compile and run your implementation, run the following commands (from \vagrant\),
 
 ```
-$ javac -cp functionaldependency/postgresql-42.2.2.jre7.jar:. functionaldependency/Test.java 
-$ java -cp functionaldependency/postgresql-42.2.2.jre7.jar:. functionaldependency/Test
+$ javac -cp functionaldependency/postgresql-42.2.2.jre7.jar:. functionaldependency/FDFinder.java 
+$ java -cp functionaldependency/postgresql-42.2.2.jre7.jar:. functionaldependency/FDFinder
 ```
 
 

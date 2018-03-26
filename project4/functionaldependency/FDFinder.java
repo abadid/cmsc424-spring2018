@@ -11,7 +11,7 @@ import java.sql.Statement;
 // Do not modify any other part of the code
 // other than where you place marked with TO-DO
 
-public class Test {
+public class FDFinder {
 
 	public static void main(String[] argv) {
 
