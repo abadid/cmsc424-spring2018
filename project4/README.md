@@ -118,7 +118,9 @@ Consider the following relation *S* having two attributes X and Y.
 
 From *S*, we observe that X->Y. However, *Y->X does not hold*. This is because 3 in Y has two possible values of 2 and 3 in X. 
 
-Many real world datasets are collected though a human manually typing the data. Such datasets are prone some amount of dirtiness in the data. For example, even though name is usually dependent on social security number or some other ID value, in some cases a name is mistyped, and will appear in a dataset alongside other instances of the ID-name pair with the name typed correctly. Take, for example, the following dataset, containing the list of MLB players who hit a home run each day:
+There are two primary ways to determine the functional dependencies that exist for a database schema. One option is ask a domain expert (someone who knows the real-world domain that is being modeled by the database schema) to list them all. Unfortunately, many domain experts charge huge sums of money for their time, and other domain experts are lazy. A viable alternative is to sample existing data and try to algorithmically detect functional dependencies. (Even if you choose this approach, it is still a good idea to verify the output of the algorithm with a domain expert). We will get some experience with this alternative approach in this assignment. 
+
+As an additional complication, many real world datasets are collected though a human manually typing the data. Such datasets are prone some amount of dirtiness in the data. For example, even though name is usually dependent on social security number or some other ID value, in some cases a name is mistyped, and will appear in a dataset alongside other instances of the ID-name pair with the name typed correctly. Take, for example, the following dataset, containing the list of MLB players who hit a home run each day:
 
 | Date | PlayerID | PlayerName | Distance (feet)
 |:---:|:---:|:---:|:---:| 
@@ -129,9 +131,9 @@ Many real world datasets are collected though a human manually typing the data. 
 | May 3 | 46 | Yonder Alonso | 402 | 
 | May 4 | 46 | Yonder Alonso | 418 | 
 
-Any human who sees this data set would immediately conclude that PlayerID --> PlayerName is functional dependency, and that the third tuple, which violates the dependency is simply a typo and not an indication that the dependency doesn't exist. Datasets that are scraped from NoSQL database systems are particularly prone to this type of dirtiness. There has been several research groups (including Prof. Abadi's research group) that have attempted to detect such functional dependencies that seem to exist in a dataset, despite the potential presence of some amount of dirtiness. We will call such detected functional dependencies **fuzzy functional dependencies**. 
+Any human who sees this data set would immediately conclude that PlayerID --> PlayerName is real functional dependency, and that the third tuple, which violates the dependency is simply a typo and not an indication that the dependency doesn't exist. Datasets that are scraped from NoSQL database systems are particularly prone to this type of dirtiness. There has been several research groups (including Prof. Abadi's research group) that have attempted to detect such functional dependencies that seem to exist in a dataset, despite the potential presence of some amount of dirtiness. We will call such detected functional dependencies **fuzzy functional dependencies**. 
 
-For illustrating fuzzy functional dependency, consider the following relation *R* having two attributes X and Y. We observe that *neither* X->Y nor Y->X holds in R. Further, let us define R(X) and R(Y) as values of attribute X and Y of relation R respectively. 
+Consider the following relation *R* having two attributes X and Y. Let us define R(X) and R(Y) as the domain (the set of all unique values) of attribute X and Y of relation R respectively. 
 
 **Relation R**
 
@@ -149,7 +151,7 @@ For illustrating fuzzy functional dependency, consider the following relation *R
 | 7 | 16|
 
 
-Let us say that we want to check if X and Y have a fuzzy functional dependency between each other in R i.e. Y is fuzzy functional dependent on X (X->Y). In this case, X is the first attribute and Y is the second attribute. 
+Let us say that we want to check if X and Y have a fuzzy functional dependency between each other (Y is fuzzy functionally dependent on X (X->Y)). 
 
 Further, let us define R<sub>DUP</sub>, while considering X->Y, as the relation obtained from R that *only* retains all duplicates defined on the first attribute (X). We define duplicates in two ways in the context of X->Y:
 	
