@@ -118,7 +118,18 @@ Consider the following relation *S* having two attributes X and Y.
 
 From *S*, we observe that X->Y. However, *Y->X does not hold*. This is because 3 in Y has two possible values of 2 and 3 in X. 
 
-As we know that data in each of these tables could be collected from multiple sources, it is prone to errors during various stages of data acquisition and processing. However, in spite of containing some errors, it could still be the case that two attributes or sets of attributes are associated with a reasonable confidence. To accommodate such cases we define the notion of **fuzzy functional dependency** for this project. 
+Many real world datasets are collected though a human manually typing the data. Such datasets are prone some amount of dirtiness in the data. For example, even though name is usually dependent on social security number or some other ID value, in some cases a name is mistyped, and will appear in a dataset alongside other instances of the ID-name pair with the name typed correctly. Take, for example, the following dataset, containing the list of MLB players who hit a home run each day:
+
+| Date | PlayerID | PlayerName | Distance (feet)
+|:---:|:---:|:---:|:---:| 
+| May 1 | 46 | Yonder Alonso | 420 | 
+| May 1 | 24 | Ian Happ | 425 |  
+| May 2 | 46 | Yondr Alonso | 455 | 
+| May 2 | 97 | Maikel Franco | 397 | 
+| May 3 | 46 | Yonder Alonso | 402 | 
+| May 4 | 46 | Yonder Alonso | 418 | 
+
+Any human who sees this data set would immediately conclude that PlayerID --> PlayerName is functional dependency, and that the third tuple, which violates the dependency is simply a typo and not an indication that the dependency doesn't exist. Datasets that are scraped from NoSQL database systems are particularly prone to this type of dirtiness. There has been several research groups (including Prof. Abadi's research group) that have attempted to detect such functional dependencies that seem to exist in a dataset, despite the potential presence of some amount of dirtiness. We will call such detected functional dependencies **fuzzy functional dependencies**. 
 
 For illustrating fuzzy functional dependency, consider the following relation *R* having two attributes X and Y. We observe that *neither* X->Y nor Y->X holds in R. Further, let us define R(X) and R(Y) as values of attribute X and Y of relation R respectively. 
 
