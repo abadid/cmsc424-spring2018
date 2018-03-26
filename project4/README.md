@@ -184,7 +184,7 @@ Let us define Cardinality(X, Y, x) *for each distinct* value x of R(X) as follow
 
 ![](./eqn/fig1.png)
 
-For Relation *R*, Cardinality(X, Y, 1) = ⅓ [Presence of (1,2), (1,3), (1,4)], Cardinality(X, Y, 2) = ½ [Presence of (2,3), (2,4)] and Cardinality(X, Y, 7) = 1 [Presence of (7,16)]. We consider only the **unique pairs** of the form (x,y) while defining Cardinality. Thus, Cardinality(X, Y, 3) = 1 [Presence of (3, 3)]. **Note that cardinality is defined on the original relation R, not R<sub>DUP</sub>**. 
+For Relation *R*, Cardinality(X, Y, 1) = ⅓ [Presence of (1,2), (1,3), (1,4)], Cardinality(X, Y, 2) = ½ [Presence of (2,3), (2,4)] and Cardinality(X, Y, 7) = 1 [Presence of (7,16)]. We consider only distinct values of Y when defining Cardinality. Thus, Cardinality(X, Y, 3) = 1 [Presence of (3, 3)]. **Note that cardinality is defined on the original relation R, not R<sub>DUP</sub>**. 
 
 Let us define Consistency(X, Y, x) *for each distinct* value x of R<sub>DUP</sub>(x) as follows,
 
