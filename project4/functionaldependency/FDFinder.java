@@ -94,7 +94,7 @@ public class FDFinder {
 		// In other words, your SQL query returns confidence(col1,col2)
 		// Do not use stored procedures --- just a regular SQL query
 		// See the README for a hint about how to cast integers as floats in Postgres (which you may need to do)
-		String query = "select max(" + col1 + ") from dataset;";
+		String query = "select count(" + col1 + ") from dataset;";
 
 		try {
 			Statement s = c.createStatement();
