@@ -1,4 +1,4 @@
-queries = ["" for i in range(0, 11)]
+queries = ["" for i in range(0, 1)]
 
 ### 1.
 queries[1] = """

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd" version="2.0">
+
+   <tlib-version>1.2</tlib-version>
+    <uri>match-functions</uri>
+    <tag>
+      <description>Generate a list of People</description>
+      <name>generatematch</name>
+      <tag-class>com.match.web.GenerateMatch</tag-class>
+      <body-content>scriptless</body-content>
+      <attribute>
+        <name>id</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+      </attribute>
+    </tag>
+
+  <tag>
+    <description>Generate a list of People</description>
+    <name>listpeople</name>
+    <tag-class>com.match.web.ListPeople</tag-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <name>query</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
+    <description>Show list of matches</description>
+    <name>listmatches</name>
+    <tag-class>com.match.web.ListMatches</tag-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+      <name>id</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+
+ 
+</taglib>
