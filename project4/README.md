@@ -173,6 +173,26 @@ $ java -cp functionaldependency/postgresql-42.2.2.jre7.jar:. functionaldependenc
 #### Coding Restrictions:
 1. Please do not modify anything in the code aside from the SQL query.
 
+#### Testing your implementation:
+
+We have provided you with 2 additional files for testing your implementation. 
+
+ 1. `answers.txt` : It contains the expected output on running FDFinder.java.
+ 2. `FDTest.py` : It matches your output on running FDFinder.java against answers.txt that we provide. 
+
+To test your implementation, execute the following commands from 
+/vagrant not anywhere else. Firstly, redirect the output of FDFinder.java to a text file (e.g. out.txt) as follows: 
+ 
+ ```
+ $ java -cp functionaldependency/postgresql-42.2.2.jre7.jar:. functionaldependency/FDFinder > out.txt
+ ```
+ Run FDTest.py to compare out.txt and answers.txt. You can do this by running
+ 
+ ```
+ $ python FDTest.py answers.txt out.txt
+ ```
+ 
+ Please do not modify anything in FDFinder.java aside from the SQL query else you will get errors. 
 
 #### Answer the following questions on ELMS
 			 
