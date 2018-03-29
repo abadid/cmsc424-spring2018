@@ -2,7 +2,7 @@
 
 The goal of this project is to introduce you to one of the most common index type in databases -- the B-tree. We have provided you with a toy database that you will use to try out some of the queries mentioned below. Based on your understanding and experience, you will answer a few questions on ELMS, that count as the deliverable for this project. 
 
-Each question below asks you to run a shell script. This script may set up some indexes and execute a couple of `SELECT` statements. You should note the output of each script, as the questions are based on it. Apart from the queries that are provided by us, we encourage you to explore the dataset using `SELECT` statements of your own. It will help you verify your understanding. **Most importantly, pay careful attention to what indexes are present on the table when you work on a particular question -- the set of indexes changes from one question to another.**
+Each question below asks you to run a shell script. These are the `question.x.sh` files in the directory, where `x` is the respective question number. Each script may set up some indexes and execute a couple of `SELECT` statements. You are to note the output of each script, as the questions are based on it. Apart from the queries that are provided by us, we encourage you to explore the dataset using `SELECT` statements of your own. It will help you verify your understanding. **Most importantly, pay careful attention to what indexes are present on the table when you work on a particular question -- the set of indexes changes from one question to another.**
 
 ## About the database
 For this project, we will use a table with approximately 500K records, representing users of a web application. The table is created for you using the following SQL.
@@ -58,70 +58,94 @@ COPY users (
 
 ## Exercises
 
+To run a file, type the following (replace `x` by the question number):
+```bash
+sudo sh ./question.x.sh
+```
+
 
 ### Question 1
-Run the file `question.1.sh` and note its output.
+Run the file `question.1.sh` and note its output. **No new indexes are created when you run this script.**
 
-This file runs two queries on the `users` table. The first query is:
+This file runs two queries on the `users` table. The first query is (Q1.1):
 ```sql
 SELECT *
 FROM users
 WHERE id = 1005;
 ```
 
-The second query is:
+And the second query is (Q1.2):
 ```sql
 SELECT *
 FROM users
-WHERE username = "bristleback";
+WHERE username = 'bristleback';
 ```
 
-If you notice the output, both queries return the same user. However, the first one finishes in much less time than the second. Why?
+If you notice the output, both queries return the same user. However, the first one finishes in much less time than the second. Why? Select one that is most appropriate in this context.
+- [] We got lucky, in general, both will run in the same amount of time
+- [] There is an index on `id`
+- [] Comparing strings is slower than comparing integers.
 
-**TODO: Multiple choice Q?** 
 
 
-
-We will now create an index on `username` using the following command:
+### Question 2
+Run the file `question.2.sh` and note its output. This script creates a UNIQUE index on the `username` attribute using the following command:
 ```sql
 CREATE UNIQUE INDEX uniq_username ON users (username);
 ```
 
-*Maybe: We encourage you to try out running `question.1.sh` and see if creating the index made any difference*
+For more detail, see [https://www.postgresql.org/docs/9.6/static/indexes-unique.html](https://www.postgresql.org/docs/9.6/static/indexes-unique.html)
 
-### Question 2
-Run the file `question.2.sh` and note its output.
-
-This file also runs two queries on the `users` table, and both queries return 100 user records. The first query is:
+After creating the index, we run two queries on the table and both return 100 user records. The first query is (Q2.1):
 ```sql
 SELECT *
 FROM users
 WHERE id >= 5000 AND id < 5100;
 ```
 
-The second query is:
+And the second query is (Q2.2):
 ```sql
 SELECT *
 FROM users 
 WHERE username LIKE "zeus%"
-LIMIT 100;
 ```
 
-Although the result sizes are the same, why does the first query finish in less time than the second one?
+Although the result sizes are the same, and there is an index on `username`, why does the first query finish in less time than the second one?
+- [] We got lucky, in general, both will run in the same amount of time.
+- [] Records are clustered according to `id`
+- [] Q2.2 is not using the index on `username` at all
 
-**TODO: MCQ**
+
+Answer the following questions based on your understanding so far.
+
+For which of the follwing queries, the index on `username` helps?
+- `select * from users where username like '%hero%'`
+- `select * from users where username like '%hero'`
+- `select * from users where username like 'hero%`
+- `select * from users where username = 'hero'`
+
+Suppose we run the following command:
+```sql
+CLUSTER users USING uniq_username;
+```
+See [https://www.postgresql.org/docs/9.6/static/sql-cluster.html](https://www.postgresql.org/docs/9.6/static/sql-cluster.html) for details.
+
+If we were to execute (Q2.1) and (Q2.2) again, how will the results change?
+- [] No change
+- [] Execution times flipped
+- [] Both will take the same time
 
 
 ### Question 3
-This is a two part question.
+This is a two part question. Run the file `question.3.sh` and note its output. **After executing this script, apart from the table definition, only following index is present.**
 
-**Part I:** Now that we know that adding indexes improves retrieval time, lets add another index on `last_name`, so that we can efficiently find users by name.
+We want to find users efficiently by their name. As a first step, we add an index on `last_name` using the command:
 ```sql
 CREATE INDEX users_last_name ON users (last_name);
 ```
 
-Run the file `question.3.sh` and note its output.
-
+ 
+**Part I:**
 This file runs the following two queries on the `users` table.
 
 Query 3.1:
