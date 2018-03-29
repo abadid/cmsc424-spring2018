@@ -1,11 +1,11 @@
 # Project 5: Index
 
-The goal of this project is to introduce you to one of the most common index type in databases -- B-tree. We have provided you with a toy database that you will use to try out some of the queries mentioned below. Based on your understanding and experience, you will answer a few questions on ELMS, that count as the deliverable for this project. 
+The goal of this project is to introduce you to one of the most common index type in databases -- the B-tree. We have provided you with a toy database that you will use to try out some of the queries mentioned below. Based on your understanding and experience, you will answer a few questions on ELMS, that count as the deliverable for this project. 
 
-Note that apart from the queries that you are required to run in order to answer the questions, we also encourage you to explore the dataset using SELECT queries of your own. It will help you verfiy your understanding.
+Each question below asks you to run a shell script. This script may set up some indexes and execute a couple of `SELECT` statements. You should note the output of each script, as the questions are based on it. Apart from the queries that are provided by us, we encourage you to explore the dataset using `SELECT` statements of your own. It will help you verify your understanding. **Most importantly, pay careful attention to what indexes are present on the table when you work on a particular question -- the set of indexes changes from one question to another.**
 
 ## About the database
-For this project, we will use a table with XXX records, representing users of a web application. The table is created for you using the following SQL.
+For this project, we will use a table with approximately 500K records, representing users of a web application. The table is created for you using the following SQL.
 
 ```sql
 CREATE TABLE users (
@@ -13,17 +13,28 @@ CREATE TABLE users (
     username VARCHAR(60),
     first_name VARCHAR(60),
     last_name VARCHAR(60),
-    email VARCHAR(120),
+    email VARCHAR(255),
+    date_of_birth VARCHAR(60),
     gender VARCHAR(6),
-    street_address VARCHAR(360),
+    street_address VARCHAR(255),
+    city VARCHAR(60),
     state VARCHAR(60),
     zip VARCHAR(6),
-    last_login TIMESTAMP,
-    created_at TIMESTAMP
+    about VARCHAR(2047),
+    theme VARCHAR(6)
 );
 ```
 
-We have populated the table with XXX user records using the command:
+
+Most of the attributes should be self-explanatory. However, note the following:
+- `id` and `username` are unique for every user. 
+- `about` is meant to capture the bio of a user in a few sentences. However, the current values for this field will not make sense, as it is meant to be a placeholder.
+- Similarly `city` and `zip` values will not make sense. 
+- You can think of the `theme` column as denoting some form of personalization for the user, e.g., some users might prefer a blue background when they visit your site, other might prefer gray, etc. Currently, there are 74 distinct theme values, encoded using a single character.
+- **Do not assume anything about the data unless you verify it** by inspecting the given table. You are free to run any SELECT query you like to learn about the data. For example, there are about 43K zip codes in the US, however, this table has about 99K. 
+
+
+We have populated the table with data in the file `dummy-users.csv` using the following command:
 ```sql
 COPY users (
         id,
@@ -31,15 +42,17 @@ COPY users (
         first_name,
         last_name,
         email,
+        date_of_birth,
         gender,
         street_address,
+        city,
         state,
         zip,
-        last_login,
-        created_at
+        about,
+        theme
     )
     FROM '/vagrant/dummy-users.csv'
-    DELIMITER ',';
+    WITH DELIMITER ',' CSV HEADER;
 ```
 
 
