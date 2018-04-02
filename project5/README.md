@@ -69,22 +69,24 @@ Run the file `question.1.sh` and note its output. **No new indexes are created w
 
 This file runs two queries on the `users` table. The first query is (Q1.1):
 ```sql
-SELECT *
+SELECT username, first_name, last_name
 FROM users
 WHERE id = 1005;
 ```
 
 And the second query is (Q1.2):
 ```sql
-SELECT *
+SELECT username, first_name, last_name
 FROM users
 WHERE username = 'bristleback';
 ```
 
 If you notice the output, both queries return the same user. However, the first one finishes in much less time than the second. Why? Select one that is most appropriate in this context.
 - [ ] We got lucky; in general, both will run in the same amount of time
-- [ ] There is an index on `id`
+- [ ] There is an index on `id` 
 - [ ] Comparing strings is slower than comparing integers.
+- [ ] 
+- [ ] 
 
 
 
@@ -306,8 +308,4 @@ WHERE username = 'Their sanity I will shatter, their dreams of conquest I will d
 Update performance.
 
 
-### Misc
-Clear page cache on linux before running every query:
-```bash
-echo 3 | sudo tee /proc/sys/vm/drop_caches
-```
+
