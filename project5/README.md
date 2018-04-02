@@ -82,11 +82,11 @@ WHERE username = 'bristleback';
 ```
 
 If you notice the output, both queries return the same user. However, the first one finishes in much less time than the second. Why? Select one that is most appropriate in this context.
-- [ ] We got lucky; in general, both will run in the same amount of time
-- [ ] There is an index on `id` 
+- [ ] This is arbitrary; in general, both will take similar time to execute.
+- [ ] There is an index on `id` because it is declared as a `PRIMARY KEY`. 
 - [ ] Comparing strings is slower than comparing integers.
 - [ ] 
-- [ ] 
+
 
 
 
@@ -115,7 +115,7 @@ WHERE username LIKE "zeus%"
 Although the result sizes are the same, and there is an index on `username`, why does the first query finish in less time than the second one?
 - [ ] We got lucky; in general, both will run in the same amount of time.
 - [ ] Records are clustered according to `id`
-- [ ] Q2.2 is not using the index on `username` at all
+- [ ] PostgreSQL cannot use the index on `username` for a pattern matching operation as in Q2.2
 
 
 Answer the following questions based on your understanding so far.
@@ -133,8 +133,8 @@ CLUSTER users USING uniq_username;
 See [https://www.postgresql.org/docs/9.6/static/sql-cluster.html](https://www.postgresql.org/docs/9.6/static/sql-cluster.html) for details.
 
 If we were to execute (Q2.1) and (Q2.2) again, how will the results change?
-- [ ] No change
-- [ ] Execution times flipped
+- [ ] There will be no change, we will observe similar behavior as before
+- [ ] The 
 - [ ] Both will take the same time
 
 
@@ -165,7 +165,7 @@ WHERE first_name = "James" AND last_name = "Giant"
 ```
 
 Both queries find one user in the table. However, the first one takes longer. Why?
-- [ ] On disk, the record for 'Bethzy Smith' appears much before the record for 'James Giant'.
+- [ ] On disk, the record for 'Bethzy Smith' appears much before the record for 'James Giant', and PostgreSQL found it earlier in the scan.
 - [ ] Postgres used the index `users_last_name` for Q3.2 but not for Q3.1
 - [ ] There are many users having last name "Smith" compared to "Giant"
 
@@ -281,7 +281,7 @@ CREATE INDEX users_dob_theme ON users (date_of_birth, theme);
 
 
 ### Question 7
-Run the file `question.5.sh` and note its output. In this part, we want to find users by their `about` description, and we decide to create an index on it.
+Run the file `question.7.sh` and note its output. In this part, we want to find users by their `about` description, and we decide to create an index on it.
 ```sql
 CREATE INDEX users_about ON users (about);
 ```
@@ -295,29 +295,50 @@ FROM pg_class
 WHERE relname IN ('uniq_username', 'users_about');
 ```
 
-**TODO: Explain the output?**
-
-Finally the script runs the following two queries, that both return the same user, but Q6.2 is slower than Q6.1. Why?
-Query 6.1
+Finally the script runs the following two queries, that both return the same user, but Q7.2 is slower than Q7.1. Why?
+Query 7.1
 ```sql
-SELECT * 
+SELECT username, first_name, last_name 
 FROM users
-WHERE username = 'od'
+WHERE username = 'od' AND state = 'MD'
 ```
 
+Query 7.2
 ```sql
-SELECT * 
+SELECT username, first_name, last_name 
 FROM users
-WHERE username = 'Their sanity I will shatter, their dreams of conquest I will destroy.'
+WHERE about = 'I am simply a test user for Question 7.' AND state = 'MD'
 ```
 
-**TODO : MCQ**
+- [ ] This is arbitrary; in general, we cannot say for certain that one will be faster than another.
+- [ ] There are more disk seeks when using the index in Q7.2 compared to Q7.1
+- [ ] PostgreSQL knows to stop when it finds one record in Q7.1, because there is a `UNIQUE` index on `username`. However, because the index on `about` is not unique, it reads more records than necessary.
 
 
+### Question 8
+Run the file `question.8.sh` and note its output. For this part, we will measure the performance of `UPDATE` statements when indexes are present.
 
-### Question 7
+We start with creating two indexes, a `UNIQUE` index on `username`, and an index on `date_of_birth`. Then we run the following queries:
 
-Update performance.
+Query 8.1
+```sql
+UPDATE users
+SET username = 'kilobyte1'
+WHERE id = '73456';
+```
+
+Query 8.2
+```sql
+UPDATE users
+SET date_of_birth = date_of_birth + interval '1 year'
+WHERE id = '89976';
+```
+
+Both queries find a user by id, and update one column in the found record. However, Q8.2 runs slower than Q8.1. Why?
+- [ ] In Q8.1, the new value (for `username`) is readily available, however, we need to calculate the new value (for `date_of_birth`) in Q8.2
+- [ ] Updating strings is faster than updating dates
+- [ ] Q8.1 does not have to update the index on `username`, whereas Q8.2 has to update the index on `date_of_birth`.
+- [ ] We got lucky in this instance, index update in Q8.1 finished earlier than Q8.2. 
 
 
 
