@@ -100,14 +100,14 @@ For more detail, see [https://www.postgresql.org/docs/9.6/static/indexes-unique.
 
 After creating the index, we run two queries on the table and both return 100 user records. The first query is (Q2.1):
 ```sql
-SELECT *
+SELECT min(date_of_birth), max(date_of_birth)
 FROM users
 WHERE id >= 5000 AND id < 5100;
 ```
 
 And the second query is (Q2.2):
 ```sql
-SELECT *
+SELECT min(date_of_birth), max(date_of_birth)
 FROM users 
 WHERE username LIKE "zeus%"
 ```
