@@ -1,6 +1,9 @@
 #!/bin/bash
 
 TIMEFORMAT='%3R'
+
+sudo -u vagrant psql --quiet -d app -f drop-indexes.sql
+
 echo "Question 1"
 echo "-------------------------------------"
 
