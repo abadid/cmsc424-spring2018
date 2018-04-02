@@ -8,7 +8,7 @@ CREATE TABLE users (
     email VARCHAR(255),
     date_of_birth VARCHAR(60),
     gender VARCHAR(6),
-    street_address VARCHAR(255),
+    street VARCHAR(255),
     city VARCHAR(60),
     state VARCHAR(60),
     zip VARCHAR(6),
@@ -25,7 +25,7 @@ COPY users (
         email,
         date_of_birth,
         gender,
-        street_address,
+        street,
         city,
         state,
         zip,
@@ -34,4 +34,9 @@ COPY users (
     )
     FROM '/vagrant/dummy-users.csv'
     WITH DELIMITER ',' CSV HEADER;
+
+ALTER TABLE users ALTER COLUMN date_of_birth type DATE using to_date(date_of_birth, 'YYYY-MM-DD');
+
+CLUSTER users USING users_pkey;
+
     

@@ -154,14 +154,14 @@ Query 3.1:
 ```sql
 SELECT username, first_name, last_name
 FROM users
-WHERE first_name = "Bethzy" AND last_name = "Smith"
+WHERE first_name = "Bethzy" AND last_name = "Richardson"
 ```
 
 Query 3.2:
 ```sql
 SELECT username, first_name, last_name
 FROM users
-WHERE first_name = "James" AND last_name = "Giant"
+WHERE first_name = "Patrick" AND last_name = "Giant"
 ```
 
 Both queries find one user in the table. However, the first one takes longer. Why?
@@ -240,7 +240,7 @@ Query 5.2
 ```sql
 SELECT username, first_name, last_name
 FROM users
-WHERE state = "CA" AND first_name = "Jaxson" AND last_name = "PENNYPACKER"
+WHERE state = "CA" AND first_name = "Alan" AND last_name = "Soto"
 ```
 
 Both queries return the same user record. We also have an index on `username` and on `state`. However, the second query takes longer to run than the first, why?
