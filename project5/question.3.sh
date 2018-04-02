@@ -1,12 +1,17 @@
 #!/bin/bash
 
 TIMEFORMAT='%3R'
-echo "Question 3"
-echo "-------------------------------------"
 
 sudo -u vagrant psql --quiet -d app -f drop-indexes.sql
+
+echo -e "\n"
+echo "Creating index on last_name..."
 sudo -u vagrant -H -- psql --quiet -d app -c \
     "CREATE INDEX users_last_name ON users (last_name);"
+
+echo -e "\n"
+echo "Question 3"
+echo "-------------------------------------"
 
 echo "Executing Q3.1..."
 sudo sh -c 'echo 3 > /proc/sys/vm/drop_caches' 

@@ -1,14 +1,22 @@
 #!/bin/bash
 
 TIMEFORMAT='%3R'
-echo "Question 5"
-echo "-------------------------------------"
 
 sudo -u vagrant psql --quiet -d app -f drop-indexes.sql
+
+echo -e "\n"
+echo "Creating UNIQUE index on username..."
 sudo -u vagrant -H -- psql --quiet -d app -c \
     "CREATE UNIQUE INDEX uniq_username ON users (username);"
+
+echo "Creating index on state..."
 sudo -u vagrant -H -- psql --quiet -d app -c \
     "CREATE INDEX users_state ON users (state);"
+echo "Two indexes created."
+
+echo -e "\n"
+echo "Question 5"
+echo "-------------------------------------"
 
 echo "Executing Q5.1..."
 sudo sh -c 'echo 3 > /proc/sys/vm/drop_caches' 

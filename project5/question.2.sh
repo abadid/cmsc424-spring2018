@@ -2,9 +2,14 @@
 
 TIMEFORMAT='%3R'
 sudo -u vagrant psql --quiet -d app -f drop-indexes.sql
+
+echo -e "\n"
+echo "Creating UNIQUE index on username..."
 sudo -u vagrant -H -- psql --quiet -d app -c \
     "CREATE UNIQUE INDEX uniq_username ON users (username);"
+echo "Index created successfully."
 
+echo -e "\n"
 echo "Question 2"
 echo "-------------------------------------"
 

@@ -12,7 +12,7 @@ sudo sh -c 'echo 3 > /proc/sys/vm/drop_caches'
 time sudo -u vagrant -H -- psql --quiet -d app -c \
     "SELECT username, first_name, last_name 
      FROM users 
-     WHERE id = 50001;" 
+     WHERE id = 267577;" 
 
 
 echo -e "\n\n-------------------------------------"
