@@ -152,14 +152,14 @@ This file runs the following two queries on the `users` table.
 
 Query 3.1:
 ```sql
-SELECT *
+SELECT username, first_name, last_name
 FROM users
 WHERE first_name = "Bethzy" AND last_name = "Smith"
 ```
 
 Query 3.2:
 ```sql
-SELECT *
+SELECT username, first_name, last_name
 FROM users
 WHERE first_name = "James" AND last_name = "Giant"
 ```
@@ -175,9 +175,6 @@ Both queries find one user in the table. However, the first one takes longer. Wh
 - [ ] Same time for both
 - [ ] Flipped
 
-_runtimes should flip -- James is a common first name, Bethzy is very uncommon for a first name_
-
-
 
 ### Question 4
 
@@ -189,23 +186,37 @@ CREATE INDEX users_first_last_name ON users (first_name, last_name);
 For which of the following three queries, would the index help?
 - [ ] Query 4.1:
 ```sql
-SELECT *
+SELECT username, first_name, last_name
 FROM users
 WHERE first_name = "Bethzy" AND last_name = "Smith"
 ```
 
 - [ ] Query 3.2:
 ```sql
-SELECT *
+SELECT username, first_name, last_name
 FROM users
 WHERE last_name = "Giant"
 ```
 
 - [ ] Query 3.3:
 ```sql
-SELECT *
+SELECT username, first_name, last_name
 FROM users
 WHERE first_name = "Jaxson"
+```
+
+- [ ] Query 3.4:
+```sql
+SELECT username, first_name, last_name
+FROM users
+WHERE first_name LIKE "Jord%"
+```
+
+- [ ] Query 3.5:
+```sql
+SELECT username, first_name, last_name
+FROM users
+WHERE last_name LIKE "Jord%"
 ```
 
 
@@ -214,35 +225,36 @@ Run the file `question.5.sh` and note its output. For this part, we create an in
 ```sql
 CREATE INDEX users_state ON users (state);
 ```
-
-Apart from the above, we also create a `UNIQUE` index on `username` as before.
+Apart from the above index, we also create a `UNIQUE` index on `username` as before (in Question 2).
 
 We then run the following two queries:
 
 Query 5.1
 ```sql
-SELECT *
+SELECT username, first_name, last_name
 FROM users
 WHERE username = "alchemist";
 ```
 
 Query 5.2
 ```sql
-SELECT *
+SELECT username, first_name, last_name
 FROM users
 WHERE state = "CA" AND first_name = "Jaxson" AND last_name = "PENNYPACKER"
 ```
 
 Both queries return the same user record. We also have an index on `username` and on `state`. However, the second query takes longer to run than the first, why?
 
-**TODO: MCQ**
+- [ ] Q5.2 compares three column values for every user, whereas Q5.1 compares only one.
+- [ ] PostgreSQL knows that there is a UNIQUE index on `username`, hence it returns as soon as it finds one record in Q5.1. However, in Q5.2, it cannot do so, as the index on `state` is not unique.
+- [ ] There are many user records that have `state = 'CA'`, so the index on `state` is not helpful.
 
 
 
 ### Question 6
 Suppose we want to run many queries of the following type:
 ```sql
-SELECT *
+SELECT username, first_name, last_name
 FROM users
 WHERE date_of_birth >= '1990-01-01' AND date_of_birth <= '1990-02-01'
     AND theme = 'B'
@@ -268,7 +280,7 @@ CREATE INDEX users_dob_theme ON users (date_of_birth, theme);
 ```
 
 
-### Question 6
+### Question 7
 Run the file `question.5.sh` and note its output. In this part, we want to find users by their `about` description, and we decide to create an index on it.
 ```sql
 CREATE INDEX users_about ON users (about);
