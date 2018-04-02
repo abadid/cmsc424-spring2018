@@ -65,7 +65,7 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
      apt-get update
-     apt-get install -y postgresql postgresql-contrib python python-pip build-essential python-dev python-psycopg2 
+     apt-get install -y postgresql postgresql-contrib python python-pip build-essential python-dev python-psycopg2 dos2unix
      sudo -u postgres createuser -s vagrant
      sudo -u vagrant createdb app
      sudo -u vagrant psql app -f /vagrant/bootstrap.sql

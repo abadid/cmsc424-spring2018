@@ -58,10 +58,16 @@ COPY users (
 
 ## Exercises
 
+If you are using a Windows machine, please run `dos2unix` as below to account for differences in line-endings (replace `x` by the question number):
+```bash
+dos2unix question.x.sh
+```
+
 To run a file, type the following (replace `x` by the question number):
 ```bash
 sudo bash question.x.sh
 ```
+
 
 
 ### Question 1
