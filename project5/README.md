@@ -60,7 +60,7 @@ COPY users (
 
 To run a file, type the following (replace `x` by the question number):
 ```bash
-sudo sh ./question.x.sh
+sudo sh question.x.sh
 ```
 
 
