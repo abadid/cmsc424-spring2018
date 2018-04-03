@@ -58,12 +58,12 @@ COPY users (
 
 ## Exercises
 
-If you are using a Windows machine, please run `dos2unix` as below to account for differences in line-endings:
+If you are using a Windows machine, please run `dos2unix` as below to account for differences in line-endings. (You should only have to do this once, and then you should be fine for the rest of the project.)
 ```bash
 dos2unix question.*.sh
 ```
 
-To run a file, type the following (replace `x` by the question number):
+To run a script for a question, type the following (replace `x` by the question number):
 ```bash
 sudo bash question.x.sh
 ```
@@ -181,7 +181,7 @@ Both queries find one user in the table. However, the first one takes longer. Wh
 
 ### Question 4
 
-Suppose instead of creating separate indexes on one of `first_name` or `last_name`, we create a _multicolumn_ index containing both attributes. Specifically, we create the following index:
+Before you do this part, read section 11.5.2 from your textbook (it should be a tiny bit more than a single page). The main thing you need to know is that the concatenation of multiple attributes can be indexed the same way as an index on a single attribute. This is called a "multi-column index". Suppose instead of creating separate indexes on one of `first_name` or `last_name`, we create a _multicolumn_ index containing both attributes. Specifically, we create the following index:
 ```sql
 CREATE INDEX users_first_last_name ON users (first_name, last_name);
 ```
