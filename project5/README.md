@@ -77,7 +77,7 @@ This file runs two queries on the `users` table. The first query is (Q1.1):
 ```sql
 SELECT username, first_name, last_name
 FROM users
-WHERE id = 1005;
+WHERE id = 267577;
 ```
 
 And the second query is (Q1.2):
@@ -91,8 +91,6 @@ If you notice the output, both queries return the same user. However, the first 
 - [ ] This is arbitrary; in general, both will take similar time to execute.
 - [ ] There is an index on `id` because it is declared as a `PRIMARY KEY`. 
 - [ ] Comparing strings is slower than comparing integers.
-- [ ] 
-
 
 
 
@@ -115,7 +113,7 @@ And the second query is (Q2.2):
 ```sql
 SELECT min(date_of_birth), max(date_of_birth)
 FROM users 
-WHERE username LIKE "zeus%"
+WHERE username LIKE 'zeus%'
 ```
 
 Although the result sizes are the same, and there is an index on `username`, why does the first query finish in less time than the second one?
@@ -140,7 +138,7 @@ See [https://www.postgresql.org/docs/9.6/static/sql-cluster.html](https://www.po
 
 If we were to execute (Q2.1) and (Q2.2) again, how will the results change?
 - [ ] There will be no change, we will observe similar behavior as before
-- [ ] The 
+- [ ] The behaviour will be flipped, Q2.1 will take more time than Q2.2
 - [ ] Both will take the same time
 
 
@@ -160,20 +158,20 @@ Query 3.1:
 ```sql
 SELECT username, first_name, last_name
 FROM users
-WHERE first_name = "Bethzy" AND last_name = "Richardson"
+WHERE first_name = 'Bethzy' AND last_name = 'Richardson'
 ```
 
 Query 3.2:
 ```sql
 SELECT username, first_name, last_name
 FROM users
-WHERE first_name = "Patrick" AND last_name = "Giant"
+WHERE first_name = 'Patrick' AND last_name = 'Giant'
 ```
 
 Both queries find one user in the table. However, the first one takes longer. Why?
 - [ ] On disk, the record for 'Bethzy Smith' appears much before the record for 'James Giant', and PostgreSQL found it earlier in the scan.
 - [ ] Postgres used the index `users_last_name` for Q3.2 but not for Q3.1
-- [ ] There are many users having last name "Smith" compared to "Giant"
+- [ ] There are many users having last name 'Richardson' compared to 'Giant'
 
 
 **Part 2:** Suppose instead of creating an index on `last_name`, we created it on `first_name`. Based on your understanding so far, what can you say about the run time of the two queries above, and why?
@@ -194,35 +192,35 @@ For which of the following three queries, would the index help?
 ```sql
 SELECT username, first_name, last_name
 FROM users
-WHERE first_name = "Bethzy" AND last_name = "Smith"
+WHERE first_name = 'Bethzy' AND last_name = 'Smith'
 ```
 
 - [ ] Query 3.2:
 ```sql
 SELECT username, first_name, last_name
 FROM users
-WHERE last_name = "Giant"
+WHERE last_name = 'Giant'
 ```
 
 - [ ] Query 3.3:
 ```sql
 SELECT username, first_name, last_name
 FROM users
-WHERE first_name = "Jaxson"
+WHERE first_name = 'Jaxson'
 ```
 
 - [ ] Query 3.4:
 ```sql
 SELECT username, first_name, last_name
 FROM users
-WHERE first_name LIKE "Jord%"
+WHERE first_name LIKE 'Jord%'
 ```
 
 - [ ] Query 3.5:
 ```sql
 SELECT username, first_name, last_name
 FROM users
-WHERE last_name LIKE "Jord%"
+WHERE last_name LIKE 'Jord%'
 ```
 
 
@@ -239,14 +237,14 @@ Query 5.1
 ```sql
 SELECT username, first_name, last_name
 FROM users
-WHERE username = "alchemist";
+WHERE username = 'alchemist';
 ```
 
 Query 5.2
 ```sql
 SELECT username, first_name, last_name
 FROM users
-WHERE state = "CA" AND first_name = "Alan" AND last_name = "Soto"
+WHERE state = 'CA' AND first_name = 'Alan' AND last_name = 'Soto'
 ```
 
 Both queries return the same user record. We also have an index on `username` and on `state`. However, the second query takes longer to run than the first, why?
