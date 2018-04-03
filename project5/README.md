@@ -317,7 +317,7 @@ Query 7.2
 select max(last_name) from users where about in (select * from tmp2);
 ```
 
-Why is Q7.2 is slower than Q7.1?
+Why is Q7.2 slower than Q7.1?
 - [ ] The cost to use the index on the about attribute is larger than the cost to use the index on the username attribute, since the index is larger and the search keys are larger.
 - [ ] Although the value returned is the same, that is because this is an aggregate. The set of of records that are read from the users table are different. In particular, Q7.2 has to read more records.
 - [ ] PostgreSQL knows to stop when it finds one record in Q7.1, because there is a `UNIQUE` index on `username`. However, because the index on `about` is not unique, it reads more records than necessary.
