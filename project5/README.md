@@ -77,7 +77,7 @@ This file runs two queries on the `users` table. The first query is (Q1.1):
 ```sql
 SELECT username, first_name, last_name
 FROM users
-WHERE id = 1005;
+WHERE id = 267577;
 ```
 
 And the second query is (Q1.2):
@@ -91,9 +91,6 @@ If you notice the output, both queries return the same user. However, the first 
 - [ ] This is arbitrary; in general, both will take similar time to execute.
 - [ ] There is an index on `id` because it is declared as a `PRIMARY KEY`. 
 - [ ] Comparing strings is slower than comparing integers.
-- [ ] 
-
-
 
 
 ### Question 2
@@ -115,7 +112,7 @@ And the second query is (Q2.2):
 ```sql
 SELECT min(date_of_birth), max(date_of_birth)
 FROM users 
-WHERE username LIKE "zeus%"
+WHERE username LIKE 'zeus%'
 ```
 
 Although the result sizes are the same, and there is an index on `username`, why does the first query finish in less time than the second one?
@@ -140,7 +137,7 @@ See [https://www.postgresql.org/docs/9.6/static/sql-cluster.html](https://www.po
 
 If we were to execute (Q2.1) and (Q2.2) again, how will the results change?
 - [ ] There will be no change, we will observe similar behavior as before
-- [ ] The 
+- [ ] The behaviour will be flipped, Q2.1 will take more time than Q2.2
 - [ ] Both will take the same time
 
 
@@ -160,26 +157,26 @@ Query 3.1:
 ```sql
 SELECT username, first_name, last_name
 FROM users
-WHERE first_name = "Bethzy" AND last_name = "Richardson"
+WHERE first_name = 'Bethzy' AND last_name = 'Richardson'
 ```
 
 Query 3.2:
 ```sql
 SELECT username, first_name, last_name
 FROM users
-WHERE first_name = "Patrick" AND last_name = "Giant"
+WHERE first_name = 'Patrick' AND last_name = 'Giant'
 ```
 
 Both queries find one user in the table. However, the first one takes longer. Why?
-- [ ] On disk, the record for 'Bethzy Smith' appears much before the record for 'James Giant', and PostgreSQL found it earlier in the scan.
-- [ ] Postgres used the index `users_last_name` for Q3.2 but not for Q3.1
-- [ ] There are many users having last name "Smith" compared to "Giant"
+- [ ] In the index, the record for 'Patrick Giant' appears much before the record for 'Bethzy Richardson', and hence PostgreSQL found it earlier.
+- [ ] The `id` of 'Patrick Giant' is much smaller than the `id` of 'Bethzy Smith'. Hence PostgreSQL found it earlier.
+- [ ] There are many users having last name 'Richardson' compared to 'Giant'
 
 
 **Part 2:** Suppose instead of creating an index on `last_name`, we created it on `first_name`. Based on your understanding so far, what can you say about the run time of the two queries above, and why?
-- [ ] No change
-- [ ] Same time for both
-- [ ] Flipped
+- [ ] Both will take the same time
+- [ ] There will be no change, we will observe similar behavior as before
+- [ ] The behaviour will be flipped, Q3.2 will take more time than Q3.1
 
 
 ### Question 4
@@ -189,40 +186,40 @@ Suppose instead of creating separate indexes on one of `first_name` or `last_nam
 CREATE INDEX users_first_last_name ON users (first_name, last_name);
 ```
 
-For which of the following three queries, would the index help?
+For which of the following queries, would the index help?
 - [ ] Query 4.1:
 ```sql
 SELECT username, first_name, last_name
 FROM users
-WHERE first_name = "Bethzy" AND last_name = "Smith"
+WHERE first_name = 'Bethzy' AND last_name = 'Smith'
 ```
 
 - [ ] Query 3.2:
 ```sql
 SELECT username, first_name, last_name
 FROM users
-WHERE last_name = "Giant"
+WHERE last_name = 'Giant'
 ```
 
 - [ ] Query 3.3:
 ```sql
 SELECT username, first_name, last_name
 FROM users
-WHERE first_name = "Jaxson"
+WHERE first_name = 'Jaxson'
 ```
 
 - [ ] Query 3.4:
 ```sql
 SELECT username, first_name, last_name
 FROM users
-WHERE first_name LIKE "Jord%"
+WHERE first_name LIKE 'Jord%'
 ```
 
 - [ ] Query 3.5:
 ```sql
 SELECT username, first_name, last_name
 FROM users
-WHERE last_name LIKE "Jord%"
+WHERE last_name LIKE 'Jord%'
 ```
 
 
@@ -239,14 +236,14 @@ Query 5.1
 ```sql
 SELECT username, first_name, last_name
 FROM users
-WHERE username = "alchemist";
+WHERE username = 'alchemist';
 ```
 
 Query 5.2
 ```sql
 SELECT username, first_name, last_name
 FROM users
-WHERE state = "CA" AND first_name = "Alan" AND last_name = "Soto"
+WHERE state = 'CA' AND first_name = 'Alan' AND last_name = 'Soto'
 ```
 
 Both queries return the same user record. We also have an index on `username` and on `state`. However, the second query takes longer to run than the first, why?
@@ -301,50 +298,99 @@ FROM pg_class
 WHERE relname IN ('uniq_username', 'users_about');
 ```
 
-Finally the script runs the following two queries, that both return the same user, but Q7.2 is slower than Q7.1. Why?
+The we create two temporary tables via running a select statement and putting the results in the newly created tables:
+```sql
+create table tmp1 as select username from users where first_name='Aaron';
+create table tmp2 as select about from users where first_name='Aaron';"
+```
+
+
+Finally the script runs the following two queries, that both return the same value:
+
 Query 7.1
 ```sql
-SELECT username, first_name, last_name 
-FROM users
-WHERE username = 'od' AND state = 'MD'
+select max(last_name) from users where username in (select * from tmp1);
 ```
 
 Query 7.2
 ```sql
-SELECT username, first_name, last_name 
-FROM users
-WHERE about = 'I am simply a test user for Question 7.' AND state = 'MD'
+select max(last_name) from users where about in (select * from tmp2);
 ```
 
-- [ ] This is arbitrary; in general, we cannot say for certain that one will be faster than another.
-- [ ] There are more disk seeks when using the index in Q7.2 compared to Q7.1
+Why is Q7.2 slower than Q7.1?
+- [ ] The cost to use the index on the about attribute is larger than the cost to use the index on the username attribute, since the index is larger and the search keys are larger.
+- [ ] Although the value returned is the same, that is because this is an aggregate. The set of of records that are read from the users table are different. In particular, Q7.2 has to read more records.
 - [ ] PostgreSQL knows to stop when it finds one record in Q7.1, because there is a `UNIQUE` index on `username`. However, because the index on `about` is not unique, it reads more records than necessary.
+- [ ] The 'username' attribute appears first in the record, before the 'about' attribute. Therefore, the cost of extracting the 'about' attribute is larger than the cost of extracting the 'username' attribute from each record in users.
 
 
 ### Question 8
 Run the file `question.8.sh` and note its output. For this part, we will measure the performance of `UPDATE` statements when indexes are present.
 
-We start with creating two indexes, a `UNIQUE` index on `username`, and an index on `date_of_birth`. Then we run the following queries:
+We start by running 3 SQL commands:
+
+```sql
+create table q8_users1 as select id, date_of_birth from users;
+create table q8_users2 as select id, date_of_birth from users;
+create index id_index_on_q8_users2 on q8_users2 (id);
+```
+
+Note that q8\_users1 has no indexes, and q8\_users2 has a single index on id.
+
+Then we run the following queries:
 
 Query 8.1
 ```sql
-UPDATE users
-SET username = 'kilobyte1'
-WHERE id = '73456';
+update q8_users1 set id = (extract(year from date_of_birth)::char(4)||id::varchar(10))::int;
 ```
 
 Query 8.2
 ```sql
-UPDATE users
-SET date_of_birth = date_of_birth + interval '1 year'
-WHERE id = '89976';
+update q8_users2 set id = (extract(year from date_of_birth)::char(4)||id::varchar(10))::int;
 ```
 
-Both queries find a user by id, and update one column in the found record. However, Q8.2 runs slower than Q8.1. Why?
-- [ ] In Q8.1, the new value (for `username`) is readily available, however, we need to calculate the new value (for `date_of_birth`) in Q8.2
-- [ ] Updating strings is faster than updating dates
-- [ ] Q8.1 does not have to update the index on `username`, whereas Q8.2 has to update the index on `date_of_birth`.
-- [ ] We got lucky in this instance, index update in Q8.1 finished earlier than Q8.2. 
+Both queries update the id value of every single tuple in the table by concatening the year of birth with the old idea. Don't worry about all of the type casting in the query --- you can trust that it works correctly. The main thing to note is that every single id value changes. 
 
+Why does Q8.2 run slower than Q8.1?
+- [ ] Q8.2 runs after Q8.1 and the CPU on my computer slows down over time. 
+- [ ] q8_users1 is smaller than q8_users2 since it doesn't have an index. Therefore q8_users1 blocks are more likely to be in cache or memory than q8_users2 blocks (which are more likey to be on disk).
+- [ ] Because we didn't create an index on q8_users1, it automatically created an index on its primary key. This index helps to accelerate the update statements.
+- [ ] The update in Q8.2 is more expensive because the index has to be updated as well.
 
+### Question 9
+Run the file `question.9.sh` and note its output. For this part, we will measure how index size is based on `INSERT` patterns.
+
+We start by running the following SQL commands:
+
+```sql
+CREATE TABLE users2 (
+    id INT,
+    username VARCHAR(60),
+    first_name VARCHAR(60),
+    last_name VARCHAR(60),
+    date_of_birth date,
+    primary key(first_name, username)
+);
+
+CREATE TABLE users3 (
+    id INT,
+    username VARCHAR(60),
+    first_name VARCHAR(60),
+    last_name VARCHAR(60),
+    date_of_brith date,
+    primary key(first_name, username)
+);
+
+CLUSTER users2 using users2_pkey;
+CLUSTER users3 using users3_pkey;
+
+CREATE INDEX id_index_on_users2 ON users2 (id) with (fillfactor=50);
+CREATE INDEX id_index_on_users3 ON users3 (id) with (fillfactor=50);
+```
+
+Note that users2 and users3 have an identical schema. Note that the primary key is composed of both the first_name and username, and that the tables are clustered (sorted) by the primary key. After we create the tables and declare the sort order, we then create an index on the id attribute for each table (the index is the same for each of them). (The fillfactor part of the statement makes the index insertion algorithm more similar to the description in your textbook and in lecture --- index nodes must be between half full and totally full).  
+
+After we do this, we extract all tuples with id in between 10 and 10009 from the users table, and insert the id, username, first and last name, and date of birth from these tuples into the users2 and users3 tables. The only difference with the way that this insert is done is that for the users2 table, the tuples are inserted in sorted order by the id attribute (each tuple that is inserted as a higher id than the previous one). However, for the users3 table, the tuples are inserted in a more random order. You can look at the bash script for how this is done if you want to, but looking at the script is unlikely to help you more than just focusing on the main point: tuples are inserted in sorted order by id for users2 and (mostly) random order for users3. 
+
+After doing all of the tuple insertions, the script then prints the size of each index. Surprisingly, the index for which insertions happened in sorted order is *larger* than the the index for which insertions happened in *random* order. Please use your understanding of how insertions into indexes work from the textbook and the lectures this semester to explain why there is a size difference between the two indexes. (Write your response in the last question on the quiz on Elms). 
 
