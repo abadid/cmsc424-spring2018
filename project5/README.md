@@ -389,7 +389,7 @@ CREATE INDEX id_index_on_users2 ON users2 (id) with (fillfactor=50);
 CREATE INDEX id_index_on_users3 ON users3 (id) with (fillfactor=50);
 ```
 
-Note that users2 and users3 have an identical schema. After we create the tables, we then create an index on the id attribute for each table (the index is the same for each of them). Don't worry about the fillfactor part of the definition --- this is just to make the index insertion algorithm more similar to the description in your textbook.  
+Note that users2 and users3 have an identical schema. Note that the primary key is composed of both the first_name and username, and that the tables are clustered (sorted) by the primary key. After we create the tables and declare the sort order, we then create an index on the id attribute for each table (the index is the same for each of them). Don't worry about the fillfactor part of the definition --- this is just to make the index insertion algorithm more similar to the description in your textbook.  
 
 After we do this, we extract all tuples with id in between 10 and 10009 from the users table, and insert the id, username, first and last name, and date of birth from these tuples into the users2 and users3 tables. The only difference with the way that this insert is done is that for the users2 table, the tuples are inserted in sorted order (each tuple that is inserted as a higher id than the previous one). However, for the users3 table, the tuples are inserted in a more random order. You can look at the bash script for how this is done if you want to, but looking at the script is unlikely to help you more than just focusing on the main point: tuples are inserted in sorted order for users2 and (mostly) random order for users3. 
 
