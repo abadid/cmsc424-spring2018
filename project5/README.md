@@ -186,7 +186,7 @@ Suppose instead of creating separate indexes on one of `first_name` or `last_nam
 CREATE INDEX users_first_last_name ON users (first_name, last_name);
 ```
 
-For which of the following three queries, would the index help?
+For which of the following queries, would the index help?
 - [ ] Query 4.1:
 ```sql
 SELECT username, first_name, last_name
@@ -326,7 +326,7 @@ We start with creating two indexes, a `UNIQUE` index on `username`, and an index
 Query 8.1
 ```sql
 UPDATE users
-SET username = 'kilobyte1'
+SET username = 'kilobyte1'  --old username = 'kilobyte'
 WHERE id = '73456';
 ```
 
@@ -340,8 +340,8 @@ WHERE id = '89976';
 Both queries find a user by id, and update one column in the found record. However, Q8.2 runs slower than Q8.1. Why?
 - [ ] In Q8.1, the new value (for `username`) is readily available, however, we need to calculate the new value (for `date_of_birth`) in Q8.2
 - [ ] Updating strings is faster than updating dates
-- [ ] Q8.1 does not have to update the index on `username`, whereas Q8.2 has to update the index on `date_of_birth`.
-- [ ] We got lucky in this instance, index update in Q8.1 finished earlier than Q8.2. 
+- [ ] In Q8.1 updating the index on `username` required less operations than updating the index on `date_of_birth` in Q8.2.
+- [ ] This was arbitrary; in general, both queries need updating of both indexes and they will take similar amount of time.
 
 
 
