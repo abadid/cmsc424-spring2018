@@ -27,7 +27,7 @@
 
   <meta name="viewport" content="width=device-width">
   
-  <title>cmsc424-spring2018/question.8.sh at scratch4proj4 · abadid/cmsc424-spring2018</title>
+  <title>cmsc424-spring2018/question.9.sh at scratch4proj4 · abadid/cmsc424-spring2018</title>
     <meta name="description" content="GitHub is where people build software. More than 27 million people use GitHub to discover, fork, and contribute to over 80 million projects.">
   <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="GitHub">
   <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub">
@@ -37,10 +37,10 @@
     <meta property="og:image" content="https://avatars2.githubusercontent.com/u/9737012?s=400&amp;v=4" /><meta property="og:site_name" content="GitHub" /><meta property="og:type" content="object" /><meta property="og:title" content="abadid/cmsc424-spring2018" /><meta property="og:url" content="https://github.com/abadid/cmsc424-spring2018" /><meta property="og:description" content="Contribute to cmsc424-spring2018 development by creating an account on GitHub." />
 
   <link rel="assets" href="https://assets-cdn.github.com/">
-  <link rel="web-socket" href="wss://live.github.com/_sockets/VjI6MjQwOTk0NzU3OjA3MjM0YTY0MGJmZDgyZjI0MmVlMGYwYmYwNjE3M2JiMDY5YzNlOTU1YzNiYjQ3YzNiYTA0YjJjYTgyM2RiMTA=--70274ef9fbd90102373aad727dd85c8e4689e8ba">
+  <link rel="web-socket" href="wss://live.github.com/_sockets/VjI6MjQwOTk0NzU3OjE4MWQ3YmI0OWM4YTA0N2E4OWE4NjkxOWJjYTNhOTVmNjNlMWYzZWFiYzU5OTg0ZmRmMWFiNDkxNzFiZmJkYzk=--a84d98b679a6eda0a2950370a8face16b71df523">
   <meta name="pjax-timeout" content="1000">
   <link rel="sudo-modal" href="/sessions/sudo_modal">
-  <meta name="request-id" content="CA31:6DB1:AAC249:13AFB32:5AC3CD62" data-pjax-transient>
+  <meta name="request-id" content="CA31:6DB1:AAA90B:13AC28B:5AC3CD2A" data-pjax-transient>
 
 
   
@@ -52,7 +52,7 @@
   <meta name="google-site-verification" content="GXs5KoUUkNCoaAZn7wPN-t01Pywp9M3sEjnt_3_ZWPc">
     <meta name="google-analytics" content="UA-3769691-2">
 
-<meta name="octolytics-host" content="collector.githubapp.com" /><meta name="octolytics-app-id" content="github" /><meta name="octolytics-event-url" content="https://collector.githubapp.com/github-external/browser_event" /><meta name="octolytics-dimension-request_id" content="CA31:6DB1:AAC249:13AFB32:5AC3CD62" /><meta name="octolytics-dimension-region_edge" content="iad" /><meta name="octolytics-dimension-region_render" content="iad" /><meta name="octolytics-actor-id" content="9737012" /><meta name="octolytics-actor-login" content="abadid" /><meta name="octolytics-actor-hash" content="e1bcc47da9d255ff29c0e6455918f4609dc7cfa44a15e6ab9954491f8511ac15" />
+<meta name="octolytics-host" content="collector.githubapp.com" /><meta name="octolytics-app-id" content="github" /><meta name="octolytics-event-url" content="https://collector.githubapp.com/github-external/browser_event" /><meta name="octolytics-dimension-request_id" content="CA31:6DB1:AAA90B:13AC28B:5AC3CD2A" /><meta name="octolytics-dimension-region_edge" content="iad" /><meta name="octolytics-dimension-region_render" content="iad" /><meta name="octolytics-actor-id" content="9737012" /><meta name="octolytics-actor-login" content="abadid" /><meta name="octolytics-actor-hash" content="e1bcc47da9d255ff29c0e6455918f4609dc7cfa44a15e6ab9954491f8511ac15" />
 <meta name="hydro-events-url" content="https://github.com/hydro_browser_events" />
 <meta name="analytics-location" content="/&lt;user-name&gt;/&lt;repo-name&gt;/blob/show" data-pjax-transient="true" />
 
@@ -68,7 +68,7 @@
     <meta name="user-login" content="abadid">
 
       <meta name="expected-hostname" content="github.com">
-    <meta name="js-proxy-site-detection-payload" content="MTQ1Y2RlYzdjM2JhZjY0MDY2MzMwZDVjNzM0ZDBjMjA3ZGZhMjM2Y2U5NmEzNWI1MmI4NDNkNmQyN2IzYjEwMXx7InJlbW90ZV9hZGRyZXNzIjoiMTA4LjQ4Ljg5LjI0OCIsInJlcXVlc3RfaWQiOiJDQTMxOjZEQjE6QUFDMjQ5OjEzQUZCMzI6NUFDM0NENjIiLCJ0aW1lc3RhbXAiOjE1MjI3ODE1NDIsImhvc3QiOiJnaXRodWIuY29tIn0=">
+    <meta name="js-proxy-site-detection-payload" content="MWQ3YjI1MjNkZjZhNzY2MWU5OWUzYzUxNTdiZGM4Y2ViYmYwMGQ3NzQ0ZTBhZGJhNDdjMzZiNDE3NmUyYmZkYnx7InJlbW90ZV9hZGRyZXNzIjoiMTA4LjQ4Ljg5LjI0OCIsInJlcXVlc3RfaWQiOiJDQTMxOjZEQjE6QUFBOTBCOjEzQUMyOEI6NUFDM0NEMkEiLCJ0aW1lc3RhbXAiOjE1MjI3ODE1MDAsImhvc3QiOiJnaXRodWIuY29tIn0=">
 
     <meta name="enabled-features" content="UNIVERSE_BANNER,FREE_TRIALS,MARKETPLACE_INSIGHTS,MARKETPLACE_INSIGHTS_CONVERSION_PERCENTAGES,JS_ROLLUP_MODULES">
 
@@ -85,7 +85,7 @@
   <meta name="octolytics-dimension-user_id" content="9737012" /><meta name="octolytics-dimension-user_login" content="abadid" /><meta name="octolytics-dimension-repository_id" content="118857137" /><meta name="octolytics-dimension-repository_nwo" content="abadid/cmsc424-spring2018" /><meta name="octolytics-dimension-repository_public" content="true" /><meta name="octolytics-dimension-repository_is_fork" content="false" /><meta name="octolytics-dimension-repository_network_root_id" content="118857137" /><meta name="octolytics-dimension-repository_network_root_nwo" content="abadid/cmsc424-spring2018" /><meta name="octolytics-dimension-repository_explore_github_marketplace_ci_cta_shown" content="true" />
 
 
-    <link rel="canonical" href="https://github.com/abadid/cmsc424-spring2018/blob/scratch4proj4/project5/question.8.sh" data-pjax-transient>
+    <link rel="canonical" href="https://github.com/abadid/cmsc424-spring2018/blob/scratch4proj4/project5/question.9.sh" data-pjax-transient>
 
 
   <meta name="browser-stats-url" content="https://api.github.com/_private/browser/stats">
@@ -136,7 +136,7 @@
               <div class="header-search scoped-search site-scoped-search js-site-search" role="search">
   <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="js-site-search-form" data-scoped-search-url="/abadid/cmsc424-spring2018/search" data-unscoped-search-url="/search" action="/abadid/cmsc424-spring2018/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" />
     <label class="form-control header-search-wrapper  js-chromeless-input-container">
-        <a class="header-search-scope no-underline" href="/abadid/cmsc424-spring2018/blob/scratch4proj4/project5/question.8.sh">This repository</a>
+        <a class="header-search-scope no-underline" href="/abadid/cmsc424-spring2018/blob/scratch4proj4/project5/question.9.sh">This repository</a>
       <input type="text"
         class="form-control header-search-input  js-site-search-focus js-site-search-field is-clearable"
         data-hotkey="s,/"
@@ -263,7 +263,7 @@
           Settings
         </a></li>
 
-        <li><!-- '"` --><!-- </textarea></xmp> --></option></form><form class="logout-form" action="/logout" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="bCRB86NkwbkPaUgPkiQCkmJ9Iy1qGRDAkI1zaFH+b/sbQT3kvX2focD7O4DS6XMvYS4qJ4kqYa3Nnr5lsWkivg==" />
+        <li><!-- '"` --><!-- </textarea></xmp> --></option></form><form class="logout-form" action="/logout" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="0Ctd7M2s75kmlTMIdQpXWytYQDoPZr+WtEzWEP0u3JanTiH707WxgekHQIc1xybmKAtJMOxVzvvpXxsdHbmR0w==" />
           <button type="submit" class="dropdown-item dropdown-signout" data-ga-click="Header, sign out, icon:logout">
             Sign out
           </button>
@@ -275,7 +275,7 @@
 
 
 
-        <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="sr-only right-0" action="/logout" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="Ey5EETvXrXEE+TJbunmcNpWKXScL9wQCn9qClxpsAmNkSzgGJc7zactrQdT6tO2LltlULejEdW/CyU+a+vtPJg==" />
+        <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="sr-only right-0" action="/logout" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="0QvQTj8CJxjUkTZNoaolVojI8h4nhpke/cQyZ0wdFkSmbqxZIRt5ABsDRcLhZ1Tri5v7FMS16HOg1/9qrIpbAQ==" />
           <button type="submit" class="dropdown-item dropdown-signout" data-ga-click="Header, sign out, icon:logout">
             Sign out
           </button>
@@ -311,7 +311,7 @@
 
       <ul class="pagehead-actions">
   <li>
-        <!-- '"` --><!-- </textarea></xmp> --></option></form><form data-autosubmit="true" data-remote="true" class="js-social-container" action="/notifications/subscribe" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="NeTgB2b24mkJM41blK8X6UG0tpPzy6xj6msgsgdvSXlE/6e4pgEnRcE79ATqwSLLxIbPcYvjC7ktQD0MRxyzgg==" />      <input type="hidden" name="repository_id" id="repository_id" value="118857137" class="form-control" />
+        <!-- '"` --><!-- </textarea></xmp> --></option></form><form data-autosubmit="true" data-remote="true" class="js-social-container" action="/notifications/subscribe" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="G3bjyFZkDm6ZuVcAVWMsE+cfjcvNkqI1NOBcZ9iJyXRqbaR3lpPLQlGxLl8rDRkxYi30KbW6Be/zy0HZmPozjw==" />      <input type="hidden" name="repository_id" id="repository_id" value="118857137" class="form-control" />
 
         <div class="select-menu js-menu-container js-select-menu">
           <a href="/abadid/cmsc424-spring2018/subscription"
@@ -391,7 +391,7 @@
   <li>
     
   <div class="js-toggler-container js-social-container starring-container ">
-    <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="starred js-social-form" action="/abadid/cmsc424-spring2018/unstar" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="KC32xOplcPTX9+v6pqVRMSeWdCr4nMjvxfxG0UauNlblQdTcOZuSQQ1zSk6K2KcfA4NnoIwzTvVzJB5cYQLbwA==" />
+    <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="starred js-social-form" action="/abadid/cmsc424-spring2018/unstar" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="W5YAQj7Qlt9i0g3b8QwJAmk53k4duJ4E0cZpC9/fsAuW+iJa7S50arhWrG/dcf8sTSzNxGkXGB5nHjGG+HNdnQ==" />
       <input type="hidden" name="context" value="repository"></input>
       <button
         type="submit"
@@ -406,7 +406,7 @@
           6
         </a>
 </form>
-    <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="unstarred js-social-form" action="/abadid/cmsc424-spring2018/star" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="YfHkwCbNeU7q8B4HNYisZLZfbj3yjMJ2uliOs2BFTq8go+kft613CT+YG2axHMvIjF6BMbdzgrfWJzi7OzTEYQ==" />
+    <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="unstarred js-social-form" action="/abadid/cmsc424-spring2018/star" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="nv829XC6K1buBqsCsgFBB6SnvnV7M03sWw1mvQqs+7/frTsq4dolETturmM2lSarnqZReT7MDS03ctC1Ud1xcQ==" />
       <input type="hidden" name="context" value="repository"></input>
       <button
         type="submit"
@@ -425,7 +425,7 @@
   </li>
 
   <li>
-          <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="btn-with-count" action="/abadid/cmsc424-spring2018/fork" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="lGoQ0anaqwaeQ8x9ofn87ttOXU8HdfMksk2IR7TYxq8F04F6M+grW6GAxvOmGAP9HnTsYRMcspsm8TLhe0lwHA==" />
+          <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="btn-with-count" action="/abadid/cmsc424-spring2018/fork" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="jYvrcrMWwc3tQuc9yaZsbwDnrnLXqwKZQx3fVtzm28IcMnrZKSRBkNKB7bPOR5N8xd0fXMPCQybXoWXwE3dtcQ==" />
             <button
                 type="submit"
                 class="btn btn-sm btn-with-count"
@@ -509,9 +509,9 @@
   <div class="repository-content ">
 
     
-  <a class="d-none js-permalink-shortcut" data-hotkey="y" href="/abadid/cmsc424-spring2018/blob/54a8c2733634e541b8e53370c583b52a07b5659f/project5/question.8.sh">Permalink</a>
+  <a class="d-none js-permalink-shortcut" data-hotkey="y" href="/abadid/cmsc424-spring2018/blob/54a8c2733634e541b8e53370c583b52a07b5659f/project5/question.9.sh">Permalink</a>
 
-  <!-- blob contrib key: blob_contributors:v21:b40ecc4cf996debc060b9fbd7a287c1d -->
+  <!-- blob contrib key: blob_contributors:v21:ef8b3617087ffbc5f2d092a2265fc2ed -->
 
   <div class="file-navigation">
     
@@ -553,7 +553,7 @@
 
 
             <a class="select-menu-item js-navigation-item js-navigation-open "
-               href="/abadid/cmsc424-spring2018/blob/master/project5/question.8.sh"
+               href="/abadid/cmsc424-spring2018/blob/master/project5/question.9.sh"
                data-name="master"
                data-skip-pjax="true"
                rel="nofollow">
@@ -563,7 +563,7 @@
               </span>
             </a>
             <a class="select-menu-item js-navigation-item js-navigation-open "
-               href="/abadid/cmsc424-spring2018/blob/p5-draft/project5/question.8.sh"
+               href="/abadid/cmsc424-spring2018/blob/p5-draft/project5/question.9.sh"
                data-name="p5-draft"
                data-skip-pjax="true"
                rel="nofollow">
@@ -573,7 +573,7 @@
               </span>
             </a>
             <a class="select-menu-item js-navigation-item js-navigation-open "
-               href="/abadid/cmsc424-spring2018/blob/scratch4proj2/project5/question.8.sh"
+               href="/abadid/cmsc424-spring2018/blob/scratch4proj2/project5/question.9.sh"
                data-name="scratch4proj2"
                data-skip-pjax="true"
                rel="nofollow">
@@ -583,7 +583,7 @@
               </span>
             </a>
             <a class="select-menu-item js-navigation-item js-navigation-open "
-               href="/abadid/cmsc424-spring2018/blob/scratch4proj3/project5/question.8.sh"
+               href="/abadid/cmsc424-spring2018/blob/scratch4proj3/project5/question.9.sh"
                data-name="scratch4proj3"
                data-skip-pjax="true"
                rel="nofollow">
@@ -593,7 +593,7 @@
               </span>
             </a>
             <a class="select-menu-item js-navigation-item js-navigation-open selected"
-               href="/abadid/cmsc424-spring2018/blob/scratch4proj4/project5/question.8.sh"
+               href="/abadid/cmsc424-spring2018/blob/scratch4proj4/project5/question.9.sh"
                data-name="scratch4proj4"
                data-skip-pjax="true"
                rel="nofollow">
@@ -603,7 +603,7 @@
               </span>
             </a>
             <a class="select-menu-item js-navigation-item js-navigation-open "
-               href="/abadid/cmsc424-spring2018/blob/scratch4proj6/project5/question.8.sh"
+               href="/abadid/cmsc424-spring2018/blob/scratch4proj6/project5/question.9.sh"
                data-name="scratch4proj6"
                data-skip-pjax="true"
                rel="nofollow">
@@ -614,7 +614,7 @@
             </a>
         </div>
 
-          <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="js-create-branch select-menu-item select-menu-new-item-form js-navigation-item js-new-item-form" action="/abadid/cmsc424-spring2018/branches" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="KoGfVEmpyGjNoN/oO8r5gJACP0AF4NOCh7S+r8FppH+8xUQ4yB7rUK0klNwRAh+pcepqTmwvMaR7Vhg5be5S7w==" />
+          <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="js-create-branch select-menu-item select-menu-new-item-form js-navigation-item js-new-item-form" action="/abadid/cmsc424-spring2018/branches" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="VTYSbT1tJ0T2nVYdE21F1jLAq1XwJowXJkKkwDRH+hvDcskBvNoEfJYZHSk5paP/0yj+W5npbjHaoAJWmMAMiw==" />
           <svg class="octicon octicon-git-branch select-menu-item-icon" viewBox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M10 5c0-1.11-.89-2-2-2a1.993 1.993 0 0 0-1 3.72v.3c-.02.52-.23.98-.63 1.38-.4.4-.86.61-1.38.63-.83.02-1.48.16-2 .45V4.72a1.993 1.993 0 0 0-1-3.72C.88 1 0 1.89 0 3a2 2 0 0 0 1 1.72v6.56c-.59.35-1 .99-1 1.72 0 1.11.89 2 2 2 1.11 0 2-.89 2-2 0-.53-.2-1-.53-1.36.09-.06.48-.41.59-.47.25-.11.56-.17.94-.17 1.05-.05 1.95-.45 2.75-1.25S8.95 7.77 9 6.73h-.02C9.59 6.37 10 5.73 10 5zM2 1.8c.66 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2C1.35 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2zm0 12.41c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm6-8c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"/></svg>
             <div class="select-menu-item-text">
               <span class="select-menu-item-heading">Create branch: <span class="js-new-item-name"></span></span>
@@ -622,7 +622,7 @@
             </div>
             <input type="hidden" name="name" id="name" class="js-new-item-value">
             <input type="hidden" name="branch" id="branch" value="scratch4proj4">
-            <input type="hidden" name="path" id="path" value="project5/question.8.sh">
+            <input type="hidden" name="path" id="path" value="project5/question.9.sh">
 </form>
       </div>
 
@@ -655,12 +655,12 @@
       </clipboard-copy>
     </div>
     <div id="blob-path" class="breadcrumb">
-      <span class="repo-root js-repo-root"><span class="js-path-segment"><a data-pjax="true" href="/abadid/cmsc424-spring2018/tree/scratch4proj4"><span>cmsc424-spring2018</span></a></span></span><span class="separator">/</span><span class="js-path-segment"><a data-pjax="true" href="/abadid/cmsc424-spring2018/tree/scratch4proj4/project5"><span>project5</span></a></span><span class="separator">/</span><strong class="final-path">question.8.sh</strong>
+      <span class="repo-root js-repo-root"><span class="js-path-segment"><a data-pjax="true" href="/abadid/cmsc424-spring2018/tree/scratch4proj4"><span>cmsc424-spring2018</span></a></span></span><span class="separator">/</span><span class="js-path-segment"><a data-pjax="true" href="/abadid/cmsc424-spring2018/tree/scratch4proj4/project5"><span>project5</span></a></span><span class="separator">/</span><strong class="final-path">question.9.sh</strong>
     </div>
   </div>
 
 
-  <include-fragment src="/abadid/cmsc424-spring2018/contributors/scratch4proj4/project5/question.8.sh" class="commit-tease">
+  <include-fragment src="/abadid/cmsc424-spring2018/contributors/scratch4proj4/project5/question.9.sh" class="commit-tease">
     <div>
       Fetching contributors&hellip;
     </div>
@@ -676,9 +676,9 @@
   <div class="file-actions">
 
     <div class="BtnGroup">
-      <a id="raw-url" class="btn btn-sm BtnGroup-item" href="/abadid/cmsc424-spring2018/raw/scratch4proj4/project5/question.8.sh">Raw</a>
-        <a class="btn btn-sm js-update-url-with-hash BtnGroup-item" data-hotkey="b" href="/abadid/cmsc424-spring2018/blame/scratch4proj4/project5/question.8.sh">Blame</a>
-      <a rel="nofollow" class="btn btn-sm BtnGroup-item" href="/abadid/cmsc424-spring2018/commits/scratch4proj4/project5/question.8.sh">History</a>
+      <a id="raw-url" class="btn btn-sm BtnGroup-item" href="/abadid/cmsc424-spring2018/raw/scratch4proj4/project5/question.9.sh">Raw</a>
+        <a class="btn btn-sm js-update-url-with-hash BtnGroup-item" data-hotkey="b" href="/abadid/cmsc424-spring2018/blame/scratch4proj4/project5/question.9.sh">Blame</a>
+      <a rel="nofollow" class="btn btn-sm BtnGroup-item" href="/abadid/cmsc424-spring2018/commits/scratch4proj4/project5/question.9.sh">History</a>
     </div>
 
         <a class="btn-octicon tooltipped tooltipped-nw"
@@ -688,13 +688,13 @@
             <svg class="octicon octicon-device-desktop" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M15 2H1c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h5.34c-.25.61-.86 1.39-2.34 2h8c-1.48-.61-2.09-1.39-2.34-2H15c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm0 9H1V3h14v8z"/></svg>
         </a>
 
-          <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="inline-form js-update-url-with-hash" action="/abadid/cmsc424-spring2018/edit/scratch4proj4/project5/question.8.sh" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="epT7vshO3bn7E4smExycwiWENK8LayIN1ZiS8KG5c/ivLM4M98HK3dkh5SmbWrkjsv151EDOQCAiqtwmUxBRbg==" />
+          <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="inline-form js-update-url-with-hash" action="/abadid/cmsc424-spring2018/edit/scratch4proj4/project5/question.9.sh" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="9RpcZCHXmMqrlBczqbWeBjyeGPQ3p+8Fe69EMWt3bMk3efjka56VizoUCuisUGtSAzRBqfhCBFCUV4RKqns2sA==" />
             <button class="btn-octicon tooltipped tooltipped-nw" type="submit"
               aria-label="Edit this file" data-hotkey="e" data-disable-with>
               <svg class="octicon octicon-pencil" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"/></svg>
             </button>
 </form>
-        <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="inline-form" action="/abadid/cmsc424-spring2018/delete/scratch4proj4/project5/question.8.sh" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="bcLl9ap7whjelPukiohRTo78kUKenaWQnG1Dvr1+4ngbG6JX4kZieQR0d66ar/B8cSDhy3vOpgeu9I9yI/NBhQ==" />
+        <!-- '"` --><!-- </textarea></xmp> --></option></form><form class="inline-form" action="/abadid/cmsc424-spring2018/delete/scratch4proj4/project5/question.9.sh" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="GzbB/9KQjPQdVbKbeX8QoQHx7ESajCk+km2Mv/BVhiCX0kR3dJjzNM+lcfWj0gF7CBT9Ly9rX+47J6dugO7Nxw==" />
           <button class="btn-octicon btn-octicon-danger tooltipped tooltipped-nw" type="submit"
             aria-label="Delete this file" data-disable-with>
             <svg class="octicon octicon-trashcan" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M11 2H9c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1H2c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1v9c0 .55.45 1 1 1h7c.55 0 1-.45 1-1V5c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1zm-1 12H3V5h1v8h1V5h1v8h1V5h1v8h1V5h1v9zm1-10H2V3h9v1z"/></svg>
@@ -702,11 +702,9 @@
 </form>  </div>
 
   <div class="file-info">
-      <span class="file-mode" title="File mode">executable file</span>
+      38 lines (28 sloc)
       <span class="file-info-divider"></span>
-      22 lines (16 sloc)
-      <span class="file-info-divider"></span>
-    715 Bytes
+    1.23 KB
   </div>
 </div>
 
@@ -738,70 +736,137 @@
       </tr>
       <tr>
         <td id="L6" class="blob-num js-line-number" data-line-number="6"></td>
-        <td id="LC6" class="blob-code blob-code-inner js-file-line">sudo -u vagrant psql --quiet -d app -f q8.sql</td>
+        <td id="LC6" class="blob-code blob-code-inner js-file-line">
+</td>
       </tr>
       <tr>
         <td id="L7" class="blob-num js-line-number" data-line-number="7"></td>
-        <td id="LC7" class="blob-code blob-code-inner js-file-line">
-</td>
+        <td id="LC7" class="blob-code blob-code-inner js-file-line"><span class="pl-c1">echo</span> -e <span class="pl-s"><span class="pl-pds">&quot;</span>\n<span class="pl-pds">&quot;</span></span></td>
       </tr>
       <tr>
         <td id="L8" class="blob-num js-line-number" data-line-number="8"></td>
-        <td id="LC8" class="blob-code blob-code-inner js-file-line"><span class="pl-c1">echo</span> -e <span class="pl-s"><span class="pl-pds">&quot;</span>\n<span class="pl-pds">&quot;</span></span></td>
+        <td id="LC8" class="blob-code blob-code-inner js-file-line"><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">&quot;</span>Creating users2 and users3 tables, and their respective id indexes<span class="pl-pds">&quot;</span></span></td>
       </tr>
       <tr>
         <td id="L9" class="blob-num js-line-number" data-line-number="9"></td>
-        <td id="LC9" class="blob-code blob-code-inner js-file-line"><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">&quot;</span>Question 8<span class="pl-pds">&quot;</span></span></td>
+        <td id="LC9" class="blob-code blob-code-inner js-file-line">sudo -u vagrant -H -- psql --quiet -d app -f q9.sql    </td>
       </tr>
       <tr>
         <td id="L10" class="blob-num js-line-number" data-line-number="10"></td>
-        <td id="LC10" class="blob-code blob-code-inner js-file-line"><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">&quot;</span>-------------------------------------<span class="pl-pds">&quot;</span></span></td>
+        <td id="LC10" class="blob-code blob-code-inner js-file-line">
+</td>
       </tr>
       <tr>
         <td id="L11" class="blob-num js-line-number" data-line-number="11"></td>
-        <td id="LC11" class="blob-code blob-code-inner js-file-line"><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">&quot;</span>Executing Q8.1...<span class="pl-pds">&quot;</span></span></td>
+        <td id="LC11" class="blob-code blob-code-inner js-file-line"><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">&quot;</span>inserting 10000 records into the users2 table in order of the id attribute<span class="pl-pds">&quot;</span></span></td>
       </tr>
       <tr>
         <td id="L12" class="blob-num js-line-number" data-line-number="12"></td>
-        <td id="LC12" class="blob-code blob-code-inner js-file-line">sudo sh -c <span class="pl-s"><span class="pl-pds">&#39;</span>echo 3 &gt; /proc/sys/vm/drop_caches<span class="pl-pds">&#39;</span></span> </td>
+        <td id="LC12" class="blob-code blob-code-inner js-file-line">ct=1<span class="pl-k">;</span></td>
       </tr>
       <tr>
         <td id="L13" class="blob-num js-line-number" data-line-number="13"></td>
-        <td id="LC13" class="blob-code blob-code-inner js-file-line"><span class="pl-k">time</span> sudo -u vagrant -H -- psql --quiet -d app -c \</td>
+        <td id="LC13" class="blob-code blob-code-inner js-file-line"><span class="pl-k">for</span> <span class="pl-smi">i</span> <span class="pl-k">in</span> <span class="pl-s"><span class="pl-pds">`</span>seq 1 1000<span class="pl-pds">`</span></span><span class="pl-k">;</span></td>
       </tr>
       <tr>
         <td id="L14" class="blob-num js-line-number" data-line-number="14"></td>
-        <td id="LC14" class="blob-code blob-code-inner js-file-line">    <span class="pl-s"><span class="pl-pds">&quot;</span>update q8_users1 set id = (extract(year from date_of_birth)::char(4)||id::varchar(10))::int;<span class="pl-pds">&quot;</span></span> </td>
+        <td id="LC14" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">do</span></td>
       </tr>
       <tr>
         <td id="L15" class="blob-num js-line-number" data-line-number="15"></td>
-        <td id="LC15" class="blob-code blob-code-inner js-file-line">
-</td>
+        <td id="LC15" class="blob-code blob-code-inner js-file-line">          sudo -u vagrant -H -- psql --quiet -d app -c \</td>
       </tr>
       <tr>
         <td id="L16" class="blob-num js-line-number" data-line-number="16"></td>
-        <td id="LC16" class="blob-code blob-code-inner js-file-line">
-</td>
+        <td id="LC16" class="blob-code blob-code-inner js-file-line">           <span class="pl-s"><span class="pl-pds">&quot;</span>INSERT INTO users2 select id,username,first_name,last_name,date_of_birth from users where id &gt;= <span class="pl-smi">$i</span>*10 and id &lt; (<span class="pl-smi">$i</span>+1)*10<span class="pl-pds">&quot;</span></span></td>
       </tr>
       <tr>
         <td id="L17" class="blob-num js-line-number" data-line-number="17"></td>
-        <td id="LC17" class="blob-code blob-code-inner js-file-line"><span class="pl-c1">echo</span> -e <span class="pl-s"><span class="pl-pds">&quot;</span>\n\n-------------------------------------<span class="pl-pds">&quot;</span></span></td>
+        <td id="LC17" class="blob-code blob-code-inner js-file-line">          ct=<span class="pl-smi">$ct</span>+1</td>
       </tr>
       <tr>
         <td id="L18" class="blob-num js-line-number" data-line-number="18"></td>
-        <td id="LC18" class="blob-code blob-code-inner js-file-line"><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">&quot;</span>Executing Q8.2...<span class="pl-pds">&quot;</span></span></td>
+        <td id="LC18" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">done</span></td>
       </tr>
       <tr>
         <td id="L19" class="blob-num js-line-number" data-line-number="19"></td>
-        <td id="LC19" class="blob-code blob-code-inner js-file-line">sudo sh -c <span class="pl-s"><span class="pl-pds">&#39;</span>echo 3 &gt; /proc/sys/vm/drop_caches<span class="pl-pds">&#39;</span></span> </td>
+        <td id="LC19" class="blob-code blob-code-inner js-file-line">
+</td>
       </tr>
       <tr>
         <td id="L20" class="blob-num js-line-number" data-line-number="20"></td>
-        <td id="LC20" class="blob-code blob-code-inner js-file-line"><span class="pl-k">time</span> sudo -u vagrant -H -- psql --quiet  -d app -c \</td>
+        <td id="LC20" class="blob-code blob-code-inner js-file-line"><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">&quot;</span>inserting the same 10000 records into the users3 table in mostly random order of id<span class="pl-pds">&quot;</span></span> </td>
       </tr>
       <tr>
         <td id="L21" class="blob-num js-line-number" data-line-number="21"></td>
-        <td id="LC21" class="blob-code blob-code-inner js-file-line">    <span class="pl-s"><span class="pl-pds">&quot;</span>update q8_users2 set id = (extract(year from date_of_birth)::char(4)||id::varchar(10))::int;<span class="pl-pds">&quot;</span></span> </td>
+        <td id="LC21" class="blob-code blob-code-inner js-file-line">ct=1<span class="pl-k">;</span></td>
+      </tr>
+      <tr>
+        <td id="L22" class="blob-num js-line-number" data-line-number="22"></td>
+        <td id="LC22" class="blob-code blob-code-inner js-file-line"><span class="pl-k">for</span> <span class="pl-smi">i</span> <span class="pl-k">in</span> <span class="pl-s"><span class="pl-pds">`</span>seq 1 1000 <span class="pl-k">|</span> sort -R<span class="pl-pds">`</span></span><span class="pl-k">;</span></td>
+      </tr>
+      <tr>
+        <td id="L23" class="blob-num js-line-number" data-line-number="23"></td>
+        <td id="LC23" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">do</span></td>
+      </tr>
+      <tr>
+        <td id="L24" class="blob-num js-line-number" data-line-number="24"></td>
+        <td id="LC24" class="blob-code blob-code-inner js-file-line">          sudo -u vagrant -H -- psql --quiet -d app -c \</td>
+      </tr>
+      <tr>
+        <td id="L25" class="blob-num js-line-number" data-line-number="25"></td>
+        <td id="LC25" class="blob-code blob-code-inner js-file-line">           <span class="pl-s"><span class="pl-pds">&quot;</span>INSERT INTO users3 select id,username,first_name,last_name,date_of_birth from users where id &gt;= <span class="pl-smi">$i</span>*10 and id &lt; (<span class="pl-smi">$i</span>+1)*10<span class="pl-pds">&quot;</span></span></td>
+      </tr>
+      <tr>
+        <td id="L26" class="blob-num js-line-number" data-line-number="26"></td>
+        <td id="LC26" class="blob-code blob-code-inner js-file-line">          ct=<span class="pl-smi">$ct</span>+1</td>
+      </tr>
+      <tr>
+        <td id="L27" class="blob-num js-line-number" data-line-number="27"></td>
+        <td id="LC27" class="blob-code blob-code-inner js-file-line">        <span class="pl-k">done</span></td>
+      </tr>
+      <tr>
+        <td id="L28" class="blob-num js-line-number" data-line-number="28"></td>
+        <td id="LC28" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L29" class="blob-num js-line-number" data-line-number="29"></td>
+        <td id="LC29" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L30" class="blob-num js-line-number" data-line-number="30"></td>
+        <td id="LC30" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L31" class="blob-num js-line-number" data-line-number="31"></td>
+        <td id="LC31" class="blob-code blob-code-inner js-file-line"><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">&quot;</span>Sizes of two first name index for each copy of the users table:<span class="pl-pds">&quot;</span></span></td>
+      </tr>
+      <tr>
+        <td id="L32" class="blob-num js-line-number" data-line-number="32"></td>
+        <td id="LC32" class="blob-code blob-code-inner js-file-line">sudo sh -c <span class="pl-s"><span class="pl-pds">&#39;</span>echo 3 &gt; /proc/sys/vm/drop_caches<span class="pl-pds">&#39;</span></span> </td>
+      </tr>
+      <tr>
+        <td id="L33" class="blob-num js-line-number" data-line-number="33"></td>
+        <td id="LC33" class="blob-code blob-code-inner js-file-line">sudo -u vagrant -H -- psql --quiet -d app -c \</td>
+      </tr>
+      <tr>
+        <td id="L34" class="blob-num js-line-number" data-line-number="34"></td>
+        <td id="LC34" class="blob-code blob-code-inner js-file-line">    <span class="pl-s"><span class="pl-pds">&quot;</span>ANALYZE users2; ANALYZE users3; SELECT relname as index_name, relpages as number_of_pages</span></td>
+      </tr>
+      <tr>
+        <td id="L35" class="blob-num js-line-number" data-line-number="35"></td>
+        <td id="LC35" class="blob-code blob-code-inner js-file-line"><span class="pl-s">     FROM pg_class</span></td>
+      </tr>
+      <tr>
+        <td id="L36" class="blob-num js-line-number" data-line-number="36"></td>
+        <td id="LC36" class="blob-code blob-code-inner js-file-line"><span class="pl-s">     WHERE relname like &#39;id%&#39;<span class="pl-pds">&quot;</span></span> </td>
+      </tr>
+      <tr>
+        <td id="L37" class="blob-num js-line-number" data-line-number="37"></td>
+        <td id="LC37" class="blob-code blob-code-inner js-file-line"> </td>
       </tr>
 </table>
 
@@ -813,7 +878,7 @@
       <ul class="BlobToolbar-dropdown dropdown-menu dropdown-menu-se mt-2">
         <li><clipboard-copy class="dropdown-item" style="cursor:pointer;" id="js-copy-lines" data-original-text="Copy lines">Copy lines</clipboard-copy></li>
         <li><clipboard-copy class="dropdown-item" id="js-copy-permalink" style="cursor:pointer;" data-original-text="Copy permalink">Copy permalink</clipboard-copy></li>
-        <li><a class="dropdown-item js-update-url-with-hash" id="js-view-git-blame" href="/abadid/cmsc424-spring2018/blame/54a8c2733634e541b8e53370c583b52a07b5659f/project5/question.8.sh">View git blame</a></li>
+        <li><a class="dropdown-item js-update-url-with-hash" id="js-view-git-blame" href="/abadid/cmsc424-spring2018/blame/54a8c2733634e541b8e53370c583b52a07b5659f/project5/question.9.sh">View git blame</a></li>
           <li><a class="dropdown-item" id="js-new-issue" href="/abadid/cmsc424-spring2018/issues/new">Open new issue</a></li>
       </ul>
     </div>
@@ -844,7 +909,7 @@
 <div class="footer container-lg px-3" role="contentinfo">
   <div class="position-relative d-flex flex-justify-between pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
     <ul class="list-style-none d-flex flex-wrap ">
-      <li class="mr-3">&copy; 2018 <span title="0.30216s from unicorn-1541443705-7h82k">GitHub</span>, Inc.</li>
+      <li class="mr-3">&copy; 2018 <span title="0.33634s from unicorn-3033043064-4fx10">GitHub</span>, Inc.</li>
         <li class="mr-3"><a data-ga-click="Footer, go to terms, text:terms" href="https://github.com/site/terms">Terms</a></li>
         <li class="mr-3"><a data-ga-click="Footer, go to privacy, text:privacy" href="https://github.com/site/privacy">Privacy</a></li>
         <li class="mr-3"><a href="https://help.github.com/articles/github-security/" data-ga-click="Footer, go to security, text:security">Security</a></li>
