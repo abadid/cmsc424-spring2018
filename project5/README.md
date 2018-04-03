@@ -1,5 +1,7 @@
 # Project 5: Index
 
+This project can be done in groups. There are no limits in group size, but the more you can do yourself, the more you will learn. 
+
 The goal of this project is to give you some hands on experience converting the theory of B trees that we've been learning about in the textbook and in lecture into practice on a real database. We have provided you with a sample dataset that you will use to try out some of the queries mentioned below. Based on your understanding and experience, you will answer a few questions on ELMS, that count as the deliverable for this project. 
 
 Most of the questions below ask you to run a shell script. These are the `question.x.sh` files in the directory, where `x` is the respective question number. Each script may set up some indexes and execute a couple of `SELECT` statements. You are to note the output of each script, as the questions are based on it. Apart from the queries that are provided by us, we encourage you to explore the dataset using `SELECT` statements of your own. This may help you to chose between the different options we give you in the multiple choice questions. You can log in to the psql instance for this project by running 'psql app' and running your queries on the command line. **Most importantly, pay careful attention to what indexes are present on the table when you work on a particular question -- the set of indexes changes from one question to another.**
@@ -116,24 +118,15 @@ And the second query is (Q2.2):
 ```sql
 SELECT min(date_of_birth), max(date_of_birth)
 FROM users 
-WHERE username LIKE 'zeus%'
+WHERE username > 'zeus' and username < 'zeut';
 ```
 
-Although the result size is the same (a single record), and there is an index on `username`, why does the first query finish in less time than the second one?
-- [ ] This is arbitrary. If we change the constant values in the WHERE clause, the performance could flip. 
-- [ ] Records are clustered according to `id`. Therefore, a range predicate on in the id attribute is faster to process.
-- [ ] Pattern matching operations are always slower to process than range predicates.
-- [ ] PostgreSQL cannot use the index on `username` for Q2.2, since the WHERE clause contains a pattern matching operation instead of a range or equality predicate. 
-
-
-Answer the following questions based on your understanding so far.
-
-For which of the follwing queries, the index on `username` helps?
-- [ ] `select * from users where username like '%hero%'`
-- [ ] `select * from users where username like '%hero'`
-- [ ] `select * from users where username like 'hero%`
-- [ ] `select * from users where username = 'hero'`
-- [ ] `select * from users where username > 'zeus'`
+Although the WHERE clause of both queries select the same number of tuples (100 tuples), and there is an index on both `id` and `username`, why does the first query finish in less time than the second one?
+- [ ] The WHERE clauses actually returns a different set of 100 tuples. It is the particular set of 100 tuples returned by Q2.2 that makes second query slow. 
+- [ ] Records are clustered according to `id`. Therefore the index on id is primary and the index on username is secondary. Range predicates are usually faster on primary indexes.
+- [ ] The `username` index is on a string. Indexes on strings are much less useful than indexes on integers. 
+- [ ] Indexes on strings cannot be used for range predicates.
+- [ ] The table is sorted on id, therefore the index on id is unnecessary.
 
 Suppose we run the following command:
 ```sql
@@ -143,9 +136,8 @@ See [https://www.postgresql.org/docs/9.6/static/sql-cluster.html](https://www.po
 
 If we were to execute (Q2.1) and (Q2.2) again, how will the results change?
 - [ ] There will be no change, we will observe similar behavior as before
-- [ ] The behaviour will be flipped, Q2.1 will take more time than Q2.2
+- [ ] The 
 - [ ] Both will take the same time
-
 
 ### Question 3
 This is a two part question. Run the file `question.3.sh` and note its output. **After executing this script, apart from the table definition, only following index is present.**
