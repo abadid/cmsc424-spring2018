@@ -116,24 +116,15 @@ And the second query is (Q2.2):
 ```sql
 SELECT min(date_of_birth), max(date_of_birth)
 FROM users 
-WHERE username LIKE 'zeus%'
+WHERE username > 'zeus' and username < 'zeut';
 ```
 
-Although the result size is the same (a single record), and there is an index on `username`, why does the first query finish in less time than the second one?
-- [ ] This is arbitrary. If we change the constant values in the WHERE clause, the performance could flip. 
-- [ ] Records are clustered according to `id`. Therefore, a range predicate on in the id attribute is faster to process.
-- [ ] Pattern matching operations are always slower to process than range predicates.
-- [ ] PostgreSQL cannot use the index on `username` for Q2.2, since the WHERE clause contains a pattern matching operation instead of a range or equality predicate. 
-
-
-Answer the following questions based on your understanding so far.
-
-For which of the follwing queries, the index on `username` helps?
-- [ ] `select * from users where username like '%hero%'`
-- [ ] `select * from users where username like '%hero'`
-- [ ] `select * from users where username like 'hero%`
-- [ ] `select * from users where username = 'hero'`
-- [ ] `select * from users where username > 'zeus'`
+Although the WHERE clause of both queries select the same number of tuples (100 tuples), and there is an index on both `id` and `username`, why does the first query finish in less time than the second one?
+- [ ] The WHERE clauses actually returns a different set of 100 tuples. It is the particular set of 100 tuples returned by Q2.2 that makes second query slow. 
+- [ ] Records are clustered according to `id`. Therefore the index on id is primary and the index on username is secondary. Range predicates are usually faster on primary indexes.
+- [ ] The `username` index is on a string. Indexes on strings are much less useful than indexes on integers. 
+- [ ] Indexes on strings cannot be used for range predicates.
+- [ ] The table is sorted on id, therefore the index on id is unnecessary.
 
 Suppose we run the following command:
 ```sql
@@ -143,9 +134,8 @@ See [https://www.postgresql.org/docs/9.6/static/sql-cluster.html](https://www.po
 
 If we were to execute (Q2.1) and (Q2.2) again, how will the results change?
 - [ ] There will be no change, we will observe similar behavior as before
-- [ ] The behaviour will be flipped, Q2.1 will take more time than Q2.2
+- [ ] The 
 - [ ] Both will take the same time
-
 
 ### Question 3
 This is a two part question. Run the file `question.3.sh` and note its output. **After executing this script, apart from the table definition, only following index is present.**
