@@ -128,16 +128,7 @@ Although the WHERE clause of both queries select the same number of tuples (100 
 - [ ] Indexes on strings cannot be used for range predicates.
 - [ ] The table is sorted on id, therefore the index on id is unnecessary.
 
-Suppose we run the following command:
-```sql
-CLUSTER users USING uniq_username;
-```
-See [https://www.postgresql.org/docs/9.6/static/sql-cluster.html](https://www.postgresql.org/docs/9.6/static/sql-cluster.html) for details.
 
-If we were to execute (Q2.1) and (Q2.2) again, how will the results change?
-- [ ] There will be no change, we will observe similar behavior as before
-- [ ] The 
-- [ ] Both will take the same time
 
 ### Question 3
 This is a two part question. Run the file `question.3.sh` and note its output. **After executing this script, apart from the table definition, only following index is present.**
