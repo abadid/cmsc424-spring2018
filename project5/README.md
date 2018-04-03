@@ -322,7 +322,6 @@ Why is Q7.2 slower than Q7.1?
 - [ ] Although the value returned is the same, that is because this is an aggregate. The set of of records that are read from the users table are different. In particular, Q7.2 has to read more records.
 - [ ] PostgreSQL knows to stop when it finds one record in Q7.1, because there is a `UNIQUE` index on `username`. However, because the index on `about` is not unique, it reads more records than necessary.
 - [ ] The 'username' attribute appears first in the record, before the 'about' attribute. Therefore, the cost of extracting the 'about' attribute is larger than the cost of extracting the 'username' attribute from each record in users.
-- [ ] The 'username' attribute is smaller than the 'about' attribute. Therefore, the cost of extracting the 'about' attribute is larger than the cost of extracting the 'username' attribute from each record in users.
 
 
 ### Question 8
