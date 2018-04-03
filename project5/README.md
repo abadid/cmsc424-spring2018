@@ -115,22 +115,15 @@ And the second query is (Q2.2):
 ```sql
 SELECT min(date_of_birth), max(date_of_birth)
 FROM users 
-WHERE username LIKE "zeus%"
+WHERE username > 'zeus' and username < 'zeut';
 ```
 
-Although the result sizes are the same, and there is an index on `username`, why does the first query finish in less time than the second one?
-- [ ] We got lucky; in general, both will run in the same amount of time.
-- [ ] Records are clustered according to `id`
-- [ ] PostgreSQL cannot use the index on `username` for a pattern matching operation as in Q2.2
-
-
-Answer the following questions based on your understanding so far.
-
-For which of the follwing queries, the index on `username` helps?
-- [ ] `select * from users where username like '%hero%'`
-- [ ] `select * from users where username like '%hero'`
-- [ ] `select * from users where username like 'hero%`
-- [ ] `select * from users where username = 'hero'`
+Although the WHERE clause of both queries select the same number of tuples (100 tuples), and there is an index on both `id` and `username`, why does the first query finish in less time than the second one?
+- [ ] The WHERE clauses actually returns a different set of 100 tuples. It is the particular set of 100 tuples returned by Q2.2 that makes second query slow. 
+- [ ] Records are clustered according to `id`. Therefore the index on id is primary and the index on username is secondary. Range predicates are usually faster on primary indexes.
+- [ ] The `username` index is on a string. Indexes on strings are much less useful than indexes on integers. 
+- [ ] Indexes on strings cannot be used for range predicates.
+- [ ] The table is sorted on id, therefore the index on id is unnecessary.
 
 Suppose we run the following command:
 ```sql
