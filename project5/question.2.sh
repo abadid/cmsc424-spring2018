@@ -6,7 +6,7 @@ sudo -u vagrant psql --quiet -d app -f drop-indexes.sql
 echo -e "\n"
 echo "Creating UNIQUE index on username..."
 sudo -u vagrant -H -- psql --quiet -d app -c \
-    "CREATE UNIQUE INDEX uniq_username ON users (username text_pattern_ops);"
+    "CREATE UNIQUE INDEX uniq_username ON users (username);"
 echo "Index created successfully."
 
 echo -e "\n"
