@@ -169,7 +169,7 @@ WHERE first_name = 'Patrick' AND last_name = 'Giant'
 
 Both queries find one user in the table. However, the first one takes longer. Why?
 - [ ] In the index, the record for 'Patrick Giant' appears much before the record for 'Bethzy Richardson', and hence PostgreSQL found it earlier.
-- [ ] The `id` of 'Patrick Giant' is much smaller than the `id` of 'Bethzy Smith'. Hence PostgreSQL found it earlier.
+- [ ] The `id` of 'Patrick Giant' is much smaller than the `id` of 'Bethzy Richardson'. Hence PostgreSQL found it earlier.
 - [ ] There are many users having last name 'Richardson' compared to 'Giant'
 
 
