@@ -2,7 +2,7 @@
 
 The goal of this project is to give you some hands on experience converting the theory of B trees that we've been learning about in the textbook and in lecture into practice on a real database. We have provided you with a sample dataset that you will use to try out some of the queries mentioned below. Based on your understanding and experience, you will answer a few questions on ELMS, that count as the deliverable for this project. 
 
-Most of the questions below asks you to run a shell script. These are the `question.x.sh` files in the directory, where `x` is the respective question number. Each script may set up some indexes and execute a couple of `SELECT` statements. You are to note the output of each script, as the questions are based on it. Apart from the queries that are provided by us, we encourage you to explore the dataset using `SELECT` statements of your own. This may help you to chose between the different options we give you in the multiple choice questions. You can log in to the psql instance for this project by running 'psql app' and running your queries on the command line. **Most importantly, pay careful attention to what indexes are present on the table when you work on a particular question -- the set of indexes changes from one question to another.**
+Most of the questions below ask you to run a shell script. These are the `question.x.sh` files in the directory, where `x` is the respective question number. Each script may set up some indexes and execute a couple of `SELECT` statements. You are to note the output of each script, as the questions are based on it. Apart from the queries that are provided by us, we encourage you to explore the dataset using `SELECT` statements of your own. This may help you to chose between the different options we give you in the multiple choice questions. You can log in to the psql instance for this project by running 'psql app' and running your queries on the command line. **Most importantly, pay careful attention to what indexes are present on the table when you work on a particular question -- the set of indexes changes from one question to another.**
 
 ## About the database
 For this project, we will use a table with approximately 500K records, representing users of a web application. The table is created for you using the following SQL.
@@ -87,10 +87,12 @@ FROM users
 WHERE username = 'bristleback';
 ```
 
-If you notice the output, both queries return the same user. However, the first one finishes in much less time than the second. Why? Select one that is most appropriate in this context.
-- [ ] This is arbitrary; in general, both will take similar time to execute.
+If you notice the output, both queries return the same user. However, the first one finishes in much less time than the second. Why? If more than one answer is correct, choose the best of the correct answers:
+- [ ] This is arbitrary. If we change the constant value in the where clause, the results could be substantially different.
 - [ ] There is an index on `id` because it is declared as a `PRIMARY KEY`. 
 - [ ] Comparing strings is slower than comparing integers.
+- [ ] The first query ran earlier, so the table is still in the cache at the time that it ran. 
+- [ ] The id attribute appears before the username attribute in the table declaration, so it is faster to extract the id of a tuple than the username.
 
 
 ### Question 2
@@ -101,7 +103,9 @@ CREATE UNIQUE INDEX uniq_username ON users (username);
 
 For more detail, see [https://www.postgresql.org/docs/9.6/static/indexes-unique.html](https://www.postgresql.org/docs/9.6/static/indexes-unique.html)
 
-After creating the index, we run two queries on the table and both return 100 user records. The first query is (Q2.1):
+After creating the index, we run two queries on the table. 
+
+The first query is (Q2.1):
 ```sql
 SELECT min(date_of_birth), max(date_of_birth)
 FROM users
@@ -115,10 +119,11 @@ FROM users
 WHERE username LIKE 'zeus%'
 ```
 
-Although the result sizes are the same, and there is an index on `username`, why does the first query finish in less time than the second one?
-- [ ] We got lucky; in general, both will run in the same amount of time.
-- [ ] Records are clustered according to `id`
-- [ ] PostgreSQL cannot use the index on `username` for a pattern matching operation as in Q2.2
+Although the result size is the same (a single record), and there is an index on `username`, why does the first query finish in less time than the second one?
+- [ ] This is arbitrary. If we change the constant values in the WHERE clause, the performance could flip. 
+- [ ] Records are clustered according to `id`. Therefore, a range predicate on in the id attribute is faster to process.
+- [ ] Pattern matching operations are always slower to process than range predicates.
+- [ ] PostgreSQL cannot use the index on `username` for Q2.2, since the WHERE clause contains a pattern matching operation instead of a range or equality predicate. 
 
 
 Answer the following questions based on your understanding so far.
@@ -128,6 +133,7 @@ For which of the follwing queries, the index on `username` helps?
 - [ ] `select * from users where username like '%hero'`
 - [ ] `select * from users where username like 'hero%`
 - [ ] `select * from users where username = 'hero'`
+- [ ] `select * from users where username > 'zeus'`
 
 Suppose we run the following command:
 ```sql
@@ -151,7 +157,7 @@ CREATE INDEX users_last_name ON users (last_name);
 
  
 **Part I:**
-This file runs the following two queries on the `users` table.
+This shell script runs the following two queries on the `users` table.
 
 Query 3.1:
 ```sql
@@ -167,26 +173,28 @@ FROM users
 WHERE first_name = 'Patrick' AND last_name = 'Giant'
 ```
 
-Both queries find one user in the table. However, the first one takes longer. Why?
-- [ ] In the index, the record for 'Patrick Giant' appears much before the record for 'Bethzy Richardson', and hence PostgreSQL found it earlier.
+Both queries find one user in the table. However, the first one takes longer. Why? (Choose the best answer).
+- [ ] In the index, the record for 'Patrick Giant' appears much earlier than the record for 'Bethzy Richardson', and hence PostgreSQL found it earlier.
 - [ ] The `id` of 'Patrick Giant' is much smaller than the `id` of 'Bethzy Richardson'. Hence PostgreSQL found it earlier.
-- [ ] There are many users having last name 'Richardson' compared to 'Giant'
+- [ ] There are many more users having last name 'Richardson' compared to 'Giant', so the index is less helpful.
+- [ ] The Postgres developers were misogynists, and biased the system to find males faster than females.
+- [ ] 'Giant' is a shorter string than 'Richardson'. Therefore, the string comparison operations that happen when traversing the index are faster.
 
 
 **Part 2:** Suppose instead of creating an index on `last_name`, we created it on `first_name`. Based on your understanding so far, what can you say about the run time of the two queries above, and why?
-- [ ] Both will take the same time
+- [ ] Both queries will take the same time since the B-tree on last name will be balanced.
 - [ ] There will be no change, we will observe similar behavior as before
 - [ ] The behaviour will be flipped, Q3.2 will take more time than Q3.1
 
 
 ### Question 4
 
-Before you do this part, read section 11.5.2 from your textbook (it should be a tiny bit more than a single page). The main thing you need to know is that the concatenation of multiple attributes can be indexed the same way as an index on a single attribute. This is called a "multi-column index". Suppose instead of creating separate indexes on one of `first_name` or `last_name`, we create a _multicolumn_ index containing both attributes. Specifically, we create the following index:
+Before you do this part, read section 11.5.2 from your textbook (it should be a tiny bit more than a single page). The main thing you need to know is that the concatenation of multiple attributes can be indexed the same way as an index on a single attribute. This is called a "multi-column index". Suppose instead of creating separate indexes on one of `first_name` or `last_name`, we create a _multicolumn_ index containing both attributes (i.e. a concatenation of both attributes). Specifically, we create the following index:
 ```sql
 CREATE INDEX users_first_last_name ON users (first_name, last_name);
 ```
 
-For which of the following queries, would the index help?
+Which of the following queries would be good candidates for using our new index?
 - [ ] Query 4.1:
 ```sql
 SELECT username, first_name, last_name
@@ -194,28 +202,28 @@ FROM users
 WHERE first_name = 'Bethzy' AND last_name = 'Smith'
 ```
 
-- [ ] Query 3.2:
+- [ ] Query 4.2:
 ```sql
 SELECT username, first_name, last_name
 FROM users
 WHERE last_name = 'Giant'
 ```
 
-- [ ] Query 3.3:
+- [ ] Query 4.3:
 ```sql
 SELECT username, first_name, last_name
 FROM users
 WHERE first_name = 'Jaxson'
 ```
 
-- [ ] Query 3.4:
+- [ ] Query 4.4:
 ```sql
 SELECT username, first_name, last_name
 FROM users
 WHERE first_name LIKE 'Jord%'
 ```
 
-- [ ] Query 3.5:
+- [ ] Query 4.5:
 ```sql
 SELECT username, first_name, last_name
 FROM users
@@ -246,11 +254,12 @@ FROM users
 WHERE state = 'CA' AND first_name = 'Alan' AND last_name = 'Soto'
 ```
 
-Both queries return the same user record. We also have an index on `username` and on `state`. However, the second query takes longer to run than the first, why?
+Both queries return the same user record and can make use of at least one index. However, the second query takes longer to run than the first, why? (Choose the best answer):
 
 - [ ] Q5.2 compares three column values for every user, whereas Q5.1 compares only one.
-- [ ] PostgreSQL knows that there is a UNIQUE index on `username`, hence it returns as soon as it finds one record in Q5.1. However, in Q5.2, it cannot do so, as the index on `state` is not unique.
+- [ ] Usernames are larger (in terms of number of bytes) than states. Therefore the index on username is more helpful.
 - [ ] There are many user records that have `state = 'CA'`, so the index on `state` is not helpful.
+- [ ] The table is sorted by username; therefore selection predicates on username are faster.
 
 
 
@@ -262,7 +271,7 @@ FROM users
 WHERE date_of_birth >= '1990-01-01' AND date_of_birth <= '1990-02-01'
     AND theme = 'B'
 ```
-Assume that the range for `date_of_birth` is around a month (25-35 days). 
+However, each query will have different constant values for the date_of_birth predicate (but with a similar date range of about a month) and different constant values for theme as well. 
 
 Which one of the following index would be most helpful?
 - [ ] 1.
