@@ -306,6 +306,7 @@ create table tmp2 as select about from users where first_name='Aaron';"
 
 
 Finally the script runs the following two queries, that both return the same value:
+
 Query 7.1
 ```sql
 select max(last_name) from users where username in (select * from tmp1);
@@ -360,4 +361,37 @@ Why does Q8.2 runs slower than Q8.1?
 ### Question 9
 Run the file `question.9.sh` and note its output. For this part, we will measure how index size is based on `INSERT` patterns.
 
+We start by running the following SQL commands:
+
+```sql
+CREATE TABLE users2 (
+    id INT,
+    username VARCHAR(60),
+    first_name VARCHAR(60),
+    last_name VARCHAR(60),
+    date_of_birth date,
+    primary key(first_name, username)
+);
+
+CREATE TABLE users3 (
+    id INT,
+    username VARCHAR(60),
+    first_name VARCHAR(60),
+    last_name VARCHAR(60),
+    date_of_brith date,
+    primary key(first_name, username)
+);
+
+CLUSTER users2 using users2_pkey;
+CLUSTER users3 using users3_pkey;
+
+CREATE INDEX id_index_on_users2 ON users2 (id) with (fillfactor=50);
+CREATE INDEX id_index_on_users3 ON users3 (id) with (fillfactor=50);
+```
+
+Note that users2 and users3 have an identical schema. After we create the tables, we then create an index on the id attribute for each table (the index is the same for each of them). Don't worry about the fillfactor part of the definition --- this is just to make the index insertion algorithm more similar to the description in your textbook.  
+
+After we do this, we extract all tuples with id in between 10 and 10009 from the users table, and insert the id, username, first and last name, and date of birth from these tuples into the users2 and users3 tables. The only difference with the way that this insert is done is that for the users2 table, the tuples are inserted in sorted order (each tuple that is inserted as a higher id than the previous one). However, for the users3 table, the tuples are inserted in a more random order. You can look at the bash script for how this is done if you want to, but looking at the script is unlikely to help you more than just focusing on the main point: tuples are inserted in sorted order for users2 and (mostly) random order for users3. 
+
+After doing all of the tuple insertions, the script then prints the size of each index. Surprisingly, the index for which insertions happend in sorted order is *larger* than the the index for which insertions happened in *random* order. Please use your understanding of how insertions into indexes work from the textbook and the lectures this semester to explain why there is a size difference between the two indexes. (Write your response in the last question on the quiz on Elms). 
 
