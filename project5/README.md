@@ -333,8 +333,8 @@ WHERE id = '73456';
 Query 8.2
 ```sql
 UPDATE users
-SET date_of_birth = date_of_birth + interval '1 year'
-WHERE id = '89976';
+SET date_of_birth = date_of_birth - interval '1 year'
+WHERE id = '329976';
 ```
 
 Both queries find a user by id, and update one column in the found record. However, Q8.2 runs slower than Q8.1. Why?
