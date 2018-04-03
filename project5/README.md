@@ -1,8 +1,8 @@
 # Project 5: Index
 
-The goal of this project is to introduce you to one of the most common index type in databases -- the B-tree. We have provided you with a toy database that you will use to try out some of the queries mentioned below. Based on your understanding and experience, you will answer a few questions on ELMS, that count as the deliverable for this project. 
+The goal of this project is to give you some hands on experience converting the theory of B trees that we've been learning about in the textbook and in lecture into practice on a real database. We have provided you with a sample dataset that you will use to try out some of the queries mentioned below. Based on your understanding and experience, you will answer a few questions on ELMS, that count as the deliverable for this project. 
 
-Each question below asks you to run a shell script. These are the `question.x.sh` files in the directory, where `x` is the respective question number. Each script may set up some indexes and execute a couple of `SELECT` statements. You are to note the output of each script, as the questions are based on it. Apart from the queries that are provided by us, we encourage you to explore the dataset using `SELECT` statements of your own. It will help you verify your understanding. **Most importantly, pay careful attention to what indexes are present on the table when you work on a particular question -- the set of indexes changes from one question to another.**
+Most of the questions below asks you to run a shell script. These are the `question.x.sh` files in the directory, where `x` is the respective question number. Each script may set up some indexes and execute a couple of `SELECT` statements. You are to note the output of each script, as the questions are based on it. Apart from the queries that are provided by us, we encourage you to explore the dataset using `SELECT` statements of your own. This may help you to chose between the different options we give you in the multiple choice questions. You can log in to the psql instance for this project by running 'psql app' and running your queries on the command line. **Most importantly, pay careful attention to what indexes are present on the table when you work on a particular question -- the set of indexes changes from one question to another.**
 
 ## About the database
 For this project, we will use a table with approximately 500K records, representing users of a web application. The table is created for you using the following SQL.
@@ -58,9 +58,9 @@ COPY users (
 
 ## Exercises
 
-If you are using a Windows machine, please run `dos2unix` as below to account for differences in line-endings (replace `x` by the question number):
+If you are using a Windows machine, please run `dos2unix` as below to account for differences in line-endings:
 ```bash
-dos2unix question.x.sh
+dos2unix question.*.sh
 ```
 
 To run a file, type the following (replace `x` by the question number):
