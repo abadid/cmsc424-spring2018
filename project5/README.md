@@ -93,7 +93,6 @@ If you notice the output, both queries return the same user. However, the first 
 - [ ] Comparing strings is slower than comparing integers.
 
 
-
 ### Question 2
 Run the file `question.2.sh` and note its output. This script creates a UNIQUE index on the `username` attribute using the following command:
 ```sql
@@ -169,15 +168,15 @@ WHERE first_name = 'Patrick' AND last_name = 'Giant'
 ```
 
 Both queries find one user in the table. However, the first one takes longer. Why?
-- [ ] On disk, the record for 'Bethzy Smith' appears much before the record for 'James Giant', and PostgreSQL found it earlier in the scan.
-- [ ] Postgres used the index `users_last_name` for Q3.2 but not for Q3.1
+- [ ] In the index, the record for 'Patrick Giant' appears much before the record for 'Bethzy Richardson', and hence PostgreSQL found it earlier.
+- [ ] The `id` of 'Patrick Giant' is much smaller than the `id` of 'Bethzy Smith'. Hence PostgreSQL found it earlier.
 - [ ] There are many users having last name 'Richardson' compared to 'Giant'
 
 
 **Part 2:** Suppose instead of creating an index on `last_name`, we created it on `first_name`. Based on your understanding so far, what can you say about the run time of the two queries above, and why?
-- [ ] No change
-- [ ] Same time for both
-- [ ] Flipped
+- [ ] Both will take the same time
+- [ ] There will be no change, we will observe similar behavior as before
+- [ ] The behaviour will be flipped, Q3.2 will take more time than Q3.1
 
 
 ### Question 4
