@@ -301,7 +301,7 @@ WHERE relname IN ('uniq_username', 'users_about');
 Then we create two temporary tables via running a select statement and putting the results in the newly created tables:
 ```sql
 create table tmp1 as select username from users where first_name='Aaron';
-create table tmp2 as select about from users where first_name='Aaron';"
+create table tmp2 as select about from users where first_name='Aaron';
 ```
 
 
