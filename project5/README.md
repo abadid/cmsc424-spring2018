@@ -1,5 +1,7 @@
 # Project 5: Index
 
+This project can be done in groups. There are no limits in group size, but the more you can do yourself, the more you will learn. 
+
 The goal of this project is to give you some hands on experience converting the theory of B trees that we've been learning about in the textbook and in lecture into practice on a real database. We have provided you with a sample dataset that you will use to try out some of the queries mentioned below. Based on your understanding and experience, you will answer a few questions on ELMS, that count as the deliverable for this project. 
 
 Most of the questions below ask you to run a shell script. These are the `question.x.sh` files in the directory, where `x` is the respective question number. Each script may set up some indexes and execute a couple of `SELECT` statements. You are to note the output of each script, as the questions are based on it. Apart from the queries that are provided by us, we encourage you to explore the dataset using `SELECT` statements of your own. This may help you to chose between the different options we give you in the multiple choice questions. You can log in to the psql instance for this project by running 'psql app' and running your queries on the command line. **Most importantly, pay careful attention to what indexes are present on the table when you work on a particular question -- the set of indexes changes from one question to another.**
