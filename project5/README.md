@@ -172,7 +172,7 @@ Both queries find one user in the table. However, the first one takes longer. Wh
 
 ### Question 4
 
-Before you do this part, read section 11.5.2 from your textbook (it should be a tiny bit more than a single page). The main thing you need to know is that the concatenation of multiple attributes can be indexed the same way as an index on a single attribute. This is called a "multi-column index". Suppose instead of creating separate indexes on one of `first_name` or `last_name`, we create a _multicolumn_ index containing both attributes (i.e. a concatenation of both attributes). Specifically, we create the following index:
+Before you do this part, read section 11.5.2 from your textbook (it should be a tiny bit more than a single page). The main thing you need to know is that the concatenation of multiple attributes can be indexed the same way as an index on a single attribute. This is called a "multi-column index". Suppose instead of creating separate indexes on one of `first_name` or `last_name`, we create a _multicolumn_ index containing both attributes (i.e. a concatenation of both attributes). Specifically, we could create the following index (although we do not imclude a script that does this):
 ```sql
 CREATE INDEX users_first_last_name ON users (first_name, last_name);
 ```
