@@ -241,7 +241,7 @@ Both queries return the same user record and can make use of at least one index.
 
 - [ ] Q5.2 compares three column values for every user, whereas Q5.1 compares only one.
 - [ ] Usernames are larger (in terms of number of bytes) than states. Therefore the index on username is more helpful.
-- [ ] There are many user records that have `state = 'CA'`, so the index on `state` is not helpful.
+- [ ] There are many user records that have `state = 'CA'`, so the index on `state` is not particularly helpful.
 - [ ] The table is sorted by username; therefore selection predicates on username are faster.
 
 
