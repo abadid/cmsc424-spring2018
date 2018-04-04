@@ -158,7 +158,7 @@ fddb=# select * from dataset;
 
 #### Task:
 
-**Fuzzy Functional Dependency**: The Java code iterates through every possible pairs of columns in a dataset and then calls a SQL query over JDBC to calculate the confidence of a fuzzy functional dependency between those two columns. You have to write this SQL query (it will likely be a complicated query with several components in the with clause). See the doQuery method in Test.java and the context for how it is called in order to understand the nature of the SQL query that is sent to the database.
+**Fuzzy Functional Dependency**: The Java code iterates through every possible pairs of columns in a dataset and then calls a SQL query over JDBC to calculate the confidence of a fuzzy functional dependency between those two columns. You have to write this SQL query (it will likely be a complicated query with several components in the with clause). See the doQuery method in FDFinder.java and the context for how it is called in order to understand the nature of the SQL query that is sent to the database.
 
 Hint: You many need to cast integers as floats in order to complete your query. In Postgres, there are multiple ways to do this. One is to add ::float at the end. E.g. 1 is an integer, but 1::float is a float.
 
@@ -173,6 +173,26 @@ $ java -cp functionaldependency/postgresql-42.2.2.jre7.jar:. functionaldependenc
 #### Coding Restrictions:
 1. Please do not modify anything in the code aside from the SQL query.
 
+#### Testing your implementation:
+
+We have provided you with 2 additional files for testing your implementation. 
+
+ 1. `answers.txt` : It contains the expected output on running FDFinder.java.
+ 2. `FDTest.py` : It matches your output on running FDFinder.java against answers.txt that we provide. 
+
+To test your implementation, execute the following commands from 
+/vagrant not anywhere else. Firstly, redirect the output of FDFinder.java to a text file (e.g. out.txt) as follows: 
+ 
+ ```
+ $ java -cp functionaldependency/postgresql-42.2.2.jre7.jar:. functionaldependency/FDFinder > out.txt
+ ```
+ Run FDTest.py to compare out.txt and answers.txt. You can do this by running
+ 
+ ```
+ $ python FDTest.py answers.txt out.txt
+ ```
+ 
+ Please do not modify anything in FDFinder.java aside from the SQL query else you will get errors. 
 
 #### Answer the following questions on ELMS
 			 
