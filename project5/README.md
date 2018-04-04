@@ -345,7 +345,7 @@ Both queries update the id value of every single tuple in the table by concateni
 
 Why does Q8.2 run slower than Q8.1?
 - [ ] Q8.2 runs after Q8.1 and the CPU on my computer slows down over time. 
-- [ ] q8_users1 is smaller than q8_users2 since it doesn't have an index. Therefore q8_users1 blocks are more likely to be in cache or memory than q8_users2 blocks (which are more likey to be on disk).
+- [ ] q8_users1 is smaller than q8_users2 since it doesn't have an index. Therefore q8_users1 blocks are more likely to be in cache or memory than q8_users2 blocks (which are more likely to be on disk).
 - [ ] Because we didn't create an index on q8_users1, it automatically created an index on its primary key. This index helps to accelerate the update statements.
 - [ ] The update in Q8.2 is more expensive because the index has to be updated as well.
 
