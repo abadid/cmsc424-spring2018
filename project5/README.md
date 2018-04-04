@@ -256,7 +256,7 @@ WHERE date_of_birth >= '1990-01-01' AND date_of_birth <= '1990-02-01'
 ```
 However, each query will have different constant values for the date_of_birth predicate (but with a similar date range of about a month) and different constant values for theme as well. 
 
-Which one of the following index would be most helpful?
+Which one of the following indexes would be most helpful?
 - [ ] 1.
 ```sql
 CREATE INDEX users_dob ON users (date_of_birth);
