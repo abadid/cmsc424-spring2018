@@ -2,7 +2,7 @@
 
 *The assignment is to be done by yourself.*
 
-Please do a `git pull` to download the directory `project4`. The files are:
+Please do a `git pull` to download the directory `project6`. The files are:
 
 ### Getting started
 Start the VM with `vagrant up` in the `project4/` directory.
@@ -111,17 +111,17 @@ The two tables (`CompanyLocation` and `CompanyName`) will be joined on the attri
 
 `CompanyLocation`
 
-| cId | cLoc |  
-|:---:|:---:| 
-| 1 | NY | 
-| 2 | CA | 
+| cId | cLoc |
+|:---:|:---:|
+| 1 | NY |
+| 2 | CA |
 | 3 | OR |
-| 4 | WA | 
+| 4 | WA |
 
 
 `CompanyName`
 
-| id | cId | cName |  
+| id | cId | cName |
 |:---:|:---:|:---:|
 | 1 | 1 | IBM |
 | 2 | 2 | Google |
@@ -131,7 +131,7 @@ The two tables (`CompanyLocation` and `CompanyName`) will be joined on the attri
 
 `ResultRelation`
 
-| cId | cLoc | id | cId | cName |  
+| cId | cLoc | id | cId | cName |
 |:---:|:---:|:---:|:---:|:---:|
 | 1 | NY | 1 | 1 | IBM |
 | 2 | CA | 2 | 2 | Google |
