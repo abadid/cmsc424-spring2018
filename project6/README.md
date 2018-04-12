@@ -5,7 +5,7 @@
 Please do a `git pull` to download the directory `project6`. The files are:
 
 ### Getting started
-Start the VM with `vagrant up` in the `project4/` directory.
+Start the VM with `vagrant up` in the `project6/` directory.
 
 **Q1 (10pt)**. [Query Plan] If you add the keyword EXPLAIN at the beginning of a query, PostgreSQL will display the execution plan for that query. This plan includes how many tuples are estimated by the query optimizer to be generated after each operation in the query plan. Furthermore, if you add the keyword ANALYZE after EXPLAIN at the beginning of a query, then in addition to getting the execution plan, the query also gets executed and also shows the actual number of tuples that were generated when the query plan was executed.
 
