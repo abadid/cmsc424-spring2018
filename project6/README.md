@@ -100,7 +100,7 @@ The query above is inefficient because of which of the following condition [only
 1. Answer the multiple choice question in ELMS.
 
 
-**Q4 (10pt)**. [Sort Merge Join] In this problem, you will implement the sort merge join algorithm, more specifically the merge algorithm. The schema of the two tables to be joined and the resulting table are as follows:
+**Q4 (10pt)**. [Sort Merge Join] In this problem, you will implement the a merge join algorithm for two tables that have already been sorted. The schema of the two tables to be joined and the resulting table are as follows:
 ``` 
 CompanyLocation (cId, cLoc)
 CompanyName (id, cId, cName)
