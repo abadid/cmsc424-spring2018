@@ -88,13 +88,20 @@ public class FDFinder {
 	public static double doQuery(Connection c, String col1, String col2) {
 
 		// TO-DO
-		// Replace the existing SQL query in the string below with your SQL query. 
+		// Replace the existing SQL query in the string below with your SQL query.
 		// Your query should return a single row with a single column
 		// that contains the confidence calculation for col1 and col2 which are parameters to this method
 		// In other words, your SQL query returns confidence(col1,col2)
 		// Do not use stored procedures --- just a regular SQL query
 		// See the README for a hint about how to cast integers as floats in Postgres (which you may need to do)
-		String query = "select count(" + col1 + ") from dataset;";
+
+		/*String query = "select count(" + col1 + ") from dataset;";*/
+
+		String query = "with cardinality as (select a, 1.0/count(*) as card from (select distinct "+col1 +" as a, "+col2+" as b from dataset) d group by a),";
+		query+=" dup as (select dataset."+col1+" as a, dataset."+col2+" as b from dataset, (select "+col1+" ,count(*) from dataset group by "+col1+" having count("+col1+") > 1) counts where dataset."+col1 +"= counts."+col1+"), ";
+		query+="consistency as (select distinct d1.a as a, 1.0*(select max(c) from (select count(*) c from dup d2 where d1.a=d2.a group by d2.b) foo)/(select count(*) from dup d2 where d1.a=d2.a group by d2.a) as const from dup d1) ";
+		query+="select (select avg(card) from cardinality) + CASE WHEN (select count(*) from dup)=0 THEN 1 ELSE (select (1.0+sum(const))/(1.0+(select count(*) from consistency)) from consistency) END as confidence;";
+
 
 		try {
 			Statement s = c.createStatement();
