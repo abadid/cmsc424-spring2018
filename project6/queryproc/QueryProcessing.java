@@ -83,42 +83,42 @@ public class QueryProcessing {
 
     public static void main(String[] args) {
 
-        Relation<TupleType1> companyLocation = new Relation<TupleType1>();
-        companyLocation.insert(new TupleType1(1, "NY", "NE"));
-        companyLocation.insert(new TupleType1(2, "CA", "W"));
-        companyLocation.insert(new TupleType1(3, "WA", "W"));
-        companyLocation.insert(new TupleType1(4, "MD", "S"));
-        companyLocation.insert(new TupleType1(5, "IL", "MW"));
-        companyLocation.insert(new TupleType1(6, "GA", "S"));
-        companyLocation.insert(new TupleType1(7, "TX", "S"));
-        companyLocation.insert(new TupleType1(8, "MA", "NE"));
-        companyLocation.insert(new TupleType1(9, "NJ", "NE"));
-        companyLocation.insert(new TupleType1(10, "NC", "S"));
-        companyLocation.insert(new TupleType1(11, "AZ", "W"));
+        Relation<TupleType1> locations = new Relation<TupleType1>();
+        locations.insert(new TupleType1(1, "NY", "NE"));
+        locations.insert(new TupleType1(2, "CA", "W"));
+        locations.insert(new TupleType1(3, "WA", "W"));
+        locations.insert(new TupleType1(4, "MD", "S"));
+        locations.insert(new TupleType1(5, "IL", "MW"));
+        locations.insert(new TupleType1(6, "GA", "S"));
+        locations.insert(new TupleType1(7, "TX", "S"));
+        locations.insert(new TupleType1(8, "MA", "NE"));
+        locations.insert(new TupleType1(9, "NJ", "NE"));
+        locations.insert(new TupleType1(10, "NC", "S"));
+        locations.insert(new TupleType1(11, "AZ", "W"));
 
 
-        Relation<TupleType2> companyName = new Relation<TupleType2>();
-        companyName.insert(new TupleType2(1, 1, "IBM"));
-        companyName.insert(new TupleType2(2, 1, "MorganStanley"));
-        companyName.insert(new TupleType2(3, 2, "Google"));
-        companyName.insert(new TupleType2(4, 2, "Apple"));
-        companyName.insert(new TupleType2(5, 3, "Microsoft"));
-        companyName.insert(new TupleType2(7, 3, "Amazon"));
-        companyName.insert(new TupleType2(8, 3, "Boeing"));
-        companyName.insert(new TupleType2(9, 4, "Geico"));
-        companyName.insert(new TupleType2(10, 7, "AT&T"));
-        companyName.insert(new TupleType2(11, 8, "GE"));
-        companyName.insert(new TupleType2(12, 9, "Johnson&Johnson"));
-        companyName.insert(new TupleType2(13, 10, "RedHat"));
-        companyName.insert(new TupleType2(14, 10, "Lenovo"));
+        Relation<TupleType2> companies = new Relation<TupleType2>();
+        companies.insert(new TupleType2(1, 1, "IBM"));
+        companies.insert(new TupleType2(2, 1, "MorganStanley"));
+        companies.insert(new TupleType2(3, 2, "Google"));
+        companies.insert(new TupleType2(4, 2, "Apple"));
+        companies.insert(new TupleType2(5, 3, "Microsoft"));
+        companies.insert(new TupleType2(7, 3, "Amazon"));
+        companies.insert(new TupleType2(8, 3, "Boeing"));
+        companies.insert(new TupleType2(9, 4, "Geico"));
+        companies.insert(new TupleType2(10, 7, "AT&T"));
+        companies.insert(new TupleType2(11, 8, "GE"));
+        companies.insert(new TupleType2(12, 9, "Johnson&Johnson"));
+        companies.insert(new TupleType2(13, 10, "RedHat"));
+        companies.insert(new TupleType2(14, 10, "Lenovo"));
 
         System.out.println("\n\n++++ Locations ++++");
-        printRelation1(companyLocation);
+        printRelation1(locations);
 
         System.out.println("\n\n++++ Companies ++++");
-        printRelation2(companyName);
+        printRelation2(companies);
 
-        Relation<TupleType3> resultTable = JoinOperators.MergeJoinOnIntegerAttributes(companyLocation, companyName, 0, 1);
+        Relation<TupleType3> resultTable = JoinOperators.MergeJoinOnIntegerAttributes(locations, companies, 0, 1);
 
         System.out.println("\n\n++++ Your ResultTable ++++");
         printRelation(resultTable);
