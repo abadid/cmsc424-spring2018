@@ -96,7 +96,7 @@ The query above is inefficient because of which of the following condition [only
 [**Note**: In general, query optimizers does not require users to write the most efficient query. For a given query, the query optimizer enumerates all possible query plans and chooses the most efficient plan based on some heuristic. Surprisingly in this case, the query optimizer of Postgres does not do a good job!] 
 
 #### What to turn in:
-1. Submit your efficient version of the query above in the `queries4.py` file.
+1. Submit your efficient version of the query above in the `p6q2.py` file.
 1. Answer the multiple choice question in ELMS.
 
 
@@ -164,7 +164,7 @@ java queryproc/QueryProcessing
 #### Coding Restrictions:
 1. You are only allowed to **add/modify** your **own** code within the `MergeJoinOnIntegerAttributes` method in **JoinOperators.java**.
 1. For the remaining java files, please do not modify any existing code in any of those files.
-1. Please remember to maintain the same order of attributes as shown in the example above when inserting a tuple in the table `ResultRelation`. More instructions provided in JoinOperators.java.
+1. Please remember to maintain the same order of attributes as shown in the example above when inserting a tuple in the table `ResultRelation`. More instructions provided in `JoinOperators.java`.
 
 #### What to turn in:
 Please submit `JoinOperators.java`.
