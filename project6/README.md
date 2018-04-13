@@ -2,7 +2,7 @@
 
 *The assignment is to be done by yourself.*
 
-Please do a `git pull` to download the directory `project6`. The files are:
+Please do a `git pull` to download the directory `project6`.
 
 ### Getting started
 Start the VM with `vagrant up` in the `project6/` directory.
