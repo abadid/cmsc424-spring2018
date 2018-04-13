@@ -2,37 +2,28 @@ package queryproc;
 
 public class TupleType3 {
 
-    private int cId;
-    private String cLoc;
-    private int id;
-    private int c_Id;
-    private String cName;
+    private Object[] tuple;
 
-    public TupleType3(int companyId, String companyLocation, int id, int company_Id, String companyName) {
-        this.cId = companyId;
-        this.cLoc = companyLocation;
-        this.id = id;
-        this.c_Id = company_Id;
-        this.cName = companyName;
+    public TupleType3(final int idleft, final String state, final String region, final int idright, final int locid, final String name) {
+
+        this.tuple = new Object[6];
+        this.tuple[0] = idleft;
+        this.tuple[1] = state;
+        this.tuple[2] = region;
+        this.tuple[3] = idright;
+        this.tuple[4] = locid;
+        this.tuple[5] = name;
     }
 
-    public int getcId() {
-        return cId;
+    public TupleType3(final Object[] lt, final Object[] rt) {
+
+        this.tuple = new Object[6];
+        System.arraycopy(lt, 0, tuple, 0, lt.length);
+        System.arraycopy(rt, 0, tuple, 3, rt.length);
     }
 
-    public String getcLoc() {
-        return cLoc;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public int getc_Id() {
-        return c_Id;
-    }
-
-    public String getcName() {
-        return cName;
+    // returns the attribute at position index in the tuple
+    public Object getAttribute(int index) {
+        return tuple[index];
     }
 }

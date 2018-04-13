@@ -1,26 +1,26 @@
 package queryproc;
 
+import java.util.Arrays;
+
 public class TupleType2 {
 
-    private int id;
-    private int cId;
-    private String cName;
+    private Object[] tuple;
 
-    public TupleType2(final int id, final int companyId, final String companyName) {
-        this.id = id;
-        this.cId = companyId;
-        this.cName = companyName;
+    public TupleType2(final int id, final int locid, final String name) {
+
+        this.tuple = new Object[3];
+        this.tuple[0] = id;
+        this.tuple[1] = locid;
+        this.tuple[2] = name;
     }
 
-    public int getId() {
-        return id;
+    // returns the attribute at position index in the tuple
+    public Object getAttribute(int index) {
+        return tuple[index];
     }
 
-    public int getcId() {
-        return cId;
-    }
-
-    public String getcName() {
-        return cName;
+    // returns all attributes in the tuple
+    public Object[] getAllAttributes(){
+        return Arrays.copyOf(tuple, tuple.length);
     }
 }
