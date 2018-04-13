@@ -106,7 +106,7 @@ Locations (id, state, region)
 Companies (id, locid, name)
 ResultRelation (id, state, region, id, locid, name)
 ```
-The two tables (`Locations` and `Companies`) will be joined on the attribute `id` which is the primary key in `Locations` and foreign key (`locid`) in `Companies`. Note that for sort merge join, we need both the tables to be sorted on the join keys. You can assume that both input tables will be sorted on the join keys. Now let us see an example below:
+The two tables (`Locations` and `Companies`) will be joined using the 'id' attribute from the `Locations` table (`id` is the primary key for that table) and  the `locid` attribute from the `Companies` table (which is a foreign key into the Locations table). You can assume that both input tables will be sorted on these join key attributes. Now let us see an example below:
 
 
 `Locations`
@@ -147,7 +147,7 @@ We have provided a package `queryproc` with the following java classes:
 1. **TupleType2.java**: Class defining the attributes for table `Companies` with helper methods.
 1. **TupleType3.java**: Class defining the attributes for table `ResultRelation` with helper methods.
 
-You may write your code with/without the help of an IDE of your choice (We encourage you to write/debug your code in an IDE). However your final code should compile and run with the following commands within the VM.
+You may write your code in whatever environment you are most comfortable with. However your final code should compile and run with the following commands within the VM in the project6 directory.
 
 ```
 javac queryproc/*.java
@@ -157,7 +157,7 @@ java queryproc/QueryProcessing
 **Assumptions**: Please note the following assumptions in regards to testing your code:
 1. The join key in the `leftRelation` will always be the primary key of the `leftRelation`.
 1. The join key in the `rightRelation` will always refer to the primary key of the `leftRelation`, i.e. it is a foreign key.
-1. There would not be any `NULL` values in the tables provided.
+1. There are not any `NULL` values in the tables provided.
 1. The input tables can be assumed to have at least one tuple.
 1. The input tables will be sorted on the join keys.
 
