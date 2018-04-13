@@ -162,8 +162,7 @@ java queryproc/QueryProcessing
 1. The input tables will be sorted on the join keys.
 
 #### Coding Restrictions:
-1. You are only allowed to **add/modify** your **own** code within the `MergeJoinOnIntegerAttributes` method in **JoinOperators.java**.
-1. For the remaining java files, please do not modify any existing code in any of those files.
+1. You are only allowed to **add/modify** your **own** code within the `MergeJoinOnIntegerAttributes` method in **JoinOperators.java**. For the remaining java files, please do not modify any existing code in any of those files.
 1. Please remember to maintain the same order of attributes as shown in the example above when inserting a tuple in the table `ResultRelation`. More instructions provided in `JoinOperators.java`.
 
 #### What to turn in:
