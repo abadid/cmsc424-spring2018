@@ -140,11 +140,11 @@ The two tables (`Location` and `Company`) will be joined on the attribute `id` w
 
 #### Coding Details:
 We have provided a package `queryproc` with the following java classes:
-1. **JoinOperators.java**: Your join algorithm must be written within the SortMergeJoin method. This method takes in two relations (or tables) as input (`leftRelation` and `rightRelation`) and returns the `resultRelation`.
+1. **JoinOperators.java**: Your join algorithm must be written within the `MergeJoinOnIntegerAttributes` method. This method takes in two relations (or tables) as input (`leftRelation` and `rightRelation`) and the indexes of the attributes (from `leftRelation` and `rightRelation`, respectively) on which the relations are to be joined and returns the `resultRelation`.
 1. **QueryProcessing.java**: Contains the main method with some helper methods for displaying the tables and testing the result.
 1. **Relation.java**: The relation class with some helper methods.
-1. **TupleType1.java**: Class defining the attributes for table `CompanyLoc` with helper methods.
-1. **TupleType2.java**: Class defining the attributes for table `CompanyName` with helper methods.
+1. **TupleType1.java**: Class defining the attributes for table `Location` with helper methods.
+1. **TupleType2.java**: Class defining the attributes for table `Company` with helper methods.
 1. **TupleType3.java**: Class defining the attributes for table `ResultRelation` with helper methods.
 
 You may write your code with/without the help of an IDE of your choice (We encourage you to write/debug your code in an IDE). However your final code should compile and run with the following commands within the VM.
@@ -162,9 +162,9 @@ java queryproc/QueryProcessing
 1. The input tables will be sorted on the join keys.
 
 #### Coding Restrictions:
-1. You are only allowed to **add/modify** your **own** code to the following java files: (i) **JoinOperators.java**: Put all your code within the SortMergeJoin method, (ii) **Relation.java**: If you think you need additional variables or helper methods in Relation.java, you may include them. You may also add additional code in the constructor if required, but you are not allowed to modify the constructor input parameters. 
+1. You are only allowed to **add/modify** your **own** code to **JoinOperators.java**. Put all your code within the `MergeJoinOnIntegerAttributes` method. 
 1. For the remaining java files, please do not modify any existing code in any of those files.
 1. Please remember to maintain the same order of attributes as shown in the example above when inserting a tuple in the table `ResultRelation`. More instructions provided in JoinOperators.java.
 
 #### What to turn in:
-Please submit `JoinOperators.java` and `Relation.java`.
+Please submit `JoinOperators.java`.
