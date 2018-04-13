@@ -7,7 +7,7 @@ Please do a `git pull` to download the directory `project6`. The files are:
 ### Getting started
 Start the VM with `vagrant up` in the `project6/` directory.
 
-**Q1 (10pt)**. [Query Plan] If you add the keyword EXPLAIN at the beginning of a query, PostgreSQL will display the execution plan for that query. This plan includes how many tuples are estimated by the query optimizer to be generated after each operation in the query plan. Furthermore, if you add the keyword ANALYZE after EXPLAIN at the beginning of a query, then in addition to getting the execution plan, the query also gets executed and also shows the actual number of tuples that were generated when the query plan was executed.
+**Q1 (5pt)**. [Query Plan] If you add the keyword EXPLAIN at the beginning of a query, PostgreSQL will display the execution plan for that query. This plan includes how many tuples are estimated by the query optimizer to be generated after each operation in the query plan. Furthermore, if you add the keyword ANALYZE after EXPLAIN at the beginning of a query, then in addition to getting the execution plan, the query also gets executed and also shows the actual number of tuples that were generated when the query plan was executed.
 
 Below is a query that was sent to PostgreSQL that prints the customers who have taken a flight more than once from a source or destination which is the hub of his frequentflyer airline. 
 
@@ -70,7 +70,7 @@ You do not need to run the query. You just need to understand the query plan sho
    2. fl.customerid = c.customerid
    3. c.frequentflieron = a.airlineid 
 
-**Q2 (10pt)**. [Query Debugging] For this problem, you are required to switch to `q2db` database (`psql q2db`) where we have already populated the `customers` table with a relatively large dataset. The `customers` table has the same schema as the one that we had used in Project 1. The following query counts the number of customer pairs whose year of birth differ by a year.
+**Q2 (5pt)**. [Query Debugging] For this problem, you are required to switch to `q2db` database (`psql q2db`) where we have already populated the `customers` table with a relatively large dataset. The `customers` table has the same schema as the one that we had used in Project 1. The following query counts the number of customer pairs whose year of birth differ by a year.
 
 ```
 with custbyear as (
@@ -100,28 +100,28 @@ The query above is inefficient because of which of the following condition [only
 1. Answer the multiple choice question in ELMS.
 
 
-**Q4 (10pt)**. [Sort Merge Join] In this problem, you will implement the a merge join algorithm for two tables that have already been sorted. The schema of the two tables to be joined and the resulting table are as follows:
+**Q3 (5pt)**. [Sort Merge Join] In this problem, you will implement a merge join algorithm for two tables that have already been sorted. The schema of the two tables to be joined and the resulting table are as follows:
 ``` 
-CompanyLocation (cId, cLoc)
-CompanyName (id, cId, cName)
-ResultRelation (cId, cLoc, id, cLoc, cName)
+Location (id, state, region)
+Company (id, locid, name)
+ResultRelation (id, state, region, id, locid, name)
 ```
-The two tables (`CompanyLocation` and `CompanyName`) will be joined on the attribute `cId` which is the primary key in `CompanyLocation` and foreign key in `CompanyName`. Note that for sort merge join, we need both the tables to be sorted on the join keys. You can assume that both input tables will be sorted on the join keys. Now let us see an example below:
+The two tables (`Location` and `Company`) will be joined on the attribute `id` which is the primary key in `Location` and foreign key (`locid`) in `Company`. Note that for sort merge join, we need both the tables to be sorted on the join keys. You can assume that both input tables will be sorted on the join keys. Now let us see an example below:
 
 
-`CompanyLocation`
+`Location`
 
-| cId | cLoc |
-|:---:|:---:|
-| 1 | NY |
-| 2 | CA |
-| 3 | OR |
-| 4 | WA |
+| id | state | region |
+|:---:|:---:|:---:|
+| 1 | NY | NE |
+| 2 | CA | W |
+| 3 | OR | W |
+| 4 | WA | W |
 
 
-`CompanyName`
+`Company`
 
-| id | cId | cName |
+| id | locid | name |
 |:---:|:---:|:---:|
 | 1 | 1 | IBM |
 | 2 | 2 | Google |
@@ -131,12 +131,12 @@ The two tables (`CompanyLocation` and `CompanyName`) will be joined on the attri
 
 `ResultRelation`
 
-| cId | cLoc | id | cId | cName |
-|:---:|:---:|:---:|:---:|:---:|
-| 1 | NY | 1 | 1 | IBM |
-| 2 | CA | 2 | 2 | Google |
-| 2 | CA | 4 | 2 | Facebook |
-| 4 | WA | 3 | 4 | Microsoft |
+| id | state | region | id | locid | name |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| 1 | NY | NE | 1 | 1 | IBM |
+| 2 | CA | W | 2 | 2 | Google |
+| 2 | CA | W | 4 | 2 | Facebook |
+| 4 | WA | W | 3 | 4 | Microsoft |
 
 #### Coding Details:
 We have provided a package `queryproc` with the following java classes:
