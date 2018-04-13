@@ -90,7 +90,7 @@ The query above is inefficient because of which of the following condition [only
 1. The query involves a self join and also on the choice of the join algorithm by the query optimizer.
 1. The choice of the join algorithm by the query optimizer.
 1. There are no indexes created on the birthdate column before executing the query.
-1. The query involves doing a cartesian product due to the absence of a join condition.
+1. The query involves performing arithmetic operations which are expensive.
 
 
 [**Note**: In general, query optimizers does not require users to write the most efficient query. For a given query, the query optimizer enumerates all possible query plans and chooses the most efficient plan based on some heuristic. Surprisingly in this case, the query optimizer of Postgres does not do a good job!] 
@@ -102,14 +102,14 @@ The query above is inefficient because of which of the following condition [only
 
 **Q3 (5pt)**. [Sort Merge Join] In this problem, you will implement a merge join algorithm for two tables that have already been sorted. The schema of the two tables to be joined and the resulting table are as follows:
 ``` 
-Location (id, state, region)
-Company (id, locid, name)
+Locations (id, state, region)
+Companies (id, locid, name)
 ResultRelation (id, state, region, id, locid, name)
 ```
-The two tables (`Location` and `Company`) will be joined on the attribute `id` which is the primary key in `Location` and foreign key (`locid`) in `Company`. Note that for sort merge join, we need both the tables to be sorted on the join keys. You can assume that both input tables will be sorted on the join keys. Now let us see an example below:
+The two tables (`Locations` and `Companies`) will be joined on the attribute `id` which is the primary key in `Locations` and foreign key (`locid`) in `Companies`. Note that for sort merge join, we need both the tables to be sorted on the join keys. You can assume that both input tables will be sorted on the join keys. Now let us see an example below:
 
 
-`Location`
+`Locations`
 
 | id | state | region |
 |:---:|:---:|:---:|
@@ -119,7 +119,7 @@ The two tables (`Location` and `Company`) will be joined on the attribute `id` w
 | 4 | WA | W |
 
 
-`Company`
+`Companies`
 
 | id | locid | name |
 |:---:|:---:|:---:|
@@ -143,8 +143,8 @@ We have provided a package `queryproc` with the following java classes:
 1. **JoinOperators.java**: Your join algorithm must be written within the `MergeJoinOnIntegerAttributes` method. This method takes in two relations (or tables) as input (`leftRelation` and `rightRelation`) and the indexes of the attributes (from `leftRelation` and `rightRelation`, respectively) on which the relations are to be joined and returns the `resultRelation`.
 1. **QueryProcessing.java**: Contains the main method with some helper methods for displaying the tables and testing the result.
 1. **Relation.java**: The relation class with some helper methods.
-1. **TupleType1.java**: Class defining the attributes for table `Location` with helper methods.
-1. **TupleType2.java**: Class defining the attributes for table `Company` with helper methods.
+1. **TupleType1.java**: Class defining the attributes for table `Locations` with helper methods.
+1. **TupleType2.java**: Class defining the attributes for table `Companies` with helper methods.
 1. **TupleType3.java**: Class defining the attributes for table `ResultRelation` with helper methods.
 
 You may write your code with/without the help of an IDE of your choice (We encourage you to write/debug your code in an IDE). However your final code should compile and run with the following commands within the VM.
@@ -162,7 +162,7 @@ java queryproc/QueryProcessing
 1. The input tables will be sorted on the join keys.
 
 #### Coding Restrictions:
-1. You are only allowed to **add/modify** your **own** code to **JoinOperators.java**. Put all your code within the `MergeJoinOnIntegerAttributes` method. 
+1. You are only allowed to **add/modify** your **own** code within the `MergeJoinOnIntegerAttributes` method in **JoinOperators.java**.
 1. For the remaining java files, please do not modify any existing code in any of those files.
 1. Please remember to maintain the same order of attributes as shown in the example above when inserting a tuple in the table `ResultRelation`. More instructions provided in JoinOperators.java.
 
