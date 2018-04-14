@@ -106,7 +106,7 @@ Locations (id, state, region)
 Companies (id, locid, name)
 ResultRelation (id, state, region, id, locid, name)
 ```
-The two tables (`Locations` and `Companies`) will be joined using the 'id' attribute from the `Locations` table (`id` is the primary key for that table) and  the `locid` attribute from the `Companies` table (which is a foreign key into the Locations table). You can assume that both input tables will be sorted on these join key attributes. Now let us see an example below:
+The two tables (`Locations` and `Companies`) will be joined using the `id` attribute from the `Locations` table (`id` is the primary key for that table) and  the `locid` attribute from the `Companies` table (which is a foreign key into the Locations table). You can assume that both input tables will be sorted on these join key attributes. Now let us see an example below:
 
 
 `Locations`
