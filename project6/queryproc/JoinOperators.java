@@ -13,10 +13,10 @@ public class JoinOperators {
         // in the ResultRelation as shown below
 
         // tuple from the left relation from row pos
-        TupleType1 lrTuple = leftRelation.getTuple(rowid);
+        TupleType1 lrTuple = leftRelation.getTuple(pos);
 
         // tuple from the right relation from row pos
-        TupleType2 rrTuple = rightRelation.getTuple(rowid);
+        TupleType2 rrTuple = rightRelation.getTuple(pos);
 
         // this is the order that you must follow while inserting attributes into the result relation
         resultRelation.insert(new TupleType3(lrTuple.getAllAttributes(), rrTuple.getAllAttributes()));
