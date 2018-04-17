@@ -65,6 +65,7 @@ You do not need to run the query. You just need to understand the query plan sho
    1. fl.flightid=f.flightid, fl.customerid = c.customerid, c.frequentflieron = a.airlineid. 
    2. c.frequentflieron = a.airlineid, fl.customerid = c.customerid, fl.flightid=f.flightid.
    3. fl.customerid = c.customerid, fl.flightid=f.flightid, c.frequentflieron = a.airlineid.
+   4. c.frequentflieron = a.airlineid, fl.flightid=f.flightid, fl.customerid = c.customerid.
 4. State 1,2 or 3 (only 1 correct answer): On which of the following join conditions does the query optimizer perform poorly in terms of overestimating or underestimating the size of the output?
    1. fl.flightid=f.flightid
    2. fl.customerid = c.customerid
