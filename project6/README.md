@@ -88,13 +88,12 @@ This query takes around 3.5 seconds to execute in the VM. Could you rewrite the 
 
 [**Hint**: You might want to use EXPLAIN to view the query plan of the query.]
 
-The query above is inefficient because of which of the following condition [only one correct answer]:
+The most significant reason why the query above is inefficient is because of which of the following? [choose the best answer]:
 
 1. The query involves a self join.
-1. The query involves a self join and also on the choice of the join algorithm by the query optimizer.
-1. The choice of the join algorithm by the query optimizer.
-1. There are no indexes created on the birthdate column before executing the query.
-1. The query involves performing arithmetic operations which are expensive.
+2. The choice of the join algorithm by Postgres.
+3. The lack of index usage in this query plan.
+4. The query involves performing arithmetic operations which are expensive.
 
 
 [**Note**: In general, query optimizers does not require users to write the most efficient query. For a given query, the query optimizer enumerates all possible query plans and chooses the most efficient plan based on some heuristic. Surprisingly in this case, the query optimizer of Postgres does not do a good job!] 
