@@ -55,7 +55,7 @@ QUERY PLAN
  Total runtime: 1.030 ms
 ```
 
-You do not need to run the query. The output is at first a little overwhelming to understand. However, Postgres' documentation is actually pretty good at explaining how to read this output: https://www.postgresql.org/docs/9.5/static/using-explain.html. https://robots.thoughtbot.com/reading-an-explain-analyze-query-plan also gives a pretty good overview for to understand the output of Postgres EXPLAIN ANALYZE. Try to read these overviews and then afterwards, make an attempt to understand the query plan shown above. You don't have to understand every detail, but you should get a general sense of of the main flow of operators and cost estimates --- at least enough to understand the questions below.
+You do not need to run the query. The output is at first a little overwhelming to understand. However, Postgres' documentation is actually pretty good at explaining how to read this output: https://www.postgresql.org/docs/9.5/static/using-explain.html. In addition, https://robots.thoughtbot.com/reading-an-explain-analyze-query-plan also gives a pretty good overview for how to understand the output of Postgres EXPLAIN ANALYZE. Try to read these overviews and then afterwards, make an attempt to understand the query plan shown above. You don't have to understand every detail, but you should get a general sense of of the main flow of operators and cost estimates --- at least enough to understand the questions below.
 
 #### Answer the following questions on ELMS
 
@@ -67,7 +67,9 @@ You do not need to run the query. The output is at first a little overwhelming t
    2. c.frequentflieron = a.airlineid, fl.customerid = c.customerid, fl.flightid=f.flightid.
    3. fl.customerid = c.customerid, fl.flightid=f.flightid, c.frequentflieron = a.airlineid.
    4. c.frequentflieron = a.airlineid, fl.flightid=f.flightid, fl.customerid = c.customerid.
-5. State 1,2 or 3 (only 1 correct answer): On which of the following join conditions does the query optimizer perform poorly in terms of overestimating or underestimating the size of the output?
+5. True or false: At least one table is first accessed with some method other than a sequential scan
+6. True or false: Each join has exactly two (not more and not less) operators that feed data into it. 
+7. Multiple choice (only one correct): On which of the following join conditions does the query optimizer perform poorly in terms of overestimating or underestimating the size of the output?
    1. fl.flightid=f.flightid
    2. fl.customerid = c.customerid
    3. c.frequentflieron = a.airlineid 
