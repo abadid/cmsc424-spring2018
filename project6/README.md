@@ -84,7 +84,7 @@ select count(*)
 from custbyear a, custbyear b
 where b.birthyear - a.birthyear = 1;
 ```
-This query takes around 3.5 seconds to execute in the VM. Could you rewrite the query to make it execute more efficiently.
+This query takes around 3.5 seconds to execute in the VM. Could you rewrite the query to make it execute approximately 10X faster.
 
 [**Hint**: You might want to use EXPLAIN to view the query plan of the query.]
 
