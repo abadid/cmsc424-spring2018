@@ -55,18 +55,19 @@ QUERY PLAN
  Total runtime: 1.030 ms
 ```
 
-You do not need to run the query. You just need to understand the query plan shown above.
+You do not need to run the query. The output is at first a little overwhelming to understand. However, Postgres' documentation is actually pretty good at explaining how to read this output: https://www.postgresql.org/docs/9.5/static/using-explain.html. https://robots.thoughtbot.com/reading-an-explain-analyze-query-plan also gives a pretty good overview for to understand the output of Postgres EXPLAIN ANALYZE. Try to read these overviews and then afterwards, make an attempt to understand the query plan shown above. You don't have to understand every detail, but you should get a general sense of of the main flow of operators and cost estimates --- at least enough to understand the questions below.
 
 #### Answer the following questions on ELMS
 
-1. State True or False. For all hash joins involved in this query, the smaller of the two relations is always hashed. 
-2. State True or False: The filter condition (a.hub=f.source or a.hub=f.dest) is executed after all the join operations are performed. 
-3. State 1,2 or 3 (only 1 correct answer): The join operations are performed in the following order (earliest to last): 
+1. True or False: The first operator in this query plan is a sort. The output of the sort is then sent to an operator called "HashAggregate". 
+2. How many rows were estimated to be returned by the query?
+3. How many rows were actually returned by the query?
+4. Multiple choice (only one correct): The join operations are performed in the following order (earliest to last): 
    1. fl.flightid=f.flightid, fl.customerid = c.customerid, c.frequentflieron = a.airlineid. 
    2. c.frequentflieron = a.airlineid, fl.customerid = c.customerid, fl.flightid=f.flightid.
    3. fl.customerid = c.customerid, fl.flightid=f.flightid, c.frequentflieron = a.airlineid.
    4. c.frequentflieron = a.airlineid, fl.flightid=f.flightid, fl.customerid = c.customerid.
-4. State 1,2 or 3 (only 1 correct answer): On which of the following join conditions does the query optimizer perform poorly in terms of overestimating or underestimating the size of the output?
+5. State 1,2 or 3 (only 1 correct answer): On which of the following join conditions does the query optimizer perform poorly in terms of overestimating or underestimating the size of the output?
    1. fl.flightid=f.flightid
    2. fl.customerid = c.customerid
    3. c.frequentflieron = a.airlineid 
