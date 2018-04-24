@@ -55,7 +55,7 @@ QUERY PLAN
  Total runtime: 1.030 ms
 ```
 
-You do not need to run the query. The output is at first a little overwhelming to understand. However, Postgres' documentation is actually pretty good at explaining how to read this output: https://www.postgresql.org/docs/9.5/static/using-explain.html. In addition, https://robots.thoughtbot.com/reading-an-explain-analyze-query-plan also gives a pretty good overview for how to understand the output of Postgres EXPLAIN ANALYZE. Try to read these overviews and then afterwards, make an attempt to understand the query plan shown above. You don't have to understand every detail, but you should get a general sense of of the main flow of operators and cost estimates --- at least enough to understand the questions below.
+You do not need to run the query (you can rely on the output we got above when we ran the query). The output is at first a little overwhelming to understand. However, Postgres' documentation is actually pretty good at explaining how to read this output: https://www.postgresql.org/docs/9.5/static/using-explain.html. In addition, https://robots.thoughtbot.com/reading-an-explain-analyze-query-plan also gives a pretty good overview for how to understand the output of Postgres EXPLAIN ANALYZE. Try to read these overviews and then afterwards, make an attempt to understand the query plan shown above. You don't have to understand every detail, but you should get a general sense of of the main flow of operators and cost estimates --- at least enough to understand the questions below.
 
 #### Answer the following questions on ELMS
 
