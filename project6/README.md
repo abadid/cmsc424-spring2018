@@ -86,19 +86,19 @@ select count(*)
 from custbyear a, custbyear b
 where b.birthyear - a.birthyear = 1;
 ```
-This query takes around 3.5 seconds to execute in the VM. Your goal in this part is to rewrite the query to make it execute approximately 10X faster (half a second or less). You new query must be equilvent to the original query as far as what is returned for any dataset. All you are doing is expressing the same query in a different way. [**Note**: In general, query optimizers are supposed to always use the best plan, no matter how the user expresses a query. For a given query, the query optimizer enumerates all possible query plans and chooses the most efficient plan based on what it expects will be the lowest cost. Surprisingly in this case, the query optimizer of Postgres does not do a good job, and if you rewrite the query, you can help the optimizer do a better job!] 
+This query takes around 3.5 seconds to execute in the VM. Your goal in this part is to rewrite the query to make it execute approximately 10X faster (half a second or less). Your new query must be equivalent to the original query as far as what is returned for any dataset. All you are doing is expressing the same query in a different way. [**Note**: In general, query optimizers are supposed to always use the best plan, no matter how the user expresses a query. For a given query, the query optimizer enumerates all possible query plans and chooses the most efficient plan based on what it expects will be the lowest cost. Surprisingly in this case, the query optimizer of Postgres does not do a good job, and if you rewrite the query, you can help the optimizer do a better job!] 
 
 [**Hint**: You might want to use EXPLAIN to view the query plan of the query.]
 
 
 Please answer the question below on the same quiz on Elms as part 1.
 
-The most significant reason why the query above is inefficient is because of which of the following? [choose the best answer]:
+The most significant reason why your rewritten query performed 10 times faster than our original query is because of which of the following? [choose the best answer]:
 
-1. The query involves a self join.
+1. The original query involved a self join and the new one did not.
 2. The choice of the join algorithm by Postgres.
-3. The lack of index usage in this query plan.
-4. The query involves performing arithmetic operations which are expensive.
+3. The lack of index usage in the original query plan.
+4. The original query involved performing arithmetic operations which are expensive.
 
 
 
