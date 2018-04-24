@@ -76,7 +76,7 @@ You do not need to run the query (you can rely on the output we got above when w
    2. fl.customerid = c.customerid
    3. c.frequentflieron = a.airlineid 
 
-**Q2 (4pt)**. [Query Debugging] For this problem, you are required to switch to `q2db` database (`psql q2db`) where we have already populated the `customers` table with a relatively large dataset. The `customers` table has the same schema as the one that we had used in Project 1. The following query counts the number of customer pairs whose year of birth differ by a year.
+**Q2 (4pt)**. [Query Debugging] For this problem, please switch to `q2db` database (`psql q2db`) where we have already populated the `customers` table with a relatively large dataset. The `customers` table has the same schema as the one that we had used in Project 1. The following query counts the number of customer pairs whose year of birth differ by a year.
 
 ```
 with custbyear as (
@@ -86,9 +86,12 @@ select count(*)
 from custbyear a, custbyear b
 where b.birthyear - a.birthyear = 1;
 ```
-This query takes around 3.5 seconds to execute in the VM. Could you rewrite the query to make it execute approximately 10X faster.
+This query takes around 3.5 seconds to execute in the VM. Your goal in this part is to rewrite the query to make it execute approximately 10X faster (half a second or less). You new query must be equilvent to the original query as far as what is returned for any dataset. All you are doing is expressing the same query in a different way. [**Note**: In general, query optimizers are supposed to always use the best plan, no matter how the user expresses a query. For a given query, the query optimizer enumerates all possible query plans and chooses the most efficient plan based on what it expects will be the lowest cost. Surprisingly in this case, the query optimizer of Postgres does not do a good job, and if you rewrite the query, you can help the optimizer do a better job!] 
 
 [**Hint**: You might want to use EXPLAIN to view the query plan of the query.]
+
+
+Please answer the question below on the same quiz on Elms as part 1.
 
 The most significant reason why the query above is inefficient is because of which of the following? [choose the best answer]:
 
@@ -98,11 +101,10 @@ The most significant reason why the query above is inefficient is because of whi
 4. The query involves performing arithmetic operations which are expensive.
 
 
-[**Note**: In general, query optimizers does not require users to write the most efficient query. For a given query, the query optimizer enumerates all possible query plans and chooses the most efficient plan based on some heuristic. Surprisingly in this case, the query optimizer of Postgres does not do a good job!] 
 
 #### What to turn in:
 1. Submit your efficient version of the query above in the `p6q2.py` file.
-1. Answer the multiple choice question in ELMS.
+1. Answer the multiple choice question in Elms.
 
 
 **Q3 (4pt)**. [Sort Merge Join] In this problem, you will implement a merge join algorithm for two tables that have already been sorted. The schema of the two tables to be joined and the resulting table are as follows:
