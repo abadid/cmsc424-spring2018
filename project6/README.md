@@ -74,7 +74,7 @@ You do not need to run the query (you can rely on the output we got above when w
    2. fl.customerid = c.customerid
    3. c.frequentflieron = a.airlineid 
 
-**Q2 (5pt)**. [Query Debugging] For this problem, you are required to switch to `q2db` database (`psql q2db`) where we have already populated the `customers` table with a relatively large dataset. The `customers` table has the same schema as the one that we had used in Project 1. The following query counts the number of customer pairs whose year of birth differ by a year.
+**Q2 (4pt)**. [Query Debugging] For this problem, you are required to switch to `q2db` database (`psql q2db`) where we have already populated the `customers` table with a relatively large dataset. The `customers` table has the same schema as the one that we had used in Project 1. The following query counts the number of customer pairs whose year of birth differ by a year.
 
 ```
 with custbyear as (
@@ -103,7 +103,7 @@ The most significant reason why the query above is inefficient is because of whi
 1. Answer the multiple choice question in ELMS.
 
 
-**Q3 (5pt)**. [Sort Merge Join] In this problem, you will implement a merge join algorithm for two tables that have already been sorted. The schema of the two tables to be joined and the resulting table are as follows:
+**Q3 (4pt)**. [Sort Merge Join] In this problem, you will implement a merge join algorithm for two tables that have already been sorted. The schema of the two tables to be joined and the resulting table are as follows:
 ``` 
 Locations (id, state, region)
 Companies (id, locid, name)
