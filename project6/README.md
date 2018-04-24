@@ -7,7 +7,7 @@ Please do a `git pull` to download the directory `project6`.
 ### Getting started
 Start the VM with `vagrant up` in the `project6/` directory.
 
-**Q1 (5pt)**. [Query Plan] If you add the keyword EXPLAIN at the beginning of a query, PostgreSQL will display the execution plan for that query. This plan includes how many tuples are estimated by the query optimizer to be generated after each operation in the query plan. Furthermore, if you add the keyword ANALYZE after EXPLAIN at the beginning of a query, then in addition to getting the execution plan, the query also gets executed and also shows the actual number of tuples that were generated when the query plan was executed.
+**Q1 (7pt)**. [Query Plan] If you add the keyword EXPLAIN at the beginning of a query, PostgreSQL will display the execution plan for that query. This plan includes how many tuples are estimated by the query optimizer to be generated after each operation in the query plan. Furthermore, if you add the keyword ANALYZE after EXPLAIN at the beginning of a query, then in addition to getting the execution plan, the query also gets executed and also shows the actual number of tuples that were generated when the query plan was executed.
 
 Below is a query that was sent to PostgreSQL that prints the customers who have taken a flight more than once from a source or destination which is the hub of his frequentflyer airline. 
 
@@ -56,6 +56,8 @@ QUERY PLAN
 ```
 
 You do not need to run the query (you can rely on the output we got above when we ran the query). The output is at first a little overwhelming to understand. However, Postgres' documentation is actually pretty good at explaining how to read this output: https://www.postgresql.org/docs/9.5/static/using-explain.html. In addition, https://robots.thoughtbot.com/reading-an-explain-analyze-query-plan also overviews how to understand the output of Postgres EXPLAIN ANALYZE. Try to read these overviews and then afterwards, make an attempt to understand the query plan shown above. You don't have to understand every detail, but you should get a general sense of of the main flow of operators and cost estimates --- at least enough to understand the questions below.
+
+(Side note: the hash join used here works a little differently than the hash join we discussed in class.  This is because in the example here, at least one of the tables fits in memory. Therefore, there's no need to create separate partitions of the tables on disk, as we did during phase 1 of the hash join algorithm we discussed in class. Postgres can instead skip straight to phase 2 with a single partition that fits in memory.) 
 
 #### Answer the following questions on ELMS
 
