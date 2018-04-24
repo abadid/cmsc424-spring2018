@@ -6,19 +6,18 @@ public class JoinOperators {
                                                      int lrJoinAttributeIndex, int rrJoinAttributeIndex) {
 
         Relation<TupleType3> resultRelation = new Relation<TupleType3>();
-
+        int pos;
         /*
         
-        // You may use the following code snippet in your code. Remember to follow the same order of attributes
-        // in the ResultRelation as shown below
+        // You may use the following code snippet in your code.
 
-        // tuple from the left relation from row pos
+        // tuple from the left relation at row corresponding to variable: pos
         TupleType1 lrTuple = leftRelation.getTuple(pos);
 
-        // tuple from the right relation from row pos
+        // tuple from the right relation at row corresponding to variable: pos
         TupleType2 rrTuple = rightRelation.getTuple(pos);
 
-        // this is the order that you must follow while inserting attributes into the result relation
+        // this is how you will insert attributes into the result relation
         resultRelation.insert(new TupleType3(lrTuple.getAllAttributes(), rrTuple.getAllAttributes()));
 
         */
