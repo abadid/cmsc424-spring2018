@@ -55,7 +55,7 @@ QUERY PLAN
  Total runtime: 1.030 ms
 ```
 
-You do not need to run the query (you can rely on the output we got above when we ran the query). The output is at first a little overwhelming to understand. However, Postgres' documentation is actually pretty good at explaining how to read this output: https://www.postgresql.org/docs/9.5/static/using-explain.html. In addition, https://robots.thoughtbot.com/reading-an-explain-analyze-query-plan also overviews how to understand the output of Postgres EXPLAIN ANALYZE. Try to read these overviews and then afterwards, make an attempt to understand the query plan shown above. You don't have to understand every detail, but you should get a general sense of of the main flow of operators and cost estimates --- at least enough to understand the questions below.
+You do not need to run the query (you can rely on the output we got above when we ran the query). The output is at first a little overwhelming to understand. However, Postgres' documentation is actually pretty good at explaining how to read this output: https://www.postgresql.org/docs/9.5/static/using-explain.html. In addition, https://robots.thoughtbot.com/reading-an-explain-analyze-query-plan also overviews how to understand the output of Postgres EXPLAIN ANALYZE. Try to read these overviews and then afterwards, make an attempt to understand the query plan shown above. You don't have to understand every detail, but you should get a general sense of the main flow of operators and cost estimates --- at least enough to understand the questions below.
 
 (Side note: the hash join used here works a little differently than the hash join we discussed in class.  This is because in the example here, at least one of the tables fits in memory. Therefore, there's no need to create separate partitions of the tables on disk, as we did during phase 1 of the hash join algorithm we discussed in class. Postgres can instead skip straight to phase 2 with a single partition that fits in memory.) 
 
@@ -113,7 +113,9 @@ Locations (id, state, region)
 Companies (id, locid, name)
 ResultRelation (id, state, region, id, locid, name)
 ```
-The two tables (`Locations` and `Companies`) will be joined using the `id` attribute from the `Locations` table (`id` is the primary key for that table) and  the `locid` attribute from the `Companies` table (which is a foreign key into the Locations table). You can assume that both input tables will be sorted on these join key attributes. Now let us see an example below:
+The two tables (`Locations` and `Companies`) will be joined using the `id` attribute from the `Locations` table (`id` is the primary key for that table) and  the `locid` attribute from the `Companies` table (which is a foreign key into the Locations table). You can assume that both input tables will be sorted on these join key attributes. 
+
+An example:
 
 
 `Locations`
@@ -170,7 +172,7 @@ java queryproc/QueryProcessing
 
 #### Coding Restrictions:
 1. You are only allowed to **add/modify** your **own** code within the `MergeJoinOnIntegerAttributes` method in **JoinOperators.java**. For the remaining java files, please do not modify any existing code in any of those files.
-1. Please remember to maintain the same order of attributes as shown in the example above when inserting a tuple in the table `ResultRelation`. More instructions provided in `JoinOperators.java`.
+1. Please remember to maintain the same order of attributes as shown in the example above when inserting a tuple in the table `ResultRelation`. More instructions are provided in `JoinOperators.java`.
 
 #### What to turn in:
 Please submit `JoinOperators.java`.
