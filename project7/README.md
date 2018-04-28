@@ -95,6 +95,8 @@ The file also contains some examples of operations on these RDDs.
 Your tasks are to fill out the 8 functions that are defined in the `task.py` file (starting with `task`). The amount of code that you 
 write would typically be small (several would be one-liners). 
 
+To run the code written in tasks.py you can run `$SPARKHOME/bin/spark-submit python/assignment.py`
+
 - **Task 1 (4pt)**: This takes as input the playRDD and for each line, finds the first word in the line, and also counts the number of words. It should then filter the RDD by only selecting the lines where the count of words in the line is > 10. The output will be an RDD where the key is the first word in the line, and the value is a 2-tuple, the first being the line and the second being the number of words (which must be >10). Simplest way to do it is probably a `map` followed by a `filter`.
 
 - **Task 2 (4pt)**: Write just the flatmap function (`task2_flatmap`) that takes in a parsed JSON document (from `prize.json`) and returns the surnames of the Nobel Laureates. In other words, the following command should create an RDD with all the surnames. We will use `json.loads` to parse the JSONs (this is already done). Make sure to look at what it returns so you know how to access the information inside the parsed JSONs (these are basically nested dictionaries). (https://docs.python.org/2/library/json.html)
@@ -123,8 +125,7 @@ is the list of all URLs fetched from that host on the second day. Use `filter` t
 ### Correct Answers
 You can use spark-submit to run the `assignment.py` file and see the output of all tasks, but it would be easier to develop with pyspark (by copying the commands over). We will also shortly post iPython instructions.
 
-**correctanswers/correctX** has the results of taskX
-**results.txt** shows the results of running assignment.py on our code using: `$SPARKHOME/bin/spark-submit assignment.py`
+**correctanswers/correctX** has the results of taskX`
 
 ### Submission
 
