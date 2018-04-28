@@ -126,15 +126,13 @@ is the list of all URLs fetched from that host on the second day. Use `filter` t
     * Partition the left and right relations into n and m partitions, respectively.
     * For each of the n partitions of the left relation, assign the tuples in the partition to m groups. Do the same for the right relation, reversing the role of n and m.
     * For each of the n * m groups, join the tuples in that group using a join algorithm of your choosing (nested loop join would be the easiest).
-    * Aggregate the joined tuples in each group together into a single relation.
-
-- Some Spark primitives that may be helpful for your implementation are listed below. You are not required to use any of these primitives, and you are allowed to use any Spark primitives (the ones listed in the documentation in the assigned reading for April 30) that are not listed here except join. (That join probably won’t help you anyway, since it is only an equi-join).
+    * Aggregate the joined tuples in each group together into a single relation.  
+Some Spark primitives that may be helpful for your implementation are listed below. You are not required to use any of these primitives, and you are allowed to use any Spark primitives (the ones listed in the documentation in the assigned reading for April 30) that are not listed here except join. (That join probably won’t help you anyway, since it is only an equi-join).
     * zipWithIndex(): Assigns each tuple in the relation a unique index starting at zero.
     * flatMap(f): Returns a new relation that is the result of applying f to each tuple then flattening the resulting lists.
     * groupByKey(): Groups the values for each key in the RDD into a single sequence.
-    * cogroup(): Combines two relations by key.
-
-- After you’ve implemented fragment-and-replicate join, you will put it to use by implementing a SQL query using Spark primitives. Since the fragment-and-replicate join algorithm is particularly useful for inequality-based joins, we will revisit Query 10 from Project 1, which you wrote earlier this semester using the flights database. The reference solution for this query can be found in repo under project1.  Write your fragment and replicate join in either fragAndReplicate.py or FragmentAndReplicateJoin.java.
+    * cogroup(): Combines two relations by key.  
+After you’ve implemented fragment-and-replicate join, you will put it to use by implementing a SQL query using Spark primitives. Since the fragment-and-replicate join algorithm is particularly useful for inequality-based joins, we will revisit Query 10 from Project 1, which you wrote earlier this semester using the flights database. The reference solution for this query can be found in repo under project1.  Write your fragment and replicate join in either fragAndReplicate.py or FragmentAndReplicateJoin.java.
 
 
 
