@@ -1,53 +1,40 @@
-# Project 7
+# Project 7: Apache Spark
 
 Project 7 focuses on using Apache Spark for doing large-scale data analysis tasks. For this assignment, we will use relatively small datasets and  we won't run anything in distributed mode; however Spark can be easily used to run the same programs on much larger datasets.
 
 ## Getting Started with Spark
 
-This guide is basically a summary of the excellent tutorials that can be found at the [Spark website](http://spark.apache.org).
+This section is basically a summary of the excellent tutorials that can be found at the [Spark website](http://spark.apache.org).
 
-[Apache Spark](https://spark.apache.org) is a relatively new cluster computing framework, developed originally at UC Berkeley. It significantly generalizes
-the 2-stage Map-Reduce paradigm (originally proposed by Google and popularized by open-source Hadoop system); Spark is instead based on the abstraction of **resilient distributed datasets (RDDs)**. An RDD is basically a distributed collection 
-of items, that can be created in a variety of ways. Spark provides a set of operations to transform one or more RDDs into an output RDD, and analysis tasks are written as
-chains of these operations.
+[Apache Spark](https://spark.apache.org) is a relatively new cluster computing framework, developed originally at UC Berkeley. It significantly generalizes the two-stage Map-Reduce paradigm originally proposed by Google and popularized by open-source Hadoop system. Spark is fundamentally based on the abstraction of **resilient distributed datasets (RDDs)**. An RDD is basically a distributed collection of items that can be created in a variety of ways. Spark provides a set of operations to transform one or more RDDs into an output RDD, and analysis tasks are written as chains of these operations.
 
 Spark can be used with the Hadoop ecosystem, including the HDFS file system and the YARN resource manager. 
 
 ### Installing Spark
 
-As before, we have provided a VagrantFile in the `project5` directory. Since the Spark distribution is large, we ask you to download that directly from the Spark website.
+We have provided a Vagrantfile in the `project7` directory. Navigate to the `project 5` directory and run `vagrant up` to start the virtual machine, which should have everything you need except for Spark to work on this project. Since the Spark distribution is large, we ask you to download it directly from the Spark website.
 
 1. Download the Spark package at http://spark.apache.org/downloads.html. We will use **Version 2.0.1, Pre-built for Hadoop 2.7 or later**.
-2. Move the downloaded file to the `project5/` directory (so it is available in '/vagrant' on the virtual machine), and uncompress it using: 
-`tar zxvf spark-2.0.1-bin-hadoop2.7.tgz`
-3. This will create a new directory: `spark-2.0.1-bin-hadoop2.7`. 
-4. Set the SPARKHOME variable: `export SPARKHOME=/vagrant/spark-2.0.1-bin-hadoop2.7`
+2. Move the downloaded file to the `project7/` directory (so it is available in `/vagrant` on the virtual machine), and uncompress it using: `tar zxvf spark-2.0.1-bin-hadoop2.7.tgz`
+3. This will create a new directory: `spark-2.0.1-bin-hadoop2.7` 
+4. Set the SPARKHOME environment variable: `export SPARKHOME=/vagrant/spark-2.0.1-bin-hadoop2.7`
+5. Test that Spark has been successfully installed by running: `$SPARKHOME/bin/pyspark`. This should run the Spark Python shell, which is a REPL which you can use for prototyping your Python code (there is not a corresponding Spark shell for Java).
 
-You will also need to make sure java is installed. This tutorial is pretty comprehensive on installing spark (https://medium.com/@josemarcialportilla/installing-scala-and-spark-on-ubuntu-5665ee4b62b1).
+### Writing Spark Code
 
-We are ready to use Spark. 
+Spark primarily supports three languages: Scala (Spark is written in Scala), Java, and Python. For this project, you have the option of writing your code in either Python or Java. Feel free to work with whichever language you are most comfortable with. You are highly encouraged to read the [Spark Quick Start Guide](http://spark.apache.org/docs/latest/quick-start.html), which has well-written tutorials for working with both languages.
 
-### Spark and Python
+#### Spark and Python
 
-Spark primarily supports three languages: Scala (Spark is written in Scala), Java, and Python. We will use Python here -- you can follow the instructions at the tutorial
-and quick start (http://spark.apache.org/docs/latest/quick-start.html) for other languages. The Java equivalent code can be very verbose and hard to follow. The below
-shows a way to use the Python interface through the standard Python shell.
-For this project you have the option of working with python or java. Java instructions to come.
+All files for implementing this project in Python are located in the `python` directory. You will write your code for completing each task in `tasks.py`, which contains a function for each task. Your implementation of fragment-and-replicate join for Task 8 should go in `fragAndReplicate.py`. We have also provided a file called `assignment.py` that will call your implementation of each task and print out the results.
 
-### PySpark Shell
+You can prototype your Python code using the Spark Python shell, which you can start by running `$SPARKHOME/bin/pyspark`. After you've written your code in `tasks.py`, you can see the results of running `assignment.py` by submitting it to the Spark cluster, which is done by running `$SPARKHOME/bin/spark-submit assignment.py`.
 
-You can also use the PySpark Shell directly.
+#### Spark and Java
 
-1. `$SPARKHOME/bin/pyspark`: This will start a Python shell (it will also output a bunch of stuff about what Spark is doing). The relevant variables are initialized in this python
-shell, but otherwise it is just a standard Python shell.
+All files for implementing this project in Java are located in the `java` directory. You will write your code for completing each task in `Tasks.java`, which contains a function for each task. Your implementation of fragment-and-replicate join for Task 8 should go in `FragmentAndReplicate.java`. We have also provided a file called `Assignment.java` that will call your implementation of each task and print out the results.
 
-2. `>>> textFile = sc.textFile("README.md")`: This creates a new RDD, called `textFile`, by reading data from a local file. The `sc.textFile` commands create an RDD
-containing one entry per line in the file.
-
-3. You can see some information about the RDD by doing `textFile.count()` or `textFile.first()`, or `textFile.take(5)` (which prints an array containing 5 items from the RDD).
-
-4. We recommend you follow the rest of the commands in the quick start guide (http://spark.apache.org/docs/latest/quick-start.html). Here we will simply do the Word Count
-application.
+To make it easier to compile your Java code with all of the Spark dependencies, we use a build system called [Maven](https://maven.apache.org/what-is-maven.html). The Maven directory structure has already been set up for you, so all you need to do to compile you code is run `mvn package` from the `java` directory. After you've written your code in `Tasks.java`, you can see the results of running `Assignment.java` by submitting it to the Spark cluster, which is done by running `$SPARKHOME/bin/spark-submit --class "Assignment" target/project7-1.0.jar`.
 
 #### Word Count Application
 
