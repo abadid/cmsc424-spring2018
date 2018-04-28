@@ -5,12 +5,20 @@ import re
 sc = SparkContext("local", "Simple App")
 sc.setLogLevel("OFF")
 
+project_path = "/vagrant"
+python_path = project_path + "/python"
+
+sc.addPyFile(python_path + '/tasks.py')
+sc.addPyFile(python_path + '/fragAndReplicate.py')
+
+datafiles_path = project_path + "/datafiles"
+
 ## Load data into RDDs
-playRDD = sc.textFile("../datafiles/play.txt")
-logsRDD = sc.textFile("../datafiles/NASA_logs_sample.txt")
-amazonInputRDD = sc.textFile("../datafiles/amazon-ratings.txt")
-nobelRDD = sc.textFile("../datafiles/prize.json")
-flewonRDD = sc.textFile("../datafiles/flewon.csv")
+playRDD = sc.textFile(datafiles_path + "/play.txt")
+logsRDD = sc.textFile(datafiles_path + "/NASA_logs_sample.txt")
+amazonInputRDD = sc.textFile(datafiles_path + "/amazon-ratings.txt")
+nobelRDD = sc.textFile(datafiles_path + "/prize.json")
+flewonRDD = sc.textFile(datafiles_path + "/flewon.csv")
 
 ## The following converts the flewonRDD into 3-tuples
 flewonRDD = flewonRDD.map(lambda x: tuple(x.split(",")))

@@ -1,5 +1,6 @@
 import json
 import re
+from fragAndReplicate import fragment_and_replicate
 from pyspark import SparkContext
 
 def task1(playRDD):
@@ -24,4 +25,5 @@ def task7(nobelRDD):
     return nobelRDD
 
 def task8(flewon, n, m):
+    fragment_and_replicate()
     return flewon
