@@ -23,6 +23,8 @@ As before, we have provided a VagrantFile in the `project5` directory. Since the
 3. This will create a new directory: `spark-2.0.1-bin-hadoop2.7`. 
 4. Set the SPARKHOME variable: `export SPARKHOME=/vagrant/spark-2.0.1-bin-hadoop2.7`
 
+You will also need to make sure java is installed. This tutorial is pretty comprehensive on installing spark (https://medium.com/@josemarcialportilla/installing-scala-and-spark-on-ubuntu-5665ee4b62b1).
+
 We are ready to use Spark. 
 
 ### Spark and Python
@@ -30,6 +32,7 @@ We are ready to use Spark.
 Spark primarily supports three languages: Scala (Spark is written in Scala), Java, and Python. We will use Python here -- you can follow the instructions at the tutorial
 and quick start (http://spark.apache.org/docs/latest/quick-start.html) for other languages. The Java equivalent code can be very verbose and hard to follow. The below
 shows a way to use the Python interface through the standard Python shell.
+For this project you have the option of working with python or java. Java instructions to come.
 
 ### PySpark Shell
 
@@ -127,11 +130,13 @@ is the list of all URLs fetched from that host on the second day. Use `filter` t
     * For each of the n partitions of the left relation, assign the tuples in the partition to m groups. Do the same for the right relation, reversing the role of n and m.
     * For each of the n * m groups, join the tuples in that group using a join algorithm of your choosing (nested loop join would be the easiest).
     * Aggregate the joined tuples in each group together into a single relation.  
+
 Some Spark primitives that may be helpful for your implementation are listed below. You are not required to use any of these primitives, and you are allowed to use any Spark primitives (the ones listed in the documentation in the assigned reading for April 30) that are not listed here except join. (That join probably won’t help you anyway, since it is only an equi-join).
     * zipWithIndex(): Assigns each tuple in the relation a unique index starting at zero.
     * flatMap(f): Returns a new relation that is the result of applying f to each tuple then flattening the resulting lists.
     * groupByKey(): Groups the values for each key in the RDD into a single sequence.
     * cogroup(): Combines two relations by key.  
+
 After you’ve implemented fragment-and-replicate join, you will put it to use by implementing a SQL query using Spark primitives. Since the fragment-and-replicate join algorithm is particularly useful for inequality-based joins, we will revisit Query 10 from Project 1, which you wrote earlier this semester using the flights database. The reference solution for this query can be found in repo under project1.  Write your fragment and replicate join in either fragAndReplicate.py or FragmentAndReplicateJoin.java.
 
 
