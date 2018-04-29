@@ -20,6 +20,12 @@ We have provided a Vagrantfile in the `project7` directory. Navigate to the `pro
 4. Set the SPARKHOME environment variable: `export SPARKHOME=/vagrant/spark-2.3.0-bin-hadoop2.7`
 5. Test that Spark has been successfully installed by running: `$SPARKHOME/bin/pyspark`. This should run the Spark Python shell, which is a REPL which you can use for prototyping your Python code (there is not a corresponding Spark shell for Java).
 
+**Important:** If you choose to complete this project using Java, make sure to set your `JAVA_HOME` environment variable by running the following commands. This only needs to be done once.
+```
+echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" >> ~/.bashrc
+source ~/.bashrc
+```
+
 ### Writing Spark Code
 
 Spark primarily supports three languages: Scala (Spark is written in Scala), Java, and Python. For this project, you have the option of writing your code in either Python or Java. Feel free to work with whichever language you are most comfortable with, but we have found that Spark Python is somewhat easier to use and faster to get started. You are highly encouraged to read the [Spark Quick Start Guide](http://spark.apache.org/docs/latest/quick-start.html), which has well-written tutorials for working with both languages.
