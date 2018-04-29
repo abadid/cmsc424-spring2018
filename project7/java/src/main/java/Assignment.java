@@ -10,6 +10,7 @@ public class Assignment {
     public static void main(String[] args) {
         SparkSession spark = SparkSession.builder().appName("Project 7").getOrCreate();
         JavaSparkContext jsc = new JavaSparkContext(spark.sparkContext());
+        jsc.setLogLevel("OFF");
 
         JavaRDD<String> playRDD = jsc.textFile("/vagrant/datafiles/play.txt");
         JavaRDD<String> prizesRDD = jsc.textFile("/vagrant/datafiles/prize.json");
