@@ -100,9 +100,9 @@ the degree of
 each user node (i.e., number of products each user has rated), and then use a reduceByKey (or aggregateByKey) to find the number of nodes with a given degree. The output 
 should be a PairRDD where the key is the degree, and the value is the number of nodes in the graph with that degree.
 
-- **Task 6 (4pt)**: On the `logsRDD`, for two given days (provided as input analogous to Task 4 above), use a 'cogroup' to create the following RDD: the key of 
-the RDD will be a host, and the value will be a 2-tuple, where the first element is a list of all URLs fetched from that host on the first day, and the second element
-is the list of all URLs fetched from that host on the second day. Use `filter` to first create two RDDs from the input `logsRDD`.
+- **Task 6 (4pt)**: On the `logsRDD`, for two given hosts (provided as input analogous to Task 4 above), use a 'cogroup' to create the following RDD: the key of 
+the RDD will be a date, and the value will be a 2-tuple, where the first element is a list of all URLs fetched from the first host on that day, and the second element
+is the list of all URLs fetched from the second host on that day. Use `filter` to first create two RDDs from the input `logsRDD`.
 
 - **Task 7 (8pt)**: [Bigrams](http://en.wikipedia.org/wiki/Bigram) are sequences of two consecutive words. For example, the previous sentence contains the following bigrams: "Bigrams are", "are simply", "simply sequences", "sequences of", etc. Your task is to write a bigram counting application for counting the bigrams in the `motivation`s of the Nobel Prizes (i.e., the reason they were given the Nobel Prize). The return value should be a PairRDD where the key is a bigram, and the value is its count, i.e., in how many different `motivations` did it appear. Don't assume 'motivation' is always present.
 
