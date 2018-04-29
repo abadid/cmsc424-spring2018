@@ -23,7 +23,7 @@ As before, we have provided a VagrantFile in the `project5` directory. Since the
 3. This will create a new directory: `spark-2.0.1-bin-hadoop2.7`. 
 4. Set the SPARKHOME variable: `export SPARKHOME=/vagrant/spark-2.0.1-bin-hadoop2.7`
 
-You will also need to make sure java is installed. This tutorial is pretty comprehensive on installing spark (https://medium.com/@josemarcialportilla/installing-scala-and-spark-on-ubuntu-5665ee4b62b1).
+You will also need to make sure java is installed.
 
 We are ready to use Spark. 
 
@@ -100,7 +100,7 @@ write would typically be small (several would be one-liners).
 
 To run the code written in tasks.py you can run `$SPARKHOME/bin/spark-submit python/assignment.py`
 
-- **Task 1 (4pt)**: This takes as input the playRDD and for each line, finds the first word in the line, and also counts the number of words. It should then filter the RDD by only selecting the lines where the count of words in the line is > 10. The output will be an RDD where the key is the first word in the line, and the value is a 2-tuple, the first being the line and the second being the number of words (which must be >10). Simplest way to do it is probably a `map` followed by a `filter`.
+- **Task 1 (4pt)**: This takes as input the playRDD and for each line counts the number of words. It should then filter the RDD by only selecting the lines That are speaking lines. A speaking line is any line in which a character is speaking and it specifically excludes three types of lines: lines with the word `ACT` or `SCENE` in it, lines with `*` in it and lines with `/` in it.  The output will be an RDD where the key is the line, and the value is the number of words in the line. Simplest way to do it is probably a `map` followed by a `filter`.
 
 - **Task 2 (4pt)**: Write just the flatmap function (`task2_flatmap`) that takes in a parsed JSON document (from `prize.json`) and returns the surnames of the Nobel Laureates. In other words, the following command should create an RDD with all the surnames. We will use `json.loads` to parse the JSONs (this is already done). Make sure to look at what it returns so you know how to access the information inside the parsed JSONs (these are basically nested dictionaries). (https://docs.python.org/2/library/json.html)
 ```
