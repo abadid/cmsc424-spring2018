@@ -92,12 +92,12 @@ Note some of the tasks ask you to return a "pair RDD". A pair RDD is an RDD with
 
 - **Task 1 (2pt)**: This takes as input the playRDD and for each line counts the number of words. It should then filter the RDD by only selecting the lines That are speaking lines. A speaking line is any line in which a character is speaking and it specifically excludes three types of lines: lines with the word `ACT` or `SCENE` in it, lines with `*` in it and lines with `/` in it.  The output will be an RDD where the key is the line, and the value is the number of words in the line. Simplest way to do it is probably a `map` followed by a `filter`.
 
-- **Task 2 (2pt)**: Write just the flatmap function (`task2_flatmap`) that takes in a parsed JSON document (from `prize.json`) and returns the surnames of the Nobel Laureates. In other words, the command shown below should create an RDD with all the surnames. We will use `json.loads` to parse the JSONs (this is already done). Make sure to look at what it returns so you know how to access the information inside the parsed JSONs (these are basically nested dictionaries). (https://docs.python.org/2/library/json.html)
+- **Task 2 (4pt)**: Write just the flatmap function (`task2_flatmap`) that takes in a parsed JSON document (from `prize.json`) and returns the word counts of all of the motivations. In other words, the command shown below should create an RDD with all the word counts of the motivations. We will use `json.loads` to parse the JSONs (this is already done). Make sure to look at what it returns so you know how to access the information inside the parsed JSONs (these are basically nested dictionaries). (https://docs.python.org/2/library/json.html)
 ```
      	task2_result = nobelRDD.map(json.loads).flatMap(task2_flatmap)
 ```
 
-- **Task 3 (2pt)**: Write a sequence of transformations starting from nobelRDD that returns an PairRDD where the key is the `category` (`physics` etc), and the value is a list of all Nobel Laureates for that category (just their surnames). Make sure the final values are `list`s, and not some other class objects (if you do a `take(5)`, it should print out the first five lists, use `collect()` to see the full results).
+- **Task 3 (4pt)**: Write a sequence of transformations starting from nobelRDD that returns an PairRDD where the key is the `category` (`physics` etc), and the value is a list of all the word counts of the motivations (make this distinct). Make sure the final values are `list`s, and not some other class objects (if you do a `take(5)`, it should print out the first five lists, use `collect()` to see the full results).
 
 - **Task 4 (2pt)**: This function operates on the `logsRDD`. It takes as input a list of *web requests* and returns an RDD with "hosts" that fulfilled all of those web requests
 The web requests will be provided as strings, in the same format that they appear in the logs (e.g., '/facilites/vab.html' and '/images/vab-small.gif').
@@ -118,8 +118,8 @@ is the list of all URLs fetched from the second host on that day. Use `filter` t
 - **Task 8 (24pt)**: Your goal for task 8 is to implement the fragment and replicate join from Section 18.5.2.2 of the textbook using SparkPrimitives (**12 points**) and then use it to implement a full SQL query (**12 points**). Recall from lecture that fragment and replicate join is a way of joining two relations in a parallel database system by partitioning the tuples of each relation across multiple processors, joining the tuples at each processor, then aggregating the results from all the processors. Since you are running Spark on a single machine, all of the processors will be located on the same machine (your machine). But as long as you create the partitions correctly (see below), Spark could easily parallelize your code across multiple machines if you had them --- each partition can be processed by a seperate machine. Your implementation of fragment-and-replicate join should work roughly as follows:
 
     * Partition the left and right relations into n and m partitions, respectively.
-    * For each of the n partitions of the left relation, assign the tuples in the partition to m groups. Do the same for the right relation, reversing the role of n and m.
-    * For each of the n * m groups, join the tuples in that group using a join algorithm of your choosing (nested loop join would be the easiest). You can assume that all the tuples within each group will easily fit in memory.
+    * For each of the n partitions of the left relation, replicate the tuples in the partition m times, corresponding to one row in Figure 18.3 of your textbook. Name each replica (e.g., via giving each tuple in that replica the same key name) according to the cell from Figure 18.3 that it belongs. Do the same for the right relation, reversing the role of n and m. 
+    * For "cell" you created above, you will have a partition of tuples from each relation. Join those partitiongs using a join algorithm of your choosing (nested loop join would be the easiest). You can assume that all the tuples within each partition will easily fit in memory.
     * Aggregate the joined tuples in each group together into a single relation.  
 
 You can use any of the Spark primitives listed in the documentation in the assigned reading for April 30 except join to complete this task. (That join primitive won’t help you anyway --- since it is only an equi-join). In addition, you can use the following primitive which may be helpful in the initial partitioing step:
@@ -151,7 +151,13 @@ WITH flight_customers_per_day AS (
      WHERE avg_customer = (SELECT max(avg_customer) FROM flight_avg_customers))
      ORDER BY rank, flightid;
 ```
-You goal is to implement the above query using the Spark primitives and the fragment-and-replicate-join you wrote and placed in either fragAndReplicate.py or FragmentAndReplicateJoin.java.
+You goal is to implement the above query using the Spark primitives and the fragment-and-replicate-join you wrote and placed in either fragAndReplicate.py or FragmentAndReplicateJoin.java. If you want to make modifications to the above query, that's fine. The only restriction is that: (1) Your query must return the same results and (2) the 
+
+```sql
+FROM flight_avg_customers t1, flight_avg_customers t2 
+WHERE t2.avg_customer > t1.avg_customer
+```
+part of the above query must remain and be implemented using your fragement and replicate join.
 
 ### Correct Answers
 You can use spark-submit to run the `assignment.py` file and see the output of all tasks, but it would be easier to develop with pyspark (by copying the commands over). We will also shortly post iPython instructions.
