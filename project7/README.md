@@ -65,6 +65,8 @@ Instead of using a shell, you can also write your code as a Python file, and sub
 
 ### Wordcount in Java
 
+The corresponding Java code can be found in the file `examples/Wordcount.java`. The semantics of the Java version are the exact same as the Python version, but the syntax is much different.
+
 ## Assignment Details
 
 We have provided a Python file: `assignment.py`, that initializes the folllowing RDDs:
