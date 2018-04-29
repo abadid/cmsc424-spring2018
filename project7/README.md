@@ -151,7 +151,7 @@ You goal is to implement the above query using the Spark primitives and the frag
 FROM flight_avg_customers t1, flight_avg_customers t2 
 WHERE t2.avg_customer > t1.avg_customer
 ```
-must stay in place and be implemented using your fragement and replicate join.
+part of the above query must remain and be implemented using your fragement and replicate join.
 
 ### Correct Answers
 You can use spark-submit to run the `assignment.py` file and see the output of all tasks, but it would be easier to develop with pyspark (by copying the commands over). We will also shortly post iPython instructions.
