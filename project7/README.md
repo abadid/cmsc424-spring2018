@@ -69,20 +69,18 @@ The corresponding Java code can be found in the file `examples/src/main/java/Wor
 
 ## Assignment Details
 
-We have provided a Python file: `assignment.py`, that initializes the folllowing RDDs:
+We have provided a Python file `assignment.py` and a Java file `Assignment.java` that initializes the folllowing RDDs:
 * An RDD consisting of lines from a Shakespeare play (`play.txt`)
 * An RDD consisting of lines from a log file (`NASA_logs_sample.txt`)
 * An RDD consisting of 2-tuples indicating user-product ratings from Amazon Dataset (`amazon-ratings.txt`)
 * An RDD consisting of 3-tuples representing the flewon table from `project1` (`flewon.csv`)
 * An RDD consisting of JSON documents pertaining to all the Noble Laureates over last few years (`prize.json`)
 
-The file also contains some examples of operations on these RDDs. 
+Your tasks are to fill out the eight functions that are defined in the `tasks.py` or `Tasks.java` file. The main point of this assignment is Task 8, where you'll be implementing parallel database query operators using Spark -- Task 8 should take the majority of your time for this assignment. The amount of code that you write for the other tasks should typically be small (several can be implemented in one line). The goal of the other tasks is to introduce you to using different Spark primitives, a subset of which will be helpful for Task 8.
 
-Your tasks are to fill out the 8 functions that are defined in the `task.py` file (starting with `task`). The main point of this assignment is Task 8, where you'll be implementing parallel database query opertors using Spark --- Task 8 should take the  majority of your time for this assignment. The amount of code that you write for the other tasks should typically be small (several would be one-liners). The goal of the other tasks is to introduce you to using different Spark primitives, a subset of which will be helpful for Task 8. 
+See the instructions in the section "Writing Spark Code" for compiling and running the code you write for these tasks.
 
-To run the code written in tasks.py you can run `$SPARKHOME/bin/spark-submit python/assignment.py`
-
-Note some of the tasks ask you to return a "pair RDD". A pair RDD is an RDD with the form (K, V) where K is a key and V is a value. Pair RDD's have additional functions available to them such as reduceByKey. For more information on pair RDD's see [here](https://www.safaribooksonline.com/library/view/learning-spark/9781449359034/ch04.html).
+Note some of the tasks ask you to return a "PairRDD". A Pair RDD is an RDD with the form (K, V) where K is a key and V is a value. Pair RDD's have additional functions available to them such as `reduceByKey`. For more information on Pair RDD's see [here](https://www.safaribooksonline.com/library/view/learning-spark/9781449359034/ch04.html).
 
 - **Task 1 (2pt)**: This takes as input the playRDD and for each line counts the number of words. It should then filter the RDD by only selecting the lines That are speaking lines. A speaking line is any line in which a character is speaking and it specifically excludes three types of lines: lines with the word `ACT` or `SCENE` in it, lines with `*` in it and lines with `/` in it.  The output will be an RDD where the key is the line, and the value is the number of words in the line. Simplest way to do it is probably a `map` followed by a `filter`.
 
@@ -167,3 +165,4 @@ Submit the `tasks.py/Tasks.java` and `fragAndReplicate.py/FragmentAndReplicateJo
 The following references may be helpful as you are implementing this project.
 * [Hadoop Map-Reduce Tutorial](http://hadoop.apache.org/docs/r1.2.1/mapred_tutorial.html#Source+Code)
 * [Spark Programming Guide](https://spark.apache.org/docs/latest/programming-guide.html)
+* [Learning Spark](https://www.safaribooksonline.com/library/view/learning-spark/9781449359034/)
