@@ -78,8 +78,7 @@ We have provided a Python file: `assignment.py`, that initializes the folllowing
 
 The file also contains some examples of operations on these RDDs. 
 
-Your tasks are to fill out the 8 functions that are defined in the `task.py` file (starting with `task`). The amount of code that you 
-write would typically be small (several would be one-liners). 
+Your tasks are to fill out the 8 functions that are defined in the `task.py` file (starting with `task`). The main point of this assignment is task 8, where you'll be implementing parallel database query opertors using Spark --- task 8 should take the  majority of your time for this assignment. The amount of code that you write for the other tasks should typically be small (several would be one-liners). The goal of the other tasks is to introduce you to using different Spark primitives, a subset of which will be helpful for task 8. 
 
 To run the code written in tasks.py you can run `$SPARKHOME/bin/spark-submit python/assignment.py`
 
