@@ -20,7 +20,7 @@ We have provided a Vagrantfile in the `project7` directory. Navigate to the `pro
 4. Set the SPARKHOME environment variable: `export SPARKHOME=/vagrant/spark-2.3.0-bin-hadoop2.7`
 5. Test that Spark has been successfully installed by running: `$SPARKHOME/bin/pyspark`. This should run the Spark Python shell, which is a REPL which you can use for prototyping your Python code (there is not a corresponding Spark shell for Java).
 
-**Important:** If you choose to complete this project using Java, make sure to set your `JAVA_HOME` environment variable by running the following commands. This only needs to be done once.
+**Important:** If you choose to complete this project using Java, make sure to set your `JAVA_HOME` environment variable in the virtual machine by running the following commands. This only needs to be done once.
 ```
 echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" >> ~/.bashrc
 source ~/.bashrc
@@ -71,7 +71,7 @@ Instead of using a shell, you can also write your code as a Python file, and sub
 
 ### Wordcount in Java
 
-The corresponding Java code can be found in the file `examples/Wordcount.java`. The semantics of the Java version are the exact same as the Python version, but the syntax is much different.
+The corresponding Java code can be found in the file `examples/src/main/java/Wordcount.java`. The semantics of the Java version are the exact same as the Python version, but the syntax is much different. To compile this example, navigate to the `examples` directory and run `mvn package`, which generates a `.jar` file called `wordcount-1.0.jar`. You can then run the program by submitting this jar file to the Spark cluster: `$SPARKHOME/bin/spark-submit --class "Wordcount" target/wordcount-1.0.jar`.
 
 ## Assignment Details
 

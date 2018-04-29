@@ -1,8 +1,8 @@
 <project>
     <groupId>edu.berkeley</groupId>
-    <artifactId>project7</artifactId>
+    <artifactId>wordcount</artifactId>
     <modelVersion>4.0.0</modelVersion>
-    <name>Project 7</name>
+    <name>Wordcount Example</name>
     <packaging>jar</packaging>
     <version>1.0</version>
     <dependencies>
@@ -15,11 +15,6 @@
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-core_2.11</artifactId>
             <version>2.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20180130</version>
         </dependency>
     </dependencies>
     <properties>

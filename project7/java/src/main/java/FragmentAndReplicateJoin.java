@@ -1,5 +1,6 @@
 import org.apache.spark.api.java.*;
-import scala.*;
+import scala.Tuple2;
+import scala.Tuple4;
 
 public class FragmentAndReplicateJoin {
 

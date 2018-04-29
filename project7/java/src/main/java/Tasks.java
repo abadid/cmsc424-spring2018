@@ -1,5 +1,7 @@
+import java.util.*;
+
 import org.apache.spark.api.java.*;
-import scala.*;
+import scala.Tuple2;
 
 public class Tasks {
 
@@ -31,7 +33,7 @@ public class Tasks {
         return null;
     }
 
-    public static JavaRDD<Tuple2<String, Long>> task8(JavaRDD<FlewonTuple>, int n, int m) {
+    public static JavaRDD<Tuple2<String, Long>> task8(JavaRDD<FlewonTuple> flewonRDD, int n, int m) {
         return null;
     }
 
