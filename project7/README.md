@@ -78,13 +78,13 @@ We have provided a Python file: `assignment.py`, that initializes the folllowing
 
 The file also contains some examples of operations on these RDDs. 
 
-Your tasks are to fill out the 8 functions that are defined in the `task.py` file (starting with `task`). The main point of this assignment is task 8, where you'll be implementing parallel database query opertors using Spark --- task 8 should take the  majority of your time for this assignment. The amount of code that you write for the other tasks should typically be small (several would be one-liners). The goal of the other tasks is to introduce you to using different Spark primitives, a subset of which will be helpful for task 8. 
+Your tasks are to fill out the 8 functions that are defined in the `task.py` file (starting with `task`). The main point of this assignment is Task 8, where you'll be implementing parallel database query opertors using Spark --- Task 8 should take the  majority of your time for this assignment. The amount of code that you write for the other tasks should typically be small (several would be one-liners). The goal of the other tasks is to introduce you to using different Spark primitives, a subset of which will be helpful for Task 8. 
 
 To run the code written in tasks.py you can run `$SPARKHOME/bin/spark-submit python/assignment.py`
 
-Note some of the tasks ask you to return a pair RDD. A pair RDD is an RDD with the form (K, V) where K is a key and V is a value. Pair RDD's have additional functions available to them such as reduceByKey. For more information on pair RDD's see [here](https://www.safaribooksonline.com/library/view/learning-spark/9781449359034/ch04.html)
+Note some of the tasks ask you to return a "pair RDD". A pair RDD is an RDD with the form (K, V) where K is a key and V is a value. Pair RDD's have additional functions available to them such as reduceByKey. For more information on pair RDD's see [here](https://www.safaribooksonline.com/library/view/learning-spark/9781449359034/ch04.html).
 
-- **Task 1 (4pt)**: This takes as input the playRDD and for each line counts the number of words. It should then filter the RDD by only selecting the lines That are speaking lines. A speaking line is any line in which a character is speaking and it specifically excludes three types of lines: lines with the word `ACT` or `SCENE` in it, lines with `*` in it and lines with `/` in it.  The output will be an RDD where the key is the line, and the value is the number of words in the line. Simplest way to do it is probably a `map` followed by a `filter`.
+- **Task 1 (2pt)**: This takes as input the playRDD and for each line counts the number of words. It should then filter the RDD by only selecting the lines That are speaking lines. A speaking line is any line in which a character is speaking and it specifically excludes three types of lines: lines with the word `ACT` or `SCENE` in it, lines with `*` in it and lines with `/` in it.  The output will be an RDD where the key is the line, and the value is the number of words in the line. Simplest way to do it is probably a `map` followed by a `filter`.
 
 - **Task 2 (4pt)**: Write just the flatmap function (`task2_flatmap`) that takes in a parsed JSON document (from `prize.json`) and returns the word counts of all of the motivations. In other words, the command shown below should create an RDD with all the word counts of the motivations. We will use `json.loads` to parse the JSONs (this is already done). Make sure to look at what it returns so you know how to access the information inside the parsed JSONs (these are basically nested dictionaries). (https://docs.python.org/2/library/json.html)
 ```
@@ -93,26 +93,27 @@ Note some of the tasks ask you to return a pair RDD. A pair RDD is an RDD with t
 
 - **Task 3 (4pt)**: Write a sequence of transformations starting from nobelRDD that returns an PairRDD where the key is the `category` (`physics` etc), and the value is a list of all the word counts of the motivations (make this distinct). Make sure the final values are `list`s, and not some other class objects (if you do a `take(5)`, it should print out the first five lists, use `collect()` to see the full results).
 
-- **Task 4 (4pt)**: This function operates on the `logsRDD`. It takes as input a list of *web requests* and returns an RDD with "hosts" that fulfilled all of those web requests
+- **Task 4 (2pt)**: This function operates on the `logsRDD`. It takes as input a list of *web requests* and returns an RDD with "hosts" that fulfilled all of those web requests
 The web requests will be provided as strings, in the same format that they appear in the logs (e.g., '/facilites/vab.html' and '/images/vab-small.gif').
 The format of the log entries should be self-explanatory, but here are more details if you need: [NASA Logs](http://ita.ee.lbl.gov/html/contrib/NASA-HTTP.html)
 Try to minimize the number of RDDs you end up creating.
 
-- **Task 5 (4pt)**: Complete a function to calculate the degree distribution of user nodes in the Amazon graph (i.e., `amazonBipartiteRDD`). In other words, calculate 
+- **Task 5 (2pt)**: Complete a function to calculate the degree distribution of user nodes in the Amazon graph (i.e., `amazonBipartiteRDD`). In other words, calculate 
 the degree of 
 each user node (i.e., number of products each user has rated), and then use a reduceByKey (or aggregateByKey) to find the number of nodes with a given degree. The output 
 should be a PairRDD where the key is the degree, and the value is the number of nodes in the graph with that degree.
 
-- **Task 6 (4pt)**: On the `logsRDD`, for two given hosts (provided as input analogous to Task 4 above), use a 'cogroup' to create the following pair RDD: the key of 
+- **Task 6 (2pt)**: On the `logsRDD`, for two given hosts (provided as input analogous to Task 4 above), use a 'cogroup' to create the following pair RDD: the key of 
 the RDD will be a date, and the value will be a 2-tuple, where the first element is a list of all URLs fetched from the first host on that day, and the second element
 is the list of all URLs fetched from the second host on that day. Use `filter` to first create two RDDs from the input `logsRDD`.
 
-- **Task 7 (8pt)**: [Bigrams](http://en.wikipedia.org/wiki/Bigram) are sequences of two consecutive words. For example, the previous sentence contains the following bigrams: "Bigrams are", "are simply", "simply sequences", "sequences of", etc. Your task is to write a bigram counting application for counting the bigrams in the `motivation`s of the Nobel Prizes (i.e., the reason they were given the Nobel Prize). The return value should be a PairRDD where the key is a bigram, and the value is its count, i.e., in how many different `motivations` did it appear. Don't assume 'motivation' is always present.
+- **Task 7 (4pt)**: [Bigrams](http://en.wikipedia.org/wiki/Bigram) are sequences of two consecutive words. For example, the previous sentence contains the following bigrams: "Bigrams are", "are simply", "simply sequences", "sequences of", etc. Your task is to write a bigram counting application for counting the bigrams in the `motivation`s of the Nobel Prizes (i.e., the reason they were given the Nobel Prize). The return value should be a PairRDD where the key is a bigram, and the value is its count, i.e., in how many different `motivations` did it appear. Don't assume 'motivation' is always present.
 
-- **Task 8 (8pt)**: Your goal for task 8 is to implement the fragment and replicate join from Section 18.5.2.2 of the textbook using SparkPrimitives. Recall from lecture that fragment and replicate join is a way of joining two relations in a parallel database system by partitioning the tuples of each relation across multiple processors, joining the tuples at each processor, then aggregating the results from all the processors. Since you are running Spark on a single machine, your fragment and replicate join implementation will replace processors with explicit groups. Your implementation of fragment-and-replicate join should work roughly as follows:
+- **Task 8 (24pt)**: Your goal for task 8 is to implement the fragment and replicate join from Section 18.5.2.2 of the textbook using SparkPrimitives (**12 points**) and then use it to implement a full SQL query (**12 points**). Recall from lecture that fragment and replicate join is a way of joining two relations in a parallel database system by partitioning the tuples of each relation across multiple processors, joining the tuples at each processor, then aggregating the results from all the processors. Since you are running Spark on a single machine, all of the processors will be located on the same machine (your machine). But as long as you create the partitions correctly (see below), Spark could easily parallelize your code across multiple machines if you had them --- each partition can be processed by a seperate machine. Your implementation of fragment-and-replicate join should work roughly as follows:
+
     * Partition the left and right relations into n and m partitions, respectively.
-    * For each of the n partitions of the left relation, assign the tuples in the partition to m groups. Do the same for the right relation, reversing the role of n and m.
-    * For each of the n * m groups, join the tuples in that group using a join algorithm of your choosing (nested loop join would be the easiest).
+    * For each of the n partitions of the left relation, replicate the tuples in the partition m times, corresponding to one row in Figure 18.3 of your textbook. Name each replica (e.g., via giving each tuple in that replica the same key name) according to the cell from Figure 18.3 that it belongs. Do the same for the right relation, reversing the role of n and m. 
+    * For "cell" you created above, you will have a partition of tuples from each relation. Join those partitiongs using a join algorithm of your choosing (nested loop join would be the easiest). You can assume that all the tuples within each partition will easily fit in memory.
     * Aggregate the joined tuples in each group together into a single relation.  
 
 You can use any of the Spark primitives listed in the documentation in the assigned reading for April 30 except join to complete this task. (That join primitive won’t help you anyway --- since it is only an equi-join). In addition, you can use the following primitive which may be helpful in the initial partitioing step:
@@ -144,7 +145,13 @@ WITH flight_customers_per_day AS (
      WHERE avg_customer = (SELECT max(avg_customer) FROM flight_avg_customers))
      ORDER BY rank, flightid;
 ```
-You goal is to implement the above query using the Spark primitives and the fragment-and-replicate-join you wrote and placed in either fragAndReplicate.py or FragmentAndReplicateJoin.java.
+You goal is to implement the above query using the Spark primitives and the fragment-and-replicate-join you wrote and placed in either fragAndReplicate.py or FragmentAndReplicateJoin.java. If you want to make modifications to the above query, that's fine. The only restriction is that: (1) Your query must return the same results and (2) the 
+
+```sql
+FROM flight_avg_customers t1, flight_avg_customers t2 
+WHERE t2.avg_customer > t1.avg_customer
+```
+part of the above query must remain and be implemented using your fragement and replicate join.
 
 ### Correct Answers
 You can use spark-submit to run the `assignment.py` file and see the output of all tasks, but it would be easier to develop with pyspark (by copying the commands over). We will also shortly post iPython instructions.
