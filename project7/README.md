@@ -91,7 +91,7 @@ Note some of the tasks ask you to return a pair RDD. A pair RDD is an RDD with t
      	task2_result = nobelRDD.map(json.loads).flatMap(task2_flatmap)
 ```
 
-- **Task 3 (4pt)**: Write a sequence of transformations starting from nobelRDD that returns an PairRDD where the key is the `category` (`physics` etc), and the value is a list of all Nobel Laureates for that category (just their surnames). Make sure the final values are `list`s, and not some other class objects (if you do a `take(5)`, it should print out the lists).
+- **Task 3 (4pt)**: Write a sequence of transformations starting from nobelRDD that returns an PairRDD where the key is the `category` (`physics` etc), and the value is a list of all Nobel Laureates for that category (just their surnames). Make sure the final values are `list`s, and not some other class objects (if you do a `take(5)`, it should print out the first five lists, use `collect()` to see the full results).
 
 - **Task 4 (4pt)**: This function operates on the `logsRDD`. It takes as input a list of *web requests* and returns an RDD with "hosts" that fulfilled all of those web requests
 The web requests will be provided as strings, in the same format that they appear in the logs (e.g., '/facilites/vab.html' and '/images/vab-small.gif').
