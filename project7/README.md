@@ -114,13 +114,38 @@ is the list of all URLs fetched from the second host on that day. Use `filter` t
     * For each of the n * m groups, join the tuples in that group using a join algorithm of your choosing (nested loop join would be the easiest).
     * Aggregate the joined tuples in each group together into a single relation.  
 
-Some Spark primitives that may be helpful for your implementation are listed below. You are not required to use any of these primitives, and you are allowed to use any Spark primitives (the ones listed in the documentation in the assigned reading for April 30) that are not listed here except join. (That join probably won’t help you anyway, since it is only an equi-join).
-    * zipWithIndex(): Assigns each tuple in the relation a unique index starting at zero.
-    * flatMap(f): Returns a new relation that is the result of applying f to each tuple then flattening the resulting lists.
-    * groupByKey(): Groups the values for each key in the RDD into a single sequence.
-    * cogroup(): Combines two relations by key.  
+You can use any of the Spark primitives listed in the documentation in the assigned reading for April 30 except join to complete this task. (That join primitive won’t help you anyway --- since it is only an equi-join). In addition, you can use the following primitive which may be helpful in the initial partitioing step:
 
-After you’ve implemented fragment-and-replicate join, you will put it to use by implementing a SQL query using Spark primitives. Since the fragment-and-replicate join algorithm is particularly useful for inequality-based joins, we will revisit Query 10 from Project 1, which you wrote earlier this semester using the flights database. The reference solution for this query can be found in repo under project1.  Write your fragment and replicate join in either fragAndReplicate.py or FragmentAndReplicateJoin.java.
+    * zipWithIndex(): Assigns each tuple in the relation a unique index starting at zero.
+
+After you’ve implemented fragment-and-replicate join, you will put it to use by implementing a SQL query using Spark primitives. Since the fragment-and-replicate join algorithm is particularly useful for inequality-based joins, we will revisit Query 10 from Project 1, which you wrote earlier this semester using the flights database. Please use the following solution to Query 10:
+
+```sql
+WITH flight_customers_per_day AS (
+    SELECT flightid, flightdate, count(customerid) AS onboard_cnt
+    FROM flewon
+    GROUP BY flightid, flightdate
+), flight_avg_customers(flightid, avg_customer) AS (
+    SELECT flightid,
+           sum(onboard_cnt) / (SELECT max(flightdate)
+                                    - min(flightdate) + 1.0 FROM flewon)
+    FROM flight_customers_per_day
+    GROUP BY flightid
+)
+     (SELECT t1.flightid, count(*)+1 as rank
+     FROM flight_avg_customers t1, flight_avg_customers t2
+     WHERE t2.avg_customer > t1.avg_customer
+     GROUP BY t1.flightid, t1.avg_customer
+     HAVING count(*) < 20)
+     UNION
+     (SELECT flightid, 1
+     FROM flight_avg_customers
+     WHERE avg_customer = (SELECT max(avg_customer) FROM flight_avg_customers))
+     ORDER BY rank, flightid;
+```
+
+
+Write your fragment and replicate join in either fragAndReplicate.py or FragmentAndReplicateJoin.java.
 
 ### Correct Answers
 You can use spark-submit to run the `assignment.py` file and see the output of all tasks, but it would be easier to develop with pyspark (by copying the commands over). We will also shortly post iPython instructions.
