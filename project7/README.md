@@ -1,12 +1,12 @@
 # Project 7: Apache Spark
 
-Project 7 focuses on using Apache Spark for doing large-scale data analysis tasks. For this assignment, we will use relatively small datasets and  we won't run anything in distributed mode; however Spark can be easily used to run the same programs on much larger datasets.
+Project 7 focuses on using Apache Spark for doing large-scale data analysis tasks. For this assignment, we will use relatively small datasets and  we won't run anything in distributed mode; however Spark can be easily used to run the same programs on much larger datasets over very large clusters of machines.
 
 ## Getting Started with Spark
 
 This section is basically a summary of the excellent tutorials that can be found at the [Spark website](http://spark.apache.org).
 
-[Apache Spark](https://spark.apache.org) is a relatively new cluster computing framework, developed originally at UC Berkeley. It significantly generalizes the two-stage Map-Reduce paradigm originally proposed by Google and popularized by the open-source Hadoop system. Spark is fundamentally based on the abstraction of **resilient distributed datasets (RDDs)**. An RDD is basically a distributed collection of items that can be created in a variety of ways. Spark provides a set of operations to transform one or more RDDs into an output RDD, and analysis tasks are written as chains of these operations.
+[Apache Spark](https://spark.apache.org) is a popular cluster computing framework, developed originally at UC Berkeley. It significantly generalizes the two-stage Map-Reduce paradigm originally proposed by Google and popularized by the open-source Hadoop system. Spark is fundamentally based on the abstraction of **resilient distributed datasets (RDDs)**. An RDD is basically a distributed collection of items that can be created in a variety of ways. Spark provides a set of operations to transform one or more RDDs into an output RDD, and analysis tasks are written as chains of these operations.
 
 Spark can be used with the Hadoop ecosystem, including the HDFS file system and the YARN resource manager. 
 
@@ -15,20 +15,20 @@ Spark can be used with the Hadoop ecosystem, including the HDFS file system and 
 We have provided a Vagrantfile in the `project7` directory. Navigate to the `project7` directory and run `vagrant up` to start the virtual machine, which should have everything you need (except for Spark) to work on this project. Since the Spark distribution is large, we ask you to download it directly from the Spark website.
 
 1. Download the Spark package at http://spark.apache.org/downloads.html. We will use **Version 2.3.0, Pre-built for Hadoop 2.7 or later**.
-2. Move the downloaded file to the `project7` directory (so it is available in `/vagrant` on the virtual machine), and uncompress it using: `tar zxvf spark-2.0.1-bin-hadoop2.7.tgz`
-3. This will create a new directory: `spark-2.0.1-bin-hadoop2.7` 
-4. Set the SPARKHOME environment variable: `export SPARKHOME=/vagrant/spark-2.0.1-bin-hadoop2.7`
+2. Move the downloaded file to the `project7` directory (so it is available in `/vagrant` on the virtual machine), and uncompress it using: `tar zxvf spark-2.3.0-bin-hadoop2.7.tgz`
+3. This will create a new directory: `spark-2.3.0-bin-hadoop2.7` 
+4. Set the SPARKHOME environment variable: `export SPARKHOME=/vagrant/spark-2.3.0-bin-hadoop2.7`
 5. Test that Spark has been successfully installed by running: `$SPARKHOME/bin/pyspark`. This should run the Spark Python shell, which is a REPL which you can use for prototyping your Python code (there is not a corresponding Spark shell for Java).
 
 ### Writing Spark Code
 
-Spark primarily supports three languages: Scala (Spark is written in Scala), Java, and Python. For this project, you have the option of writing your code in either Python or Java. Feel free to work with whichever language you are most comfortable with. You are highly encouraged to read the [Spark Quick Start Guide](http://spark.apache.org/docs/latest/quick-start.html), which has well-written tutorials for working with both languages.
+Spark primarily supports three languages: Scala (Spark is written in Scala), Java, and Python. For this project, you have the option of writing your code in either Python or Java. Feel free to work with whichever language you are most comfortable with, but we have found that Spark Python is somewhat easier to use and faster to get started. You are highly encouraged to read the [Spark Quick Start Guide](http://spark.apache.org/docs/latest/quick-start.html), which has well-written tutorials for working with both languages.
 
 #### Spark and Python
 
 All files for implementing this project in Python are located in the `python` directory. You will write your code for completing each task in `tasks.py`, which contains a function for each task. Your implementation of fragment-and-replicate join for Task 8 should go in `fragAndReplicate.py`. We have also provided a file called `assignment.py` that will call your implementation of each task and print out the results.
 
-You can prototype your Python code using the Spark Python shell, which you can start by running `$SPARKHOME/bin/pyspark`. After you've written your code in `tasks.py`, you can see the results of running `assignment.py` by submitting it to the Spark cluster, which is done by running `$SPARKHOME/bin/spark-submit assignment.py`.
+You can prototype your Python code using the Spark Python shell, which you can start by running `$SPARKHOME/bin/pyspark`. After you've written your code in `tasks.py`, you can see the results of running `assignment.py` by submitting it to the Spark "cluster" (which is this case is just your machine), which is done by running `$SPARKHOME/bin/spark-submit assignment.py`.
 
 #### Spark and Java
 
@@ -38,7 +38,7 @@ To make it easier to compile your Java code with all of the Spark dependencies, 
 
 ## Example Spark Application
 
-Below, we provide an example Spark application written in both Python and Java that counts the number of times each word appears in the file `README.md`. Use this example as a guide for how to write your code for this project.
+Below, we provide an example Spark application written in both Python and Java that counts the number of times each word appears in the file `README.md`. You can use this example as a guide for how to write your code for this project.
 
 ### Wordcount in Python
 
@@ -78,8 +78,7 @@ We have provided a Python file: `assignment.py`, that initializes the folllowing
 
 The file also contains some examples of operations on these RDDs. 
 
-Your tasks are to fill out the 8 functions that are defined in the `task.py` file (starting with `task`). The amount of code that you 
-write would typically be small (several would be one-liners). 
+Your tasks are to fill out the 8 functions that are defined in the `task.py` file (starting with `task`). The main point of this assignment is task 8, where you'll be implementing parallel database query opertors using Spark --- task 8 should take the  majority of your time for this assignment. The amount of code that you write for the other tasks should typically be small (several would be one-liners). The goal of the other tasks is to introduce you to using different Spark primitives, a subset of which will be helpful for task 8. 
 
 To run the code written in tasks.py you can run `$SPARKHOME/bin/spark-submit python/assignment.py`
 
@@ -87,7 +86,7 @@ Note some of the tasks ask you to return a pair RDD. A pair RDD is an RDD with t
 
 - **Task 1 (4pt)**: This takes as input the playRDD and for each line counts the number of words. It should then filter the RDD by only selecting the lines That are speaking lines. A speaking line is any line in which a character is speaking and it specifically excludes three types of lines: lines with the word `ACT` or `SCENE` in it, lines with `*` in it and lines with `/` in it.  The output will be an RDD where the key is the line, and the value is the number of words in the line. Simplest way to do it is probably a `map` followed by a `filter`.
 
-- **Task 2 (4pt)**: Write just the flatmap function (`task2_flatmap`) that takes in a parsed JSON document (from `prize.json`) and returns the surnames of the Nobel Laureates. In other words, the following command should create an RDD with all the surnames. We will use `json.loads` to parse the JSONs (this is already done). Make sure to look at what it returns so you know how to access the information inside the parsed JSONs (these are basically nested dictionaries). (https://docs.python.org/2/library/json.html)
+- **Task 2 (4pt)**: Write just the flatmap function (`task2_flatmap`) that takes in a parsed JSON document (from `prize.json`) and returns the surnames of the Nobel Laureates. In other words, the command shown below should create an RDD with all the surnames. We will use `json.loads` to parse the JSONs (this is already done). Make sure to look at what it returns so you know how to access the information inside the parsed JSONs (these are basically nested dictionaries). (https://docs.python.org/2/library/json.html)
 ```
      	task2_result = nobelRDD.map(json.loads).flatMap(task2_flatmap)
 ```
@@ -116,13 +115,36 @@ is the list of all URLs fetched from the second host on that day. Use `filter` t
     * For each of the n * m groups, join the tuples in that group using a join algorithm of your choosing (nested loop join would be the easiest).
     * Aggregate the joined tuples in each group together into a single relation.  
 
-Some Spark primitives that may be helpful for your implementation are listed below. You are not required to use any of these primitives, and you are allowed to use any Spark primitives (the ones listed in the documentation in the assigned reading for April 30) that are not listed here except join. (That join probably won’t help you anyway, since it is only an equi-join).
-    * zipWithIndex(): Assigns each tuple in the relation a unique index starting at zero.
-    * flatMap(f): Returns a new relation that is the result of applying f to each tuple then flattening the resulting lists.
-    * groupByKey(): Groups the values for each key in the RDD into a single sequence.
-    * cogroup(): Combines two relations by key.  
+You can use any of the Spark primitives listed in the documentation in the assigned reading for April 30 except join to complete this task. (That join primitive won’t help you anyway --- since it is only an equi-join). In addition, you can use the following primitive which may be helpful in the initial partitioing step:
 
-After you’ve implemented fragment-and-replicate join, you will put it to use by implementing a SQL query using Spark primitives. Since the fragment-and-replicate join algorithm is particularly useful for inequality-based joins, we will revisit Query 10 from Project 1, which you wrote earlier this semester using the flights database. The reference solution for this query can be found in repo under project1.  Write your fragment and replicate join in either fragAndReplicate.py or FragmentAndReplicateJoin.java.
+    * zipWithIndex(): Assigns each tuple in the relation a unique index starting at zero.
+
+After you’ve implemented fragment-and-replicate join, you will put it to use by implementing a SQL query using Spark primitives. Since the fragment-and-replicate join algorithm is particularly useful for inequality-based joins, we will revisit Query 10 from Project 1, which you wrote earlier this semester using the flights database. Please use the following solution to Query 10:
+
+```sql
+WITH flight_customers_per_day AS (
+    SELECT flightid, flightdate, count(customerid) AS onboard_cnt
+    FROM flewon
+    GROUP BY flightid, flightdate
+), flight_avg_customers(flightid, avg_customer) AS (
+    SELECT flightid,
+           sum(onboard_cnt) / (SELECT max(flightdate)
+                                    - min(flightdate) + 1.0 FROM flewon)
+    FROM flight_customers_per_day
+    GROUP BY flightid
+)
+     (SELECT t1.flightid, count(*)+1 as rank
+     FROM flight_avg_customers t1, flight_avg_customers t2
+     WHERE t2.avg_customer > t1.avg_customer
+     GROUP BY t1.flightid, t1.avg_customer
+     HAVING count(*) < 20)
+     UNION
+     (SELECT flightid, 1
+     FROM flight_avg_customers
+     WHERE avg_customer = (SELECT max(avg_customer) FROM flight_avg_customers))
+     ORDER BY rank, flightid;
+```
+You goal is to implement the above query using the Spark primitives and the fragment-and-replicate-join you wrote and placed in either fragAndReplicate.py or FragmentAndReplicateJoin.java.
 
 ### Correct Answers
 You can use spark-submit to run the `assignment.py` file and see the output of all tasks, but it would be easier to develop with pyspark (by copying the commands over). We will also shortly post iPython instructions.
