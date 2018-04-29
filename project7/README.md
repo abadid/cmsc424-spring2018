@@ -78,11 +78,11 @@ We have provided a Python file: `assignment.py`, that initializes the folllowing
 
 The file also contains some examples of operations on these RDDs. 
 
-Your tasks are to fill out the 8 functions that are defined in the `task.py` file (starting with `task`). The main point of this assignment is task 8, where you'll be implementing parallel database query opertors using Spark --- task 8 should take the  majority of your time for this assignment. The amount of code that you write for the other tasks should typically be small (several would be one-liners). The goal of the other tasks is to introduce you to using different Spark primitives, a subset of which will be helpful for task 8. 
+Your tasks are to fill out the 8 functions that are defined in the `task.py` file (starting with `task`). The main point of this assignment is Task 8, where you'll be implementing parallel database query opertors using Spark --- Task 8 should take the  majority of your time for this assignment. The amount of code that you write for the other tasks should typically be small (several would be one-liners). The goal of the other tasks is to introduce you to using different Spark primitives, a subset of which will be helpful for Task 8. 
 
 To run the code written in tasks.py you can run `$SPARKHOME/bin/spark-submit python/assignment.py`
 
-Note some of the tasks ask you to return a pair RDD. A pair RDD is an RDD with the form (K, V) where K is a key and V is a value. Pair RDD's have additional functions available to them such as reduceByKey. For more information on pair RDD's see [here](https://www.safaribooksonline.com/library/view/learning-spark/9781449359034/ch04.html)
+Note some of the tasks ask you to return a "pair RDD". A pair RDD is an RDD with the form (K, V) where K is a key and V is a value. Pair RDD's have additional functions available to them such as reduceByKey. For more information on pair RDD's see [here](https://www.safaribooksonline.com/library/view/learning-spark/9781449359034/ch04.html).
 
 - **Task 1 (2pt)**: This takes as input the playRDD and for each line counts the number of words. It should then filter the RDD by only selecting the lines That are speaking lines. A speaking line is any line in which a character is speaking and it specifically excludes three types of lines: lines with the word `ACT` or `SCENE` in it, lines with `*` in it and lines with `/` in it.  The output will be an RDD where the key is the line, and the value is the number of words in the line. Simplest way to do it is probably a `map` followed by a `filter`.
 
@@ -113,7 +113,7 @@ is the list of all URLs fetched from the second host on that day. Use `filter` t
 
     * Partition the left and right relations into n and m partitions, respectively.
     * For each of the n partitions of the left relation, assign the tuples in the partition to m groups. Do the same for the right relation, reversing the role of n and m.
-    * For each of the n * m groups, join the tuples in that group using a join algorithm of your choosing (nested loop join would be the easiest).
+    * For each of the n * m groups, join the tuples in that group using a join algorithm of your choosing (nested loop join would be the easiest). You can assume that all the tuples within each group will easily fit in memory.
     * Aggregate the joined tuples in each group together into a single relation.  
 
 You can use any of the Spark primitives listed in the documentation in the assigned reading for April 30 except join to complete this task. (That join primitive won’t help you anyway --- since it is only an equi-join). In addition, you can use the following primitive which may be helpful in the initial partitioing step:
