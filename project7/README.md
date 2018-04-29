@@ -6,16 +6,16 @@ Project 7 focuses on using Apache Spark for doing large-scale data analysis task
 
 This section is basically a summary of the excellent tutorials that can be found at the [Spark website](http://spark.apache.org).
 
-[Apache Spark](https://spark.apache.org) is a relatively new cluster computing framework, developed originally at UC Berkeley. It significantly generalizes the two-stage Map-Reduce paradigm originally proposed by Google and popularized by open-source Hadoop system. Spark is fundamentally based on the abstraction of **resilient distributed datasets (RDDs)**. An RDD is basically a distributed collection of items that can be created in a variety of ways. Spark provides a set of operations to transform one or more RDDs into an output RDD, and analysis tasks are written as chains of these operations.
+[Apache Spark](https://spark.apache.org) is a relatively new cluster computing framework, developed originally at UC Berkeley. It significantly generalizes the two-stage Map-Reduce paradigm originally proposed by Google and popularized by the open-source Hadoop system. Spark is fundamentally based on the abstraction of **resilient distributed datasets (RDDs)**. An RDD is basically a distributed collection of items that can be created in a variety of ways. Spark provides a set of operations to transform one or more RDDs into an output RDD, and analysis tasks are written as chains of these operations.
 
 Spark can be used with the Hadoop ecosystem, including the HDFS file system and the YARN resource manager. 
 
 ### Installing Spark
 
-We have provided a Vagrantfile in the `project7` directory. Navigate to the `project 5` directory and run `vagrant up` to start the virtual machine, which should have everything you need except for Spark to work on this project. Since the Spark distribution is large, we ask you to download it directly from the Spark website.
+We have provided a Vagrantfile in the `project7` directory. Navigate to the `project7` directory and run `vagrant up` to start the virtual machine, which should have everything you need (except for Spark) to work on this project. Since the Spark distribution is large, we ask you to download it directly from the Spark website.
 
 1. Download the Spark package at http://spark.apache.org/downloads.html. We will use **Version 2.0.1, Pre-built for Hadoop 2.7 or later**.
-2. Move the downloaded file to the `project7/` directory (so it is available in `/vagrant` on the virtual machine), and uncompress it using: `tar zxvf spark-2.0.1-bin-hadoop2.7.tgz`
+2. Move the downloaded file to the `project7` directory (so it is available in `/vagrant` on the virtual machine), and uncompress it using: `tar zxvf spark-2.0.1-bin-hadoop2.7.tgz`
 3. This will create a new directory: `spark-2.0.1-bin-hadoop2.7` 
 4. Set the SPARKHOME environment variable: `export SPARKHOME=/vagrant/spark-2.0.1-bin-hadoop2.7`
 5. Test that Spark has been successfully installed by running: `$SPARKHOME/bin/pyspark`. This should run the Spark Python shell, which is a REPL which you can use for prototyping your Python code (there is not a corresponding Spark shell for Java).
@@ -36,9 +36,13 @@ All files for implementing this project in Java are located in the `java` direct
 
 To make it easier to compile your Java code with all of the Spark dependencies, we use a build system called [Maven](https://maven.apache.org/what-is-maven.html). The Maven directory structure has already been set up for you, so all you need to do to compile you code is run `mvn package` from the `java` directory. After you've written your code in `Tasks.java`, you can see the results of running `Assignment.java` by submitting it to the Spark cluster, which is done by running `$SPARKHOME/bin/spark-submit --class "Assignment" target/project7-1.0.jar`.
 
-#### Word Count Application
+## Example Spark Application
 
-The following command (in the pyspark shell) does a word count, i.e., it counts the number of times each word appears in the file `README.md`. Use `counts.take(5)` to see the output.
+Below, we provide an example Spark application written in both Python and Java that counts the number of times each word appears in the file `README.md`. Use this example as a guide for how to write your code for this project.
+
+### Wordcount in Python
+
+The wordcount application is implemented by the following command, when input in the Pyspark shell. Use `counts.take(5)` to see the top five results from the output.
 
 `>>> counts = textfile.flatMap(lambda line: line.split(" ")).map(lambda word: (word, 1)).reduceByKey(lambda a, b: a + b)`
 
@@ -55,21 +59,11 @@ def sum(a, b):
 textfile.flatMap(split).map(generateone).reduceByKey(sum)
 ```
 
-The `flatmap` splits each line into words, and the following `map` and `reduce` do the counting (we will discuss this in the class, but here is an excellent and detailed
-description: [Hadoop Map-Reduce Tutorial](http://hadoop.apache.org/docs/r1.2.1/mapred_tutorial.html#Source+Code) (look for Walk-Through).
+The `flatMap` function splits each line into words, and the following `map` and `reduceByKey` do the counting. The `lambda` representation is more compact and preferable, especially for small functions, but for large functions, it is better to separate out the definitions.
 
-The `lambda` representation is more compact and preferable, especially for small functions, but for large functions, it is better to separate out the definitions.
+Instead of using a shell, you can also write your code as a Python file, and submit that to the Spark cluster. The `examples` directory contains a Python file `wordcount.py`, which runs the program in a local mode. To run the program, do: `$SPARKHOME/bin/spark-submit wordcount.py`.
 
-### Running it as an Application
-
-Instead of using a shell, you can also write your code as a python file, and *submit* that to the spark cluster. The `project7` directory contains a python file `wordcount.py`,
-which runs the program in a local mode. To run the program, do:
-`$SPARKHOME/bin/spark-submit wordcount.py`
-
-### More...
-
-We encourage you to look at the [Spark Programming Guide](https://spark.apache.org/docs/latest/programming-guide.html) and play with the other RDD manipulation commands. 
-You should also try out the Scala and Java interfaces.
+### Wordcount in Java
 
 ## Assignment Details
 
@@ -126,15 +120,17 @@ Some Spark primitives that may be helpful for your implementation are listed bel
 
 After you’ve implemented fragment-and-replicate join, you will put it to use by implementing a SQL query using Spark primitives. Since the fragment-and-replicate join algorithm is particularly useful for inequality-based joins, we will revisit Query 10 from Project 1, which you wrote earlier this semester using the flights database. The reference solution for this query can be found in repo under project1.  Write your fragment and replicate join in either fragAndReplicate.py or FragmentAndReplicateJoin.java.
 
-
-
-
 ### Correct Answers
 You can use spark-submit to run the `assignment.py` file and see the output of all tasks, but it would be easier to develop with pyspark (by copying the commands over). We will also shortly post iPython instructions.
 
-**correctanswers/correctX** has the results of taskX`
+**correctanswers/correctX** has the results of `taskX`
 
 ### Submission
 
 Submit the `tasks.py/Tasks.java` and `fragAndReplicate.py/FragmentAndReplicateJoin.java` files.
 
+## Helpful Resources
+
+The following references may be helpful as you are implementing this project.
+* [Hadoop Map-Reduce Tutorial](http://hadoop.apache.org/docs/r1.2.1/mapred_tutorial.html#Source+Code)
+* [Spark Programming Guide](https://spark.apache.org/docs/latest/programming-guide.html)
