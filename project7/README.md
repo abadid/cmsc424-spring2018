@@ -143,9 +143,7 @@ WITH flight_customers_per_day AS (
      WHERE avg_customer = (SELECT max(avg_customer) FROM flight_avg_customers))
      ORDER BY rank, flightid;
 ```
-
-
-Write your fragment and replicate join in either fragAndReplicate.py or FragmentAndReplicateJoin.java.
+You goal is to implement the above query using the Spark primitives and the fragment-and-replicate-join you wrote and placed in either fragAndReplicate.py or FragmentAndReplicateJoin.java.
 
 ### Correct Answers
 You can use spark-submit to run the `assignment.py` file and see the output of all tasks, but it would be easier to develop with pyspark (by copying the commands over). We will also shortly post iPython instructions.
