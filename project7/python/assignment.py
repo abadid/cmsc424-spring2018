@@ -46,7 +46,7 @@ for x in task3_result.takeOrdered(10):
 
 #### Task 4
 print "=========================== Task 4"
-task4_result = task4(logsRDD, ['01/Jul/1995', '02/Jul/1995'])
+task4_result = task4(logsRDD, ['/facilities/vab.html', '/images/vab-small.gif'])
 for x in task4_result.takeOrdered(10):
 	print x
 

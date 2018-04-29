@@ -96,8 +96,8 @@ To run the code written in tasks.py you can run `$SPARKHOME/bin/spark-submit pyt
 
 - **Task 3 (4pt)**: Write a sequence of transformations starting from prizeRDD that returns an PairRDD where the key is the `category` (`physics` etc), and the value is a list of all Nobel Laureates for that category (just their surnames). Make sure the final values are `list`s, and not some other class objects (if you do a `take(5)`, it should print out the lists).
 
-- **Task 4 (4pt)**: This function operates on the `logsRDD`. It takes as input a list of *dates* and returns an RDD with "hosts" that were present in the log on all of 
-those dates. The dates would be provided as strings, in the same format that they appear in the logs (e.g., '01/Jul/1995' and '02/Jul/1995').
+- **Task 4 (4pt)**: This function operates on the `logsRDD`. It takes as input a list of *web resources* and returns an RDD with "hosts" that requested all of those web resources
+The web resources will be provided as strings, in the same format that they appear in the logs (e.g., '/facilites/vab.html' and '/images/vab-small.gif').
 The format of the log entries should be self-explanatory, but here are more details if you need: [NASA Logs](http://ita.ee.lbl.gov/html/contrib/NASA-HTTP.html)
 Try to minimize the number of RDDs you end up creating.
 
