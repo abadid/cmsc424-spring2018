@@ -103,16 +103,13 @@ is the list of all URLs fetched from the second host on that day. Use `filter` t
 
 - **Task 7 (4pt)**: [Bigrams](http://en.wikipedia.org/wiki/Bigram) are sequences of two consecutive words. For example, the previous sentence contains the following bigrams: "Bigrams are", "are simply", "simply sequences", "sequences of", etc. Your task is to write a bigram counting application for counting the bigrams in the `motivation`s of the Nobel Prizes (i.e., the reason they were given the Nobel Prize). The return value should be a PairRDD where the key is a bigram, and the value is its count, i.e., in how many different `motivations` did it appear. Don't assume 'motivation' is always present.
 
-- **Task 8 (24pt)**: Your goal for task 8 is to implement the fragment and replicate join from Section 18.5.2.2 of the textbook using SparkPrimitives (**12 points**) and then use it to implement a full SQL query (**12 points**). Recall from lecture that fragment and replicate join is a way of joining two relations in a parallel database system by partitioning the tuples of each relation across multiple processors, joining the tuples at each processor, then aggregating the results from all the processors. Since you are running Spark on a single machine, all of the processors will be located on the same machine (your machine). But as long as you create the partitions correctly (see below), Spark could easily parallelize your code across multiple machines if you had them --- each partition can be processed by a seperate machine. Your implementation of fragment-and-replicate join should work roughly as follows:
-
-    * Partition the left and right relations into n and m partitions, respectively.
-    * For each of the n partitions of the left relation, replicate the tuples in the partition m times, corresponding to one row in Figure 18.3 of your textbook. Name each replica (e.g., via giving each tuple in that replica the same key name) according to the cell from Figure 18.3 that it belongs. Do the same for the right relation, reversing the role of n and m. 
-    * For "cell" you created above, you will have a partition of tuples from each relation. Join those partitiongs using a join algorithm of your choosing (nested loop join would be the easiest). You can assume that all the tuples within each partition will easily fit in memory.
-    * Aggregate the joined tuples in each group together into a single relation.  
-
-You can use any of the Spark primitives listed in the documentation in the assigned reading for April 30 except join to complete this task. (That join primitive won’t help you anyway --- since it is only an equi-join). In addition, you can use the following primitive which may be helpful in the initial partitioing step:
-
-    * zipWithIndex(): Assigns each tuple in the relation a unique index starting at zero.
+- **Task 8 (24pt)**: Your goal for task 8 is to implement the fragment-and-replicate join algorithm from Section 18.5.2.2 of the textbook using Spark primitives (**12 points**) and then use it to implement a full SQL query (**12 points**). Recall from lecture that fragment-and-replicate join is a way of joining two relations in a parallel database system by partitioning the tuples of each relation across multiple processors, joining the tuples at each processor, then aggregating the results from all the processors. Since you are running Spark on a single machine, all of the processors will be located on the same machine (your machine). But as long as you create the partitions correctly (see below), Spark could easily parallelize your code across multiple machines if you had them -- each partition can be processed by a seperate machine. Your implementation of fragment-and-replicate join should work roughly as follows:
+    * Partition the left and right relations into *n* and *m* partitions, respectively.
+    * For each of the *n* partitions of the left relation, replicate the tuples in the partition *m* times, corresponding to one row in Figure 18.3 of your textbook. Name each replica (e.g., via giving each tuple in that replica the same key name) according to the cell from Figure 18.3 that it belongs. Do the same for the right relation, reversing the role of *n* and *m*. 
+    * For each cell you created above, you will have a partition of tuples from each relation. Join those partitions using a join algorithm of your choosing (nested loop join would be the easiest). You can assume that all the tuples within each partition will easily fit in memory.
+    * Aggregate the joined tuples in each group together into a single relation.
+You can use any of the Spark primitives listed in the documentation in the assigned reading for April 30 except join to complete this task (that join primitive won’t help you anyway, since it is only an equi-join). In addition, you can use the following primitive which may be helpful in the initial partitioning step:
+* zipWithIndex(): Assigns each tuple in the relation a unique index starting at zero.
 
 After you’ve implemented fragment-and-replicate join, you will put it to use by implementing a SQL query using Spark primitives. Since the fragment-and-replicate join algorithm is particularly useful for inequality-based joins, we will revisit Query 10 from Project 1, which you wrote earlier this semester using the flights database. Please use the following solution to Query 10:
 
@@ -122,39 +119,33 @@ WITH flight_customers_per_day AS (
     FROM flewon
     GROUP BY flightid, flightdate
 ), flight_avg_customers(flightid, avg_customer) AS (
-    SELECT flightid,
-           sum(onboard_cnt) / (SELECT max(flightdate)
-                                    - min(flightdate) + 1.0 FROM flewon)
+    SELECT flightid, sum(onboard_cnt) / (SELECT max(flightdate) - min(flightdate) + 1.0 FROM flewon)
     FROM flight_customers_per_day
     GROUP BY flightid
 )
-     (SELECT t1.flightid, count(*)+1 as rank
-     FROM flight_avg_customers t1, flight_avg_customers t2
-     WHERE t2.avg_customer > t1.avg_customer
-     GROUP BY t1.flightid, t1.avg_customer
-     HAVING count(*) < 20)
-     UNION
-     (SELECT flightid, 1
-     FROM flight_avg_customers
-     WHERE avg_customer = (SELECT max(avg_customer) FROM flight_avg_customers))
-     ORDER BY rank, flightid;
+    (SELECT t1.flightid, count(*)+1 as rank
+    FROM flight_avg_customers t1, flight_avg_customers t2
+    WHERE t2.avg_customer > t1.avg_customer
+    GROUP BY t1.flightid, t1.avg_customer
+    HAVING count(*) < 20)
+    UNION
+    (SELECT flightid, 1
+    FROM flight_avg_customers
+    WHERE avg_customer = (SELECT max(avg_customer) FROM flight_avg_customers))
+    ORDER BY rank, flightid;
 ```
-You goal is to implement the above query using the Spark primitives and the fragment-and-replicate-join you wrote and placed in either fragAndReplicate.py or FragmentAndReplicateJoin.java. If you want to make modifications to the above query, that's fine. The only restriction is that: (1) Your query must return the same results and (2) the 
-
+Your goal is to implement the above query using the Spark primitives and the fragment-and-replicate-join you wrote and placed in either `fragAndReplicate.py` or `FragmentAndReplicateJoin.java`. If you want to make modifications to the above query, that's fine. The only restriction is that: (1) Your query must return the same results and (2) the 
 ```sql
 FROM flight_avg_customers t1, flight_avg_customers t2 
 WHERE t2.avg_customer > t1.avg_customer
 ```
-part of the above query must remain and be implemented using your fragement and replicate join.
+part of the above query must remain and be implemented using your fragment-and-replicate join.
 
-### Correct Answers
-You can use spark-submit to run the `assignment.py` file and see the output of all tasks, but it would be easier to develop with pyspark (by copying the commands over). We will also shortly post iPython instructions.
+## Submission
 
-**correctanswers/correctX** has the results of `taskX`
-
-### Submission
-
-Submit the `tasks.py/Tasks.java` and `fragAndReplicate.py/FragmentAndReplicateJoin.java` files.
+Submit the following two files under the Project 7 assignment on ELMS:
+* **Python:** `tasks.py` and `fragAndReplicate.py`
+* **Java:** `Tasks.java` and `FragmentAndReplicateJoin.java`
 
 ## Helpful Resources
 
@@ -162,3 +153,6 @@ The following references may be helpful as you are implementing this project.
 * [Hadoop Map-Reduce Tutorial](http://hadoop.apache.org/docs/r1.2.1/mapred_tutorial.html#Source+Code)
 * [Spark Programming Guide](https://spark.apache.org/docs/latest/programming-guide.html)
 * [Learning Spark](https://www.safaribooksonline.com/library/view/learning-spark/9781449359034/)
+* [Spark Quick-Start Guide](http://spark.apache.org/docs/latest/quick-start.html)
+* [Spark Examples](https://github.com/holdenk/learning-spark-examples)
+* [Spark Java Documentation](https://spark.apache.org/docs/latest/api/java/index.html)
