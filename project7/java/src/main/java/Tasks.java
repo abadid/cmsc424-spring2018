@@ -5,7 +5,7 @@ import scala.Tuple2;
 
 public class Tasks {
 
-    public static JavaPairRDD<String, Tuple2<String, Integer>> task1(JavaRDD<String> playRDD) {
+    public static JavaPairRDD<String, Integer> task1(JavaRDD<String> playRDD) {
         return null;
     }
 

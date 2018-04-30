@@ -23,50 +23,82 @@ public class Assignment {
 
         // Task 1
         System.out.println("*** Task 1 ***");
-        JavaPairRDD<String, Tuple2<String, Integer>> resultTask1 = Tasks.task1(playRDD);
-        resultTask1.foreach(x -> System.out.println(x));
+        JavaPairRDD<String, Integer> resultTask1 = Tasks.task1(playRDD);
+        if (resultTask1 != null) {
+            resultTask1.foreach(x -> System.out.println(x));
+        } else {
+            System.out.println("No result.");
+        }
         System.out.println();
 
         // Task 2
         System.out.println("*** Task 2 ***");
         JavaRDD<String> resultTask2 = Tasks.task2(prizesRDD);
-        resultTask2.foreach(x -> System.out.println(x));
+        if (resultTask2 != null) {
+            resultTask2.foreach(x -> System.out.println(x));
+        } else {
+            System.out.println("No result.");
+        }
         System.out.println();
 
         // Task 3
         System.out.println("*** Task 3 ***");
         JavaPairRDD<String, List<String>> resultTask3 = Tasks.task3(prizesRDD);
-        resultTask3.foreach(x -> System.out.println(x));
+        if (resultTask3 != null) {
+            resultTask3.foreach(x -> System.out.println(x));
+        } else {
+            System.out.println("No result.");
+        }
         System.out.println();
 
         // Task 4
         System.out.println("*** Task 4 ***");
         JavaRDD<String> resultTask4 = Tasks.task4(logsRDD);
-        resultTask4.foreach(x -> System.out.println(x));
+        if (resultTask4 != null) {
+            resultTask4.foreach(x -> System.out.println(x));
+        } else {
+            System.out.println("No result.");
+        }
         System.out.println();
 
         // Task 5
         System.out.println("*** Task 5 ***");
         JavaPairRDD<Long, Long> resultTask5 = Tasks.task5(amazonInputRDD);
-        resultTask5.foreach(x -> System.out.println(x));
+        if (resultTask5 != null) {
+            resultTask5.foreach(x -> System.out.println(x));
+        } else {
+            System.out.println("No result.");
+        }
         System.out.println();
 
         // Task 6
         System.out.println("*** Task 6 ***");
         JavaPairRDD<String, Tuple2<Iterable<String>, Iterable<String>>> resultTask6 = Tasks.task6(logsRDD);
-        resultTask6.foreach(x -> System.out.println(x));
+        if (resultTask6 != null) {
+            resultTask6.foreach(x -> System.out.println(x));
+        } else {
+            System.out.println("No result.");
+        }
         System.out.println();
 
         // Task 7
         System.out.println("*** Task 7 ***");
         JavaPairRDD<String, Long> resultTask7 = Tasks.task7(prizesRDD);
-        resultTask7.foreach(x -> System.out.println(x));
+        if (resultTask7 != null) {
+            resultTask7.foreach(x -> System.out.println(x));
+        } else {
+            System.out.println("No result.");
+        }
         System.out.println();
 
         // Task 8
         System.out.println("*** Task 8 ***");
-        JavaRDD<Tuple2<String, Long>> resultTask8 = Tasks.task8(flewonRDD);
-        resultTask8.foreach(x -> System.out.println(x));
+        JavaRDD<Tuple2<String, Long>> resultTask8 = Tasks.task8(flewonRDD, 2, 2);
+        if (resultTask8 != null) {
+            resultTask8.foreach(x -> System.out.println(x));
+        } else {
+            System.out.println("No result.");
+        }
         System.out.println();
 
         spark.stop();

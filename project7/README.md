@@ -80,9 +80,9 @@ Your tasks are to fill out the eight functions that are defined in the `tasks.py
 
 See the instructions in the section "Writing Spark Code" for compiling and running the code you write for these tasks.
 
-Note some of the tasks ask you to return a "PairRDD". A Pair RDD is an RDD with the form (K, V) where K is a key and V is a value. Pair RDD's have additional functions available to them such as `reduceByKey`. For more information on Pair RDD's see [here](https://www.safaribooksonline.com/library/view/learning-spark/9781449359034/ch04.html).
+Note some of the tasks ask you to return a "Pair RDD". A Pair RDD is an RDD with the form (K, V) where K is a key and V is a value. Pair RDD's have additional functions available to them such as `reduceByKey`. For more information on Pair RDD's see [here](https://www.safaribooksonline.com/library/view/learning-spark/9781449359034/ch04.html).
 
-- **Task 1 (2pt)**: This takes as input the playRDD and for each line counts the number of words. It should then filter the RDD by only selecting the lines That are speaking lines. A speaking line is any line in which a character is speaking and it specifically excludes three types of lines: lines with the word `ACT` or `SCENE` in it, lines with `*` in it and lines with `/` in it.  The output will be an RDD where the key is the line, and the value is the number of words in the line. Simplest way to do it is probably a `map` followed by a `filter`.
+- **Task 1 (2pt)**: Write a function to count the number of speaking lines in the Shakespeare play RDD. A "speaking line" is a line in which a character is speaking -- it is any line that does not begin with "ACT", "SCENE", "*" or "/". The output will be an RDD where the key is the speaking line and the value is the number of words in the line.
 
 - **Task 2 (4pt)**: Write just the flatmap function (`task2_flatmap`) that takes in a parsed JSON document (from `prize.json`) and returns the word counts of all of the motivations. In other words, the command shown below should create an RDD with all the word counts of the motivations. We will use `json.loads` to parse the JSONs (this is already done). Make sure to look at what it returns so you know how to access the information inside the parsed JSONs (these are basically nested dictionaries). (https://docs.python.org/2/library/json.html)
 ```
