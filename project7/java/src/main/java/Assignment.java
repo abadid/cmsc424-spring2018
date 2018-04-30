@@ -43,7 +43,7 @@ public class Assignment {
 
         // Task 3
         System.out.println("*** Task 3 ***");
-        JavaPairRDD<String, List<String>> resultTask3 = Tasks.task3(prizesRDD);
+        JavaPairRDD<String, List<String>> resultTask3 = Tasks.task3(nobelRDD);
         if (resultTask3 != null) {
             resultTask3.foreach(x -> System.out.println(x));
         } else {

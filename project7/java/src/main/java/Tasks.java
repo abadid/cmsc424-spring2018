@@ -14,7 +14,7 @@ public class Tasks {
         return null;
     }
 
-    public static JavaPairRDD<String, List<String>> task3(JavaRDD<String> prizesRDD) {
+    public static JavaPairRDD<String, Iterable<Integer>> task3(JavaRDD<String> nobelRDD) {
         return null;
     }
 
