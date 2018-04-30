@@ -33,7 +33,7 @@ public class Assignment {
 
         // Task 2
         System.out.println("*** Task 2 ***");
-        JavaRDD<String> resultTask2 = Tasks.task2(prizesRDD);
+        JavaRDD<Integer> resultTask2 = nobelRDD.map(line -> new JSONObject(line)).flatMap(json -> Tasks.task2(json));
         if (resultTask2 != null) {
             resultTask2.foreach(x -> System.out.println(x));
         } else {

@@ -2,6 +2,7 @@ import java.util.*;
 
 import org.apache.spark.api.java.*;
 import scala.Tuple2;
+import org.json.*;
 
 public class Tasks {
 
@@ -9,7 +10,7 @@ public class Tasks {
         return null;
     }
 
-    public static JavaRDD<String> task2(JavaRDD<String> prizesRDD) {
+    public static Iterator<Integer> task2(JSONObject json) {
         return null;
     }
 
