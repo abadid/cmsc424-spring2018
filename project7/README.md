@@ -108,6 +108,7 @@ is the list of all URLs fetched from the second host on that day. Use `filter` t
     * For each of the *n* partitions of the left relation, replicate the tuples in the partition *m* times, corresponding to one row in Figure 18.3 of your textbook. Name each replica (e.g., via giving each tuple in that replica the same key name) according to the cell from Figure 18.3 that it belongs. Do the same for the right relation, reversing the role of *n* and *m*. 
     * For each cell you created above, you will have a partition of tuples from each relation. Join those partitions using a join algorithm of your choosing (nested loop join would be the easiest). You can assume that all the tuples within each partition will easily fit in memory.
     * Aggregate the joined tuples in each group together into a single relation.
+   
 You can use any of the Spark primitives listed in the documentation in the assigned reading for April 30 except join to complete this task (that join primitive won’t help you anyway, since it is only an equi-join). In addition, you can use the following primitive which may be helpful in the initial partitioning step:
 * zipWithIndex(): Assigns each tuple in the relation a unique index starting at zero.
 
