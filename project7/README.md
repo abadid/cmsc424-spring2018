@@ -85,8 +85,8 @@ Note some of the tasks ask you to return a "Pair RDD". A Pair RDD is an RDD with
 - **Task 1 (2pt)**: Write a function to count the number of speaking lines in the Shakespeare play RDD. A "speaking line" is a line in which a character is speaking -- it is any line that does not begin with "ACT", "SCENE", "*" or "/". The output will be an RDD where the key is the speaking line and the value is the number of words in the line.
 
 - **Task 2 (4pt)**: Write just the flatmap function (Python: `task2_flatmap`, Java: `task2`) that takes in a parsed JSON document from `prize.json` and returns the word counts of all of the motivations. In other words, the code shown below should create an RDD with all the word counts of the motivations. We will use Python `json.loads` function and Java `org.json` library to parse the JSON objects (this is already done). Make sure to consult the documentation ([Python](https://docs.python.org/2/library/json.html), [Java](https://stleary.github.io/JSON-java/)) so you know how to access the information inside the parsed JSON objects. 
-* Python: `task2_result = nobelRDD.map(json.loads).flatMap(task2_flatmap)`
-* Java: `JavaRDD<Integer> resultTask2 = nobelRDD.map(line -> new JSONObject(line)).flatMap(json -> Tasks.task2(json));`
+    * Python: `task2_result = nobelRDD.map(json.loads).flatMap(task2_flatmap)`
+    * Java: `JavaRDD<Integer> resultTask2 = nobelRDD.map(line -> new JSONObject(line)).flatMap(json -> Tasks.task2(json));`
 
 - **Task 3 (4pt)**: Write a sequence of transformations starting from nobelRDD that returns an PairRDD where the key is the `category` (`physics` etc), and the value is a list of all the word counts of the motivations (make this distinct). Make sure the final values are `list`s, and not some other class objects (if you do a `take(5)`, it should print out the first five lists, use `collect()` to see the full results).
 
