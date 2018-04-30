@@ -30,7 +30,7 @@ public class Tasks {
         return null;
     }
 
-    public static JavaPairRDD<String, Long> task7(JavaRDD<String> prizesRDD) {
+    public static JavaPairRDD<String, Long> task7(JavaRDD<String> nobelRDD) {
         return null;
     }
 
