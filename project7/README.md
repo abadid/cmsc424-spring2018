@@ -34,7 +34,7 @@ You can prototype your Python code using the Spark Python shell, which you can s
 
 All files for implementing this project in Java are located in the `java` directory. You will write your code for completing each task in `Tasks.java`, which contains a function for each task. Your implementation of fragment-and-replicate join for Task 8 should go in `FragmentAndReplicate.java`. We have also provided a file called `Assignment.java` that will call your implementation of each task and print out the results.
 
-To make it easier to compile your Java code with all of the Spark dependencies, we use a build system called [Maven](https://maven.apache.org/what-is-maven.html). The Maven directory structure has already been set up for you, so all you need to do to compile you code is run `mvn package` from the `java` directory. After you've written your code in `Tasks.java`, you can see the results of running `Assignment.java` by submitting it to the Spark cluster, which is done by running `$SPARKHOME/bin/spark-submit --class "Assignment" target/project7-1.0.jar`.
+To make it easier to compile your Java code with all of the Spark dependencies, we use a build system called [Maven](https://maven.apache.org/what-is-maven.html). The Maven directory structure has already been set up for you, so all you need to do to compile you code is run `mvn package` from the `java` directory. After you've written your code in `Tasks.java`, you can see the results of running `Assignment.java` by submitting it to the Spark cluster, which is done by running `$SPARKHOME/bin/spark-submit --class "Assignment" --jars ~/.m2/repository/org/json/json/20180130/json-20180130.jar target/project7-1.0.jar`.
 
 ## Example Spark Application
 
