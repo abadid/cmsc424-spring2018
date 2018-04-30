@@ -16,6 +16,7 @@ public class Assignment {
         JavaRDD<String> nobelRDD = jsc.textFile("/vagrant/datafiles/prize.json");
         JavaRDD<String> logsRDD = jsc.textFile("/vagrant/datafiles/NASA_logs_sample.txt");
         JavaRDD<String> amazonInputRDD = jsc.textFile("/vagrant/datafiles/amazon-ratings.txt");
+        JavaPairRDD<String, String> amazonBipartiteRDD = amazonInputRDD.map(x -> x.split(" ")).mapToPair(x -> new Tuple2<String, String>(x[0], x[1])).distinct();
         JavaRDD<FlewonTuple> flewonRDD = jsc.textFile("/vagrant/datafiles/flewon.csv").map(line -> {
             String[] attributes = line.split(",");
             return new FlewonTuple(attributes[0], attributes[1], attributes[2]);
@@ -66,7 +67,7 @@ public class Assignment {
 
         // Task 5
         System.out.println("*** Task 5 ***");
-        JavaPairRDD<Long, Long> resultTask5 = Tasks.task5(amazonInputRDD);
+        JavaPairRDD<Long, Long> resultTask5 = Tasks.task5(amazonBipartiteRDD);
         if (resultTask5 != null) {
             resultTask5.foreach(x -> System.out.println(x));
         } else {
