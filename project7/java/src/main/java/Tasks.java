@@ -18,7 +18,7 @@ public class Tasks {
         return null;
     }
 
-    public static JavaRDD<String> task4(JavaRDD<String> logsRDD) {
+    public static JavaRDD<String> task4(JavaRDD<String> logsRDD, List<String> requests) {
         return null;
     }
 

@@ -13,7 +13,7 @@ public class Assignment {
         jsc.setLogLevel("OFF");
 
         JavaRDD<String> playRDD = jsc.textFile("/vagrant/datafiles/play.txt");
-        JavaRDD<String> prizesRDD = jsc.textFile("/vagrant/datafiles/prize.json");
+        JavaRDD<String> nobelRDD = jsc.textFile("/vagrant/datafiles/prize.json");
         JavaRDD<String> logsRDD = jsc.textFile("/vagrant/datafiles/NASA_logs_sample.txt");
         JavaRDD<String> amazonInputRDD = jsc.textFile("/vagrant/datafiles/amazon-ratings.txt");
         JavaRDD<FlewonTuple> flewonRDD = jsc.textFile("/vagrant/datafiles/flewon.csv").map(line -> {
@@ -43,7 +43,7 @@ public class Assignment {
 
         // Task 3
         System.out.println("*** Task 3 ***");
-        JavaPairRDD<String, List<String>> resultTask3 = Tasks.task3(nobelRDD);
+        JavaPairRDD<String, Iterable<Integer>> resultTask3 = Tasks.task3(nobelRDD);
         if (resultTask3 != null) {
             resultTask3.foreach(x -> System.out.println(x));
         } else {
@@ -53,7 +53,10 @@ public class Assignment {
 
         // Task 4
         System.out.println("*** Task 4 ***");
-        JavaRDD<String> resultTask4 = Tasks.task4(logsRDD);
+        List<String> hosts = new ArrayList<String>();
+        hosts.add("/facilites/vab.html");
+        hosts.add("/images/vab-small.gif");
+        JavaRDD<String> resultTask4 = Tasks.task4(logsRDD, hosts);
         if (resultTask4 != null) {
             resultTask4.foreach(x -> System.out.println(x));
         } else {
@@ -83,7 +86,7 @@ public class Assignment {
 
         // Task 7
         System.out.println("*** Task 7 ***");
-        JavaPairRDD<String, Long> resultTask7 = Tasks.task7(prizesRDD);
+        JavaPairRDD<String, Long> resultTask7 = Tasks.task7(nobelRDD);
         if (resultTask7 != null) {
             resultTask7.foreach(x -> System.out.println(x));
         } else {

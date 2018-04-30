@@ -90,10 +90,7 @@ Note some of the tasks ask you to return a "Pair RDD". A Pair RDD is an RDD with
 
 - **Task 3 (4pt)**: Write a sequence of transformations starting from nobelRDD that returns an Pair RDD where the key is the `category` (e.g. physics) and the value is a list of all the word counts of the motivations (make this distinct). For Python, make sure the final values are `list`s, and not some other class objects (if you do a `take(5)`, it should print out the first five lists, use `collect()` to see the full results). For Java, see the method signature for the return type we are expecting.
 
-- **Task 4 (2pt)**: This function operates on the `logsRDD`. It takes as input a list of *web requests* and returns an RDD with "hosts" that fulfilled all of those web requests
-The web requests will be provided as strings, in the same format that they appear in the logs (e.g., '/facilites/vab.html' and '/images/vab-small.gif').
-The format of the log entries should be self-explanatory, but here are more details if you need: [NASA Logs](http://ita.ee.lbl.gov/html/contrib/NASA-HTTP.html)
-Try to minimize the number of RDDs you end up creating.
+- **Task 4 (2pt)**: This function operates on the `logsRDD`. It takes as input a list of *web requests* and returns an RDD with "hosts" that fulfilled all of those web requests. The web requests will be provided as strings, in the same format that they appear in the logs (e.g., '/facilites/vab.html' and '/images/vab-small.gif'). The format of the log entries should be self-explanatory, but here are more details: [NASA Logs](http://ita.ee.lbl.gov/html/contrib/NASA-HTTP.html). Try to minimize the number of RDDs you end up creating.
 
 - **Task 5 (2pt)**: Complete a function to calculate the degree distribution of user nodes in the Amazon graph (i.e., `amazonBipartiteRDD`). In other words, calculate 
 the degree of 
