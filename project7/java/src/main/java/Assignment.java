@@ -77,7 +77,7 @@ public class Assignment {
 
         // Task 6
         System.out.println("*** Task 6 ***");
-        JavaPairRDD<String, Tuple2<Iterable<String>, Iterable<String>>> resultTask6 = Tasks.task6(logsRDD);
+        JavaPairRDD<String, Tuple2<Iterable<String>, Iterable<String>>> resultTask6 = Tasks.task6(logsRDD, "ppp199.aix.or.jp", "drjo002a099.embratel.net.br");
         if (resultTask6 != null) {
             resultTask6.foreach(x -> System.out.println(x));
         } else {

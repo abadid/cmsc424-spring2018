@@ -26,7 +26,7 @@ public class Tasks {
         return null;
     }
 
-    public static JavaPairRDD<String, Tuple2<Iterable<String>, Iterable<String>>> task6(JavaRDD<String> logsRDD) {
+    public static JavaPairRDD<String, Tuple2<Iterable<String>, Iterable<String>>> task6(JavaRDD<String> logsRDD, String host1, String host2) {
         return null;
     }
 
