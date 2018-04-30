@@ -57,7 +57,7 @@ print task5_result.collect()
 
 #### Task 6
 print "=========================== Task 6"
-task6_result = task6(logsRDD, '01/Jul/1995', '02/Jul/1995')
+task6_result = task6(logsRDD, '204.19.123.36', 'ppp3_136.bekkoame.or.jp')
 for x in task6_result.takeOrdered(10):
 	print x
 

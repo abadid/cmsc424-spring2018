@@ -18,7 +18,7 @@ def task4(logsRDD, l):
 def task5(bipartiteGraphRDD):
     return bipartiteGraphRDD
 
-def task6(logsRDD, day1, day2):
+def task6(logsRDD, host1, host2):
     return logsRDD
 
 def task7(nobelRDD):
