@@ -2,7 +2,7 @@
 
 *The assignment is to be done by yourself.*
 
-*Due to the fact that this is the final assignment and your final grades must be submitted within 2 days of the final exam, this assignment has different late policies than the rest of the assignments this semester: It is due May 10, 11:59PM. However, if you miss this deadline, as long as you submit it before the final exam for our class (May 15, 1:30PM), you will only lose 1 point (out of 40) for lateness. If you submit it by 1:30PM on May 16, you will lose 7 points for lateness. After that point, we cannot accept late submissions since we need to grade all submissions and submit your final grade.*
+*Due to the fact that this is the final assignment and your final grades must be submitted within 2 days of the final exam, this assignment has different late policies than the rest of the assignments this semester: It is due May 10, 11:59PM. However, if you miss this deadline, as long as you submit it before the final exam for our class (May 15, 1:30PM), you will only lose 1 point (out of 40) for lateness. If you submit it by 1:30PM on May 16, you will lose 5 points for lateness. After that point, we cannot accept late submissions since we need to grade all submissions and submit your final grade.*
 
 Project 7 focuses on using Apache Spark for doing large-scale data analysis tasks. For this assignment, we will use relatively small datasets and we won't run anything in distributed mode; however Spark can be easily used to run the same programs on much larger datasets over very large clusters of machines.
 
