@@ -1,7 +1,11 @@
 import java.util.*;
+import java.io.Serializable;
 
 import org.apache.spark.api.java.*;
+import org.apache.spark.api.java.function.*;
 import scala.Tuple2;
+import scala.Tuple3;
+import scala.Tuple4;
 import org.json.*;
 
 public class Tasks {
@@ -34,7 +38,7 @@ public class Tasks {
         return null;
     }
 
-    public static JavaRDD<Tuple2<String, Long>> task8(JavaRDD<FlewonTuple> flewonRDD, int n, int m) {
+    public static JavaRDD<Tuple2<String, Long>> task8(JavaRDD<FlewonTuple> flewonRDD, int n, int m, Function2<Tuple2<String, Double>, Tuple2<String, Double>, Boolean> joinCondition) {
         return null;
     }
 
