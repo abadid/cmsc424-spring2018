@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Assignment {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchMethodException {
         SparkSession spark = SparkSession.builder().appName("Project 7").getOrCreate();
         JavaSparkContext jsc = new JavaSparkContext(spark.sparkContext());
         jsc.setLogLevel("OFF");
@@ -97,7 +97,7 @@ public class Assignment {
 
         // Task 8
         System.out.println("*** Task 8 ***");
-        JavaRDD<Tuple2<String, Long>> resultTask8 = Tasks.task8(flewonRDD, 2, 2);
+        JavaRDD<Tuple2<String, Long>> resultTask8 = Tasks.task8(flewonRDD, 2, 2, (t1, t2) -> t1._2().compareTo(t2._2()) < 0);
         if (resultTask8 != null) {
             resultTask8.foreach(x -> System.out.println(x));
         } else {
