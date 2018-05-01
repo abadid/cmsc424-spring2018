@@ -131,7 +131,7 @@ Your implementation of fragment-and-replicate join should work roughly as follow
 You can use any of the Spark primitives listed in the documentation in the [assigned reading for April 30](https://spark.apache.org/docs/latest/rdd-programming-guide.html) except `join` to complete this task (that join primitive won’t help you anyway, since it is only an equi-join). In addition, you can use the following primitive which may be helpful in the initial partitioning step:
 * zipWithIndex(): Assigns each tuple in the relation a unique index starting at zero.
 
-**Grading:** We will grade you implementation by calling your `fragmentAndReplicateJoin` function with multiple different values for `n`, `m`, and `joinCondition`. In addition, we will be grading the intermediate results of your implementation. Therefore, please print to standard output the following intermediate results that your implementation creates (using the standard string representation is fine, see `assignment.py` or `Assignment.java` for examples):
+**Grading:** We will grade you implementation by calling your `fragmentAndReplicateJoin` function with multiple different values for `n`, `m`, and `joinCondition`. In addition, we will be grading the intermediate results of your implementation. Therefore, please print to standard output the following intermediate results that your implementation creates (using the standard string representation is fine, see `assignment.py` or `Assignment.java` for examples of how to print to standard output):
 * The tuples in each of the `n` partitions of `leftRelation` that were created.
     * Example: `1 -> [("a",1.0), ("b",4.0), ("c",7.0)]`
 * The tuples in each of the `m` partitions of `rightRelation` that were created.
