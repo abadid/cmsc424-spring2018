@@ -98,7 +98,7 @@ Note some of the tasks ask you to return a "Pair RDD". A Pair RDD is an RDD with
 
 - **Task 5 (2pt)**: Complete a function to calculate the degree distribution of user nodes in the Amazon graph (i.e., `amazonBipartiteRDD`). In other words, calculate 
 the degree of 
-each user node (i.e., number of products each user has rated), and then use a reduceByKey (or aggregateByKey) to find the number of nodes with a given degree. The output 
+each user node (i.e., number of distinct products each user has rated), and then use a reduceByKey (or aggregateByKey) to find the number of nodes with a given degree. The output 
 should be a PairRDD where the key is the degree, and the value is the number of nodes in the graph with that degree.
 
 - **Task 6 (2pt)**: On the `logsRDD`, for two given hosts, use a 'cogroup' to create the following pair RDD: the key of 
