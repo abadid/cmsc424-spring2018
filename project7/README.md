@@ -26,7 +26,7 @@ We have provided a Vagrantfile in the `project7` directory. Navigate to the `pro
 
 ### Writing Spark Code
 
-Spark primarily supports three languages: Scala (Spark is written in Scala), Java, and Python. For this project, you have the option of writing your code in either Python or Java. Feel free to work with whichever language you are most comfortable with, but we have found that Spark Python is somewhat easier to use and faster to get started. You are highly encouraged to read the [Spark Quick Start Guide](http://spark.apache.org/docs/latest/quick-start.html), which has well-written tutorials for working with both languages.
+Spark primarily supports three languages: Scala (Spark is written in Scala), Java, and Python. For this project, you have the option of writing your code in either Python or Java. Feel free to work with whichever language you are most comfortable with, but we have found that Spark Python is somewhat easier to use and faster to get started. Furthermore, the documentation for Spark Python is much better and more complete. You are highly encouraged to read the [Spark Quick Start Guide](http://spark.apache.org/docs/latest/quick-start.html), which has well-written tutorials for working with both languages.
 
 #### Spark and Python
 
