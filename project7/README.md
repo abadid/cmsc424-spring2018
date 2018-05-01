@@ -173,8 +173,11 @@ part of the above query must remain and be implemented using your fragment-and-r
 ## Submission
 
 Submit the following two files under the Project 7 assignment on ELMS:
+
 * **Python:** `tasks.py` and `fragAndReplicate.py`
+
 OR
+
 * **Java:** `Tasks.java` and `FragmentAndReplicateJoin.java`
 
 ## Helpful Resources
