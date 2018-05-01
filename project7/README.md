@@ -174,14 +174,15 @@ part of the above query must remain and be implemented using your fragment-and-r
 
 Submit the following two files under the Project 7 assignment on ELMS:
 * **Python:** `tasks.py` and `fragAndReplicate.py`
+OR
 * **Java:** `Tasks.java` and `FragmentAndReplicateJoin.java`
 
 ## Helpful Resources
 
 The following references may be helpful as you are implementing this project.
-* [Hadoop Map-Reduce Tutorial](http://hadoop.apache.org/docs/r1.2.1/mapred_tutorial.html#Source+Code)
 * [Spark Programming Guide](https://spark.apache.org/docs/latest/programming-guide.html)
 * [Learning Spark](https://www.safaribooksonline.com/library/view/learning-spark/9781449359034/)
 * [Spark Quick-Start Guide](http://spark.apache.org/docs/latest/quick-start.html)
 * [Spark Examples](https://github.com/holdenk/learning-spark-examples)
 * [Spark Java Documentation](https://spark.apache.org/docs/latest/api/java/index.html)
+* [Hadoop Map-Reduce Tutorial](http://hadoop.apache.org/docs/r1.2.1/mapred_tutorial.html#Source+Code)
