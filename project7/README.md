@@ -103,14 +103,37 @@ is the list of all URLs fetched from the second host on that day. Use `filter` t
 
 - **Task 7 (4pt)**: [Bigrams](http://en.wikipedia.org/wiki/Bigram) are simply sequences of two consecutive words. For example, the previous sentence contains the following bigrams: "Bigrams are", "are simply", "simply sequences", "sequences of", etc. Your task is to write a bigram counting application for counting the bigrams in the `motivation`s of the Nobel Prizes (i.e., the reason they were given the Nobel Prize). The return value should be a PairRDD where the key is a bigram, and the value is its count, i.e., in how many times it appeared across all the `motivations`. Don't assume 'motivation' is always present. Punctuation and case should be ignored. Thus "for writing", "For writing" and "for writing." are all the same bigram.
 
-- **Task 8 (24pt)**: Your goal for task 8 is to implement the fragment-and-replicate join algorithm from Section 18.5.2.2 of the textbook using Spark primitives (**12 points**) and then use it to implement a full SQL query (**12 points**). Recall from lecture that fragment-and-replicate join is a way of joining two relations in a parallel database system by partitioning the tuples of each relation across multiple processors, joining the tuples at each processor, then aggregating the results from all the processors. Since you are running Spark on a single machine, all of the processors will be located on the same machine (your machine). But as long as you create the partitions correctly (see below), Spark could easily parallelize your code across multiple machines if you had them -- each partition can be processed by a seperate machine. Your implementation of fragment-and-replicate join should work roughly as follows:
-    * Partition the left and right relations into *n* and *m* partitions, respectively.
-    * For each of the *n* partitions of the left relation, replicate the tuples in the partition *m* times, corresponding to one row in Figure 18.3 of your textbook. Name each replica (e.g., via giving each tuple in that replica the same key name, perhaps (x,y) corressponding to P<sub>x,y</sub> in the book) according to the cell from Figure 18.3 that it belongs. Do the same for the right relation, reversing the role of *n* and *m*. 
-    * For each cell you created above, you will have a partition of tuples from each relation. Join those partitions using a join algorithm of your choosing (nested loop join would be the easiest). You can assume that all the tuples within each partition will easily fit in memory.
-    * Aggregate the joined tuples in each group together into a single relation.
+### Task 8 (24pt)
+
+Your goal for task 8 is to implement the fragment-and-replicate join algorithm from Section 18.5.2.2 of the textbook using Spark primitives (**12 points**) and then use it to implement a full SQL query (**12 points**).
+
+#### Part A: Implementing Fragment-and-Replicate Join (12pt)
+
+Recall from lecture that fragment-and-replicate join is a way of joining two relations in a parallel database system by partitioning the tuples of each relation across multiple processors, joining the tuples at each processor, then aggregating the results from all the processors. Since you are running Spark on a single machine, all of the processors will be located on the same machine (your machine). But as long as you create the partitions correctly (see below), Spark could easily parallelize your code across multiple machines if you had them -- each partition can be processed by a separate machine.
+
+In the file `fragAndReplicate.py` (Python) or `FragmentAndReplicateJoin.java` (Java), implement the fragment-and-replicate join algorithm in the function `fragment_and_replicate` (Python) or `fragmentAndReplicateJoin` (Java) using Spark primitives. Your function must return an RDD consisting of four-tuples that is the result of joining the two RDDs provided as arguments. Your function will have the following five parameters:
+* `leftRelation`: An RDD containing tuples of the first relation being joined. Each tuple of `leftRelation` is a two-tuple containing a String and a Double value.
+* `n`: An integer representing the number of partitions your function should create of `leftRelation`.
+* `rightRelation`: An RDD containing tuples of the second relation being joined. Each tuple of `rightRelation` is a two-tuple containing a String and a Double value.
+* `m`: An integer representing the number of partitions your function should create of `rightRelation`.
+* `joinCondition`: A lambda function containing the join predicate. You must use this function to test if two tuples should be joined together and included in the output of your function.
+
+Your implementation of fragment-and-replicate join should work roughly as follows:
+* Partition the left and right relations into *n* and *m* partitions, respectively, using round-robin partitioning.
+* For each of the *n* partitions of the left relation, replicate the tuples in the partition *m* times, corresponding to one row in Figure 18.3 of your textbook. Name each replica (e.g., via giving each tuple in that replica the same key name, perhaps (x,y) corressponding to P<sub>x,y</sub> in the book) according to the cell from Figure 18.3 that it belongs. Do the same for the right relation, reversing the role of *n* and *m*. 
+* For each cell you created above, you will have a partition of tuples from each relation. Join those partitions using a join algorithm of your choosing (nested loop join would be the easiest). You can assume that all the tuples within each partition will easily fit in memory.
+* Aggregate the joined tuples from each cell together into a single relation.
    
-You can use any of the Spark primitives listed in the documentation in the assigned reading for April 30 except join to complete this task (that join primitive won’t help you anyway, since it is only an equi-join). In addition, you can use the following primitive which may be helpful in the initial partitioning step:
+You can use any of the Spark primitives listed in the documentation in the [assigned reading for April 30](https://spark.apache.org/docs/latest/rdd-programming-guide.html) except `join` to complete this task (that join primitive won’t help you anyway, since it is only an equi-join). In addition, you can use the following primitive which may be helpful in the initial partitioning step:
 * zipWithIndex(): Assigns each tuple in the relation a unique index starting at zero.
+
+**Grading:** We will grade you implementation by calling your `fragmentAndReplicateJoin` function with multiple different values for `n`, `m`, and `joinCondition`. In addition, we will be grading the intermediate results of your implementation. Therefore, please print to standard output the following intermediate results that your implementation creates (using the standard string representation is fine, see `assignment.py` or `Assignment.java` for examples):
+* The tuples in each of the `n` partitions of `leftRelation` that were created.
+* The tuples in each of the `m` partitions of `rightRelation` that were created.
+* The result of assigning tuples from each patition of each relation to cells.
+* The result of joining the tuples in each cell.
+
+#### Part B: Implementing a SQL Query with Spark (12pt)
 
 After you’ve implemented fragment-and-replicate join, you will put it to use by implementing a SQL query using Spark primitives. Since the fragment-and-replicate join algorithm is particularly useful for inequality-based joins, we will revisit Query 10 from Project 1, which you wrote earlier this semester using the flights database. Please use the following solution to Query 10:
 
@@ -135,6 +158,7 @@ WITH flight_customers_per_day AS (
     WHERE avg_customer = (SELECT max(avg_customer) FROM flight_avg_customers))
     ORDER BY rank, flightid;
 ```
+
 Your goal is to implement the above query using the Spark primitives and the fragment-and-replicate-join you wrote and placed in either `fragAndReplicate.py` or `FragmentAndReplicateJoin.java`. If you want to make modifications to the above query, that's fine. The only restriction is that: (1) Your query must return the same results and (2) the 
 ```sql
 FROM flight_avg_customers t1, flight_avg_customers t2 
