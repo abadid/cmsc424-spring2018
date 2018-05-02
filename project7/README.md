@@ -131,7 +131,7 @@ Your implementation of fragment-and-replicate join should work roughly as follow
 You can use any of the Spark primitives listed in the documentation in the [assigned reading for April 30](https://spark.apache.org/docs/latest/rdd-programming-guide.html) except `join` to complete this task (that join primitive won’t help you anyway, since it is only an equi-join). In addition, you can use the following primitive which may be helpful in the initial partitioning step:
 * zipWithIndex(): Assigns each tuple in the relation a unique index starting at zero.
 
-**Grading:** We will grade you implementation by calling your `fragmentAndReplicateJoin` function with multiple different values for `n`, `m`, and `joinCondition`. In addition, we will be grading the intermediate results of your implementation. Therefore, please print to standard output the following intermediate results that your implementation creates (using the standard string representation is fine, see `assignment.py` or `Assignment.java` for examples of how to print to standard output):
+**Grading:** We will grade your implementation by calling your `fragmentAndReplicateJoin` function with multiple different values for `n`, `m`, and `joinCondition`. In addition, we will be grading the intermediate results of your implementation. Therefore, please print to standard output the following intermediate results that your implementation creates. Using the standard string representation is fine, see `assignment.py` or `Assignment.java` for examples of how to print to standard output. Also, please separate each intermediate result by a blank line.
 * The tuples in each of the `n` partitions of `leftRelation` that were created.
     * Example: `1 -> [("a",1.0), ("b",4.0), ("c",7.0)]`
 * The tuples in each of the `m` partitions of `rightRelation` that were created.
@@ -173,6 +173,8 @@ FROM flight_avg_customers t1, flight_avg_customers t2
 WHERE t2.avg_customer > t1.avg_customer
 ```
 part of the above query must remain and be implemented using your fragment-and-replicate join.
+
+**Note:** To make it easier to calculate the subquery `(SELECT max(flightdate) - min(flightdate) + 1.0 FROM flewon)`, you may assume that all values in the `flightdate` column have the same month and year.
 
 ## Submission
 
