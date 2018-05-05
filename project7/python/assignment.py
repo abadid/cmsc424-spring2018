@@ -30,24 +30,24 @@ amazonBipartiteRDD = amazonInputRDD.map(lambda x: x.split(" ")).map(lambda x: (x
 ### Task 1
 print "=========================== Task 1"
 task1_result = task1(playRDD)
-for x in task1_result.takeOrdered(10):
+for x in task1_result.collect():
 	print x
 
 ### Task 2
 print "=========================== Task 2"
 task2_result = nobelRDD.map(json.loads).flatMap(task2_flatmap).distinct()
-print task2_result.takeOrdered(10)
+print task2_result.collect()
 
 #### Task 3
 print "=========================== Task 3"
 task3_result = task3(nobelRDD)
-for x in task3_result.takeOrdered(10):
+for x in task3_result.collect():
 	print x
 
 #### Task 4
 print "=========================== Task 4"
 task4_result = task4(logsRDD, ['/facilities/vab.html', '/images/vab-small.gif'])
-for x in task4_result.takeOrdered(10):
+for x in task4_result.collect():
 	print x
 
 #### Task 5
@@ -57,18 +57,18 @@ print task5_result.collect()
 
 #### Task 6
 print "=========================== Task 6"
-task6_result = task6(logsRDD, '204.19.123.36', 'ppp3_136.bekkoame.or.jp')
-for x in task6_result.takeOrdered(10):
+task6_result = task6(logsRDD, 'ppp199.aix.or.jp', 'drjo002a099.embratel.net.br')
+for x in task6_result.collect():
 	print x
 
 #### Task 7
 print "=========================== Task 7"
 task7_result = task7(nobelRDD)
-for x in task7_result.takeOrdered(10):
+for x in task7_result.collect():
 	print x
 
-#### Task 8 -- we will start with a non-empty currentMatching and do a few iterations
+#### Task 8
 print "=========================== Task 8"
 task8_result = task8(flewonRDD, 4, 5)
-for x in task8_result.takeOrdered(20):
+for x in task8_result.collect():
     print x
