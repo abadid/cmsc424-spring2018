@@ -55,7 +55,7 @@ public class Assignment {
         // Task 4
         System.out.println("*** Task 4 ***");
         List<String> hosts = new ArrayList<String>();
-        hosts.add("/facilites/vab.html");
+        hosts.add("/facilities/vab.html");
         hosts.add("/images/vab-small.gif");
         JavaRDD<String> resultTask4 = Tasks.task4(logsRDD, hosts);
         if (resultTask4 != null) {
