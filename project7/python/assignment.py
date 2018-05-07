@@ -54,7 +54,8 @@ for x in task4_result.collect():
 #### Task 5
 print "=========================== Task 5"
 task5_result = task5(amazonBipartiteRDD)
-print task5_result.collect()
+for x in task5_result.collect():
+	print x
 
 #### Task 6
 print "=========================== Task 6"
