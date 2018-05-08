@@ -133,9 +133,9 @@ You can use any of the Spark primitives listed in the documentation in the [assi
 
 **Grading:** We will grade your implementation by calling your `fragmentAndReplicateJoin` function with multiple different values for `n`, `m`, and `joinCondition`. In addition, we will be grading the intermediate results of your implementation. Therefore, please print to standard output the following intermediate results that your implementation creates. Using the standard string representation is fine, see `assignment.py` or `Assignment.java` for examples of how to print to standard output. Also, please separate each intermediate result by a blank line.
 * The tuples in each of the `n` partitions of `leftRelation` that were created.
-    * Example: `(0, 1) -> [("a",1.0), ("b",4.0), ("c",7.0)]`
+    * Example: `1 -> [("a",1.0), ("b",4.0), ("c",7.0)]`
 * The tuples in each of the `m` partitions of `rightRelation` that were created.
-    * Example: `(1, 0) -> [("a",1.0), ("b",4.0), ("c",7.0)]`
+    * Example: `1 -> [("a",1.0), ("b",4.0), ("c",7.0)]`
 * The result of assigning tuples from each partition of each relation to cells.
     * Example: `(2, 2) -> ([[("a",2.0), ("d",5.0), ("c",8.0)]],[[("b",2.0), ("d",4.0), ("b",6.0), ("d",8.0)]])`
 * The result of joining the tuples in each cell.
