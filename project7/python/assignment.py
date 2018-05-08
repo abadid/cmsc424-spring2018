@@ -36,7 +36,8 @@ for x in task1_result.collect():
 ### Task 2
 print "=========================== Task 2"
 task2_result = nobelRDD.map(json.loads).flatMap(task2_flatmap)
-print task2_result.collect()
+for x in task2_result.collect():
+	print x
 
 #### Task 3
 print "=========================== Task 3"
@@ -53,7 +54,8 @@ for x in task4_result.collect():
 #### Task 5
 print "=========================== Task 5"
 task5_result = task5(amazonBipartiteRDD)
-print task5_result.collect()
+for x in task5_result.collect():
+	print x
 
 #### Task 6
 print "=========================== Task 6"
