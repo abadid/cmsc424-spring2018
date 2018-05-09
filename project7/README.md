@@ -137,7 +137,7 @@ You can use any of the Spark primitives listed in the documentation in the [assi
 * The tuples in each of the `m` partitions of `rightRelation` that were created.
     * Example: `(1,[("a",1.0), ("b",4.0), ("c",7.0)])`
 * The result of assigning tuples from each partition of each relation to cells.
-    * Example: `((2,2),([[("a",2.0), ("d",5.0), ("c",8.0)]],[[("b",2.0), ("d",4.0), ("b",6.0), ("d",8.0)]]))`
+    * Example: `((2,2),([("a",2.0), ("d",5.0), ("c",8.0)],[("b",2.0), ("d",4.0), ("b",6.0), ("d",8.0)]))`
 * The result of joining the tuples in each cell.
     * Example: `((2,2),[("a",2.0,"b",2.0), ("c",8.0,"d",8.0)])`
 
