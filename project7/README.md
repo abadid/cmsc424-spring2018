@@ -195,3 +195,4 @@ The following references may be helpful as you are implementing this project.
 * [Spark Examples](https://github.com/holdenk/learning-spark-examples)
 * [Spark Java Documentation](https://spark.apache.org/docs/latest/api/java/index.html)
 * [Hadoop Map-Reduce Tutorial](http://hadoop.apache.org/docs/r1.2.1/mapred_tutorial.html#Source+Code)
+* [Spark Python Documentation](http://spark.apache.org/docs/2.2.0/api/python/pyspark.html)
